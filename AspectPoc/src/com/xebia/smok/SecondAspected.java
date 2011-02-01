@@ -1,9 +1,8 @@
 package com.xebia.smok;
 
-public class Aspected {
+public class SecondAspected {
 	
 	public int add(int firstNo, int secondNo){
-		
 		System.out.println("Doing addition");
 		return firstNo + secondNo;
 	}
@@ -18,7 +17,7 @@ public class Aspected {
 	
 	
 	public static void main(String[] args) {
-		Aspected aspected = new Aspected();
+		SecondAspected aspected = new SecondAspected();
 		aspected.add(13, 25);
 		aspected.sub(13, 25);
 		aspected.print();
