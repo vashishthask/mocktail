@@ -29,4 +29,8 @@ public class Smok {
 		this.methods.addAll(methods);
 	}
 
+	public boolean onlyForClass() {
+		return methods.size() == 0;
+	}
+
 }
