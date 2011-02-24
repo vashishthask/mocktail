@@ -14,7 +14,7 @@ import com.xebia.smok.xml.domain.Smok;
  */
 public class SmokClassAspectCreator extends AbstractAspectCreator<Smok> {
 
-	protected InputStream getTemplateInputStream() {
+	protected InputStream getAspectTemplateInputStream() {
 		return new ClasspathResourceLoader()
 				.getResourceStream("com/xebia/smok/aj/creator/ClassRecordingAspect.vm");
 	}
