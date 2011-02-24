@@ -20,11 +20,16 @@ public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok>{
 	}
 
 	@Override
-	protected Map<String, Object> getTemplateDynamicValues(Smok smok) {
+	protected Map<String, Object> getTemplateParameterValues(Smok smok) {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		contextMap.put("className", smok.getClassName());
 		contextMap.put("methods", smok.getMethods());
 		return contextMap;
+	}
+	
+	@Override
+	protected String getAspectFileName(Smok classObj) {
+		return classObj.getClassName();
 	}
 
 }

@@ -19,10 +19,15 @@ public class SmokClassAspectCreator extends AbstractAspectCreator<Smok> {
 				.getResourceStream("com/xebia/smok/aj/creator/ClassRecordingAspect.vm");
 	}
 
-	protected Map<String, Object> getTemplateDynamicValues(Smok smok) {
+	protected Map<String, Object> getTemplateParameterValues(Smok smok) {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		contextMap.put("className", smok.getClassName());
 		return contextMap;
+	}
+	
+	@Override
+	protected String getAspectFileName(Smok classObj) {
+		return classObj.getClassName();
 	}
 
 }
