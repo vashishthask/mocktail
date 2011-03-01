@@ -5,18 +5,17 @@ public aspect RecordingAspect {
  		pointcut callPointcut$method() : 
 			call(* $className.$method(..));
 	
-	
-		before() : callPointcut$method() {
+		
+		Object around() : callPointcut$method() {
+			System.out.println("Around Before");
 			Object[] objects = thisJoinPoint.getArgs();
 			for(Object object : objects) {
 				System.out.println("Arguments " + object.toString());
 			}
-			System.out.println("Before");
-		}
-		
-		after() : callPointcut$method() {
-			System.out.println("after");
-		}
+			Object returnValue = proceed();
+			System.out.println("Around After");
+			return returnValue;
+		}	
 	#end
 	
 }
