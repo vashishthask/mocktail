@@ -19,6 +19,7 @@ public class SmokContext {
 	}
 
 	public String getRecordingDirectoryPath() {
+		assertNotNull(recordingDirectory);
 		return rotDirectory + File.separator + recordingDirectory;
 	}
 
