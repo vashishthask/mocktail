@@ -1,22 +1,20 @@
 package com.xebia.smok.aj.creator;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
-
+import com.xebia.smok.xml.domain.AspectType;
 import com.xebia.smok.xml.domain.Smok;
+import com.xebia.smok.xml.domain.SmokMode;
+
 /**
  * I'll create an aspect for methods defined in Smok
- *
+ * 
  */
-public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok>{
+public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok> {
 
-	@Override
-	protected InputStream getAspectTemplateInputStream() {
-		return new ClasspathResourceLoader()
-		.getResourceStream("com/xebia/smok/aj/creator/MethodsRecordingAspect.vm");
+	public SmokMethodsAspectCreator(SmokMode smokMode) {
+		super(AspectType.METHODS_ASPECT_TYPE, smokMode);
 	}
 
 	@Override
@@ -26,7 +24,7 @@ public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok>{
 		contextMap.put("methods", smok.getMethods());
 		return contextMap;
 	}
-	
+
 	@Override
 	protected String getAspectFileName(Smok classObj) {
 		return classObj.getClassName();

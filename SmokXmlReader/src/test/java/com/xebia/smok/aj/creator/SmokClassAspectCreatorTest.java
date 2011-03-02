@@ -12,6 +12,7 @@ import org.mockito.Mock;
 
 import com.xebia.smok.SmokObjectMother;
 import com.xebia.smok.xml.domain.Smok;
+import com.xebia.smok.xml.domain.SmokMode;
 
 public class SmokClassAspectCreatorTest {
 
@@ -19,9 +20,22 @@ public class SmokClassAspectCreatorTest {
 	File aspectDir;
 	
 	@Test
-	public void shouldCreateAspectForClass() throws Exception {
+	public void shouldCreateRecordingAspectForClass() throws Exception {
 		final Smok classSmok = SmokObjectMother.createClassSmok("FQCN");
-		new SmokClassAspectCreator() {
+		new SmokClassAspectCreator(SmokMode.RECORDING_MODE) {
+			@Override
+			protected void createAspectFile(String fileName, File directory,
+					String templatedClassObjectString) throws IOException {
+				assertThat(fileName, is(classSmok.getClassName()));
+				assertThat(templatedClassObjectString, containsString(classSmok.getClassName()));
+			}
+		}.createAspect(classSmok, aspectDir);
+	}
+
+	@Test
+	public void shouldCreatePlaybackAspectForClass() throws Exception {
+		final Smok classSmok = SmokObjectMother.createClassSmok("FQCN");
+		new SmokClassAspectCreator(SmokMode.PLAYBACK_MODE) {
 			@Override
 			protected void createAspectFile(String fileName, File directory,
 					String templatedClassObjectString) throws IOException {

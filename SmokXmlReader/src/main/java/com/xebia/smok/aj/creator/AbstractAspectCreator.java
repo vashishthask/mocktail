@@ -6,8 +6,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+
+import com.xebia.smok.xml.domain.AspectType;
+import com.xebia.smok.xml.domain.SmokMode;
+
 public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 
+	private final AspectType aspectType;
+	private final SmokMode smokMode;
+
+	public AbstractAspectCreator(AspectType aspectType, SmokMode smokMode ){
+		this.aspectType = aspectType;
+		this.smokMode = smokMode;
+	}
+	
+	
 	@Override
 	public void createAspect(C classObj, File directory) throws Exception {
 		String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER.processTemplate(
@@ -23,7 +37,14 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 		aspectOs.close();
 	}
 
-	protected abstract InputStream getAspectTemplateInputStream();
+	protected InputStream getAspectTemplateInputStream() {
+		StringBuffer aspectTemplatePath = new StringBuffer("com/xebia/smok/aj/creator/");
+		aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append("/");
+		aspectTemplatePath.append(smokMode.getModeDirectory()).append("/");
+		aspectTemplatePath.append("template.vm");
+		return new ClasspathResourceLoader()
+		.getResourceStream(aspectTemplatePath.toString());
+	}
 
 	protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
 
