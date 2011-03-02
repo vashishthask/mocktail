@@ -29,6 +29,7 @@ public class SmokMethodsAspectCreatorTest {
 				assertThat(fileName, is(methodSmok.getClassName()));
 				assertThat(templatedClassObjectString, containsString("method1"));
 				assertThat(templatedClassObjectString, containsString("method2"));
+				assertThat(templatedClassObjectString, containsString("around"));
 			}
 		}.createAspect(methodSmok, aspectDir);
 	}
