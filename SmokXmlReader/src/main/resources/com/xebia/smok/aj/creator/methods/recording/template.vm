@@ -7,7 +7,7 @@ public aspect RecordingAspect {
 	
 		
 		Object around() : callPointcut$method() {
-			System.out.println("Around Before");
+			System.out.println("I'll do the recording if the recorded file is not there");
 			Object[] objects = thisJoinPoint.getArgs();
 			for(Object object : objects) {
 				System.out.println("Arguments " + object.toString());

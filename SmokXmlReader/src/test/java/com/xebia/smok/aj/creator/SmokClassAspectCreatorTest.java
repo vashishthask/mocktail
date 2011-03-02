@@ -28,6 +28,7 @@ public class SmokClassAspectCreatorTest {
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
 				assertThat(templatedClassObjectString, containsString(classSmok.getClassName()));
+				assertThat(templatedClassObjectString, containsString("I'll do the recording if the recorded file is not there"));
 			}
 		}.createAspect(classSmok, aspectDir);
 	}
@@ -41,6 +42,7 @@ public class SmokClassAspectCreatorTest {
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
 				assertThat(templatedClassObjectString, containsString(classSmok.getClassName()));
+				assertThat(templatedClassObjectString, containsString("I'll skip the actual execution"));
 			}
 		}.createAspect(classSmok, aspectDir);
 	}

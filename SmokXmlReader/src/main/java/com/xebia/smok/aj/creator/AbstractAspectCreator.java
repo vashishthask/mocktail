@@ -30,10 +30,10 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 	}
 
 	protected void createAspectFile(String fileName, File directory,
-			String templatedClassObjectString) throws IOException {
+			String templatedObjectString) throws IOException {
 		File file = new File(directory, fileName);
 		FileWriter aspectOs = new FileWriter(file);
-		aspectOs.write(templatedClassObjectString);
+		aspectOs.write(templatedObjectString);
 		aspectOs.close();
 	}
 

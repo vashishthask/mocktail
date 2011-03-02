@@ -26,11 +26,12 @@ public class SmokMethodsAspectCreatorTest {
 		new SmokMethodsAspectCreator(SmokMode.RECORDING_MODE) {
 			@Override
 			protected void createAspectFile(String fileName, File directory,
-					String templatedClassObjectString) throws IOException {
+					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodSmok.getClassName()));
-				assertThat(templatedClassObjectString, containsString("method1"));
-				assertThat(templatedClassObjectString, containsString("method2"));
-				assertThat(templatedClassObjectString, containsString("around"));
+				assertThat(templatedMethodObjectString, containsString("method1"));
+				assertThat(templatedMethodObjectString, containsString("method2"));
+				assertThat(templatedMethodObjectString, containsString("around"));
+				assertThat(templatedMethodObjectString, containsString("I'll do the recording if the recorded file is not there"));
 			}
 		}.createAspect(methodSmok, aspectDir);
 	}
@@ -42,11 +43,12 @@ public class SmokMethodsAspectCreatorTest {
 		new SmokMethodsAspectCreator(SmokMode.PLAYBACK_MODE) {
 			@Override
 			protected void createAspectFile(String fileName, File directory,
-					String templatedClassObjectString) throws IOException {
+					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodSmok.getClassName()));
-				assertThat(templatedClassObjectString, containsString("method1"));
-				assertThat(templatedClassObjectString, containsString("method2"));
-				assertThat(templatedClassObjectString, containsString("around"));
+				assertThat(templatedMethodObjectString, containsString("method1"));
+				assertThat(templatedMethodObjectString, containsString("method2"));
+				assertThat(templatedMethodObjectString, containsString("around"));
+				assertThat(templatedMethodObjectString, containsString("I'll skip the actual execution"));
 			}
 		}.createAspect(methodSmok, aspectDir);
 	}
