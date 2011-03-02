@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.util.RecordigsRepository;
+import com.xebia.smok.util.RecordingsRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
 public aspect RecordingAspect {
@@ -33,7 +33,7 @@ public aspect RecordingAspect {
 			File recordingFile = new File(recordingDirectoryPath, recrodingFileName);
 			outputStream = new FileOutputStream(recordingFile);
 			// Ask Recorder to save the recording file
-			RecordigsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
+			RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
 					objectToBeRecorded, outputStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

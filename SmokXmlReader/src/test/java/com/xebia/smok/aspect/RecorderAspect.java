@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.util.RecordigsRepository;
+import com.xebia.smok.util.RecordingsRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
 public class RecorderAspect {
@@ -22,12 +22,14 @@ public class RecorderAspect {
 		// Create the unique id of param objects to be recorded
 		String recrodingFileName = UniqueIdGenerator.HASH_CODE_IMPL
 				.getUniqueId(paramObjects) + "";
+		
+		//Get the object to be recorded
 		OutputStream outputStream;
 		try {
 			File recordingFile = new File(recordingDirectoryPath, recrodingFileName);
 			outputStream = new FileOutputStream(recordingFile);
 			// Ask Recorder to save the recording file
-			RecordigsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
+			RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
 					objectToBeRecorded, outputStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

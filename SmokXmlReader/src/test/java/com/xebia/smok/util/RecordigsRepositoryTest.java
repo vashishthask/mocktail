@@ -26,7 +26,7 @@ public class RecordigsRepositoryTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldRecordObj() throws Exception {
-		RecordigsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
+		RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
 				Arrays.asList("sandy", "ganesh", 12, 23.0), outputStream);
 		verify(outputStream, new Times(14)).write((byte[]) any(), anyInt(),
 				anyInt());
@@ -35,7 +35,7 @@ public class RecordigsRepositoryTest {
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void shouldReadObj() throws Exception {
-		List recordedList = (List) RecordigsRepository.SERIALIZER_RECORDINGS_REPOSITORY
+		List recordedList = (List) RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY
 				.unmarshall(new ClasspathResourceLoader()
 						.getResourceStream("com/xebia/smok/util/recorded_list.ser"));
 
