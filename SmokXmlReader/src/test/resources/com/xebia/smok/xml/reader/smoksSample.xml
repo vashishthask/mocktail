@@ -1,0 +1,8 @@
+<smoks>
+	<smok class="fqcn1">
+		<method name="method1"/>
+		<method name="method1"/>
+	</smok>
+	<smok class="fqcn2">
+	</smok>
+</smoks>

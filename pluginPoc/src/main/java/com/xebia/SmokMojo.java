@@ -17,86 +17,57 @@ package com.xebia;
  */
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
+import java.lang.reflect.Field;
 
-import org.apache.maven.model.Resource;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-
+import org.codehaus.mojo.aspectj.AjcCompileMojo;
 
 /**
  * Goal which touches a timestamp file.
  * 
- * @goal touch
+ * @goal smok
  * 
- * @phase process-sources
+ * @phase compile
  */
-public class SmokMojo extends AbstractMojo {
-    /**
-     * @parameter expression=”${smok.recording}”
-     * @required
-     */
-    private File recordingDirectory;
+public class SmokMojo extends AjcProperties {
+	/**
+	 * @parameter expression=”${smok.recording}”
+	 * @required
+	 */
+	private File recordingDirectory;
 
-    /**
-     * List of Resource objects for the current build, containing directory,
-     * includes, and excludes.
-     * @parameter default-value="${project.resources}"
-     * @required
-     * @readonly
-     */
-    private List resources;
+	public void execute() throws MojoExecutionException {
 
-    public void execute() throws MojoExecutionException {
-        if (resources != null && !resources.isEmpty()) {
-            for (Iterator it = resources.iterator(); it.hasNext();) {
-                Resource resource = (Resource) it.next();
-                String resourceRoot = resource.getDirectory();
-                System.out.println(resourceRoot);
-            }
-        }
-        
-        File f = recordingDirectory;
-        System.out.println(recordingDirectory);
-        if (!f.exists()) {
-            System.out.println(recordingDirectory);
-            f.mkdirs();
-        }
+		AjcCompileMojo ajcCompileMojo = new AjcCompileMojo();
+		Class<?> superclass = ajcCompileMojo.getClass().getSuperclass();
+		setValue(superclass,ajcCompileMojo, "source",source);
+		setValue(superclass,ajcCompileMojo,"target",target);
+		setValue(superclass.getSuperclass(),ajcCompileMojo,"project",project);
+		setValue(superclass.getSuperclass(),ajcCompileMojo,"basedir",basedir);
 
-        File touch = new File(f, "touch.txt");
+		System.out.println("\n\n\n\n ------------------------------- Aspect J -----------------------\n\n\n\n");
+		ajcCompileMojo.execute();
+		System.out.println("\n\n\n------------------------------- My execution -----------------------\n\n\n");
+	}
 
-        FileWriter w = null;
-        try {
-            w = new FileWriter(touch);
+	@SuppressWarnings("rawtypes")
+	public void setValue(Class classToBeSetOn,Object o, String fieldName, Object value)throws RuntimeException {
+		Field field;
+		try {
+			field = classToBeSetOn.getDeclaredField(fieldName);
+			field.setAccessible(true);
+			field.set(o, value);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
+		}
+	}
 
-            w.write("touch.txt");
-        }
-        catch (IOException e) {
-            throw new MojoExecutionException("Error creating file " + touch, e);
-        }
-        catch (Exception e) {
-            throw new MojoExecutionException("Damn it", e);
-        }
-        finally {
-            if (w != null) {
-                try {
-                    w.close();
-                }
-                catch (IOException e) {
-                    // ignore
-                }
-            }
-        }
-    }
+	public File getRecordingDirectory() {
+		return recordingDirectory;
+	}
 
-    public File getRecordingDirectory() {
-        return recordingDirectory;
-    }
-
-    public void setRecordingDirectory(File recordingDirectory) {
-        this.recordingDirectory = recordingDirectory;
-    }
+	public void setRecordingDirectory(File recordingDirectory) {
+		this.recordingDirectory = recordingDirectory;
+	}
 }

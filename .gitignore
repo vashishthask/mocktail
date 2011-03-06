@@ -2,4 +2,8 @@
 .classpath
 *.class
 .settings
+<<<<<<< HEAD
 *target/*
+=======
+target/
+>>>>>>> fe59071085d60eda414728cd9654ba942b3964c3
