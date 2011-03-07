@@ -11,7 +11,6 @@ public enum TemplateProcesser {
 	TEMPLATE_PROCESSER;
 	private VelocityEngine ve;
 
-
 	private TemplateProcesser() {
 		ve = new VelocityEngine();
 	}

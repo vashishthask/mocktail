@@ -1,20 +1,53 @@
 package com.xebia.smok.aj.creator;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+
+import com.xebia.smok.xml.domain.AspectType;
+import com.xebia.smok.xml.domain.SmokMode;
+
 public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 
+	private final AspectType aspectType;
+	private final SmokMode smokMode;
+
+	public AbstractAspectCreator(AspectType aspectType, SmokMode smokMode ){
+		this.aspectType = aspectType;
+		this.smokMode = smokMode;
+	}
+	
+	
 	@Override
 	public void createAspect(C classObj, File directory) throws Exception {
 		String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER.processTemplate(
-				getTemplateDynamicValues(classObj), getTemplateInputStream());
-		//TODO Store this string with the class Obj file name
+				getTemplateParameterValues(classObj), getAspectTemplateInputStream());
+		createAspectFile(getAspectFileName(classObj), directory, templatedClassObjectString);
 	}
 
-	protected abstract InputStream getTemplateInputStream();
+	protected void createAspectFile(String fileName, File directory,
+			String templatedObjectString) throws IOException {
+		File file = new File(directory, fileName);
+		FileWriter aspectOs = new FileWriter(file);
+		aspectOs.write(templatedObjectString);
+		aspectOs.close();
+	}
 
-	protected abstract Map<String, Object> getTemplateDynamicValues(C classObj);
+	protected InputStream getAspectTemplateInputStream() {
+		StringBuffer aspectTemplatePath = new StringBuffer("com/xebia/smok/aj/creator/");
+		aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append("/");
+		aspectTemplatePath.append(smokMode.getModeDirectory()).append("/");
+		aspectTemplatePath.append("template.vm");
+		return new ClasspathResourceLoader()
+		.getResourceStream(aspectTemplatePath.toString());
+	}
+
+	protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
+
+	protected abstract String getAspectFileName(C classObj);
 
 }

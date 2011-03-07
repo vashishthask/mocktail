@@ -5,15 +5,12 @@ public aspect RecordingAspect {
 		call(* $className.*(..));
 	
 	
-	before() : callPointcut() {
+	Object around() : callPointcut() {
+		System.out.println("I'll skip the actual execution");
 		Object[] objects = thisJoinPoint.getArgs();
 		for(Object object : objects) {
 			System.out.println("Arguments " + object.toString());
 		}
-		System.out.println("Before");
-	}
-	
-	after() : callPointcut() {
-		System.out.println("after");
+		return null;
 	}
 }

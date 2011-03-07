@@ -3,29 +3,31 @@ package com.xebia.smok;
 
 public aspect RecordingAspect {
 
-	pointcut callPointcut() : 
+	pointcut aroundMethodPointcut() : 
 		call(* Aspected.*(..));
 	
-	pointcut callPointcut2() : 
-		call(* SecondAspected.*(..));
 	
-	before() : callPointcut() {
+	/*before() : callPointcut() {
 		Object[] objects = thisJoinPoint.getArgs();
 		for(Object object : objects) {
 			System.out.println("Arguments " + object.toString());
 		}
 		System.out.println("Before");
-	}
+	}*/
 	
-	before() : callPointcut2() {
+	Object around() : aroundMethodPointcut() {
+		System.out.println("Around Before");
 		Object[] objects = thisJoinPoint.getArgs();
 		for(Object object : objects) {
 			System.out.println("Arguments " + object.toString());
 		}
-		System.out.println("Before");
+		Object returnValue = proceed();
+		System.out.println("Around After");
+		return returnValue;
 	}
 	
-	after() : callPointcut() {
+	
+	/*after() : callPointcut() {
 		System.out.println("after");
-	}
+	}*/
 }

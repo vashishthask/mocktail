@@ -5,20 +5,21 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import com.xebia.smok.xml.domain.Smok;
+import com.xebia.smok.xml.domain.SmokMode;
 
 
 public class AspectCreatorFactoryTest {
 	
 
 	@Test
-	public void shouldCreateAspectCreatorForClass() throws Exception {
-		AspectCreator<Smok> aspectCreator = SmokAspectCreatorFactory.getAspectCreator(true);
+	public void shouldCreateRecordingAspectCreatorForClass() throws Exception {
+		AspectCreator<Smok> aspectCreator = SmokAspectCreatorFactory.getAspectCreator(true, SmokMode.RECORDING_MODE);
 		assertTrue(aspectCreator instanceof SmokClassAspectCreator);
 	}
 
 	@Test
-	public void shouldCreateAspectCreatorForMethods() throws Exception {
-		AspectCreator<Smok> aspectCreator = SmokAspectCreatorFactory.getAspectCreator(false);
+	public void shouldCreateRecordingAspectCreatorForMethods() throws Exception {
+		AspectCreator<Smok> aspectCreator = SmokAspectCreatorFactory.getAspectCreator(false, SmokMode.RECORDING_MODE);
 		assertTrue(aspectCreator instanceof SmokMethodsAspectCreator);
 		
 	}
