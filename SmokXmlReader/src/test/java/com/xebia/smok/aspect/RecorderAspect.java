@@ -12,7 +12,7 @@ public class RecorderAspect {
 		// Get the Directory path form SmokContext where we have to store the
 		// file
 		String recordingDirectoryPath = SmokContext.getSmokContext()
-				.getRecordingDirectoryPath();
+				.getRootDirectory();
 
 		// Create the unique id of param objects to be recorded
 		String recrodingFileName = UniqueIdGenerator.HASH_CODE_IMPL

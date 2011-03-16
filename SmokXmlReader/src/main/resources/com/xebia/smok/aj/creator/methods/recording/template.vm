@@ -9,7 +9,7 @@ public aspect RecordingAspect {
 		Object around() : callPointcut$method() {
 			// Get the Directory path form SmokContext where we have to store the
 		// file
-		String recordingDirectoryPath = SmokContext.getSmokContext().getRecordingDirectoryPath();
+		String recordingDirectoryPath = "$recordingDirectoryPath" + File.separator + "$className";
 		
 		// Create the unique id of param objects to be recorded
 		String recrodingFileName = UniqueIdGenerator.HASH_CODE_IMPL

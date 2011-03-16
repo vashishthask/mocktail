@@ -17,57 +17,60 @@ package com.xebia;
  */
 
 import java.io.File;
-import java.lang.reflect.Field;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.List;
 
+import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.codehaus.mojo.aspectj.AjcCompileMojo;
+
+import com.xebia.smok.SmokContext;
+import com.xebia.smok.aj.creator.SmoksAspectsCreator;
+import com.xebia.smok.xml.domain.Smok;
+import com.xebia.smok.xml.domain.SmokMode;
+import com.xebia.smok.xml.reader.XStreamSmokXmlReader;
 
 /**
  * Goal which touches a timestamp file.
  * 
  * @goal smok
  * 
- * @phase compile
+ * @phase process-resources
  */
-public class SmokMojo extends AjcProperties {
+public class SmokMojo extends AbstractMojo {
 	/**
-	 * @parameter expression=”${smok.recording}”
+	 * @parameter expression=”${aspectsDirectory}”
+	 *            default-value="${target}/aspects"
 	 * @required
 	 */
-	private File recordingDirectory;
+	private File aspectsDirectory;
+
+	/**
+	 * @parameter expression=”${smokconfig}” default-value="smok.xml"
+	 * @required
+	 */
+	private File configuration;
+
+	/**
+	 * @parameter expression=”${recordingDir}” default-value="src/recording"
+	 * @required
+	 */
+	private File recordingDir;
 
 	public void execute() throws MojoExecutionException {
-
-		AjcCompileMojo ajcCompileMojo = new AjcCompileMojo();
-		Class<?> superclass = ajcCompileMojo.getClass().getSuperclass();
-		setValue(superclass,ajcCompileMojo, "source",source);
-		setValue(superclass,ajcCompileMojo,"target",target);
-		setValue(superclass.getSuperclass(),ajcCompileMojo,"project",project);
-		setValue(superclass.getSuperclass(),ajcCompileMojo,"basedir",basedir);
-
-		System.out.println("\n\n\n\n ------------------------------- Aspect J -----------------------\n\n\n\n");
-		ajcCompileMojo.execute();
-		System.out.println("\n\n\n------------------------------- My execution -----------------------\n\n\n");
-	}
-
-	@SuppressWarnings("rawtypes")
-	public void setValue(Class classToBeSetOn,Object o, String fieldName, Object value)throws RuntimeException {
-		Field field;
-		try {
-			field = classToBeSetOn.getDeclaredField(fieldName);
-			field.setAccessible(true);
-			field.set(o, value);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
+		if (!aspectsDirectory.exists()) {
+			aspectsDirectory.mkdirs();
 		}
-	}
-
-	public File getRecordingDirectory() {
-		return recordingDirectory;
-	}
-
-	public void setRecordingDirectory(File recordingDirectory) {
-		this.recordingDirectory = recordingDirectory;
+		XStreamSmokXmlReader configReader = new XStreamSmokXmlReader();
+		SmokContext.getSmokContext(recordingDir.getAbsolutePath());
+		try {
+			List<Smok> smoks = configReader.readXml(new FileInputStream(
+					configuration));
+			System.out.println("\n\n " + smoks + "\n\n");
+			SmoksAspectsCreator.ASPECTS_CREATOR.createAspects(smoks,
+					aspectsDirectory, SmokMode.RECORDING_MODE);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }

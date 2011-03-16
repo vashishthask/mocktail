@@ -19,7 +19,7 @@ public class RecordingAspected {
 
 	public static void main(String[] args) {
 		SmokContext smokContext = SmokContext.getSmokContext("c:\\sandy");
-		smokContext.setRecordingDirectory("recording");
+//		smokContext.setRecordingDirectory("recording");
 		RecordingAspected aspected = new RecordingAspected();
 		aspected.add(13, 25);
 		aspected.sub(13, 25);

@@ -10,6 +10,7 @@ import java.io.IOException;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import com.xebia.smok.SmokContext;
 import com.xebia.smok.SmokObjectMother;
 import com.xebia.smok.xml.domain.Smok;
 import com.xebia.smok.xml.domain.SmokMode;
@@ -21,6 +22,8 @@ public class SmokMethodsAspectCreatorTest {
 	
 	@Test
 	public void shouldCreateRecordingMethodAspects() throws Exception {
+		
+		SmokContext.getSmokContext("some_dir");
 		final Smok methodSmok = SmokObjectMother.createMethodSmok("FQCN2",
 				"method1", "method2");
 		new SmokMethodsAspectCreator(SmokMode.RECORDING_MODE) {

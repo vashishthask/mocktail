@@ -6,7 +6,7 @@ import java.util.List;
 public class Smok {
 
 	private String className;
-	private List<String> methods;
+	private List<String> methods = new ArrayList<String>();
 
 	public Smok() {
 		methods = new ArrayList<String>();
@@ -32,5 +32,11 @@ public class Smok {
 	public boolean onlyForClass() {
 		return methods.size() == 0;
 	}
+
+	@Override
+	public String toString() {
+		return "Smok [className=" + className + ", methods=" + methods + "]";
+	}
+	
 
 }

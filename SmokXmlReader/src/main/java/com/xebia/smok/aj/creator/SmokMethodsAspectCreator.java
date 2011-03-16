@@ -3,6 +3,7 @@ package com.xebia.smok.aj.creator;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.xebia.smok.SmokContext;
 import com.xebia.smok.xml.domain.AspectType;
 import com.xebia.smok.xml.domain.Smok;
 import com.xebia.smok.xml.domain.SmokMode;
@@ -22,6 +23,7 @@ public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok> {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		contextMap.put("className", smok.getClassName());
 		contextMap.put("methods", smok.getMethods());
+		contextMap.put("recordingDirectoryPath", SmokContext.getSmokContext().getRootDirectory().replaceAll("\\\\","/"));
 		return contextMap;
 	}
 

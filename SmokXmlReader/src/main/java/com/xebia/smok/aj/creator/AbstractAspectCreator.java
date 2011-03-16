@@ -31,7 +31,14 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 
 	protected void createAspectFile(String fileName, File directory,
 			String templatedObjectString) throws IOException {
-		File file = new File(directory, fileName);
+		if(!directory.exists()){
+			try {
+				directory.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		File file = new File(directory, "Aspect"+fileName+".aj");
 		FileWriter aspectOs = new FileWriter(file);
 		aspectOs.write(templatedObjectString);
 		aspectOs.close();

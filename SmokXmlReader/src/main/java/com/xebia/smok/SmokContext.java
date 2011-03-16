@@ -6,26 +6,21 @@ import java.io.File;
 
 public class SmokContext {
 
-	private final String rotDirectory;
-	private String recordingDirectory;
+	private final String rootDirectory;
 	private static SmokContext context;
 
 	private SmokContext(String rotDirectory) {
-		this.rotDirectory = rotDirectory;
+		this.rootDirectory = rotDirectory;
 	}
 
-	public void setRecordingDirectory(String recordingDirectory) {
-		this.recordingDirectory = recordingDirectory;
-	}
 
-	public String getRecordingDirectoryPath() {
-		assertNotNull(recordingDirectory);
-		return rotDirectory + File.separator + recordingDirectory;
+	public String getRootDirectory() {
+		return rootDirectory;
 	}
-
-	public static SmokContext getSmokContext(String rotDirectory) {
+	
+	public static SmokContext getSmokContext(String rootDirectory) {
 		if (null == context) {
-			context = new SmokContext(rotDirectory);
+			context = new SmokContext(rootDirectory);
 		}
 		return context;
 	}
