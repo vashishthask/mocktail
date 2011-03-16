@@ -29,7 +29,8 @@ public class SmokXmlReaderTest {
 		List<Smok> smoks = smokXmlReader.readXml(sampleXmlStream);
 		
 		assertEquals("Size of smoks didnt matched", smoks.size(), 2);
-		assertThat(smoks.get(0).getClassName(), is("fqcn1"));
+		assertThat(smoks.get(0).getClassName(), is("className"));
+		assertThat(smoks.get(0).getClassPackageName(), is("classPackage"));
 		assertThat(smoks.get(0).getMethods().size(), is(2));
 
 		assertThat(smoks.get(1).getClassName(), is("fqcn2"));

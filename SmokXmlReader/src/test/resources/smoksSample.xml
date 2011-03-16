@@ -1,6 +1,7 @@
 <smoks>
 	<smok>
-		<className>fqcn1</className>
+		<className>className</className>
+		<classPackageName>classPackage</classPackageName>
 		<methods>
 			<method name="method1" />
 			<method name="method1" />

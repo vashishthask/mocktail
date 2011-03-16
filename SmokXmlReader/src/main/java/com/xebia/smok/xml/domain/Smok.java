@@ -6,6 +6,7 @@ import java.util.List;
 public class Smok {
 
 	private String className;
+	private String classPackageName;
 	private List<String> methods = new ArrayList<String>();
 
 	public Smok() {
@@ -22,7 +23,14 @@ public class Smok {
 
 	public void setClassName(String className) {
 		this.className = className;
+	}
 
+	public void setClassPackageName(String classPackageName) {
+		this.classPackageName = classPackageName;
+	}
+
+	public String getClassPackageName() {
+		return this.classPackageName;
 	}
 
 	public void setMethods(List<String> methods) {
@@ -37,6 +45,5 @@ public class Smok {
 	public String toString() {
 		return "Smok [className=" + className + ", methods=" + methods + "]";
 	}
-	
 
 }

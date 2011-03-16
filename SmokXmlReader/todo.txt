@@ -1,0 +1,4 @@
+TODO
+
+1.) Create aspect files in package directory of class, if directory doesnt exist create it
+2.) Save recordings in the package directory, if directory doesnt exist create it
