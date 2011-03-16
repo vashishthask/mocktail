@@ -13,23 +13,24 @@ public class SmokObjectMother {
 		List<Smok> smoks = new ArrayList<Smok>();
 		
 		smoks.add(getSmok(TemplateProcesser.class.getName(), "a", "b"));
-		smoks.add(getSmok(Smok.class.getName()));
+		smoks.add(getSmok(Smok.class.getName(),"PACKAGE"));
 		return smoks;
 	}
 
-	private static Smok getSmok(String className, String...methodsName) {
+	private static Smok getSmok(String className, String packageName, String...methodsName) {
 		Smok smok = new Smok();
 		smok.setClassName(className);
+		smok.setClassPackageName(packageName);
 		smok.setMethods(Arrays.asList(methodsName));
 		return smok;
 	}
 
 	public static Smok createClassSmok(String className) {
-		return getSmok(className);
+		return getSmok(className, "");
 	}
 
-	public static Smok createMethodSmok(String className, String... methodsName) {
-		return getSmok(className, methodsName);
+	public static Smok createMethodSmok(String className, String packageName, String... methodsName) {
+		return getSmok(className, packageName, methodsName);
 	}
 
 }

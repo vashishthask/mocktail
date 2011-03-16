@@ -29,6 +29,10 @@ public class Smok {
 		this.classPackageName = classPackageName;
 	}
 
+	public String getClassFQCN() {
+		return this.classPackageName + "." + this.className;
+	}
+
 	public String getClassPackageName() {
 		return this.classPackageName;
 	}

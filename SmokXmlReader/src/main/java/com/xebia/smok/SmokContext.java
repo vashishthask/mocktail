@@ -2,8 +2,6 @@ package com.xebia.smok;
 
 import static junit.framework.Assert.assertNotNull;
 
-import java.io.File;
-
 public class SmokContext {
 
 	private final String rootDirectory;

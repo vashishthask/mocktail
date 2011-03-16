@@ -23,8 +23,8 @@ public class SmokMethodsAspectCreatorTest {
 	@Test
 	public void shouldCreateRecordingMethodAspects() throws Exception {
 		
-		SmokContext.getSmokContext("some_dir");
-		final Smok methodSmok = SmokObjectMother.createMethodSmok("FQCN2",
+		SmokContext.getSmokContext("root_dir");
+		final Smok methodSmok = SmokObjectMother.createMethodSmok("FQCN2","com.xebia",
 				"method1", "method2");
 		new SmokMethodsAspectCreator(SmokMode.RECORDING_MODE) {
 			@Override
@@ -34,7 +34,7 @@ public class SmokMethodsAspectCreatorTest {
 				assertThat(templatedMethodObjectString, containsString("method1"));
 				assertThat(templatedMethodObjectString, containsString("method2"));
 				assertThat(templatedMethodObjectString, containsString("around"));
-//				assertThat(templatedMethodObjectString, containsString("I'll do the recording if the recorded file is not there"));
+				assertThat(templatedMethodObjectString, containsString("String recordingDirectoryPath = \"root_dir/com/xebia\" + File.separator + \"FQCN2\";"));
 			}
 		}.createAspect(methodSmok, aspectDir);
 	}
