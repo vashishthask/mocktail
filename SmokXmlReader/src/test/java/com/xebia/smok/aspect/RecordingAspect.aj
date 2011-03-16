@@ -7,9 +7,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.util.RecordingsRepository;
+import com.xebia.smok.util.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
+/**
+ * I'll represent the recording aspect use me to test the recording aspect whether it is working fine or not and then 
+ * update the class and method template files accordingly
+ * @author sandeep
+ *
+ */
 public aspect RecordingAspect {
 	
 	pointcut aroundMethodPointcut() : 
@@ -25,20 +31,19 @@ public aspect RecordingAspect {
 		String recrodingFileName = UniqueIdGenerator.HASH_CODE_IMPL
 				.getUniqueId(thisJoinPoint.getArgs()) + "";
 		
-		//Get the object to be recorded
-		Object objectToBeRecorded = proceed();
 		
-		OutputStream outputStream;
-		try {
-			File recordingFile = new File(recordingDirectoryPath, recrodingFileName);
-			outputStream = new FileOutputStream(recordingFile);
-			// Ask Recorder to save the recording file
-			RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
-					objectToBeRecorded, outputStream);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+		Object objectToBeRecorded = ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
+		.getObject(recrodingFileName, recordingDirectoryPath);
+		
+		if (null == objectToBeRecorded) {
+			System.out.println("Recording not already in place so doing the recording");
+			//Get the object to be recorded
+			objectToBeRecorded = proceed();
+			ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
+					objectToBeRecorded, recrodingFileName,
+					recordingDirectoryPath);
+		} else {
+			System.out.println("Recording already in place so fetching data from recording");
 		}
 		return objectToBeRecorded;
 	}
