@@ -23,7 +23,10 @@ public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok> {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		contextMap.put("className", smok.getClassName());
 		contextMap.put("methods", smok.getMethods());
-		String recordingDirectoryPath = SmokContext.getSmokContext().getRootDirectory() + "/" + smok.getClassPackageName().replaceAll("\\.", "/");
+		String recordingDirectoryPath = SmokContext.getSmokContext()
+				.getRootDirectory()
+				+ "/"
+				+ smok.getClassPackageName().replaceAll("\\.", "/");
 		contextMap.put("recordingDirectoryPath", recordingDirectoryPath);
 		return contextMap;
 	}

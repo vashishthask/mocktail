@@ -10,6 +10,7 @@ import java.io.IOException;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import com.xebia.smok.SmokContext;
 import com.xebia.smok.SmokObjectMother;
 import com.xebia.smok.xml.domain.Smok;
 import com.xebia.smok.xml.domain.SmokMode;
@@ -21,14 +22,15 @@ public class SmokClassAspectCreatorTest {
 	
 	@Test
 	public void shouldCreateRecordingAspectForClass() throws Exception {
-		final Smok classSmok = SmokObjectMother.createClassSmok("FQCN");
+		SmokContext.getSmokContext("root_dir");
+		final Smok classSmok = SmokObjectMother.createClassSmok("FQCN", "com.xebia");
 		new SmokClassAspectCreator(SmokMode.RECORDING_MODE) {
 			@Override
 			protected void createAspectFile(String fileName, File directory,
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
 				assertThat(templatedClassObjectString, containsString(classSmok.getClassName()));
-//				assertThat(templatedClassObjectString, containsString("I'll do the recording if the recorded file is not there"));
+				assertThat(templatedClassObjectString, containsString("String recordingDirectoryPath = \"root_dir/com/xebia\" + File.separator + \"FQCN\";"));
 			}
 		}.createAspect(classSmok, aspectDir);
 	}

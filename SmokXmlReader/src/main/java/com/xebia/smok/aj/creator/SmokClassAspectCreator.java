@@ -10,10 +10,9 @@ import com.xebia.smok.xml.domain.SmokMode;
 
 /**
  * I'll create an aspect for the class defined in Smok
- *
+ * 
  */
 public class SmokClassAspectCreator extends AbstractAspectCreator<Smok> {
-
 
 	public SmokClassAspectCreator(SmokMode smokMode) {
 		super(AspectType.CLASS_ASPECT_TYPE, smokMode);
@@ -22,10 +21,14 @@ public class SmokClassAspectCreator extends AbstractAspectCreator<Smok> {
 	protected Map<String, Object> getTemplateParameterValues(Smok smok) {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		contextMap.put("className", smok.getClassName());
-		contextMap.put("recordingDirectoryPath", SmokContext.getSmokContext().getRootDirectory().replaceAll("\\\\","/"));
+		String recordingDirectoryPath = SmokContext.getSmokContext()
+				.getRootDirectory()
+				+ "/"
+				+ smok.getClassPackageName().replaceAll("\\.", "/");
+		contextMap.put("recordingDirectoryPath", recordingDirectoryPath);
 		return contextMap;
 	}
-	
+
 	@Override
 	protected String getAspectFileName(Smok classObj) {
 		return classObj.getClassName();

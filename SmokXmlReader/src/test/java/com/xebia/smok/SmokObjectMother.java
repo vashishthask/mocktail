@@ -25,8 +25,8 @@ public class SmokObjectMother {
 		return smok;
 	}
 
-	public static Smok createClassSmok(String className) {
-		return getSmok(className, "");
+	public static Smok createClassSmok(String className, String pcakageName) {
+		return getSmok(className, pcakageName);
 	}
 
 	public static Smok createMethodSmok(String className, String packageName, String... methodsName) {
