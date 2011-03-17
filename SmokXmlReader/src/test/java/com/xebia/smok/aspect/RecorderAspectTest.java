@@ -13,7 +13,7 @@ public class RecorderAspectTest {
 	public void shouldDoRecording() throws Exception {
 		Assert.assertTrue(true);
 		RecorderAspect recorderAspect = new RecorderAspect();
-		SmokContext smokContext = SmokContext.getSmokContext("c:\\sandy\\recording\\test");
+		SmokContext.getSmokContext("c:\\sandy\\recording\\test");
 		recorderAspect.doTheRecording("to be recorded object", "sandy", "ganesh", 12, 23.0);
 	}
 }

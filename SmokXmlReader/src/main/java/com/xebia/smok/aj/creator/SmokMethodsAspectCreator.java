@@ -1,9 +1,7 @@
 package com.xebia.smok.aj.creator;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import com.xebia.smok.SmokContext;
 import com.xebia.smok.xml.domain.AspectType;
 import com.xebia.smok.xml.domain.Smok;
 import com.xebia.smok.xml.domain.SmokMode;
@@ -12,7 +10,7 @@ import com.xebia.smok.xml.domain.SmokMode;
  * I'll create an aspect for methods defined in Smok
  * 
  */
-public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok> {
+public class SmokMethodsAspectCreator extends AbstractSmokAspectCreator {
 
 	public SmokMethodsAspectCreator(SmokMode smokMode) {
 		super(AspectType.METHODS_ASPECT_TYPE, smokMode);
@@ -20,25 +18,9 @@ public class SmokMethodsAspectCreator extends AbstractAspectCreator<Smok> {
 
 	@Override
 	protected Map<String, Object> getTemplateParameterValues(Smok smok) {
-		Map<String, Object> contextMap = new HashMap<String, Object>();
-		contextMap.put("className", smok.getClassName());
+		Map<String, Object> contextMap = super.getTemplateParameterValues(smok);
 		contextMap.put("methods", smok.getMethods());
-		String recordingDirectoryPath = SmokContext.getSmokContext()
-				.getRootDirectory()
-				+ "/"
-				+ getAspectDirectory(smok);
-		contextMap.put("recordingDirectoryPath", recordingDirectoryPath);
 		return contextMap;
 	}
-
-	@Override
-	protected String getAspectFileName(Smok classObj) {
-		return classObj.getClassName();
-	}
-
-	@Override
-	protected String getAspectDirectory(Smok smok) {
-		return smok.getClassPackageName().replaceAll("\\.", "/");
-	}
-
+	
 }

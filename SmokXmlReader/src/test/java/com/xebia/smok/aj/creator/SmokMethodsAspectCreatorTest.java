@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 import org.mockito.Mock;
+import org.springframework.beans.DirectFieldAccessor;
 
 import com.xebia.smok.SmokContext;
 import com.xebia.smok.SmokObjectMother;
@@ -23,7 +24,10 @@ public class SmokMethodsAspectCreatorTest {
 	@Test
 	public void shouldCreateRecordingMethodAspects() throws Exception {
 		
-		SmokContext.getSmokContext("root_dir");
+		SmokContext smokContext = SmokContext.getSmokContext("root_dir");
+		DirectFieldAccessor dfa = new DirectFieldAccessor(smokContext);
+		//Need to set as Smok Context is a singleton class and is getting set-upped from multiple places
+		dfa.setPropertyValue("rootDirectory", "root_dir");
 		final Smok methodSmok = SmokObjectMother.createMethodSmok("FQCN2","com.xebia",
 				"method1", "method2");
 		new SmokMethodsAspectCreator(SmokMode.RECORDING_MODE) {

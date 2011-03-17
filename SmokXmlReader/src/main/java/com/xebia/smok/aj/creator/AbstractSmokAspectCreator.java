@@ -8,14 +8,15 @@ import com.xebia.smok.xml.domain.AspectType;
 import com.xebia.smok.xml.domain.Smok;
 import com.xebia.smok.xml.domain.SmokMode;
 
-/**
- * I'll create an aspect for the class defined in Smok
- * 
- */
-public class SmokClassAspectCreator extends AbstractSmokAspectCreator {
+public abstract class AbstractSmokAspectCreator extends
+		AbstractAspectCreator<Smok> {
 
-	public SmokClassAspectCreator(SmokMode smokMode) {
-		super(AspectType.CLASS_ASPECT_TYPE, smokMode);
+	public AbstractSmokAspectCreator(AspectType aspectType, SmokMode smokMode) {
+		super(aspectType, smokMode);
+	}
+
+	protected String getAspectDirectory(Smok smok) {
+		return smok.getClassPackageName().replaceAll("\\.", "/");
 	}
 
 	protected Map<String, Object> getTemplateParameterValues(Smok smok) {
@@ -27,6 +28,10 @@ public class SmokClassAspectCreator extends AbstractSmokAspectCreator {
 				+ getAspectDirectory(smok);
 		contextMap.put("recordingDirectoryPath", recordingDirectoryPath);
 		return contextMap;
+	}
+
+	protected String getAspectFileName(Smok smok) {
+		return smok.getClassName();
 	}
 
 }
