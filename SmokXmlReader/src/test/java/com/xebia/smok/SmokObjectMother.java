@@ -11,13 +11,15 @@ public class SmokObjectMother {
 
 	public static List<Smok> getSmoksForAspects() {
 		List<Smok> smoks = new ArrayList<Smok>();
-		
-		smoks.add(getSmok(TemplateProcesser.class.getName(), "a", "b"));
-		smoks.add(getSmok(Smok.class.getName(),"PACKAGE"));
+
+		smoks.add(getSmok("TemplateProcesser", "com.xebia.smok.aj.creator",
+				"a", "b"));
+		smoks.add(getSmok("Smok", "com.xebia.smok.xml.domain"));
 		return smoks;
 	}
 
-	private static Smok getSmok(String className, String packageName, String...methodsName) {
+	private static Smok getSmok(String className, String packageName,
+			String... methodsName) {
 		Smok smok = new Smok();
 		smok.setClassName(className);
 		smok.setClassPackageName(packageName);
@@ -29,7 +31,8 @@ public class SmokObjectMother {
 		return getSmok(className, pcakageName);
 	}
 
-	public static Smok createMethodSmok(String className, String packageName, String... methodsName) {
+	public static Smok createMethodSmok(String className, String packageName,
+			String... methodsName) {
 		return getSmok(className, packageName, methodsName);
 	}
 

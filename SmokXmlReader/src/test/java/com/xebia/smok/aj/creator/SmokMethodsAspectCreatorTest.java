@@ -28,7 +28,7 @@ public class SmokMethodsAspectCreatorTest {
 				"method1", "method2");
 		new SmokMethodsAspectCreator(SmokMode.RECORDING_MODE) {
 			@Override
-			protected void createAspectFile(String fileName, File directory,
+			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodSmok.getClassName()));
 				assertThat(templatedMethodObjectString, containsString("method1"));

@@ -16,42 +16,50 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 	private final AspectType aspectType;
 	private final SmokMode smokMode;
 
-	public AbstractAspectCreator(AspectType aspectType, SmokMode smokMode ){
+	public AbstractAspectCreator(AspectType aspectType, SmokMode smokMode) {
 		this.aspectType = aspectType;
 		this.smokMode = smokMode;
 	}
-	
-	
+
 	@Override
-	public void createAspect(C classObj, File directory) throws Exception {
-		String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER.processTemplate(
-				getTemplateParameterValues(classObj), getAspectTemplateInputStream());
-		createAspectFile(getAspectFileName(classObj), directory, templatedClassObjectString);
+	public void createAspect(C classObj, File aspectsRootDirectory)
+			throws Exception {
+		String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER
+				.processTemplate(getTemplateParameterValues(classObj),
+						getAspectTemplateInputStream());
+		createAspectFile(classObj, getAspectFileName(classObj),
+				aspectsRootDirectory, templatedClassObjectString);
 	}
 
-	protected void createAspectFile(String fileName, File directory,
-			String templatedObjectString) throws IOException {
-		if(!directory.exists()){
-			try {
-				directory.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	/**
+	 * I'll create aspect in the the aspect directory
+	 */
+	protected void createAspectFile(C classObj, String fileName,
+			File aspectsRootDirecotry, String templatedObjectString)
+			throws IOException {
+		File aspectFileDirectory = new File(aspectsRootDirecotry,
+				getAspectDirectory(classObj));
+		if (!aspectFileDirectory.exists()) {
+			aspectFileDirectory.mkdirs();
 		}
-		File file = new File(directory, "Aspect"+fileName+".aj");
+		File file = new File(aspectFileDirectory, "Aspect" + fileName + ".aj");
 		FileWriter aspectOs = new FileWriter(file);
 		aspectOs.write(templatedObjectString);
 		aspectOs.close();
 	}
 
 	protected InputStream getAspectTemplateInputStream() {
-		StringBuffer aspectTemplatePath = new StringBuffer("com/xebia/smok/aj/creator/");
-		aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append("/");
+		StringBuffer aspectTemplatePath = new StringBuffer(
+				"com/xebia/smok/aj/creator/");
+		aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append(
+				"/");
 		aspectTemplatePath.append(smokMode.getModeDirectory()).append("/");
 		aspectTemplatePath.append("template.vm");
 		return new ClasspathResourceLoader()
-		.getResourceStream(aspectTemplatePath.toString());
+				.getResourceStream(aspectTemplatePath.toString());
 	}
+
+	protected abstract String getAspectDirectory(C classObj);
 
 	protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
 

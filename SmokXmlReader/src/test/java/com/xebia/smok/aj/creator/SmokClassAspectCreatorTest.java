@@ -26,7 +26,7 @@ public class SmokClassAspectCreatorTest {
 		final Smok classSmok = SmokObjectMother.createClassSmok("FQCN", "com.xebia");
 		new SmokClassAspectCreator(SmokMode.RECORDING_MODE) {
 			@Override
-			protected void createAspectFile(String fileName, File directory,
+			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
 				assertThat(templatedClassObjectString, containsString(classSmok.getClassName()));

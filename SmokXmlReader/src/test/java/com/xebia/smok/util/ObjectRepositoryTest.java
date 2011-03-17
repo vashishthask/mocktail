@@ -45,40 +45,47 @@ public class ObjectRepositoryTest {
 		assertThat(recordedList.size(), is(4));
 
 	}
-	
+
 	@Test
 	public void testObjectAlreadyExists() throws Exception {
-		String locationDirectory = getAbsolutePath("src","test","resources","com","xebia","smok", "util");
-		boolean objectAlreadyExist = ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.objectAlreadyExist("recorded_list.ser", locationDirectory);
+		String locationDirectory = getAbsolutePath("src", "test", "resources",
+				"com", "xebia", "smok", "util");
+		boolean objectAlreadyExist = ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
+				.objectAlreadyExist("recorded_list.ser", locationDirectory);
 		assertThat(objectAlreadyExist, is(true));
 	}
-	
+
 	@Test
 	public void shouldSaveObject() throws Exception {
-		String locationDirectory = getAbsolutePath("src","test","resources","com","xebia","smok", "util");
+		String locationDirectory = getAbsolutePath("src", "test", "resources",
+				"com", "xebia", "smok", "util");
 		File file = new File(locationDirectory, "saved_object");
 		assertThat(file.exists(), is(false));
-		ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(Arrays.asList("sandy", "ganesh", 12, 23.0), "saved_object", locationDirectory);
+		ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
+				Arrays.asList("sandy", "ganesh", 12, 23.0), "saved_object",
+				locationDirectory);
 		file = new File(locationDirectory, "saved_object");
 		assertThat(file.exists(), is(true));
 		assertThat("Unable to delete file", true, is(file.delete()));
 	}
-	
+
 	@Test
 	public void shouldGetObject() throws Exception {
-		String locationDirectory = getAbsolutePath("src","test","resources","com","xebia","smok", "util");
-		List recordedList = (List)ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.getObject("recorded_list.ser", locationDirectory);
+		String locationDirectory = getAbsolutePath("src", "test", "resources",
+				"com", "xebia", "smok", "util");
+		List recordedList = (List) ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
+				.getObject("recorded_list.ser", locationDirectory);
 		assertThat(recordedList.size(), is(4));
-		assertThat((String)recordedList.get(0), is("sandy"));
-		assertThat((String)recordedList.get(1), is("ganesh"));
-		assertThat((Integer)recordedList.get(2), is(12));
-		assertThat((Double)recordedList.get(3), is(23.0));
+		assertThat((String) recordedList.get(0), is("sandy"));
+		assertThat((String) recordedList.get(1), is("ganesh"));
+		assertThat((Integer) recordedList.get(2), is(12));
+		assertThat((Double) recordedList.get(3), is(23.0));
 	}
 
 	private String getAbsolutePath(String... path) throws IOException {
-		File file = new File("."); 
+		File file = new File(".");
 		StringBuffer absolutePath = new StringBuffer(file.getCanonicalPath());
-		for(String pathElement : path) {
+		for (String pathElement : path) {
 			absolutePath.append(File.separator).append(pathElement);
 		}
 		return absolutePath.toString();

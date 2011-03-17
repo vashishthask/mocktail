@@ -1,5 +1,7 @@
 package com.xebia.smok.aspect;
 
+import java.io.File;
+
 import com.xebia.smok.SmokContext;
 import com.xebia.smok.util.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
@@ -13,6 +15,9 @@ public class RecorderAspect {
 		// file
 		String recordingDirectoryPath = SmokContext.getSmokContext()
 				.getRootDirectory();
+		if(!(new File(recordingDirectoryPath)).exists()) {
+			(new File(recordingDirectoryPath)).mkdirs();
+		}
 
 		// Create the unique id of param objects to be recorded
 		String recrodingFileName = UniqueIdGenerator.HASH_CODE_IMPL

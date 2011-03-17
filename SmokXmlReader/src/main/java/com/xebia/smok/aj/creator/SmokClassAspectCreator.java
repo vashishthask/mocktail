@@ -24,7 +24,7 @@ public class SmokClassAspectCreator extends AbstractAspectCreator<Smok> {
 		String recordingDirectoryPath = SmokContext.getSmokContext()
 				.getRootDirectory()
 				+ "/"
-				+ smok.getClassPackageName().replaceAll("\\.", "/");
+				+ getAspectDirectory(smok);
 		contextMap.put("recordingDirectoryPath", recordingDirectoryPath);
 		return contextMap;
 	}
@@ -32,6 +32,11 @@ public class SmokClassAspectCreator extends AbstractAspectCreator<Smok> {
 	@Override
 	protected String getAspectFileName(Smok classObj) {
 		return classObj.getClassName();
+	}
+	
+	@Override
+	protected String getAspectDirectory(Smok smok) {
+		return smok.getClassPackageName().replaceAll("\\.", "/");
 	}
 
 }
