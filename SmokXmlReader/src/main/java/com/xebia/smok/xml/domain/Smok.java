@@ -7,7 +7,7 @@ public class Smok {
 
 	private String className;
 	private String classPackageName;
-	private List<String> methods = new ArrayList<String>();
+	private List<String> methods;
 
 	public Smok() {
 		methods = new ArrayList<String>();
@@ -42,7 +42,7 @@ public class Smok {
 	}
 
 	public boolean onlyForClass() {
-		return methods.size() == 0;
+		return methods == null || methods.size() == 0;
 	}
 
 	@Override

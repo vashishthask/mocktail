@@ -32,9 +32,11 @@ public class SmokXmlReaderTest {
 		assertThat(smoks.get(0).getClassName(), is("className"));
 		assertThat(smoks.get(0).getClassPackageName(), is("classPackage"));
 		assertThat(smoks.get(0).getMethods().size(), is(2));
+		assertThat(smoks.get(0).onlyForClass(), is(false));
 
 		assertThat(smoks.get(1).getClassName(), is("fqcn2"));
 		assertNull(smoks.get(1).getMethods());
+		assertThat(smoks.get(1).onlyForClass(), is(true));
 	}
 
 }
