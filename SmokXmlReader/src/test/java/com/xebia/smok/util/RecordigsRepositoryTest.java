@@ -17,6 +17,8 @@ import org.mockito.Mock;
 import org.mockito.internal.verification.Times;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.xebia.smok.repository.RecordingsRepository;
+
 @RunWith(MockitoJUnitRunner.class)
 public class RecordigsRepositoryTest {
 

@@ -3,7 +3,7 @@ package com.xebia.smok.aspect;
 import java.io.File;
 
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.util.ObjectRepository;
+import com.xebia.smok.repository.DiskObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
 public class RecorderAspect {
@@ -25,9 +25,9 @@ public class RecorderAspect {
 
 		// Get the object to be recorded
 		// Ask Recorder to save the recording file
-		if (null == ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
+		if (null == DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
 				.getObject(recrodingFileName, recordingDirectoryPath)) {
-			ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
+			DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
 					objectToBeRecorded, recrodingFileName,
 					recordingDirectoryPath);
 		}

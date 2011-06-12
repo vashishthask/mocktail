@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.util.ObjectRepository;
+import com.xebia.smok.repository.DiskObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
 /**
@@ -32,14 +32,14 @@ public aspect RecordingAspect {
 				.getUniqueId(thisJoinPoint.getArgs()) + "";
 		
 		
-		Object objectToBeRecorded = ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
+		Object objectToBeRecorded = DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
 		.getObject(recrodingFileName, recordingDirectoryPath);
 		
 		if (null == objectToBeRecorded) {
 			System.out.println("Recording not already in place so doing the recording");
 			//Get the object to be recorded
 			objectToBeRecorded = proceed();
-			ObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
+			DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
 					objectToBeRecorded, recrodingFileName,
 					recordingDirectoryPath);
 		} else {

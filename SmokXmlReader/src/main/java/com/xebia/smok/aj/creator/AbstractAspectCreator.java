@@ -61,8 +61,9 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 
 	protected abstract String getAspectDirectory(C classObj);
 
+	protected abstract String getAspectFileName(C classObj);
+
 	protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
 
-	protected abstract String getAspectFileName(C classObj);
 
 }
