@@ -1,7 +1,31 @@
+Things to cover
+	
+1.) Review code of smok xml generation(SmokXmlReader)
+	Set standard smok xml
+	Verify smok xml generation for only classes
+	Verify smok xml generation for only methods
+	Verify smok xml generation for both classes and methods
+	Verify smok xml generation for boundary conditions i.e classes are not their ambiguity in methods: TBD  
+	
+2.) Create repository that can save and read objects
+	Generic creation is still missing: TBD
+	Test and verify Recording repository
+	Test and verify playback repository
+
+3.) Review code of aspects creation
+	Recording aspect
+	Playback aspect
+
+4.) Test integration of recording aspects with the repository
+
+5.) Test integration of playback aspects with the repository
+	
+
+
 TODO
 
-1.) Create aspect files in package directory of class, if directory doesnt exist create it
-2.) Save recordings in the package directory, if directory doesnt exist create it
+1.) Create aspect files in package directory of class, if directory doesn't exist create it
+2.) Save recordings in the package directory, if directory doesn't exist create it
 
 
 
@@ -9,4 +33,4 @@ TODO
 
 
 -- Aspect File Creation
-1.) Create Aspect file in the specified pacakage directory
+1.) Create Aspect file in the specified package directory
