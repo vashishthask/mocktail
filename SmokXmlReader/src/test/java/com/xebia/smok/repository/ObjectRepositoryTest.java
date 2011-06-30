@@ -19,16 +19,19 @@ import org.mockito.Mock;
 import org.mockito.internal.verification.Times;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.xebia.smok.SmokContainer;
+
 @RunWith(MockitoJUnitRunner.class)
 public class ObjectRepositoryTest {
 
 	@Mock
 	OutputStream outputStream;
+	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 
 	@SuppressWarnings("unchecked")
 	@Test
 	public void shouldRecordObj() throws Exception {
-		DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
+		objectRepository.saveObject(
 				Arrays.asList("sandy", "ganesh", 12, 23.0), outputStream);
 		verify(outputStream, new Times(14)).write((byte[]) any(), anyInt(),
 				anyInt());
@@ -37,7 +40,7 @@ public class ObjectRepositoryTest {
 	@SuppressWarnings("rawtypes")
 	@Test
 	public void shouldReadObj() throws Exception {
-		List recordedList = (List) DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
+		List recordedList = (List) objectRepository
 				.getObject(new ClasspathResourceLoader()
 						.getResourceStream("com/xebia/smok/util/recorded_list.ser"));
 
@@ -49,8 +52,7 @@ public class ObjectRepositoryTest {
 	public void testObjectAlreadyExists() throws Exception {
 		String locationDirectory = getAbsolutePath("src", "test", "resources",
 				"com", "xebia", "smok", "util");
-		boolean objectAlreadyExist = DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
-				.objectAlreadyExist("recorded_list.ser", locationDirectory);
+		boolean objectAlreadyExist = objectRepository.objectAlreadyExist("recorded_list.ser", locationDirectory);
 		assertThat(objectAlreadyExist, is(true));
 	}
 
@@ -60,7 +62,7 @@ public class ObjectRepositoryTest {
 				"com", "xebia", "smok", "util");
 		File file = new File(locationDirectory, "saved_object");
 		assertThat(file.exists(), is(false));
-		DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
+		objectRepository.saveObject(
 				Arrays.asList("sandy", "ganesh", 12, 23.0), "saved_object",
 				locationDirectory);
 		file = new File(locationDirectory, "saved_object");
@@ -72,8 +74,7 @@ public class ObjectRepositoryTest {
 	public void shouldGetObject() throws Exception {
 		String locationDirectory = getAbsolutePath("src", "test", "resources",
 				"com", "xebia", "smok", "util");
-		List recordedList = (List) DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
-				.getObject("recorded_list.ser", locationDirectory);
+		List recordedList = (List) objectRepository.getObject("recorded_list.ser", locationDirectory);
 		assertThat(recordedList.size(), is(4));
 		assertThat((String) recordedList.get(0), is("sandy"));
 		assertThat((String) recordedList.get(1), is("ganesh"));

@@ -1,13 +1,10 @@
 package com.xebia.smok.aspect;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 
+import com.xebia.smok.SmokContainer;
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.repository.DiskObjectRepository;
+import com.xebia.smok.repository.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
 /**
@@ -18,6 +15,10 @@ import com.xebia.smok.util.UniqueIdGenerator;
  */
 public aspect RecordingAspect {
 	
+	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
+	String fqcn = "com.xebia.smok.aspect";
+	
 	pointcut aroundMethodPointcut() : 
 		call(* com.xebia.smok.aspect.RecordingAspected.*(..));
 	
@@ -25,26 +26,39 @@ public aspect RecordingAspect {
 	Object around() : aroundMethodPointcut() {
 		// Get the Directory path form SmokContext where we have to store the
 		// file
-		String recordingDirectoryPath = SmokContext.getSmokContext().getRecordingDirectoryPath();
+		String recordingDirectoryPath = SmokContext.getSmokContext()
+				.getRecordingDirectory();
+		
+		String fileSeparator = "/";
+		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+				+ fqcn.replaceAll("\\.", fileSeparator);
+
+		if (!(new File(recordingDirectoryPath)).exists()) {
+			(new File(recordingDirectoryPath)).mkdirs();
+		}
 		
 		// Create the unique id of param objects to be recorded
-		String recrodingFileName = UniqueIdGenerator.HASH_CODE_IMPL
-				.getUniqueId(thisJoinPoint.getArgs()) + "";
+		//TODO: Look into method name issue
+		/*String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getStaticPart(), thisJoinPoint.getArgs())
+				+ "";*/
+		String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getArgs())
+		+ "";
 		
-		
-		Object objectToBeRecorded = DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY
-		.getObject(recrodingFileName, recordingDirectoryPath);
-		
-		if (null == objectToBeRecorded) {
+		Object objectToBeRecorded = null;
+		// Get the object to be recorded
+		// Ask Recorder to save the recording file
+		if (!objectRepository.objectAlreadyExist(recrodingFileName,
+				recordingDirectoryPath)) {
 			System.out.println("Recording not already in place so doing the recording");
-			//Get the object to be recorded
 			objectToBeRecorded = proceed();
-			DiskObjectRepository.SERIALIZER_RECORDINGS_REPOSITORY.saveObject(
-					objectToBeRecorded, recrodingFileName,
+			objectRepository.saveObject(objectToBeRecorded, recrodingFileName,
 					recordingDirectoryPath);
 		} else {
-			System.out.println("Recording already in place so fetching data from recording");
+			System.out.println("object already exists so not saving it");
+			objectToBeRecorded = objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
 		}
+
+		
 		return objectToBeRecorded;
 	}
 }
