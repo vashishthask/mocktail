@@ -10,9 +10,10 @@ import com.xebia.smok.util.UniqueIdGenerator;
 
 public aspect Aspect$className {
 
+	String fqcn = "$classPackage.$className";
 	#foreach($method in $methods)
  		pointcut callPointcut$method() : 
-			call(* $className.$method(..));
+			call(* $classPackage.$className.$method(..));
 	
 		
 		Object around() : callPointcut$method() {

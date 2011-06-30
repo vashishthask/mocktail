@@ -3,3 +3,5 @@
 *.class
 .settings
 */target/*
+/sampleapp/target
+/samplejarapp/target

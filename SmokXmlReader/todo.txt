@@ -7,13 +7,17 @@ Things to cover
 	Verify smok xml generation for both classes and methods
 	Verify smok xml generation for boundary conditions i.e classes are not their ambiguity in methods: TBD  
 	
-2.) Create repository that can save and read objects
+2.) Create repository that can save and read objects(ObjectRepository)
 	Generic creation is still missing: TBD
-	Test and verify Recording repository
-	Test and verify playback repository
 
 3.) Review code of aspects creation
-	Recording aspect
+	Test templating: Template Processor. Create an interface and user will use that interface to create actual objects out of template
+	Recording aspect: 
+		a.) Test Recording aspect: Are we able to do the recording using the Recording aspect| RecorderAspect. It's test case need to be modified
+		b.) Test aspectj file: Create actual aspectj file from the java class and then verify that aspect file manually. Verified RecordingAspect.aj it's working as desired 
+		c.) Are we creating recoding aspect in sync with our sample recording aspect
+		d.) Test aj file creation for class
+		e.) Test aj file creation for methods
 	Playback aspect
 
 4.) Test integration of recording aspects with the repository
@@ -34,3 +38,28 @@ TODO
 
 -- Aspect File Creation
 1.) Create Aspect file in the specified package directory
+
+
+Things to be done
+
+DONE
+1.) Define smok xml 
+2.) Creating Smok object from xml file
+3.) Marshal and un-marshal objects 
+4.) Create a java file that can be used as a reference by smok recording aspect. All recording related testing can be done on this class.
+5.) Create recording smok aj file for a specific class
+6.) Create smok recorder template
+		Smok template for class
+		Smok template for method
+7.) Create smok aj file from recording template
+		Class smok aj file
+		Method smok aj file
+8.) Create Class smok aj file from smok xml
+9.) Create Method smok aj file from smok xml
+IN PROGRESS
+
+PLAYBACK 
+
+
+
+

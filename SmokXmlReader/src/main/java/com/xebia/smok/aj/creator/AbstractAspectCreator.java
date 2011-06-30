@@ -22,8 +22,14 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 	}
 
 	@Override
+	/**
+	 * I'll create the contents of the aspect file for that
+	 * We have to get the dynamic values <code>getTemplateParameterValues</code>
+	 * Input stream of template recording/playback class/method
+	 */
 	public void createAspect(C classObj, File aspectsRootDirectory)
 			throws Exception {
+		
 		String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER
 				.processTemplate(getTemplateParameterValues(classObj),
 						getAspectTemplateInputStream());

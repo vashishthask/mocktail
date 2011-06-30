@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+//TODO: This class will be removed along with its' test class as Object Repository handles this stuff
 public enum RecordingsRepository {
 
 	SERIALIZER_RECORDINGS_REPOSITORY;

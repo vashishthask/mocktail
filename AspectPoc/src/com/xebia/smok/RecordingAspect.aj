@@ -23,6 +23,14 @@ public aspect RecordingAspect {
 		}
 		Object returnValue = proceed();
 		System.out.println("Around After");
+		
+		if ( thisJoinPoint.getThis() != null) {
+            System.out.println("getThis()=" + thisJoinPoint.getThis());
+        }
+        if ( thisJoinPoint.getTarget() != null) {
+            System.out.println("getTarget()=" + thisJoinPoint.getTarget());
+        }
+        System.out.println("toLongString()=" + thisJoinPoint.getStaticPart()); 
 		return returnValue;
 	}
 	

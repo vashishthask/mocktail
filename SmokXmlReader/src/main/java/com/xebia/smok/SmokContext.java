@@ -4,16 +4,16 @@ import static junit.framework.Assert.assertNotNull;
 
 public class SmokContext {
 
-	private final String rootDirectory;
+	private final String recordingDirectory;
 	private static SmokContext context;
 
-	private SmokContext(String rotDirectory) {
-		this.rootDirectory = rotDirectory;
+	private SmokContext(String recordingDirectory) {
+		this.recordingDirectory = recordingDirectory;
 	}
 
 
-	public String getRootDirectory() {
-		return rootDirectory;
+	public String getRecordingDirectory() {
+		return recordingDirectory;
 	}
 	
 	public static SmokContext getSmokContext(String rootDirectory) {

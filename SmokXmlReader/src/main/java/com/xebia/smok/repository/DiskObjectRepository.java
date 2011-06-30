@@ -10,9 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-public enum DiskObjectRepository implements ObjectRepository{
-
-	SERIALIZER_RECORDINGS_REPOSITORY;
+public class  DiskObjectRepository implements ObjectRepository{
 
 	public void saveObject(Object objectToBeSerialized, OutputStream outputStream)
 			throws IOException {
