@@ -1,6 +1,7 @@
 <smoks>
  <smok>
   <className>Greeter</className>
+  <classPackageName>com</classPackageName>
   <methods></methods>
  </smok>
 </smoks>

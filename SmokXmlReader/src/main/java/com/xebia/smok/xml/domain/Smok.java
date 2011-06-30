@@ -6,7 +6,7 @@ import java.util.List;
 public class Smok {
 
 	private String className;
-	private String classPackageName;
+	private String classPackageName = "";
 	private List<String> methods;
 
 	public Smok() {
@@ -47,7 +47,9 @@ public class Smok {
 
 	@Override
 	public String toString() {
-		return "Smok [className=" + className + ", methods=" + methods + "]";
+		return "Smok [className=" + className + ", classPackageName="
+				+ classPackageName + ", methods=" + methods + "]";
 	}
 
+	
 }
