@@ -30,7 +30,11 @@ public class Smok {
 	}
 
 	public String getClassFQCN() {
-		return this.classPackageName + "." + this.className;
+		String fqcn = "";
+		if( null != classPackageName && this.classPackageName.length() > 0) {
+			fqcn = fqcn + this.classPackageName + ".";
+		}
+		return fqcn + this.className;
 	}
 
 	public String getClassPackageName() {

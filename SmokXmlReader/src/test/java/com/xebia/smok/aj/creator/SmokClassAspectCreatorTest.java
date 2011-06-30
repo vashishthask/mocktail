@@ -53,8 +53,8 @@ public class SmokClassAspectCreatorTest {
 			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
-				assertThat(templatedClassObjectString, containsString("String fqcn = \".FQCN\";"));
-				assertThat(templatedClassObjectString, containsString("pointcut callPointcut() : call(* .FQCN.*(..));"));
+				assertThat(templatedClassObjectString, containsString("String fqcn = \"FQCN\";"));
+				assertThat(templatedClassObjectString, containsString("pointcut callPointcut() : call(* FQCN.*(..));"));
 			}
 		}.createAspect(classSmok, aspectDir);
 	}

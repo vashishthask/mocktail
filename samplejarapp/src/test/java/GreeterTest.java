@@ -2,7 +2,6 @@
 
 import org.junit.Test;
 
-import com.Greeter;
 
 
 public class GreeterTest{

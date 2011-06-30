@@ -14,7 +14,7 @@ public class TemplateProcesserTest {
 	public void shouldCreateClassAspect() throws Exception {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		contextMap.put("className", "TemplateProcesserTest");
-		contextMap.put("classPackage", "com.xebia.smok.aj.creator");
+		contextMap.put("fqcn", "com.xebia.smok.aj.creator.TemplateProcesserTest");
 
 		String templatedString = TemplateProcesser.TEMPLATE_PROCESSER
 				.processTemplate(
@@ -33,7 +33,7 @@ public class TemplateProcesserTest {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
 		String []methods = {"method1", "method2"};
 		contextMap.put("className", "TemplateProcesserTest");
-		contextMap.put("classPackage", "com.xebia.smok.aj.creator");
+		contextMap.put("fqcn", "com.xebia.smok.aj.creator.TemplateProcesserTest");
 		contextMap.put("methods", methods);
 
 		String templatedString = TemplateProcesser.TEMPLATE_PROCESSER

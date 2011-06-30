@@ -1,4 +1,6 @@
-package com;
+import com.xebia.smok.SmokContext;
+
+
 
 
 
@@ -10,6 +12,7 @@ public class Greeter {
 	}
 	
 	public static void main(String[] args) {
+		SmokContext context = SmokContext.getSmokContext("C:\\sandy\\recording");
 		Greeter greeter = new Greeter();
 		greeter.SayHello();
 	}

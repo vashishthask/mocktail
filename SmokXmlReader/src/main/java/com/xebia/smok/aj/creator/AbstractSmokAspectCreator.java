@@ -21,8 +21,9 @@ public abstract class AbstractSmokAspectCreator extends
 
 	protected Map<String, Object> getTemplateParameterValues(Smok smok) {
 		Map<String, Object> contextMap = new HashMap<String, Object>();
+		contextMap.put("fqcn", smok.getClassFQCN());
 		contextMap.put("className", smok.getClassName());
-		contextMap.put("classPackage", smok.getClassPackageName());
+//		contextMap.put("classPackage", smok.getClassPackageName());
 		return contextMap;
 	}
 
