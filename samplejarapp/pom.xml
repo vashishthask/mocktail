@@ -40,7 +40,7 @@
 				<configuration>
 					<aspectsDirectory>target/generated/aspects</aspectsDirectory>
 					<configuration>src/main/resources/smok.xml</configuration>
-					<recordingDir>src/recording</recordingDir>
+					<recordingDir>c:/sandy</recordingDir>
 				</configuration>
 				<executions>
 					<execution>

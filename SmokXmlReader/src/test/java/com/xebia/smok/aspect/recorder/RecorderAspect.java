@@ -1,4 +1,4 @@
-package com.xebia.smok.aspect;
+package com.xebia.smok.aspect.recorder;
 
 import java.io.File;
 
@@ -7,28 +7,21 @@ import com.xebia.smok.SmokContext;
 import com.xebia.smok.repository.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
-/**
- * I'll represent the recording aspect use me to test the recording aspect whether it is working fine or not and then 
- * update the class and method template files accordingly
- * @author sandeep
- *
- */
-public aspect RecordingAspect {
-	
+public class RecorderAspect {
+
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
-	String fqcn = "com.xebia.smok.aspect";
+	String fqcn = "com.xebia.smok.aspect.recorder";
 	
-	pointcut aroundMethodPointcut() : 
-		call(* com.xebia.smok.aspect.RecordingAspected.*(..));
-	
-	
-	Object around() : aroundMethodPointcut() {
+
+	public void doTheRecording(Object objectToBeRecorded,
+			Object... paramObjects) {
+		
+//		String methodName = "doTheRecording";
 		// Get the Directory path form SmokContext where we have to store the
 		// file
 		String recordingDirectoryPath = SmokContext.getSmokContext()
 				.getRecordingDirectory();
-		
 		String fileSeparator = "/";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 				+ fqcn.replaceAll("\\.", fileSeparator);
@@ -36,29 +29,22 @@ public aspect RecordingAspect {
 		if (!(new File(recordingDirectoryPath)).exists()) {
 			(new File(recordingDirectoryPath)).mkdirs();
 		}
-		
+
 		// Create the unique id of param objects to be recorded
-		//TODO: Look into method name issue
-		/*String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getStaticPart(), thisJoinPoint.getArgs())
-				+ "";*/
-		String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getArgs())
+		//Look into uniqueness of method
+/*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
+				+ "";
+*/		String recrodingFileName = uniqueIdGenerator.getUniqueId(paramObjects)
 		+ "";
-		
-		Object objectToBeRecorded = null;
+
 		// Get the object to be recorded
 		// Ask Recorder to save the recording file
 		if (!objectRepository.objectAlreadyExist(recrodingFileName,
 				recordingDirectoryPath)) {
-			System.out.println("Recording not already in place so doing the recording");
-			objectToBeRecorded = proceed();
 			objectRepository.saveObject(objectToBeRecorded, recrodingFileName,
 					recordingDirectoryPath);
 		} else {
 			System.out.println("object already exists so not saving it");
-			objectToBeRecorded = objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
 		}
-
-		
-		return objectToBeRecorded;
 	}
 }

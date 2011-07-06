@@ -1,3 +1,5 @@
+package com.xebia.smok.aspect.recorder;
+
 import java.io.File;
 
 import com.xebia.smok.SmokContainer;
@@ -5,23 +7,31 @@ import com.xebia.smok.SmokContext;
 import com.xebia.smok.repository.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
-public aspect Aspect$className {
-
+/**
+ * I'll represent the recording aspect use me to test the recording aspect whether it is working fine or not and then 
+ * update the class and method template files accordingly
+ * @author sandeep
+ *
+ */
+public aspect RecordingAspect {
+	
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
+	String fqcn = "com.xebia.smok.aspect";
 	
-	String fqcn = "$fqcn";
-	pointcut callPointcut() : call(* $fqcn.*(..));
+	pointcut aroundMethodPointcut() : 
+		call(* com.xebia.smok.aspect.RecordingAspected.*(..));
 	
 	
-	Object around() : callPointcut() {
+	Object around() : aroundMethodPointcut() {
 		// Get the Directory path form SmokContext where we have to store the
 		// file
 		String recordingDirectoryPath = SmokContext.getSmokContext()
 				.getRecordingDirectory();
 		
 		String fileSeparator = "/";
-		recordingDirectoryPath = recordingDirectoryPath + fileSeparator + fqcn.replaceAll("\\.", fileSeparator);
+		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+				+ fqcn.replaceAll("\\.", fileSeparator);
 
 		if (!(new File(recordingDirectoryPath)).exists()) {
 			(new File(recordingDirectoryPath)).mkdirs();
@@ -34,7 +44,6 @@ public aspect Aspect$className {
 		String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getArgs())
 		+ "";
 		
-		
 		Object objectToBeRecorded = null;
 		// Get the object to be recorded
 		// Ask Recorder to save the recording file
@@ -45,7 +54,7 @@ public aspect Aspect$className {
 			objectRepository.saveObject(objectToBeRecorded, recrodingFileName,
 					recordingDirectoryPath);
 		} else {
-			System.out.println("object already exists so not saving it " + recordingDirectoryPath + " " + recrodingFileName);
+			System.out.println("object already exists so not saving it");
 			objectToBeRecorded = objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
 		}
 

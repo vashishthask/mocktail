@@ -1,4 +1,4 @@
-package com.xebia.smok.aspect;
+package com.xebia.smok.aspect.recorder;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;

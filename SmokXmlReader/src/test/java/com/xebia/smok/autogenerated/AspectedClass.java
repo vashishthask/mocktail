@@ -4,7 +4,7 @@ import org.springframework.beans.DirectFieldAccessor;
 
 import com.xebia.smok.SmokContainer;
 import com.xebia.smok.SmokContext;
-import com.xebia.smok.aspect.RecordingAspected;
+import com.xebia.smok.aspect.recorder.RecordingAspected;
 
 public class AspectedClass {
 	public int add(int no1, int no2) {

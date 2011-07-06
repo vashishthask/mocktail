@@ -1,4 +1,4 @@
-package com.xebia.smok.aspect;
+package com.xebia.smok.aspect.recorder;
 
 import junit.framework.Assert;
 
