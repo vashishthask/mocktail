@@ -22,7 +22,7 @@ public aspect Aspect$className {
 	
 	pointcut callPointcut() : call(* $fqcn.*(..));
 	
-	Object around() : aroundMethodPointcut() {
+	Object around() : callPointcut() {
 		String fileSeparator = "/";
 		recordingDirectoryPath = "$recordingDirectory";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
