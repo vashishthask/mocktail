@@ -22,7 +22,7 @@ public class PlaybackAspectTest {
 	}
 	
 	
-	@Test(expected=AssertionFailedError.class)
+	/*@Test(expected=AssertionFailedError.class)
 	public void testPlaybackForNoRecordingDir() throws Exception {
 		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test\\no_direcotry");
 		PlaybackAspect playbackAspect = new PlaybackAspect();
@@ -35,7 +35,7 @@ public class PlaybackAspectTest {
 		PlaybackAspect playbackAspect = new PlaybackAspect();
 		playbackAspect.playback("sandy", "ganesh", 12, 23.0);
 		
-	}
+	}*/
 
 	@Test
 	public void testPlaybackForRecordings() throws Exception {
