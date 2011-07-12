@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.beans.DirectFieldAccessor;
 
+import com.xebia.smok.SmokContainer;
 import com.xebia.smok.SmokContext;
 import com.xebia.smok.SmokObjectMother;
 import com.xebia.smok.xml.domain.Smok;
@@ -23,6 +24,7 @@ public class SmokClassAspectCreatorTest {
 	
 	@Test
 	public void shouldCreateRecordingAspectForClass() throws Exception {
+		SmokContainer.initializeContainer("");
 		SmokContext smokContext = SmokContext.getSmokContext("root_dir");
 		DirectFieldAccessor dfa = new DirectFieldAccessor(smokContext);
 		//Need to set as Smok Context is a singleton class and is getting set-upped from multiple places
@@ -34,6 +36,7 @@ public class SmokClassAspectCreatorTest {
 			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
+				assertThat(templatedClassObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedClassObjectString, containsString("String fqcn = \"com.xebia.FQCN\";"));
 				assertThat(templatedClassObjectString, containsString("pointcut callPointcut() : call(* com.xebia.FQCN.*(..));"));
 			}
@@ -42,6 +45,7 @@ public class SmokClassAspectCreatorTest {
 	
 	@Test
 	public void shouldCreateRecordingAspectForClassWithoutPackage() throws Exception {
+		SmokContainer.initializeContainer("");
 		SmokContext smokContext = SmokContext.getSmokContext("root_dir");
 		DirectFieldAccessor dfa = new DirectFieldAccessor(smokContext);
 		//Need to set as Smok Context is a singleton class and is getting set-upped from multiple places
@@ -53,6 +57,7 @@ public class SmokClassAspectCreatorTest {
 			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedClassObjectString) throws IOException {
 				assertThat(fileName, is(classSmok.getClassName()));
+				assertThat(templatedClassObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedClassObjectString, containsString("String fqcn = \"FQCN\";"));
 				assertThat(templatedClassObjectString, containsString("pointcut callPointcut() : call(* FQCN.*(..));"));
 			}

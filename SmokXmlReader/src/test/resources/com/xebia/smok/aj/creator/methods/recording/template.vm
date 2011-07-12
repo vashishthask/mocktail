@@ -11,15 +11,14 @@ import com.xebia.smok.util.UniqueIdGenerator;
 public aspect Aspect$className {
 
 	String fqcn = "$fqcn";
+	// Get the Directory path form SmokContext where we have to store the
+	// file
+	String recordingDirectoryPath = "$recordingDirectory";
 	#foreach($method in $methods)
  		pointcut callPointcut$method() : call(* $fqcn.$method(..));
 	
 		
 		Object around() : callPointcut$method() {
-			// Get the Directory path form SmokContext where we have to store the
-			// file
-			String recordingDirectoryPath = SmokContext.getSmokContext()
-					.getRecordingDirectory();
 			
 			String fileSeparator = "/";
 			recordingDirectoryPath = recordingDirectoryPath + fileSeparator + fqcn.replaceAll("\\.", fileSeparator);

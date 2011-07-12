@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.beans.DirectFieldAccessor;
 
+import com.xebia.smok.SmokContainer;
 import com.xebia.smok.SmokContext;
 import com.xebia.smok.SmokObjectMother;
 import com.xebia.smok.xml.domain.Smok;
@@ -23,7 +24,7 @@ public class SmokMethodsAspectCreatorTest {
 	
 	@Test
 	public void shouldCreateRecordingMethodAspects() throws Exception {
-		
+		SmokContainer.initializeContainer("");
 		SmokContext smokContext = SmokContext.getSmokContext("root_dir");
 		DirectFieldAccessor dfa = new DirectFieldAccessor(smokContext);
 		//Need to set as Smok Context is a singleton class and is getting set-upped from multiple places
@@ -35,6 +36,7 @@ public class SmokMethodsAspectCreatorTest {
 			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodSmok.getClassName()));
+				assertThat(templatedMethodObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedMethodObjectString, containsString("String fqcn = \"com.xebia.FQCN2\";"));
 				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutmethod1() : call(* com.xebia.FQCN2.method1(..));"));
 				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutmethod2() : call(* com.xebia.FQCN2.method2(..));"));

@@ -11,10 +11,13 @@ public class SmokContainer {
 
 	private static XStreamSmokXmlReader smokXmlReader = new XStreamSmokXmlReader();
 	private static ObjectRepository objectRepository = new DiskObjectRepository();
-	//TODO Need to give a real path
-	private static SmokContext smokContext = SmokContext.getSmokContext("");
+	private static SmokContext smokContext;
 	private static UniqueIdGenerator uniqueIdGenerator = new HashCodeIdGenerator();
 
+	public static void initializeContainer(String recordingDirecotry) {
+		smokContext = SmokContext.getSmokContext(recordingDirecotry);
+	}
+	
 	public static SmokXmlReader getSmokXmlReader() {
 		return smokXmlReader;
 	}
@@ -22,7 +25,7 @@ public class SmokContainer {
 	public static ObjectRepository getObjectRepository() {
 		return objectRepository;
 	}
-
+	
 	public static SmokContext getSmokContext() {
 		return smokContext;
 	}

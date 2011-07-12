@@ -7,7 +7,6 @@ import org.junit.Test;
 import org.springframework.beans.DirectFieldAccessor;
 
 import com.xebia.smok.SmokContainer;
-import com.xebia.smok.SmokContext;
 
 
 public class RecorderAspectTest {
@@ -16,6 +15,7 @@ public class RecorderAspectTest {
 
 	@Before
 	public void setup(){
+		SmokContainer.initializeContainer("");
 		dfa = new DirectFieldAccessor(SmokContainer.getSmokContext());
 		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test");
 	}

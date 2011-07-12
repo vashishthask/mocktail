@@ -24,7 +24,7 @@ import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 
-import com.xebia.smok.SmokContext;
+import com.xebia.smok.SmokContainer;
 import com.xebia.smok.aj.creator.SmoksAspectsCreator;
 import com.xebia.smok.xml.domain.Smok;
 import com.xebia.smok.xml.domain.SmokMode;
@@ -62,7 +62,8 @@ public class SmokMojo extends AbstractMojo {
 			aspectsDirectory.mkdirs();
 		}
 		XStreamSmokXmlReader configReader = new XStreamSmokXmlReader();
-		SmokContext.getSmokContext(recordingDir.getAbsolutePath());
+		SmokContainer.initializeContainer("c:");
+		//SmokContext.getSmokContext(recordingDir.getAbsolutePath());
 		try {
 			List<Smok> smoks = configReader.readXml(new FileInputStream(
 					configuration));

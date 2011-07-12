@@ -1,9 +1,5 @@
 package com.xebia.smok.aspect.recorder;
 
-import org.springframework.beans.DirectFieldAccessor;
-
-import com.xebia.smok.SmokContainer;
-import com.xebia.smok.SmokContext;
 
 public class RecordingAspected {
 
@@ -21,9 +17,9 @@ public class RecordingAspected {
 	}
 
 	public static void main(String[] args) {
-		SmokContext smokContext = SmokContainer.getSmokContext();
+		/*SmokContext smokContext = SmokContainer.getSmokContext();
 		DirectFieldAccessor dfa = new DirectFieldAccessor(SmokContainer.getSmokContext());
-		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test");
+		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test");*/
 		
 		RecordingAspected aspected = new RecordingAspected();
 		aspected.add(13, 25);

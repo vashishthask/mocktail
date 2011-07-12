@@ -11,14 +11,13 @@ public aspect Aspect$className {
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
 	
 	String fqcn = "$fqcn";
+	// Get the Directory path form SmokContext where we have to store the
+	// file
+	String recordingDirectoryPath = "$recordingDirectory";
 	pointcut callPointcut() : call(* $fqcn.*(..));
 	
 	
 	Object around() : callPointcut() {
-		// Get the Directory path form SmokContext where we have to store the
-		// file
-		String recordingDirectoryPath = SmokContext.getSmokContext()
-				.getRecordingDirectory();
 		
 		String fileSeparator = "/";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator + fqcn.replaceAll("\\.", fileSeparator);

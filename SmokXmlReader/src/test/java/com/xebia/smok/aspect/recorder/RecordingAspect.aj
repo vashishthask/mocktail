@@ -18,16 +18,13 @@ public aspect RecordingAspect {
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
 	String fqcn = "com.xebia.smok.aspect";
-	
+	String recordingDirectoryPath = "c:\\sandy\\recording\\test";
+
 	pointcut aroundMethodPointcut() : 
-		call(* com.xebia.smok.aspect.RecordingAspected.*(..));
+		call(* com.xebia.smok.aspect.recorder.RecordingAspected.*(..));
 	
 	
 	Object around() : aroundMethodPointcut() {
-		// Get the Directory path form SmokContext where we have to store the
-		// file
-		String recordingDirectoryPath = SmokContext.getSmokContext()
-				.getRecordingDirectory();
 		
 		String fileSeparator = "/";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator

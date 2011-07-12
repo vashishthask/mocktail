@@ -12,7 +12,8 @@ public class RecorderAspect {
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
 	String fqcn = "com.xebia.smok.aspect.recorder";
-	
+//	SmokContext.getSmokContext().getRecordingDirectory();
+	String recordingDirectoryPath = "c:\\sandy\\recording\\test";
 
 	public void doTheRecording(Object objectToBeRecorded,
 			Object... paramObjects) {
@@ -20,8 +21,6 @@ public class RecorderAspect {
 //		String methodName = "doTheRecording";
 		// Get the Directory path form SmokContext where we have to store the
 		// file
-		String recordingDirectoryPath = SmokContext.getSmokContext()
-				.getRecordingDirectory();
 		String fileSeparator = "/";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 				+ fqcn.replaceAll("\\.", fileSeparator);
