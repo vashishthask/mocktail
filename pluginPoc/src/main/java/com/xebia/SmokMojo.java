@@ -19,10 +19,11 @@ package com.xebia;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Field;
 import java.util.List;
 
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.codehaus.mojo.aspectj.AjcCompileMojo;
 
 import com.xebia.smok.SmokContainer;
 import com.xebia.smok.aj.creator.SmoksAspectsCreator;
@@ -35,12 +36,12 @@ import com.xebia.smok.xml.reader.XStreamSmokXmlReader;
  * 
  * @goal smok
  * 
- * @phase process-resources
+ * @phase process-classes
  */
-public class SmokMojo extends AbstractMojo {
+public class SmokMojo extends AjcCompileMojo {
 	/**
 	 * @parameter expression=”${aspectsDirectory}”
-	 *            default-value="${target}/aspects"
+	 *            default-value="${target}/generated/aspects"
 	 * @required
 	 */
 	private File aspectsDirectory;
@@ -58,20 +59,53 @@ public class SmokMojo extends AbstractMojo {
 	private File recordingDir;
 
 	public void execute() throws MojoExecutionException {
+
+		System.out.println("Executing the smok mojo");
 		if (!aspectsDirectory.exists()) {
 			aspectsDirectory.mkdirs();
 		}
 		XStreamSmokXmlReader configReader = new XStreamSmokXmlReader();
 		SmokContainer.initializeContainer("c:");
-		//SmokContext.getSmokContext(recordingDir.getAbsolutePath());
+		// SmokContext.getSmokContext(recordingDir.getAbsolutePath());
 		try {
 			List<Smok> smoks = configReader.readXml(new FileInputStream(
 					configuration));
 			System.out.println("\n\n " + smoks + "\n\n");
 			SmoksAspectsCreator.ASPECTS_CREATOR.createAspects(smoks,
 					aspectsDirectory, SmokMode.RECORDING_MODE);
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+		}
+		System.out.println("Generated aspect files at " + aspectsDirectory.getAbsolutePath());
+		AjcCompileMojo ajcCompileMojo = new AjcCompileMojo();
+		Class<?> superclass = ajcCompileMojo.getClass().getSuperclass();
+		setValue(superclass, ajcCompileMojo, "source", source);
+		setValue(superclass, ajcCompileMojo, "target", target);
+		setValue(superclass, ajcCompileMojo, "aspectDirectory", aspectsDirectory.getAbsolutePath());
+		setValue(superclass.getSuperclass(), ajcCompileMojo, "project", project);
+		setValue(superclass.getSuperclass(), ajcCompileMojo, "basedir", basedir);
+		
+		System.out.println("************************************" );
+		System.out.println("************************************" );
+		System.out.println("Executing ajc mojo" );
+		ajcCompileMojo.execute();
+		System.out.println("************************************" );
+		System.out.println("************************************" );
+
+	}
+
+	@SuppressWarnings("rawtypes")
+	public void setValue(Class classToBeSetOn, Object o, String fieldName,
+			Object value) throws RuntimeException {
+		Field field;
+		try {
+			field = classToBeSetOn.getDeclaredField(fieldName);
+			field.setAccessible(true);
+			field.set(o, value);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 }
