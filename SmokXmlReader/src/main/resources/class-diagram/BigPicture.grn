@@ -1,0 +1,39 @@
+<uml>
+   <greenVersion="30500"/>
+   <type>
+      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.aj.creator{SmoksAspectsCreator.java[SmoksAspectsCreator"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="48"/>
+      <y="71"/>
+   </type>
+   <type>
+      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.aj.creator{SmokAspectCreatorFactory.java[SmokAspectCreatorFactory"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="617"/>
+      <y="219"/>
+   </type>
+   <type>
+      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.repository{ObjectRepository.java[ObjectRepository"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="34"/>
+      <y="539"/>
+   </type>
+   <type>
+      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.aj.creator{AspectCreator.java[AspectCreator"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="116"/>
+      <y="305"/>
+   </type>
+   <type>
+      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.util{UniqueIdGenerator.java[UniqueIdGenerator"/>
+      <height="-1"/>
+      <width="-1"/>
+      <x="431"/>
+      <y="355"/>
+   </type>
+</uml>
+
