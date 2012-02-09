@@ -23,7 +23,7 @@ public class PlaybackAspectTest {
 		dfa = new DirectFieldAccessor(SmokContainer.getSmokContext());
 		dfa.setPropertyValue("recordingDirectory","src/test/resources/recording");
 	}
-	//Able to playback the api call
+
 	@Test
 	public void testPlaybackForRecordings() throws Exception {
 		playbackAspect = new PlaybackAspect();
@@ -34,23 +34,31 @@ public class PlaybackAspectTest {
 		assertEquals("to be recorded object",(String)recordedObject);
 		
 	}
-	//Unable to playback the api call when recording directory doesn't exists
-	//Unable to playback the api call when recording file doesn't exists
+
+	@Test(expected=AssertionFailedError.class)
+	public void testPlaybackForInvalidRecordingDir() throws Exception {
+		dfa.setPropertyValue("recordingDirectory","src/test/resources/non_existent_recording_dir");
+		playbackAspect = new PlaybackAspect();
+		playbackAspect.fqcn ="com.xebia.smok.aspect.recorder";
+		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
+		assertNull(recordedObject);
+	}
 	
-	
-	/*@Test(expected=AssertionFailedError.class)
-	public void testPlaybackForNoRecordingDir() throws Exception {
-		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test\\no_direcotry");
-		PlaybackAspect playbackAspect = new PlaybackAspect();
-		playbackAspect.playback("sandy", "ganesh", 12, 23.0);
+	@Test(expected=AssertionFailedError.class)
+	public void testPlaybackForInvalideFQCN() throws Exception {
+		dfa.setPropertyValue("recordingDirectory","src/test/resources/recording");
+		playbackAspect = new PlaybackAspect();
+		playbackAspect.fqcn ="invalid_fqcn";
+		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
+		assertNull(recordedObject);
 	}
 
 	@Test(expected=AssertionFailedError.class)
-	public void testPlaybackForNoRecordings() throws Exception {
-		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test\\no_recordings.ser");
-		PlaybackAspect playbackAspect = new PlaybackAspect();
-		playbackAspect.playback("sandy", "ganesh", 12, 23.0);
-		
-	}*/
+	public void testPlaybackForRecordingNotAvailable() throws Exception {
+		playbackAspect = new PlaybackAspect();
+		playbackAspect.fqcn ="com.xebia.smok.aspect.recorder";
+		Object recordedObject = playbackAspect.playback("sandh", "ganesh", 12, 23.0);
+		assertNull(recordedObject);
+	}
 
 }
