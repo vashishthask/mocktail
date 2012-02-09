@@ -8,7 +8,7 @@ import com.xebia.smok.SmokContext;
 import com.xebia.smok.repository.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
-
+//TODO Will be removed
 /**
  * I'll represent the playback aspect use me to test the playback aspect whether it is working fine or not and then 
  * update the class and method template files accordingly
@@ -29,7 +29,7 @@ public aspect AspectPlaybackAspect {
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 				+ fqcn.replaceAll("\\.", fileSeparator);
 		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
-		
+		System.out.println("Doing addition");
 		// Create the unique id of param objects to be recorded
 		//Look into uniqueness of method
 /*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
