@@ -1,5 +1,7 @@
 package com.xebia.smok.aspect.recorder;
 
+import static junit.framework.Assert.assertTrue;
+
 import java.io.File;
 
 import com.xebia.smok.SmokContainer;
@@ -11,20 +13,26 @@ public class RecorderAspect {
 
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
-	String fqcn = "com.xebia.smok.aspect.recorder";
-//	SmokContext.getSmokContext().getRecordingDirectory();
-	String recordingDirectoryPath = "c:\\sandy\\recording\\test";
+	
+	//Populated from fqcn property of smok
+	//smok.getFQCN();
+	String fqcn;
+
+	String recordingDirectoryPath = SmokContext.getSmokContext().getRecordingDirectory();
 
 	public void doTheRecording(Object objectToBeRecorded,
 			Object... paramObjects) {
 		
-//		String methodName = "doTheRecording";
-		// Get the Directory path form SmokContext where we have to store the
-		// file
-		String fileSeparator = "/";
-		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-				+ fqcn.replaceAll("\\.", fileSeparator);
+		String fileSeparator = File.separator;
+		
+		// Verifying if root recording directory where all recordings exist is already their or not
+		assertTrue("The root recordings direcotry doesn't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 
+		//Recording directory will also have fqcn
+		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+						+ fqcn.replaceAll("\\.", fileSeparator);
+
+		//Verify if recording directory exists or not if doesn't create the directory
 		if (!(new File(recordingDirectoryPath)).exists()) {
 			(new File(recordingDirectoryPath)).mkdirs();
 		}
@@ -32,15 +40,15 @@ public class RecorderAspect {
 		// Create the unique id of param objects to be recorded
 		//Look into uniqueness of method
 /*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
-				+ "";
-*/		String recrodingFileName = uniqueIdGenerator.getUniqueId(paramObjects)
-		+ "";
+				+ "";*/
+		//Recording file name will be as per the parameters
+		String recordingFileName = uniqueIdGenerator.getUniqueId(paramObjects)	+ "";
 
 		// Get the object to be recorded
 		// Ask Recorder to save the recording file
-		if (!objectRepository.objectAlreadyExist(recrodingFileName,
+		if (!objectRepository.objectAlreadyExist(recordingFileName,
 				recordingDirectoryPath)) {
-			objectRepository.saveObject(objectToBeRecorded, recrodingFileName,
+			objectRepository.saveObject(objectToBeRecorded, recordingFileName,
 					recordingDirectoryPath);
 		} else {
 			System.out.println("object already exists so not saving it");
