@@ -5,6 +5,7 @@ import static junit.framework.Assert.assertTrue;
 import java.io.File;
 
 import com.xebia.smok.SmokContainer;
+import com.xebia.smok.SmokContext;
 import com.xebia.smok.repository.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
@@ -15,26 +16,37 @@ import com.xebia.smok.util.UniqueIdGenerator;
 public class PlaybackAspect {
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
-	String fqcn = "com.xebia.smok.aspect.recorder";
-	//	SmokContext.getSmokContext().getRecordingDirectory();
-	String recordingDirectoryPath;
+	
+	//Populated from fqcn property of smok
+	//smok.getFQCN();
+	String fqcn;
+	
+	// Populated from smok context recording directory
+	// SmokContext.getSmokContext().getRecordingDirectory();
+	String recordingDirectoryPath = SmokContext.getSmokContext().getRecordingDirectory();
 	
 	public Object playback(Object... paramObjects) {
 
-		String fileSeparator = "/";
-		recordingDirectoryPath = "c:\\sandy\\recording\\test";
+		String fileSeparator = File.separator;
+		
+		//Recording directory will also have fqcn
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 				+ fqcn.replaceAll("\\.", fileSeparator);
+
+		// Verifying if directory where recordings exist is already their or not
 		assertTrue("The recordings direcotry don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 		
 		// Create the unique id of param objects to be recorded
 		//Look into uniqueness of method
-/*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
-				+ "";
-*/		String recrodingFileName = uniqueIdGenerator.getUniqueId(paramObjects)
-		+ "";
+//		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects) + "";
+		
+		//Recording file name will be as per the parameters
+		String recrodingFileName = uniqueIdGenerator.getUniqueId(paramObjects) + "";
 
+		//Verifying if recording is already in place 
 		assertTrue("Recording not in place " + recrodingFileName, objectRepository.objectAlreadyExist(recrodingFileName, recordingDirectoryPath));
+		
+		//Returning the recorded api call result 
 		return objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
 	}
 }

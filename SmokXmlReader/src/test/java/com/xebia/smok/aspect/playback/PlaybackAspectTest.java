@@ -8,18 +8,34 @@ import org.junit.Test;
 import org.springframework.beans.DirectFieldAccessor;
 
 import com.xebia.smok.SmokContainer;
+import com.xebia.smok.SmokContext;
 
 
 public class PlaybackAspectTest {
 	
 	DirectFieldAccessor dfa;
+	private PlaybackAspect playbackAspect;
 
 	@Before
 	public void setup(){
 		SmokContainer.initializeContainer("");
+		SmokContext smokContext = SmokContext.getSmokContext("");
 		dfa = new DirectFieldAccessor(SmokContainer.getSmokContext());
-		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test");
+		dfa.setPropertyValue("recordingDirectory","src/test/resources/recording");
 	}
+	//Able to playback the api call
+	@Test
+	public void testPlaybackForRecordings() throws Exception {
+		playbackAspect = new PlaybackAspect();
+		playbackAspect.fqcn ="com.xebia.smok.aspect.recorder";
+		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
+		assertNotNull(recordedObject);
+		assertTrue(recordedObject instanceof String);
+		assertEquals("to be recorded object",(String)recordedObject);
+		
+	}
+	//Unable to playback the api call when recording directory doesn't exists
+	//Unable to playback the api call when recording file doesn't exists
 	
 	
 	/*@Test(expected=AssertionFailedError.class)
@@ -37,14 +53,4 @@ public class PlaybackAspectTest {
 		
 	}*/
 
-	@Test
-	public void testPlaybackForRecordings() throws Exception {
-		dfa.setPropertyValue("recordingDirectory","c:\\sandy\\recording\\test");
-		PlaybackAspect playbackAspect = new PlaybackAspect();
-		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
-		assertNotNull(recordedObject);
-		assertTrue(recordedObject instanceof String);
-		assertEquals("to be recorded object",(String)recordedObject);
-		
-	}
 }
