@@ -40,7 +40,7 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 	/**
 	 * I'll create aspect in the the aspect directory
 	 */
-	protected void createAspectFile(C classObj, String fileName,
+	protected void createAspectFile(C classObj, String aspectFileName,
 			File aspectsRootDirecotry, String templatedObjectString)
 			throws IOException {
 		File aspectFileDirectory = new File(aspectsRootDirecotry,
@@ -48,7 +48,7 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 		if (!aspectFileDirectory.exists()) {
 			aspectFileDirectory.mkdirs();
 		}
-		File file = new File(aspectFileDirectory, "Aspect" + fileName + ".aj");
+		File file = new File(aspectFileDirectory, "Aspect" + aspectFileName + ".aj");
 		FileWriter aspectOs = new FileWriter(file);
 		aspectOs.write(templatedObjectString);
 		aspectOs.close();
