@@ -1,16 +1,42 @@
-package com.xebia.smok;
-public aspect RecordingAspect {
+package com.xebia.smok.aspect.playback;
+import static junit.framework.Assert.assertTrue;
 
-	pointcut callPointcut() : 
-		call(* $className.*(..));
+import java.io.File;
+
+import com.xebia.smok.SmokContainer;
+import com.xebia.smok.SmokContext;
+import com.xebia.smok.repository.ObjectRepository;
+import com.xebia.smok.util.UniqueIdGenerator;
+
+
+/**
+ * I'll represent the playback aspect use me to test the playback aspect whether it is working fine or not and then 
+ * update the class and method template files accordingly
+ */
+public aspect Aspect$className {
+	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
+	String fqcn = "$fqcn";
+	//SmokContext.getSmokContext().getRecordingDirectory();	
+	String recordingDirectoryPath;
 	
+	pointcut callPointcut() : call(* $fqcn.*(..));
 	
 	Object around() : callPointcut() {
-		System.out.println("I'll skip the actual execution");
-		Object[] objects = thisJoinPoint.getArgs();
-		for(Object object : objects) {
-			System.out.println("Arguments " + object.toString());
-		}
-		return null;
+		String fileSeparator = "/";
+		recordingDirectoryPath = "$recordingDirectory";
+		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+				+ fqcn.replaceAll("\\.", fileSeparator);
+		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
+		
+		// Create the unique id of param objects to be recorded
+		//Look into uniqueness of method
+/*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
+				+ "";
+*/		String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getArgs())
+		+ "";
+
+		assertTrue("Recording not in place " + recrodingFileName, objectRepository.objectAlreadyExist(recrodingFileName, recordingDirectoryPath));
+		return objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
 	}
 }
