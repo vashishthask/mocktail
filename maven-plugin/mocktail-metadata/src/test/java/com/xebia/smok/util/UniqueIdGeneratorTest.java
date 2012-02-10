@@ -26,6 +26,10 @@ public class UniqueIdGeneratorTest {
 		uniqueId = uniqueIdGenerator.getUniqueId(Arrays.asList("sandy",
 				"ganesh", 12, 23.0));
 		assertThat(uniqueId, is(1332060453));
+		
+		Object [] array = {"ganesh", 12, 23.0};
+		Object [] array2 = {"ganesh", 12, 23.0};
+		assertThat(uniqueIdGenerator.getUniqueId("sandy", array), is(uniqueIdGenerator.getUniqueId("sandy", array2)));
 	}
 
 }

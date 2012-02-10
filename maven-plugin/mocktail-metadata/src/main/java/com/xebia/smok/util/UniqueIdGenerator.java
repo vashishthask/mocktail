@@ -8,4 +8,5 @@ package com.xebia.smok.util;
 public interface UniqueIdGenerator {
 
 	public int getUniqueId(Object... objects);
+	public int getUniqueId(String methodNam, Object... objects);
 }
