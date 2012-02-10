@@ -18,13 +18,12 @@ public aspect Aspect$className {
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
 	String fqcn = "$fqcn";
 	//SmokContext.getSmokContext().getRecordingDirectory();	
-	String recordingDirectoryPath;
+	String recordingDirectoryPath = "$recordingDirectory";
 	
 	pointcut callPointcut() : call(* $fqcn.*(..));
 	
 	Object around() : callPointcut() {
 		String fileSeparator = "/";
-		recordingDirectoryPath = "$recordingDirectory";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 				+ fqcn.replaceAll("\\.", fileSeparator);
 		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
