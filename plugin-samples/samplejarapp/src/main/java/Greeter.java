@@ -1,4 +1,4 @@
-import com.xebia.smok.SmokContext;
+import org.mocktail.MocktailContext;
 
 
 
@@ -12,7 +12,7 @@ public class Greeter {
 	}
 	
 	public static void main(String[] args) {
-		SmokContext context = SmokContext.getSmokContext("C:\\sandy\\recording");
+		MocktailContext context = MocktailContext.getMocktailContext("C:\\sandy\\recording");
 		Greeter greeter = new Greeter();
 		greeter.SayHello();
 	}

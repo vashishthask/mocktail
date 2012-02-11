@@ -1,10 +1,10 @@
-package com.xebia.smok;
+package org.mocktail;
 
 
 public aspect RecordingAspect {
 
 	pointcut callPointcut() : 
-		call(* com.xebia.Greeter.*(..));
+		call(* org.mocktail.Greeter.*(..));
 	
 	
 	before() : callPointcut() {

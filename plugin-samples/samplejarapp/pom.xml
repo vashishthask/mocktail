@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.xebia</groupId>
+	<groupId>org.mocktail</groupId>
 	<artifactId>samplejarapp</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -34,19 +34,19 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<artifactId>smok</artifactId>
-				<groupId>com.xebia</groupId>
+				<artifactId>mocktail-plugin</artifactId>
+				<groupId>org.mocktail</groupId>
 				<version>1.0-SNAPSHOT</version>
 				<configuration>
 					<aspectsDirectory>target/generated/aspects</aspectsDirectory>
-					<configuration>src/main/resources/smok.xml</configuration>
+					<configuration>src/main/resources/mocktail.xml</configuration>
 					<recordingDir>c:/sandy</recordingDir>
 				</configuration>
 				<executions>
 					<execution>
 						<id>touch-file</id>
 						<goals>
-							<goal>smok</goal>
+							<goal>mocktail</goal>
 						</goals>
 						<configuration>
 							<source>1.5</source>
@@ -78,8 +78,8 @@
 			<version>1.6.7</version>
 		</dependency>
 		<dependency>
-			<groupId>com.xebia.xmok</groupId>
-			<artifactId>SmokXmlReader</artifactId>
+			<groupId>org.mocktail</groupId>
+			<artifactId>mocktail-metadata</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
