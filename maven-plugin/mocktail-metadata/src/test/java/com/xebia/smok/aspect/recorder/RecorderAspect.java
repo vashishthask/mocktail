@@ -18,16 +18,19 @@ public class RecorderAspect {
 	//smok.getFQCN();
 	String fqcn;
 
-	String recordingDirectoryPath = SmokContext.getSmokContext().getRecordingDirectory();
+	String recordingDirectoryPath;
 
 	public void doTheRecording(Object objectToBeRecorded,
 			Object... paramObjects) {
 		
 		String fileSeparator = File.separator;
+
+		recordingDirectoryPath = SmokContext.getSmokContext().getRecordingDirectory();
 		
 		// Verifying if root recording directory where all recordings exist is already their or not
 		assertTrue("The root recordings direcotry doesn't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 
+		
 		//Recording directory will also have fqcn
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 						+ fqcn.replaceAll("\\.", fileSeparator);

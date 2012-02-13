@@ -34,18 +34,19 @@ public class SmokMethodsAspectCreatorTest {
 	
 	@Test
 	public void shouldCreateRecordingMethodAspects() throws Exception {
-		final Smok methodSmok = SmokObjectMother.createMethodSmok("name","com.xebia",
-				"method1", "method2");
+		final Smok methodSmok = SmokObjectMother.createMethodSmok("AspectedClass", "com.sandy",
+				"add", "minus");
 		new SmokMethodsAspectCreator(SmokMode.RECORDING_MODE) {
 			@Override
 			protected void createAspectFile(Smok smok, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodSmok.getClassName()));
-				assertThat(templatedMethodObjectString, containsString("public aspect Aspectname"));
+				assertThat(templatedMethodObjectString, containsString("public aspect AspectAspectedClass"));
 				assertThat(templatedMethodObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
-				assertThat(templatedMethodObjectString, containsString("String fqcn = \"com.xebia.name\";"));
-				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutmethod1() : call(* com.xebia.name.method1(..));"));
-				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutmethod2() : call(* com.xebia.name.method2(..));"));
+				assertThat(templatedMethodObjectString, containsString("String fqcn = \"com.sandy.AspectedClass\";"));
+				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutadd() : call(* com.sandy.AspectedClass.add(..));"));
+				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutminus() : call(* com.sandy.AspectedClass.minus(..));"));
+				System.out.println(templatedMethodObjectString);
 			}
 		}.createAspect(methodSmok, aspectRootDir);
 	}

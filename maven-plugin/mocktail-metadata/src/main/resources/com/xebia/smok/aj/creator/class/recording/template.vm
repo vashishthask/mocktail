@@ -1,3 +1,5 @@
+import static junit.framework.Assert.assertTrue;
+
 import java.io.File;
 
 import com.xebia.smok.SmokContainer;
@@ -5,7 +7,7 @@ import com.xebia.smok.SmokContext;
 import com.xebia.smok.repository.ObjectRepository;
 import com.xebia.smok.util.UniqueIdGenerator;
 
-public aspect Aspect$className {
+public aspect RecorderAspect$className {
 
 	ObjectRepository objectRepository = SmokContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = SmokContainer.getUniqueIdGenerator();
@@ -19,19 +21,24 @@ public aspect Aspect$className {
 	
 	Object around() : callPointcut() {
 		
-		String fileSeparator = "/";
-		recordingDirectoryPath = recordingDirectoryPath + fileSeparator + fqcn.replaceAll("\\.", fileSeparator);
+		String fileSeparator = File.separator;
+		//SmokContext.getSmokContext().getRecordingDirectory();
+		recordingDirectoryPath = "$recordingDirectory";
 
+		// Verifying if root recording directory where all recordings exist is already their or not
+		assertTrue("The root recordings directory doesn't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
+		
+		//Recording directory will also have fqcn
+		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+						+ fqcn.replaceAll("\\.", fileSeparator);
+
+		//Verify if recording directory exists or not if doesn't create the directory
 		if (!(new File(recordingDirectoryPath)).exists()) {
 			(new File(recordingDirectoryPath)).mkdirs();
 		}
 		
 		// Create the unique id of param objects to be recorded
-		//TODO: Look into method name issue
-		/*String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getStaticPart(), thisJoinPoint.getArgs())
-				+ "";*/
-		String recrodingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getArgs())
-		+ "";
+		String recordingFileName = uniqueIdGenerator.getUniqueId(thisJoinPoint.getArgs())	+ "";		
 		
 		
 		Object objectToBeRecorded = null;
@@ -47,7 +54,6 @@ public aspect Aspect$className {
 			System.out.println("object already exists so not saving it");
 			objectToBeRecorded = objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
 		}
-
 		
 		return objectToBeRecorded;
 	}
