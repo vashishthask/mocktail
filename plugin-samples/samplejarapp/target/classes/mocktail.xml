@@ -1,0 +1,7 @@
+<mocktails>
+ <mocktail>
+  <className>Greeter</className>
+  <classPackageName></classPackageName>
+  <methods></methods>
+ </mocktail>
+</mocktails>
