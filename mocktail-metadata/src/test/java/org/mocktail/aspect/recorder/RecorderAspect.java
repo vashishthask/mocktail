@@ -14,7 +14,7 @@ public class RecorderAspect {
 	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
 	String fqcn;
-
+	String methodName;
 	public void doTheRecording(Object objectToBeRecorded,
 			Object... paramObjects) {
 		
@@ -39,7 +39,8 @@ public class RecorderAspect {
 /*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
 				+ "";*/
 		//Recording file name will be as per the parameters
-		String recordingFileName = uniqueIdGenerator.getUniqueId(paramObjects)	+ "";
+//		String methodName = thisJoinPoint.getSignature().getName()
+		String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)	+ "";
 
 		// Get the object to be recorded
 		// Ask Recorder to save the recording file

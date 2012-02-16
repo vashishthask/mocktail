@@ -47,7 +47,7 @@ public class RecorderAspectTest {
 		recorderAspect.doTheRecording("to be recorded object", "sandy", "ganesh", 12, 23.0);
 
 		assertTrue("Recording directory doesn't exists", recordingDir.exists());
-		(new File(recordingDir, "1332060422")).delete();
+		(new File(recordingDir, "1359766052")).delete();
 		recordingDir.delete();
 	}
 	
@@ -56,7 +56,7 @@ public class RecorderAspectTest {
 	public void shouldExecuteIfRecordingExists() throws Exception {
 		String rootRecordingDirectory = "src/test/resources/recording";
 		String packagePath = "org.mocktail.aspect.recorder";
-		File recordingFile = new File(rootRecordingDirectory + File.separator + packagePath.replaceAll("\\.", File.separator) + File.separator + "1332060422");
+		File recordingFile = new File(rootRecordingDirectory + File.separator + packagePath.replaceAll("\\.", File.separator) + File.separator + "1359766052");
 		
 		assertTrue("Recording File doesn't exists", recordingFile.exists());
 		
@@ -70,7 +70,7 @@ public class RecorderAspectTest {
 	public void shouldDoRecordingIfRecordingNotTheir() throws Exception {
 		String rootRecordingDirectory = "src/test/resources/recording";
 		String packagePath = "org.mocktail.aspect.recorder.new";
-		File recordingFile = new File(rootRecordingDirectory + File.separator + packagePath.replaceAll("\\.", File.separator) + File.separator + "1332060422");
+		File recordingFile = new File(rootRecordingDirectory + File.separator + packagePath.replaceAll("\\.", File.separator) + File.separator + "1359766052");
 		
 		assertFalse("Recording File already exists", recordingFile.exists());
 		
