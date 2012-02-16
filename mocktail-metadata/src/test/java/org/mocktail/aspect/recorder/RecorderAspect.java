@@ -13,19 +13,13 @@ public class RecorderAspect {
 
 	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
 	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
-	
-	//Populated from fqcn property of mocktail
-	//mocktail.getFQCN();
 	String fqcn;
-
-	String recordingDirectoryPath;
 
 	public void doTheRecording(Object objectToBeRecorded,
 			Object... paramObjects) {
 		
 		String fileSeparator = File.separator;
-
-		recordingDirectoryPath = MocktailContext.getMocktailContext().getRecordingDirectory();
+		String recordingDirectoryPath = MocktailContext.getMocktailContext().getRecordingDirectory();
 		
 		// Verifying if root recording directory where all recordings exist is already their or not
 		assertTrue("The root recordings direcotry doesn't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
