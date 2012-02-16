@@ -23,7 +23,8 @@ public aspect PlaybackAspect$className {
 	Object around() : callPointcut() {
 		String fileSeparator = "/";
 		String fqcn = "$fqcn";
-		String recordingDirectoryPath  = recordingDirectoryPath + fileSeparator
+		String recordingDirectoryPath = "$recordingDirectory";
+		 recordingDirectoryPath += fileSeparator
 				+ fqcn.replaceAll("\\.", fileSeparator);
 		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 		

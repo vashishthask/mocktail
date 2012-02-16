@@ -40,7 +40,7 @@ public class MocktailMethodsAspectCreatorTest {
 			protected void createAspectFile(Mocktail mocktail, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodMocktail.getClassName()));
-				assertThat(templatedMethodObjectString, containsString("public aspect Aspectname"));
+				assertThat(templatedMethodObjectString, containsString("public aspect RecorderAspectname"));
 				assertThat(templatedMethodObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedMethodObjectString, containsString("String fqcn = \"org.mocktail.name\";"));
 				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutmethod1() : call(* org.mocktail.name.method1(..));"));
@@ -59,7 +59,7 @@ public class MocktailMethodsAspectCreatorTest {
 			protected void createAspectFile(Mocktail mocktail, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
 				assertThat(fileName, is(methodMocktail.getClassName()));
-				assertThat(templatedMethodObjectString, containsString("public aspect Aspectname"));
+				assertThat(templatedMethodObjectString, containsString("public aspect PlaybackAspectname"));
 				assertThat(templatedMethodObjectString, containsString("recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedMethodObjectString, containsString("String fqcn = \"org.mocktail.name\";"));
 				assertThat(templatedMethodObjectString, containsString("pointcut callPointcutmethod1() : call(* org.mocktail.name.method1(..));"));
