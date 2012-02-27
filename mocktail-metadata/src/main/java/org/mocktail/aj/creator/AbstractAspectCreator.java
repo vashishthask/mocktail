@@ -48,7 +48,7 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 		if (!aspectFileDirectory.exists()) {
 			aspectFileDirectory.mkdirs();
 		}
-		File file = new File(aspectFileDirectory, "Aspect" + aspectFileName
+		File file = new File(aspectFileDirectory, aspectFileName
 				+ ".aj");
 		FileWriter aspectOs = new FileWriter(file);
 		aspectOs.write(templatedObjectString);
@@ -68,7 +68,9 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 
 	protected abstract String getAspectDirectory(C classObj);
 
-	protected abstract String getAspectFileName(C classObj);
+	protected String getAspectFileName(C classObj){
+		return mocktailMode.getFilePrefixForMode();
+	}
 
 	protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
 

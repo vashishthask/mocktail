@@ -39,7 +39,7 @@ public class MocktailMethodsAspectCreatorTest {
 			@Override
 			protected void createAspectFile(Mocktail mocktail, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
-				assertThat(fileName, is(methodMocktail.getClassName()));
+				assertThat(fileName, is("RecorderAspect" + methodMocktail.getClassName()));
 				assertThat(templatedMethodObjectString, containsString("public aspect RecorderAspectname"));
 				assertThat(templatedMethodObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedMethodObjectString, containsString("String fqcn = \"org.mocktail.name\";"));
@@ -58,7 +58,7 @@ public class MocktailMethodsAspectCreatorTest {
 			@Override
 			protected void createAspectFile(Mocktail mocktail, String fileName, File directory,
 					String templatedMethodObjectString) throws IOException {
-				assertThat(fileName, is(methodMocktail.getClassName()));
+				assertThat(fileName, is("PlaybackAspect" + methodMocktail.getClassName()));
 				assertThat(templatedMethodObjectString, containsString("public aspect PlaybackAspectname"));
 				assertThat(templatedMethodObjectString, containsString("recordingDirectoryPath = \"root_dir\";"));
 				assertThat(templatedMethodObjectString, containsString("String fqcn = \"org.mocktail.name\";"));

@@ -30,11 +30,11 @@ public class MocktailAspectsCreatorTest {
 				MocktailMode.RECORDING_MODE);
 
 		String firstMocktailFile = absolutePath("src", "test", "resources", "org", "mocktail", "aspectsDirectory", "org", "mocktail",
-				"aj", "creator", "AspectTemplateProcesser.aj");
+				"aj", "creator", "RecorderAspectTemplateProcesser.aj");
 		assertTrue(new File(firstMocktailFile).isFile());
 
 		String secondMocktailFile = absolutePath("src", "test", "resources", "org", "mocktail", "aspectsDirectory", "org", "mocktail",
-				"xml", "domain", "AspectMocktail.aj");
+				"xml", "domain", "RecorderAspectMocktail.aj");
 		assertTrue(new File(secondMocktailFile).isFile());
 		// Uncomment the deleteDir if you want to see the aspects
 		deleteDir(new File(testAspectsDirectory));

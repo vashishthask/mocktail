@@ -25,10 +25,10 @@ public class AbstractAspectCreatorTest {
 		MocktailContainer.initializeContainer("");
 		AbstractAspectCreator<Mocktail> abstractAspectCreator = new AbstractMocktailAspectCreator(AspectType.CLASS_ASPECT_TYPE, MocktailMode.RECORDING_MODE) {};
 		File aspectsRootDirectory = temporaryAspectDir.newFolder("aspect");
-		assertFalse("Aspect already exists", (new File(aspectsRootDirectory, "AspectAspectedClass.aj")).exists());
+		assertFalse("Aspect already exists", (new File(aspectsRootDirectory, "RecorderAspectAspectedClass.aj")).exists());
 		
 		abstractAspectCreator.createAspect(MocktailObjectMother.createClassMocktail("AspectedClass", ""), aspectsRootDirectory);
 
-		assertTrue("Aspect doesn't exists", (new File(aspectsRootDirectory, "AspectAspectedClass.aj")).exists());
+		assertTrue("Aspect doesn't exists", (new File(aspectsRootDirectory, "RecorderAspectAspectedClass.aj")).exists());
 	}
 }

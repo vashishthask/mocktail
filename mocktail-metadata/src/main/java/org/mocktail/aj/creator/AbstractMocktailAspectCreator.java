@@ -16,7 +16,11 @@ public abstract class AbstractMocktailAspectCreator extends
 	}
 
 	protected String getAspectDirectory(Mocktail mocktail) {
-		return mocktail.getClassPackageName().replaceAll("\\.", "/");
+		String packagePath =  "";
+		if(null != mocktail.getClassPackageName()) {
+			packagePath = mocktail.getClassPackageName().replaceAll("\\.", "/");
+		}
+		return packagePath;
 	}
 
 	protected Map<String, Object> getTemplateParameterValues(Mocktail mocktail) {
@@ -29,7 +33,7 @@ public abstract class AbstractMocktailAspectCreator extends
 	}
 
 	protected String getAspectFileName(Mocktail mocktail) {
-		return mocktail.getClassName();
+		return super.getAspectFileName(mocktail) + "Aspect" + mocktail.getClassName();
 	}
 
 }

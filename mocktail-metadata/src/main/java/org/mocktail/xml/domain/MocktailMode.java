@@ -8,16 +8,22 @@ package org.mocktail.xml.domain;
  */
 public enum MocktailMode {
 	
-	PLAYBACK_MODE("playback"), RECORDING_MODE("recording");
+	PLAYBACK_MODE("playback", "Playback"), RECORDING_MODE("recording", "Recorder");
 	
 	private final String mode;
+	private final String filePrefix;
 
-	private MocktailMode(String mode) {
+	private MocktailMode(String mode, String filePrefix) {
 		this.mode = mode;
+		this.filePrefix = filePrefix;
 	}
 	
 	public String getModeDirectory(){
 		return mode;
+	}
+
+	public String getFilePrefixForMode() {
+		return this.filePrefix;
 	}
 
 }
