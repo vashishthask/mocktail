@@ -28,21 +28,21 @@ public aspect RecorderAspect$className {
 			
 			// Create the unique id of param objects to be recorded
 			String methodName=$method;
-			String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs()) + "";
+			String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs()) + "";
 			
 			
 			Object objectToBeRecorded = null;
 			// Get the object to be recorded
 			// Ask Recorder to save the recording file
-			if (!objectRepository.objectAlreadyExist(recrodingFileName,
+			if (!objectRepository.objectAlreadyExist(recordingFileName,
 					recordingDirectoryPath)) {
 				System.out.println("Recording not already in place so doing the recording");
 				objectToBeRecorded = proceed();
-				objectRepository.saveObject(objectToBeRecorded, recrodingFileName,
+				objectRepository.saveObject(objectToBeRecorded, recordingFileName,
 						recordingDirectoryPath);
 			} else {
 				System.out.println("object already exists so not saving it");
-				objectToBeRecorded = objectRepository.getObject(recrodingFileName, recordingDirectoryPath);
+				objectToBeRecorded = objectRepository.getObject(recordingFileName, recordingDirectoryPath);
 			}
 	
 			
