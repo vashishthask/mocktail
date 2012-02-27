@@ -40,7 +40,7 @@
 				<configuration>
 					<aspectsDirectory>target/generated/aspects</aspectsDirectory>
 					<configuration>src/main/resources/mocktail.xml</configuration>
-					<recordingDir>c:/sandy</recordingDir>
+					<recordingDir>target/generated/recordings</recordingDir>
 				</configuration>
 				<executions>
 					<execution>
