@@ -1,5 +1,7 @@
 
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 
@@ -8,6 +10,8 @@ public class GreeterTest{
 	
 	@Test
 	public void shouldGreet(){
-		new Greeter().SayHello();
+		String message = new Greeter().SayHello();
+		
+		assertEquals("hi", message);
 	}
 }

@@ -31,7 +31,7 @@ public aspect PlaybackAspect$className {
 		String methodName = thisJoinPoint.getSignature().getName();
 		// Create the unique id of param objects to be recorded
 		//Look into uniqueness of method
-		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects) + "";
+		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs()) + "";
 
 		assertTrue("Recording not in place " + recrodingFileName, objectRepository.objectAlreadyExist(recrodingFileName, recordingDirectoryPath));
 		return objectRepository.getObject(recrodingFileName, recordingDirectoryPath);

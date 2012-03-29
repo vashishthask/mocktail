@@ -30,7 +30,7 @@ public aspect PlaybackAspect$className {
 			
 			String methodName=$method;
 			// Create the unique id of param objects to be recorded
-			String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
+			String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs())
 					+ "";
 	
 			assertTrue("Recording not in place " + recordingFileName, objectRepository.objectAlreadyExist(recordingFileName, recordingDirectoryPath));
