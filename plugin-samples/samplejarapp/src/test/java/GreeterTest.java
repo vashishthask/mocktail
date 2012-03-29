@@ -12,6 +12,6 @@ public class GreeterTest{
 	public void shouldGreet(){
 		String message = new Greeter().SayHello();
 		
-		assertEquals("hi", message);
+		assertEquals("bye", message);
 	}
 }

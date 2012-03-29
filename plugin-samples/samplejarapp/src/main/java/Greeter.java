@@ -1,9 +1,3 @@
-import org.mocktail.MocktailContext;
-
-
-
-
-
 public class Greeter {
 
 	public String SayHello(){
@@ -12,7 +6,6 @@ public class Greeter {
 	}
 	
 	public static void main(String[] args) {
-		MocktailContext context = MocktailContext.getMocktailContext("C:\\sandy\\recording");
 		Greeter greeter = new Greeter();
 		greeter.SayHello();
 	}
