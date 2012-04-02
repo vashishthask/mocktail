@@ -4,4 +4,9 @@
   <classPackageName></classPackageName>
   <methods></methods>
  </mocktail>
+ <mocktail>
+  <className>ClassMock</className>
+  <classPackageName>com.sandy.mock</classPackageName>
+  <methods></methods>
+ </mocktail>
 </mocktails>
