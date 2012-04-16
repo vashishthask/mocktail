@@ -12,16 +12,16 @@ import org.mocktail.aj.creator.TemplateProcesser;
 
 public class TestAspectTemplate {
 
-	@Test
-	public void testRecordingTemplate() throws Exception {
-		Map<String, Object> contextMap = new HashMap<String, Object>();
-		contextMap.put("name", "sandy");
-		String templatedString = TemplateProcesser.TEMPLATE_PROCESSER
-				.processTemplate(
-						contextMap,
-						new ClasspathResourceLoader()
-								.getResourceStream("org/mocktail/aj/creator/HelloWorld.vm"));
+    @Test
+    public void testRecordingTemplate() throws Exception {
+        Map<String, Object> contextMap = new HashMap<String, Object>();
+        contextMap.put("name", "sandy");
+        String templatedString = TemplateProcesser.TEMPLATE_PROCESSER
+                .processTemplate(
+                        contextMap,
+                        new ClasspathResourceLoader()
+                                .getResourceStream("org/mocktail/aj/creator/HelloWorld.vm"));
 
-		assertThat(templatedString, is("Hello sandy"));
-	}
+        assertThat(templatedString, is("Hello sandy"));
+    }
 }

@@ -1,25 +1,4 @@
 <uml>
    <greenVersion="30500"/>
-   <type>
-      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.repository{ObjectRepository.java[ObjectRepository"/>
-      <height="-1"/>
-      <width="-1"/>
-      <x="418"/>
-      <y="46"/>
-   </type>
-   <type>
-      <name="=SmokXmlReader/src\/main\/java<com.xebia.smok.repository{DiskObjectRepository.java[DiskObjectRepository"/>
-      <height="-1"/>
-      <width="-1"/>
-      <x="255"/>
-      <y="390"/>
-   </type>
-   <relationship>
-      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
-      <sourceType="=SmokXmlReader/src\/main\/java<com.xebia.smok.repository{DiskObjectRepository.java[DiskObjectRepository"/>
-      <targetType="=SmokXmlReader/src\/main\/java<com.xebia.smok.repository{ObjectRepository.java[ObjectRepository"/>
-      <bendpoints>
-      </bendpoints>
-   </relationship>
 </uml>
 

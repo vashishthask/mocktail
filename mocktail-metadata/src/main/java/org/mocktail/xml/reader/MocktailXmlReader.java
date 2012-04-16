@@ -7,6 +7,6 @@ import org.mocktail.xml.domain.Mocktail;
 
 public interface MocktailXmlReader {
 
-	List<Mocktail> readXml(InputStream sampleXmlStream);
-	
+    List<Mocktail> readXml(InputStream sampleXmlStream);
+
 }

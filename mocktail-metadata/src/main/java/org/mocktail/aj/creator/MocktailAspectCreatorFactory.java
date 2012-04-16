@@ -5,11 +5,12 @@ import org.mocktail.xml.domain.MocktailMode;
 
 public class MocktailAspectCreatorFactory {
 
-	public static AspectCreator<Mocktail> getAspectCreator(boolean aspectForCompleteClass, MocktailMode mocktailMode) {
-		if(aspectForCompleteClass) {
-			return new MocktailClassAspectCreator(mocktailMode);
-		} else {
-			return new MocktailMethodsAspectCreator(mocktailMode);
-		}
-	}
+    public static AspectCreator<Mocktail> getAspectCreator(
+            boolean aspectForCompleteClass, MocktailMode mocktailMode) {
+        if (aspectForCompleteClass) {
+            return new MocktailClassAspectCreator(mocktailMode);
+        } else {
+            return new MocktailMethodsAspectCreator(mocktailMode);
+        }
+    }
 }

@@ -23,70 +23,71 @@ import org.mocktail.MocktailContainer;
 @RunWith(MockitoJUnitRunner.class)
 public class ObjectRepositoryTest {
 
-	@Mock
-	OutputStream outputStream;
-	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
+    @Mock
+    OutputStream outputStream;
+    ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void shouldRecordObj() throws Exception {
-		objectRepository.saveObject(
-				Arrays.asList("sandy", "ganesh", 12, 23.0), outputStream);
-		verify(outputStream, new Times(14)).write((byte[]) any(), anyInt(),
-				anyInt());
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void shouldRecordObj() throws Exception {
+        objectRepository.saveObject(Arrays.asList("sandy", "ganesh", 12, 23.0),
+                outputStream);
+        verify(outputStream, new Times(14)).write((byte[]) any(), anyInt(),
+                anyInt());
+    }
 
-	@SuppressWarnings("rawtypes")
-	@Test
-	public void shouldReadObj() throws Exception {
-		List recordedList = (List) objectRepository
-				.getObject(new ClasspathResourceLoader()
-						.getResourceStream("org/mocktail/util/recorded_list.ser"));
+    @SuppressWarnings("rawtypes")
+    @Test
+    public void shouldReadObj() throws Exception {
+        List recordedList = (List) objectRepository
+                .getObject(new ClasspathResourceLoader()
+                        .getResourceStream("org/mocktail/util/recorded_list.ser"));
 
-		assertThat(recordedList.size(), is(4));
+        assertThat(recordedList.size(), is(4));
 
-	}
+    }
 
-	@Test
-	public void testObjectAlreadyExists() throws Exception {
-		String locationDirectory = getAbsolutePath("src", "test", "resources",
-				"org", "mocktail", "util");
-		boolean objectAlreadyExist = objectRepository.objectAlreadyExist("recorded_list.ser", locationDirectory);
-		assertThat(objectAlreadyExist, is(true));
-	}
+    @Test
+    public void testObjectAlreadyExists() throws Exception {
+        String locationDirectory = getAbsolutePath("src", "test", "resources",
+                "org", "mocktail", "util");
+        boolean objectAlreadyExist = objectRepository.objectAlreadyExist(
+                "recorded_list.ser", locationDirectory);
+        assertThat(objectAlreadyExist, is(true));
+    }
 
-	@Test
-	public void shouldSaveObject() throws Exception {
-		String locationDirectory = getAbsolutePath("src", "test", "resources",
-				"org", "mocktail", "util");
-		File file = new File(locationDirectory, "saved_object");
-		assertThat(file.exists(), is(false));
-		objectRepository.saveObject(
-				Arrays.asList("sandy", "ganesh", 12, 23.0), "saved_object",
-				locationDirectory);
-		file = new File(locationDirectory, "saved_object");
-		assertThat(file.exists(), is(true));
-		assertThat("Unable to delete file", true, is(file.delete()));
-	}
+    @Test
+    public void shouldSaveObject() throws Exception {
+        String locationDirectory = getAbsolutePath("src", "test", "resources",
+                "org", "mocktail", "util");
+        File file = new File(locationDirectory, "saved_object");
+        assertThat(file.exists(), is(false));
+        objectRepository.saveObject(Arrays.asList("sandy", "ganesh", 12, 23.0),
+                "saved_object", locationDirectory);
+        file = new File(locationDirectory, "saved_object");
+        assertThat(file.exists(), is(true));
+        assertThat("Unable to delete file", true, is(file.delete()));
+    }
 
-	@Test
-	public void shouldGetObject() throws Exception {
-		String locationDirectory = getAbsolutePath("src", "test", "resources",
-				"org", "mocktail", "util");
-		List recordedList = (List) objectRepository.getObject("recorded_list.ser", locationDirectory);
-		assertThat(recordedList.size(), is(4));
-		assertThat((String) recordedList.get(0), is("sandy"));
-		assertThat((String) recordedList.get(1), is("ganesh"));
-		assertThat((Integer) recordedList.get(2), is(12));
-		assertThat((Double) recordedList.get(3), is(23.0));
-	}
+    @Test
+    public void shouldGetObject() throws Exception {
+        String locationDirectory = getAbsolutePath("src", "test", "resources",
+                "org", "mocktail", "util");
+        List recordedList = (List) objectRepository.getObject(
+                "recorded_list.ser", locationDirectory);
+        assertThat(recordedList.size(), is(4));
+        assertThat((String) recordedList.get(0), is("sandy"));
+        assertThat((String) recordedList.get(1), is("ganesh"));
+        assertThat((Integer) recordedList.get(2), is(12));
+        assertThat((Double) recordedList.get(3), is(23.0));
+    }
 
-	private String getAbsolutePath(String... path) throws IOException {
-		File file = new File(".");
-		StringBuffer absolutePath = new StringBuffer(file.getCanonicalPath());
-		for (String pathElement : path) {
-			absolutePath.append(File.separator).append(pathElement);
-		}
-		return absolutePath.toString();
-	}
+    private String getAbsolutePath(String... path) throws IOException {
+        File file = new File(".");
+        StringBuffer absolutePath = new StringBuffer(file.getCanonicalPath());
+        for (String pathElement : path) {
+            absolutePath.append(File.separator).append(pathElement);
+        }
+        return absolutePath.toString();
+    }
 }

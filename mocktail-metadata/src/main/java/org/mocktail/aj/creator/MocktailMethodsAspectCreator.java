@@ -12,15 +12,16 @@ import org.mocktail.xml.domain.MocktailMode;
  */
 public class MocktailMethodsAspectCreator extends AbstractMocktailAspectCreator {
 
-	public MocktailMethodsAspectCreator(MocktailMode mocktailMode) {
-		super(AspectType.METHODS_ASPECT_TYPE, mocktailMode);
-	}
+    public MocktailMethodsAspectCreator(MocktailMode mocktailMode) {
+        super(AspectType.METHODS_ASPECT_TYPE, mocktailMode);
+    }
 
-	@Override
-	protected Map<String, Object> getTemplateParameterValues(Mocktail mocktail) {
-		Map<String, Object> contextMap = super.getTemplateParameterValues(mocktail);
-		contextMap.put("methods", mocktail.getMethods());
-		return contextMap;
-	}
-	
+    @Override
+    protected Map<String, Object> getTemplateParameterValues(Mocktail mocktail) {
+        Map<String, Object> contextMap = super
+                .getTemplateParameterValues(mocktail);
+        contextMap.put("methods", mocktail.getMethods());
+        return contextMap;
+    }
+
 }

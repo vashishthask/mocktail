@@ -12,66 +12,65 @@ import org.mocktail.xml.domain.MocktailMode;
 
 public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
 
-	private final AspectType aspectType;
-	private final MocktailMode mocktailMode;
+    private final AspectType aspectType;
+    private final MocktailMode mocktailMode;
 
-	public AbstractAspectCreator(AspectType aspectType,
-			MocktailMode mocktailMode) {
-		this.aspectType = aspectType;
-		this.mocktailMode = mocktailMode;
-	}
+    public AbstractAspectCreator(AspectType aspectType,
+            MocktailMode mocktailMode) {
+        this.aspectType = aspectType;
+        this.mocktailMode = mocktailMode;
+    }
 
-	@Override
-	/**
-	 * I'll create the contents of the aspect file for that
-	 * We have to get the dynamic values <code>getTemplateParameterValues</code>
-	 * Input stream of template recording/playback class/method
-	 */
-	public void createAspect(C classObj, File aspectsRootDirectory)
-			throws Exception {
+    @Override
+    /**
+     * I'll create the contents of the aspect file for that
+     * We have to get the dynamic values <code>getTemplateParameterValues</code>
+     * Input stream of template recording/playback class/method
+     */
+    public void createAspect(C classObj, File aspectsRootDirectory)
+            throws Exception {
 
-		String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER
-				.processTemplate(getTemplateParameterValues(classObj),
-						getAspectTemplateInputStream());
-		createAspectFile(classObj, getAspectFileName(classObj),
-				aspectsRootDirectory, templatedClassObjectString);
-	}
+        String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER
+                .processTemplate(getTemplateParameterValues(classObj),
+                        getAspectTemplateInputStream());
+        createAspectFile(classObj, getAspectFileName(classObj),
+                aspectsRootDirectory, templatedClassObjectString);
+    }
 
-	/**
-	 * I'll create aspect in the the aspect directory
-	 */
-	protected void createAspectFile(C classObj, String aspectFileName,
-			File aspectsRootDirecotry, String templatedObjectString)
-			throws IOException {
-		File aspectFileDirectory = new File(aspectsRootDirecotry,
-				getAspectDirectory(classObj));
-		if (!aspectFileDirectory.exists()) {
-			aspectFileDirectory.mkdirs();
-		}
-		File file = new File(aspectFileDirectory, aspectFileName
-				+ ".aj");
-		FileWriter aspectOs = new FileWriter(file);
-		aspectOs.write(templatedObjectString);
-		aspectOs.close();
-	}
+    /**
+     * I'll create aspect in the the aspect directory
+     */
+    protected void createAspectFile(C classObj, String aspectFileName,
+            File aspectsRootDirecotry, String templatedObjectString)
+            throws IOException {
+        File aspectFileDirectory = new File(aspectsRootDirecotry,
+                getAspectDirectory(classObj));
+        if (!aspectFileDirectory.exists()) {
+            aspectFileDirectory.mkdirs();
+        }
+        File file = new File(aspectFileDirectory, aspectFileName + ".aj");
+        FileWriter aspectOs = new FileWriter(file);
+        aspectOs.write(templatedObjectString);
+        aspectOs.close();
+    }
 
-	protected InputStream getAspectTemplateInputStream() {
-		StringBuffer aspectTemplatePath = new StringBuffer(
-				"org/mocktail/aj/creator/");
-		aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append(
-				"/");
-		aspectTemplatePath.append(mocktailMode.getModeDirectory()).append("/");
-		aspectTemplatePath.append("template.vm");
-		return new ClasspathResourceLoader()
-				.getResourceStream(aspectTemplatePath.toString());
-	}
+    protected InputStream getAspectTemplateInputStream() {
+        StringBuffer aspectTemplatePath = new StringBuffer(
+                "org/mocktail/aj/creator/");
+        aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append(
+                "/");
+        aspectTemplatePath.append(mocktailMode.getModeDirectory()).append("/");
+        aspectTemplatePath.append("template.vm");
+        return new ClasspathResourceLoader()
+                .getResourceStream(aspectTemplatePath.toString());
+    }
 
-	protected abstract String getAspectDirectory(C classObj);
+    protected abstract String getAspectDirectory(C classObj);
 
-	protected String getAspectFileName(C classObj){
-		return mocktailMode.getFilePrefixForMode();
-	}
+    protected String getAspectFileName(C classObj) {
+        return mocktailMode.getFilePrefixForMode();
+    }
 
-	protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
+    protected abstract Map<String, Object> getTemplateParameterValues(C classObj);
 
 }

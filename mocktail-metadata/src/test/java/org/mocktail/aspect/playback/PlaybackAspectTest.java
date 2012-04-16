@@ -12,55 +12,62 @@ import org.mocktail.MocktailContainer;
 import org.mocktail.MocktailContext;
 import org.springframework.beans.DirectFieldAccessor;
 
-
 public class PlaybackAspectTest {
-	
-	DirectFieldAccessor dfa;
-	private PlaybackAspect playbackAspect;
 
-	@Before
-	public void setup(){
-		MocktailContainer.initializeContainer("");
-		MocktailContext mocktailContext = MocktailContext.getMocktailContext("");
-		dfa = new DirectFieldAccessor(MocktailContainer.getMocktailContext());
-		dfa.setPropertyValue("recordingDirectory","src/test/resources/recording");
-	}
+    DirectFieldAccessor dfa;
+    private PlaybackAspect playbackAspect;
 
-	@Test
-	public void testPlaybackForRecordings() throws Exception {
-		playbackAspect = new PlaybackAspect();
-		playbackAspect.fqcn ="org.mocktail.aspect.recorder";
-		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
-		assertNotNull(recordedObject);
-		assertTrue(recordedObject instanceof String);
-		assertEquals("to be recorded object",(String)recordedObject);
-		
-	}
+    @Before
+    public void setup() {
+        MocktailContainer.initializeContainer("");
+        MocktailContext mocktailContext = MocktailContext
+                .getMocktailContext("");
+        dfa = new DirectFieldAccessor(MocktailContainer.getMocktailContext());
+        dfa.setPropertyValue("recordingDirectory",
+                "src/test/resources/recording");
+    }
 
-	@Test(expected=AssertionFailedError.class)
-	public void testPlaybackForInvalidRecordingDir() throws Exception {
-		dfa.setPropertyValue("recordingDirectory","src/test/resources/non_existent_recording_dir");
-		playbackAspect = new PlaybackAspect();
-		playbackAspect.fqcn ="org.mocktail.aspect.recorder";
-		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
-		assertNull(recordedObject);
-	}
-	
-	@Test(expected=AssertionFailedError.class)
-	public void testPlaybackForInvalideFQCN() throws Exception {
-		dfa.setPropertyValue("recordingDirectory","src/test/resources/recording");
-		playbackAspect = new PlaybackAspect();
-		playbackAspect.fqcn ="invalid_fqcn";
-		Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12, 23.0);
-		assertNull(recordedObject);
-	}
+    @Test
+    public void testPlaybackForRecordings() throws Exception {
+        playbackAspect = new PlaybackAspect();
+        playbackAspect.fqcn = "org.mocktail.aspect.recorder";
+        Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12,
+                23.0);
+        assertNotNull(recordedObject);
+        assertTrue(recordedObject instanceof String);
+        assertEquals("to be recorded object", (String) recordedObject);
 
-	@Test(expected=AssertionFailedError.class)
-	public void testPlaybackForRecordingNotAvailable() throws Exception {
-		playbackAspect = new PlaybackAspect();
-		playbackAspect.fqcn ="org.mocktail.aspect.recorder";
-		Object recordedObject = playbackAspect.playback("sandh", "ganesh", 12, 23.0);
-		assertNull(recordedObject);
-	}
+    }
+
+    @Test(expected = AssertionFailedError.class)
+    public void testPlaybackForInvalidRecordingDir() throws Exception {
+        dfa.setPropertyValue("recordingDirectory",
+                "src/test/resources/non_existent_recording_dir");
+        playbackAspect = new PlaybackAspect();
+        playbackAspect.fqcn = "org.mocktail.aspect.recorder";
+        Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12,
+                23.0);
+        assertNull(recordedObject);
+    }
+
+    @Test(expected = AssertionFailedError.class)
+    public void testPlaybackForInvalideFQCN() throws Exception {
+        dfa.setPropertyValue("recordingDirectory",
+                "src/test/resources/recording");
+        playbackAspect = new PlaybackAspect();
+        playbackAspect.fqcn = "invalid_fqcn";
+        Object recordedObject = playbackAspect.playback("sandy", "ganesh", 12,
+                23.0);
+        assertNull(recordedObject);
+    }
+
+    @Test(expected = AssertionFailedError.class)
+    public void testPlaybackForRecordingNotAvailable() throws Exception {
+        playbackAspect = new PlaybackAspect();
+        playbackAspect.fqcn = "org.mocktail.aspect.recorder";
+        Object recordedObject = playbackAspect.playback("sandh", "ganesh", 12,
+                23.0);
+        assertNull(recordedObject);
+    }
 
 }

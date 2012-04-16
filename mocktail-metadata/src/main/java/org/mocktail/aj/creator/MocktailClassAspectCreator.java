@@ -9,8 +9,8 @@ import org.mocktail.xml.domain.MocktailMode;
  */
 public class MocktailClassAspectCreator extends AbstractMocktailAspectCreator {
 
-	public MocktailClassAspectCreator(MocktailMode mocktailMode) {
-		super(AspectType.CLASS_ASPECT_TYPE, mocktailMode);
-	}
+    public MocktailClassAspectCreator(MocktailMode mocktailMode) {
+        super(AspectType.CLASS_ASPECT_TYPE, mocktailMode);
+    }
 
 }
