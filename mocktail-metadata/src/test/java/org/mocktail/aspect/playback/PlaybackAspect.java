@@ -38,7 +38,7 @@ public class PlaybackAspect {
 
         // Recording directory will also have fqcn
         recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-                + fqcn.replaceAll("\\.", fileSeparator);
+                + fqcn.replace(".", fileSeparator);
 
         // Verifying if directory where recordings exist is already their or not
         assertTrue("The recordings direcotry don't exists "

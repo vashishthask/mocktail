@@ -8,7 +8,6 @@ public class GreeterTest {
     @Test
     public void shouldGreet() {
         String message = new Greeter().SayHello();
-
-        assertEquals("hi", message);
+        assertEquals("bye", message);
     }
 }
