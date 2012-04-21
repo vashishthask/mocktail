@@ -43,11 +43,16 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.shri</groupId>
+        <artifactId>sample-maven-plugin</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </plugin>
     </plugins>
   </build>
   <modules>
     <module>mocktail-metadata</module>
-    <module>mocktail-plugin</module>
+    <module>mocktail-maven-plugin</module>
     <module>plugin-samples</module>
   </modules>
 </project>

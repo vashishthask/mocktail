@@ -6,7 +6,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>mocktail-plugin</artifactId>
+  <artifactId>mocktail-maven-plugin</artifactId>
   <packaging>maven-plugin</packaging>
   <name>mocktail-plugin</name>
   <url>https://sites.google.com/site/mocktailpro/</url>

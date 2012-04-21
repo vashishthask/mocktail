@@ -32,7 +32,7 @@
         </executions>
       </plugin>
       <plugin>
-        <artifactId>mocktail-plugin</artifactId>
+        <artifactId>mocktail-maven-plugin</artifactId>
         <groupId>org.mocktail</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <configuration>
