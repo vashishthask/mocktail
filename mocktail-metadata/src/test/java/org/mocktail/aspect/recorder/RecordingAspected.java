@@ -16,18 +16,9 @@ public class RecordingAspected {
     }
 
     public static void main(String[] args) {
-        /*
-         * MocktailContext mocktailContext =
-         * MocktailContainer.getMocktailContext(); DirectFieldAccessor dfa = new
-         * DirectFieldAccessor(MocktailContainer.getMocktailContext());
-         * dfa.setPropertyValue
-         * ("recordingDirectory","c:\\sandy\\recording\\test");
-         */
-
         RecordingAspected aspected = new RecordingAspected();
         aspected.add(13, 25);
         aspected.sub(13, 25);
         aspected.print();
     }
-
 }

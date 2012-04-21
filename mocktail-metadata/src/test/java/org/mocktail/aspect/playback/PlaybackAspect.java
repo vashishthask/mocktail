@@ -5,7 +5,6 @@ import static junit.framework.Assert.assertTrue;
 import java.io.File;
 
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
@@ -15,15 +14,15 @@ import org.mocktail.util.UniqueIdGenerator;
  * 
  */
 public class PlaybackAspect {
-    ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-    UniqueIdGenerator uniqueIdGenerator = MocktailContainer
+    ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+    UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance()
             .getUniqueIdGenerator();
 
     // Populated from fqcn property of mocktail
     // mocktail.getFQCN();
     String fqcn;
 
-    String recordingDirectoryPath = MocktailContext.getMocktailContext()
+    String recordingDirectoryPath = MocktailContainer.getInstance()
             .getRecordingDirectory();
 
     public Object playback(Object... paramObjects) {

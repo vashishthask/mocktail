@@ -5,14 +5,13 @@ import static junit.framework.Assert.assertTrue;
 import java.io.File;
 
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
 public class RecorderAspect {
 
-    ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-    UniqueIdGenerator uniqueIdGenerator = MocktailContainer
+    ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+    UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance()
             .getUniqueIdGenerator();
     String fqcn;
     String methodName;
@@ -21,7 +20,7 @@ public class RecorderAspect {
             Object... paramObjects) {
 
         String fileSeparator = File.separator;
-        String recordingDirectoryPath = MocktailContext.getMocktailContext()
+        String recordingDirectoryPath = MocktailContainer.getInstance()
                 .getRecordingDirectory();
 
         // Verifying if root recording directory where all recordings exist is

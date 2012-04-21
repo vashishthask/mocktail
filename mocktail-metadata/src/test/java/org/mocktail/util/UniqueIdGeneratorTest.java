@@ -10,7 +10,7 @@ import org.mocktail.MocktailContainer;
 
 public class UniqueIdGeneratorTest {
 
-    UniqueIdGenerator uniqueIdGenerator = MocktailContainer
+    UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance()
             .getUniqueIdGenerator();
 
     @SuppressWarnings("unchecked")

@@ -25,7 +25,7 @@ public class ObjectRepositoryTest {
 
     @Mock
     OutputStream outputStream;
-    ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
+    ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
 
     @SuppressWarnings("unchecked")
     @Test

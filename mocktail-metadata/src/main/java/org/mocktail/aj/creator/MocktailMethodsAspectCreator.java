@@ -10,7 +10,7 @@ import org.mocktail.xml.domain.MocktailMode;
  * I'll create an aspect for methods defined in Mocktail
  * 
  */
-public class MocktailMethodsAspectCreator extends AbstractMocktailAspectCreator {
+public class MocktailMethodsAspectCreator extends MocktailAspectCreator {
 
     public MocktailMethodsAspectCreator(MocktailMode mocktailMode) {
         super(AspectType.METHODS_ASPECT_TYPE, mocktailMode);

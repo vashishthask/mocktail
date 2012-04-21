@@ -9,10 +9,10 @@ import org.mocktail.xml.domain.AspectType;
 import org.mocktail.xml.domain.Mocktail;
 import org.mocktail.xml.domain.MocktailMode;
 
-public abstract class AbstractMocktailAspectCreator extends
+public class MocktailAspectCreator extends
         AbstractAspectCreator<Mocktail> {
 
-    public AbstractMocktailAspectCreator(AspectType aspectType,
+    public MocktailAspectCreator(AspectType aspectType,
             MocktailMode mocktailMode) {
         super(aspectType, mocktailMode);
     }
@@ -29,8 +29,7 @@ public abstract class AbstractMocktailAspectCreator extends
         Map<String, Object> contextMap = new HashMap<String, Object>();
         contextMap.put("fqcn", mocktail.getClassFQCN());
         contextMap.put("className", mocktail.getClassName());
-        String recordingDirectory = MocktailContainer
-                .getMocktailContext().getRecordingDirectory();
+        String recordingDirectory = MocktailContainer.getInstance().getRecordingDirectory();
         contextMap.put("recordingDirectory", recordingDirectory);
         // contextMap.put("classPackage", mocktail.getClassPackageName());
         return contextMap;

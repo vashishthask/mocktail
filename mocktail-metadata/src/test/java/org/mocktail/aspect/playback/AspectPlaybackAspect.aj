@@ -1,10 +1,10 @@
 package org.mocktail.aspect.playback;
 import static junit.framework.Assert.assertTrue;
 
+
 import java.io.File;
 
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
@@ -14,10 +14,9 @@ import org.mocktail.util.UniqueIdGenerator;
  * update the class and method template files accordingly
  */
 public aspect AspectPlaybackAspect {
-	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
+	ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance().getUniqueIdGenerator();
 	String fqcn = "org.mocktail.aspect.playback";
-	//MocktailContext.getMocktailContext().getRecordingDirectory();	
 	String recordingDirectoryPath;
 	
 	pointcut aroundMethodPointcut() : 

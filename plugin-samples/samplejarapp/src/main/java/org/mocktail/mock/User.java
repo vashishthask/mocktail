@@ -1,4 +1,4 @@
-package com.sandy.mock;
+package org.mocktail.mock;
 
 import java.io.Serializable;
 

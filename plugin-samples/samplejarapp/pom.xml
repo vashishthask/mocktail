@@ -41,18 +41,14 @@
           <recordingDir>src/main/resources/generated/recordings</recordingDir>
           <mode>recording</mode>
         </configuration>
-        <!-- executions>
+        <executions>
           <execution>
-            <id>touch-file</id>
+            <phase>validate</phase>
             <goals>
               <goal>mocktail</goal>
             </goals>
-            <configuration>
-              <source>1.6</source>
-              <target>1.6</target>
-            </configuration>
           </execution>
-        </executions-->
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

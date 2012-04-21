@@ -9,30 +9,57 @@ import org.mocktail.xml.reader.XStreamMocktailXmlReader;
 
 public class MocktailContainer {
 
-    private static XStreamMocktailXmlReader mocktailXmlReader = new XStreamMocktailXmlReader();
-    private static ObjectRepository objectRepository = new DiskObjectRepository();
-    private static MocktailContext mocktailContext;
-    private static UniqueIdGenerator uniqueIdGenerator = new HashCodeIdGenerator();
+    private XStreamMocktailXmlReader mocktailXmlReader;
+    private ObjectRepository objectRepository;
+    private UniqueIdGenerator uniqueIdGenerator;
+    private String recordingDirectory;
+    
+    private static MocktailContainer mocktailContainer = new MocktailContainer();
 
-    public static void initializeContainer(String recordingDirecotry) {
-        mocktailContext = MocktailContext
-                .getMocktailContext(recordingDirecotry);
+    private MocktailContainer() {
+        init();
     }
 
-    public static MocktailXmlReader getMocktailXmlReader() {
+    private void init() {
+        mocktailXmlReader = new XStreamMocktailXmlReader();
+        objectRepository = new DiskObjectRepository();
+        uniqueIdGenerator = new HashCodeIdGenerator();
+    }
+    
+    public static MocktailContainer getInstance(){
+        return mocktailContainer;
+    }
+
+    public MocktailXmlReader getMocktailXmlReader() {
         return mocktailXmlReader;
     }
 
-    public static ObjectRepository getObjectRepository() {
+    public ObjectRepository getObjectRepository() {
         return objectRepository;
     }
-
-    public static MocktailContext getMocktailContext() {
-        return mocktailContext;
+    
+    public void initRecordingDirectory(String directoryPath){
+        if (directoryPath.contains("\\")) {
+            this.setRecordingDirectory(directoryPath.replace("\\", "\\\\"));
+        } else {
+            this.setRecordingDirectory(directoryPath);
+        }
     }
 
-    public static UniqueIdGenerator getUniqueIdGenerator() {
+    public UniqueIdGenerator getUniqueIdGenerator() {
         return uniqueIdGenerator;
     }
 
+    public String getRecordingDirectory() {
+        return recordingDirectory;
+    }
+
+    private void setRecordingDirectory(String recordingDirectory) {
+        this.recordingDirectory = recordingDirectory;
+    }
+    
+    public void clean(){
+        this.recordingDirectory = null;
+        this.init();
+    }
 }

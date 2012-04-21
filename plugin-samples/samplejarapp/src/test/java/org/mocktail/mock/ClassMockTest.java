@@ -1,9 +1,11 @@
-package com.sandy.mock;
+package org.mocktail.mock;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mocktail.mock.ClassMock;
+import org.mocktail.mock.User;
 
 public class ClassMockTest {
 

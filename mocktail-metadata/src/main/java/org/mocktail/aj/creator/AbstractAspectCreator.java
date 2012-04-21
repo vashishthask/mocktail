@@ -27,8 +27,7 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
      * We have to get the dynamic values <code>getTemplateParameterValues</code>
      * Input stream of template recording/playback class/method
      */
-    public void createAspect(C classObj, File aspectsRootDirectory)
-            throws Exception {
+    public void createAspect(C classObj, File aspectsRootDirectory) {
 
         String templatedClassObjectString = TemplateProcesser.TEMPLATE_PROCESSER
                 .processTemplate(getTemplateParameterValues(classObj),
@@ -42,16 +41,20 @@ public abstract class AbstractAspectCreator<C> implements AspectCreator<C> {
      */
     protected void createAspectFile(C classObj, String aspectFileName,
             File aspectsRootDirecotry, String templatedObjectString)
-            throws IOException {
+            {
         File aspectFileDirectory = new File(aspectsRootDirecotry,
                 getAspectDirectory(classObj));
         if (!aspectFileDirectory.exists()) {
             aspectFileDirectory.mkdirs();
         }
         File file = new File(aspectFileDirectory, aspectFileName + ".aj");
-        FileWriter aspectOs = new FileWriter(file);
-        aspectOs.write(templatedObjectString);
-        aspectOs.close();
+        try {
+            FileWriter aspectOs = new FileWriter(file);
+            aspectOs.write(templatedObjectString);
+            aspectOs.close();
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     protected InputStream getAspectTemplateInputStream() {

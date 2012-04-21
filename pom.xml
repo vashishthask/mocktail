@@ -48,5 +48,6 @@
   <modules>
     <module>mocktail-metadata</module>
     <module>mocktail-plugin</module>
+    <module>plugin-samples</module>
   </modules>
 </project>

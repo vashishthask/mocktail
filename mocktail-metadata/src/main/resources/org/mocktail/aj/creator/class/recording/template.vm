@@ -3,19 +3,14 @@ import static junit.framework.Assert.assertTrue;
 import java.io.File;
 
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
 public aspect RecorderAspect$className {
 
-	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
+	ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance().getUniqueIdGenerator();
 	
-	// Get the Directory path form MocktailContext where we have to store the
-	// file
-	
-
 	pointcut callPointcut() : call(* $fqcn.*(..));
 	
 	

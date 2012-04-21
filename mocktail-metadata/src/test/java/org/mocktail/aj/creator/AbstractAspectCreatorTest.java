@@ -21,8 +21,8 @@ public class AbstractAspectCreatorTest {
 
     @Test
     public void testAspectFileCreation() throws Exception {
-        MocktailContainer.initializeContainer("");
-        AbstractAspectCreator<Mocktail> abstractAspectCreator = new AbstractMocktailAspectCreator(
+        MocktailContainer.getInstance().clean();
+        AbstractAspectCreator<Mocktail> abstractAspectCreator = new MocktailAspectCreator(
                 AspectType.CLASS_ASPECT_TYPE, MocktailMode.RECORDING_MODE) {
         };
         File aspectsRootDirectory = temporaryAspectDir.newFolder("aspect");

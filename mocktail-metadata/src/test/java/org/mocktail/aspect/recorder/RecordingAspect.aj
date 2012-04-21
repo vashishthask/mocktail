@@ -2,8 +2,8 @@ package org.mocktail.aspect.recorder;
 
 import java.io.File;
 
+
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
@@ -15,13 +15,12 @@ import org.mocktail.util.UniqueIdGenerator;
  */
 public aspect RecordingAspect {
 	
-	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
+	ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance().getUniqueIdGenerator();
 	String fqcn = "org.mocktail.aspect";
 	String recordingDirectoryPath = "c:\\sandy\\recording\\test";
 
-	pointcut aroundMethodPointcut() : 
-		call(* org.mocktail.aspect.recorder.RecordingAspected.*(..));
+	pointcut aroundMethodPointcut() : call(* org.mocktail.aspect.recorder.RecordingAspected.*(..));
 	
 	
 	Object around() : aroundMethodPointcut() {

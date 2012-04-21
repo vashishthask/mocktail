@@ -8,7 +8,6 @@ import java.io.File;
 
 import org.junit.Test;
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.MocktailObjectMother;
 import org.mocktail.xml.domain.MocktailMode;
 import org.springframework.beans.DirectFieldAccessor;
@@ -17,10 +16,9 @@ public class MocktailAspectsCreatorTest {
 
     @Test
     public void testCreateAspects() throws Exception {
-        MocktailContainer.initializeContainer("");
-        MocktailContext mocktailContext = MocktailContext
-                .getMocktailContext("");
-        DirectFieldAccessor dfa = new DirectFieldAccessor(mocktailContext);
+        MocktailContainer mocktailContainer = MocktailContainer.getInstance();
+        mocktailContainer.clean();
+        DirectFieldAccessor dfa = new DirectFieldAccessor(mocktailContainer);
         // Need to set as Mocktail Context is a singleton class and is getting
         // set-upped from multiple places
         dfa.setPropertyValue("recordingDirectory", "");

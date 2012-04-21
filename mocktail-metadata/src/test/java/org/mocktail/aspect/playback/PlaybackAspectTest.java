@@ -9,7 +9,6 @@ import junit.framework.AssertionFailedError;
 import org.junit.Before;
 import org.junit.Test;
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.springframework.beans.DirectFieldAccessor;
 
 public class PlaybackAspectTest {
@@ -19,10 +18,7 @@ public class PlaybackAspectTest {
 
     @Before
     public void setup() {
-        MocktailContainer.initializeContainer("");
-        MocktailContext mocktailContext = MocktailContext
-                .getMocktailContext("");
-        dfa = new DirectFieldAccessor(MocktailContainer.getMocktailContext());
+        dfa = new DirectFieldAccessor(MocktailContainer.getInstance());
         dfa.setPropertyValue("recordingDirectory",
                 "src/test/resources/recording");
     }

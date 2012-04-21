@@ -1,12 +1,12 @@
 <mocktails>
  <mocktail>
   <className>Greeter</className>
-  <classPackageName></classPackageName>
+  <classPackageName>org.mocktail</classPackageName>
   <methods></methods>
  </mocktail>
  <mocktail>
   <className>ClassMock</className>
-  <classPackageName>com.sandy.mock</classPackageName>
+  <classPackageName>org.mocktail.mock</classPackageName>
   <methods></methods>
  </mocktail>
 </mocktails>
