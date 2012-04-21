@@ -25,7 +25,7 @@ public aspect PlaybackAspect$className {
 		String fqcn = "$fqcn";
 		String recordingDirectoryPath = "$recordingDirectory";
 		 recordingDirectoryPath += fileSeparator
-				+ fqcn.replaceAll("\\.", fileSeparator);
+				+ fqcn.replace(".", fileSeparator);
 		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 		
 		String methodName = thisJoinPoint.getSignature().getName();

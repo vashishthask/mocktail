@@ -1,5 +1,6 @@
 package org.mocktail.aj.creator;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public abstract class AbstractMocktailAspectCreator extends
     protected String getAspectDirectory(Mocktail mocktail) {
         String packagePath = "";
         if (null != mocktail.getClassPackageName()) {
-            packagePath = mocktail.getClassPackageName().replaceAll("\\.", "/");
+            packagePath = mocktail.getClassPackageName().replace(".", File.separator);
         }
         return packagePath;
     }
@@ -28,8 +29,9 @@ public abstract class AbstractMocktailAspectCreator extends
         Map<String, Object> contextMap = new HashMap<String, Object>();
         contextMap.put("fqcn", mocktail.getClassFQCN());
         contextMap.put("className", mocktail.getClassName());
-        contextMap.put("recordingDirectory", MocktailContainer
-                .getMocktailContext().getRecordingDirectory());
+        String recordingDirectory = MocktailContainer
+                .getMocktailContext().getRecordingDirectory();
+        contextMap.put("recordingDirectory", recordingDirectory);
         // contextMap.put("classPackage", mocktail.getClassPackageName());
         return contextMap;
     }

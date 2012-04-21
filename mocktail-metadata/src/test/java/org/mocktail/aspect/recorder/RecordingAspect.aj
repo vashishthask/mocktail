@@ -28,7 +28,7 @@ public aspect RecordingAspect {
 		
 		String fileSeparator = "/";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-				+ fqcn.replaceAll("\\.", fileSeparator);
+				+ fqcn.replace(".", fileSeparator);
 
 		if (!(new File(recordingDirectoryPath)).exists()) {
 			(new File(recordingDirectoryPath)).mkdirs();

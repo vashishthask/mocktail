@@ -27,7 +27,7 @@ public aspect AspectPlaybackAspect {
 		String fileSeparator = "/";
 		recordingDirectoryPath = "c:\\sandy\\recording\\test";
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-				+ fqcn.replaceAll("\\.", fileSeparator);
+				+ fqcn.replace(".", fileSeparator);
 		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 		System.out.println("Doing addition");
 		// Create the unique id of param objects to be recorded

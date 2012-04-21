@@ -32,7 +32,7 @@ public class RecorderAspect {
 
         // Recording directory will also have fqcn
         recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-                + fqcn.replaceAll("\\.", fileSeparator);
+                + fqcn.replace(".", fileSeparator);
 
         // Verify if recording directory exists or not if doesn't create the
         // directory

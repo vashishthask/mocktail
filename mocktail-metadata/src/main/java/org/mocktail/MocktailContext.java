@@ -8,7 +8,11 @@ public class MocktailContext {
     private static MocktailContext context;
 
     private MocktailContext(String recordingDirectory) {
-        this.recordingDirectory = recordingDirectory;
+        if (recordingDirectory.contains("\\")) {
+            this.recordingDirectory = recordingDirectory.replace("\\", "\\\\");
+        } else {
+            this.recordingDirectory = recordingDirectory;
+        }
     }
 
     public String getRecordingDirectory() {
