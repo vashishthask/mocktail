@@ -23,10 +23,8 @@ public aspect AspectPlaybackAspect {
 		call(* org.mocktail.aspect.playback.PlaybackAspected.*(..));
 	
 	Object around() : aroundMethodPointcut() {
-		String fileSeparator = "/";
-		recordingDirectoryPath = "c:\\sandy\\recording\\test";
-		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-				+ fqcn.replace(".", fileSeparator);
+		recordingDirectoryPath = recordingDirectoryPath + File.separator
+				+ fqcn.replace(".", File.separator);
 		assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 		System.out.println("Doing addition");
 		// Create the unique id of param objects to be recorded
