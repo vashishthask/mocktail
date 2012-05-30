@@ -28,7 +28,7 @@ public aspect PlaybackAspect$className {
 					+ fqcn.replaceAll("\\.", fileSeparator);
 			assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
 			
-			String methodName=$method;
+			String methodName="$method";
 			// Create the unique id of param objects to be recorded
 			String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs())
 					+ "";

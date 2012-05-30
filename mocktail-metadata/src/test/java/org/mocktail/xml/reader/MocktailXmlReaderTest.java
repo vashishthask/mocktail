@@ -31,6 +31,8 @@ public class MocktailXmlReaderTest {
 		assertThat(mocktails.get(0).getClassName(), is("className"));
 		assertThat(mocktails.get(0).getClassPackageName(), is("classPackage"));
 		assertThat(mocktails.get(0).getMethods().size(), is(2));
+		assertThat(mocktails.get(0).getMethods().get(0), is("method1"));
+		assertThat(mocktails.get(0).getMethods().get(1), is("method2"));
 		assertThat(mocktails.get(0).onlyForClass(), is(false));
 
 		assertThat(mocktails.get(1).getClassName(), is("fqcn2"));

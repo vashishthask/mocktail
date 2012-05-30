@@ -41,11 +41,11 @@
 					<aspectsDirectory>target/generated/aspects</aspectsDirectory>
 					<configuration>src/main/resources/mocktail.xml</configuration>
 					<recordingDir>src/main/resources/generated/recordings</recordingDir>
-					<mode>recording</mode>
+					<mode>playback</mode>
 				</configuration>
 				<executions>
 					<execution>
-						<id>touch-file</id>
+						<id>updatefile</id>
 						<goals>
 							<goal>mocktail</goal>
 						</goals>
@@ -87,6 +87,31 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.2</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.6</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>3.1.0.RELEASE</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>3.1.0.RELEASE</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 	<repositories>

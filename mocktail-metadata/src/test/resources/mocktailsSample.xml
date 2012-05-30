@@ -3,8 +3,8 @@
 		<className>className</className>
 		<classPackageName>classPackage</classPackageName>
 		<methods>
-			<method name="method1" />
-			<method name="method1" />
+			<string>method1</string>
+			<string>method2</string>
 		</methods>
 	</mocktail>
 	<mocktail>
