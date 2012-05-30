@@ -4,12 +4,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
+
+import org.mocktail.MocktailContainer;
 import org.mocktail.MocktailContext;
-import org.mocktail.util.ObjectRepository;
+import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
 public aspect RecorderAspect$className {
 
+	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
 	String fqcn = "$fqcn";
 
 	#foreach($method in $methods)
