@@ -39,7 +39,7 @@
           <aspectsDirectory>target/generated/aspects</aspectsDirectory>
           <configuration>src/main/resources/mocktail.xml</configuration>
           <recordingDir>src/main/resources/generated/recordings</recordingDir>
-          <mode>recording</mode>
+          <mode>playback</mode>
         </configuration>
         <executions>
           <execution>

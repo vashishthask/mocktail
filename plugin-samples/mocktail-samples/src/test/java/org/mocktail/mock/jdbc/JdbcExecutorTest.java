@@ -34,8 +34,8 @@ public class JdbcExecutorTest {
 				ArrayList usersList = new ArrayList();
 				usersList.add(1L);
 				usersList.add(2L);
-				/*usersList.add(2L);
-				usersList.add(2L);*/
+				usersList.add(2L);
+				usersList.add(2L);
 				return usersList;
 			}
 		});
