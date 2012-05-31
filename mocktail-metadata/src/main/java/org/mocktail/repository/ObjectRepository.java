@@ -6,15 +6,15 @@ import java.io.OutputStream;
 
 public interface ObjectRepository {
 
-	public void saveObject(Object objectToBeSerialized,
-			OutputStream outputStream) throws IOException;
+    public void saveObject(Object objectToBeSerialized,
+            OutputStream outputStream) throws IOException;
 
-	public Object getObject(InputStream inputStream) throws IOException,
-			ClassNotFoundException;
+    public Object getObject(InputStream inputStream) throws IOException,
+            ClassNotFoundException;
 
-	public void saveObject(Object object, String objectId, String location);
+    public void saveObject(Object object, String objectId, String location);
 
-	public Object getObject(String objectId, String location);
-	
-	public boolean objectAlreadyExist(String objectId, String location);
+    public Object getObject(String objectId, String location);
+
+    public boolean objectAlreadyExist(String objectId, String location);
 }

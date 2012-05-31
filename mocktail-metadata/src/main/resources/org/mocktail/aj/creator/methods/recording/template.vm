@@ -6,14 +6,13 @@ import java.io.OutputStream;
 
 
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
 public aspect RecorderAspect$className {
 
-	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
+	ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance().getUniqueIdGenerator();
 	String fqcn = "$fqcn";
 
 	#foreach($method in $methods)
@@ -55,3 +54,4 @@ public aspect RecorderAspect$className {
 	#end
 	
 }
+

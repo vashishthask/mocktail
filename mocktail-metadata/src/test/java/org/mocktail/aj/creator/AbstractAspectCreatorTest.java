@@ -14,21 +14,26 @@ import org.mocktail.xml.domain.AspectType;
 import org.mocktail.xml.domain.Mocktail;
 import org.mocktail.xml.domain.MocktailMode;
 
-
 public class AbstractAspectCreatorTest {
 
-	@Rule
-    public TemporaryFolder temporaryAspectDir= new TemporaryFolder();
-	
-	@Test
-	public void testAspectFileCreation() throws Exception {
-		MocktailContainer.initializeContainer("");
-		AbstractAspectCreator<Mocktail> abstractAspectCreator = new AbstractMocktailAspectCreator(AspectType.CLASS_ASPECT_TYPE, MocktailMode.RECORDING_MODE) {};
-		File aspectsRootDirectory = temporaryAspectDir.newFolder("aspect");
-		assertFalse("Aspect already exists", (new File(aspectsRootDirectory, "RecorderAspectAspectedClass.aj")).exists());
-		
-		abstractAspectCreator.createAspect(MocktailObjectMother.createClassMocktail("AspectedClass", ""), aspectsRootDirectory);
+    @Rule
+    public TemporaryFolder temporaryAspectDir = new TemporaryFolder();
 
-		assertTrue("Aspect doesn't exists", (new File(aspectsRootDirectory, "RecorderAspectAspectedClass.aj")).exists());
-	}
+    @Test
+    public void testAspectFileCreation() throws Exception {
+        MocktailContainer.getInstance().clean();
+        AbstractAspectCreator<Mocktail> abstractAspectCreator = new MocktailAspectCreator(
+                AspectType.CLASS_ASPECT_TYPE, MocktailMode.RECORDING_MODE) {
+        };
+        File aspectsRootDirectory = temporaryAspectDir.newFolder("aspect");
+        assertFalse("Aspect already exists", (new File(aspectsRootDirectory,
+                "RecorderAspectAspectedClass.aj")).exists());
+
+        abstractAspectCreator.createAspect(
+                MocktailObjectMother.createClassMocktail("AspectedClass", ""),
+                aspectsRootDirectory);
+
+        assertTrue("Aspect doesn't exists", (new File(aspectsRootDirectory,
+                "RecorderAspectAspectedClass.aj")).exists());
+    }
 }

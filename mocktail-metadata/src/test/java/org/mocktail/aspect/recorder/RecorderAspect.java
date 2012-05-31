@@ -5,51 +5,59 @@ import static junit.framework.Assert.assertTrue;
 import java.io.File;
 
 import org.mocktail.MocktailContainer;
-import org.mocktail.MocktailContext;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.UniqueIdGenerator;
 
 public class RecorderAspect {
 
-	ObjectRepository objectRepository = MocktailContainer.getObjectRepository();
-	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getUniqueIdGenerator();
-	String fqcn;
-	String methodName;
-	public void doTheRecording(Object objectToBeRecorded,
-			Object... paramObjects) {
-		
-		String fileSeparator = File.separator;
-		String recordingDirectoryPath = MocktailContext.getMocktailContext().getRecordingDirectory();
-		
-		// Verifying if root recording directory where all recordings exist is already their or not
-		assertTrue("The root recordings direcotry doesn't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
+    ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+    UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance()
+            .getUniqueIdGenerator();
+    String fqcn;
+    String methodName;
 
-		
-		//Recording directory will also have fqcn
-		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-						+ fqcn.replaceAll("\\.", fileSeparator);
+    public void doTheRecording(Object objectToBeRecorded,
+            Object... paramObjects) {
 
-		//Verify if recording directory exists or not if doesn't create the directory
-		if (!(new File(recordingDirectoryPath)).exists()) {
-			(new File(recordingDirectoryPath)).mkdirs();
-		}
+        String fileSeparator = File.separator;
+        String recordingDirectoryPath = MocktailContainer.getInstance()
+                .getRecordingDirectory();
 
-		// Create the unique id of param objects to be recorded
-		//Look into uniqueness of method
-/*		String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)
-				+ "";*/
-		//Recording file name will be as per the parameters
-//		String methodName = thisJoinPoint.getSignature().getName()
-		String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, paramObjects)	+ "";
+        // Verifying if root recording directory where all recordings exist is
+        // already their or not
+        assertTrue("The root recordings direcotry doesn't exists "
+                + recordingDirectoryPath,
+                (new File(recordingDirectoryPath)).exists());
 
-		// Get the object to be recorded
-		// Ask Recorder to save the recording file
-		if (!objectRepository.objectAlreadyExist(recordingFileName,
-				recordingDirectoryPath)) {
-			objectRepository.saveObject(objectToBeRecorded, recordingFileName,
-					recordingDirectoryPath);
-		} else {
-			System.out.println("object already exists so not saving it");
-		}
-	}
+        // Recording directory will also have fqcn
+        recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+                + fqcn.replace(".", fileSeparator);
+
+        // Verify if recording directory exists or not if doesn't create the
+        // directory
+        if (!(new File(recordingDirectoryPath)).exists()) {
+            (new File(recordingDirectoryPath)).mkdirs();
+        }
+
+        // Create the unique id of param objects to be recorded
+        // Look into uniqueness of method
+        /*
+         * String recrodingFileName = uniqueIdGenerator.getUniqueId(methodName,
+         * paramObjects) + "";
+         */
+        // Recording file name will be as per the parameters
+        // String methodName = thisJoinPoint.getSignature().getName()
+        String recordingFileName = uniqueIdGenerator.getUniqueId(methodName,
+                paramObjects) + "";
+
+        // Get the object to be recorded
+        // Ask Recorder to save the recording file
+        if (!objectRepository.objectAlreadyExist(recordingFileName,
+                recordingDirectoryPath)) {
+            objectRepository.saveObject(objectToBeRecorded, recordingFileName,
+                    recordingDirectoryPath);
+        } else {
+            System.out.println("object already exists so not saving it");
+        }
+    }
 }

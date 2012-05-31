@@ -21,26 +21,26 @@ import org.mocktail.repository.RecordingsRepository;
 @RunWith(MockitoJUnitRunner.class)
 public class RecordigsRepositoryTest {
 
-	@Mock
-	OutputStream outputStream;
+    @Mock
+    OutputStream outputStream;
 
-	@SuppressWarnings("unchecked")
-	@Test
-	public void shouldRecordObj() throws Exception {
-		RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
-				Arrays.asList("sandy", "ganesh", 12, 23.0), outputStream);
-		verify(outputStream, new Times(14)).write((byte[]) any(), anyInt(),
-				anyInt());
-	}
+    @SuppressWarnings("unchecked")
+    @Test
+    public void shouldRecordObj() throws Exception {
+        RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY.marshall(
+                Arrays.asList("sandy", "ganesh", 12, 23.0), outputStream);
+        verify(outputStream, new Times(14)).write((byte[]) any(), anyInt(),
+                anyInt());
+    }
 
-	@SuppressWarnings("rawtypes")
-	@Test
-	public void shouldReadObj() throws Exception {
-		List recordedList = (List) RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY
-				.unmarshall(new ClasspathResourceLoader()
-						.getResourceStream("org/mocktail/util/recorded_list.ser"));
+    @SuppressWarnings("rawtypes")
+    @Test
+    public void shouldReadObj() throws Exception {
+        List recordedList = (List) RecordingsRepository.SERIALIZER_RECORDINGS_REPOSITORY
+                .unmarshall(new ClasspathResourceLoader()
+                        .getResourceStream("org/mocktail/util/recorded_list.ser"));
 
-		assertThat(recordedList.size(), is(4));
+        assertThat(recordedList.size(), is(4));
 
-	}
+    }
 }

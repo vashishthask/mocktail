@@ -10,17 +10,18 @@ import org.mocktail.xml.domain.MocktailMode;
  * I'll create an aspect for methods defined in Mocktail
  * 
  */
-public class MocktailMethodsAspectCreator extends AbstractMocktailAspectCreator {
+public class MocktailMethodsAspectCreator extends MocktailAspectCreator {
 
-	public MocktailMethodsAspectCreator(MocktailMode mocktailMode) {
-		super(AspectType.METHODS_ASPECT_TYPE, mocktailMode);
-	}
+    public MocktailMethodsAspectCreator(MocktailMode mocktailMode) {
+        super(AspectType.METHODS_ASPECT_TYPE, mocktailMode);
+    }
 
-	@Override
-	protected Map<String, Object> getTemplateParameterValues(Mocktail mocktail) {
-		Map<String, Object> contextMap = super.getTemplateParameterValues(mocktail);
-		contextMap.put("methods", mocktail.getMethods());
-		return contextMap;
-	}
-	
+    @Override
+    protected Map<String, Object> getTemplateParameterValues(Mocktail mocktail) {
+        Map<String, Object> contextMap = super
+                .getTemplateParameterValues(mocktail);
+        contextMap.put("methods", mocktail.getMethods());
+        return contextMap;
+    }
+
 }

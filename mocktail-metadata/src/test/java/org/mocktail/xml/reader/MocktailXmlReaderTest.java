@@ -40,4 +40,5 @@ public class MocktailXmlReaderTest {
 		assertThat(mocktails.get(1).onlyForClass(), is(true));
 	}
 
+
 }

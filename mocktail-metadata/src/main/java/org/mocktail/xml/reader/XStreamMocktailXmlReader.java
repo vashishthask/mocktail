@@ -7,7 +7,7 @@ import org.mocktail.xml.domain.Mocktail;
 
 import com.thoughtworks.xstream.XStream;
 
-public class XStreamMocktailXmlReader implements MocktailXmlReader  {
+public class XStreamMocktailXmlReader implements MocktailXmlReader {
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -20,5 +20,6 @@ public class XStreamMocktailXmlReader implements MocktailXmlReader  {
 		List<Mocktail> mocktails = (List<Mocktail>)xstream.fromXML(sampleXmlStream);
 		return mocktails;
 	}
+
 
 }
