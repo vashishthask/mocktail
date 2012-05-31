@@ -6,12 +6,12 @@
 	</mocktail>
 	<mocktail>
 		<className>ClassMock</className>
-		<classPackageName>com.sandy.mock</classPackageName>
+		<classPackageName>org.mocktail.mock</classPackageName>
 		<methods></methods>
 	</mocktail>
 	<mocktail>
 		<className>JdbcExecutor</className>
-		<classPackageName>com.sandy.mock.jdbc</classPackageName>
+		<classPackageName>org.mocktail.mock.jdbc</classPackageName>
 		<methods>
 			<string>executeQuery</string>
 		</methods>
