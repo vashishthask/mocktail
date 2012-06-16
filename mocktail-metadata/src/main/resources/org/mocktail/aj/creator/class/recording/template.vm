@@ -26,6 +26,7 @@ public aspect RecorderAspect$className {
 		//Recording directory will also have fqcn
 		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
 						+ fqcn.replace(".", fileSeparator);
+		System.err.println("The recording directory is:"+recordingDirectoryPath);
 
 		//Verify if recording directory exists or not if doesn't create the directory
 		if (!(new File(recordingDirectoryPath)).exists()) {

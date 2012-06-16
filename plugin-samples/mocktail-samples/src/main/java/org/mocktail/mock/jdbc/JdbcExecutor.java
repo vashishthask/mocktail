@@ -11,6 +11,7 @@ public class JdbcExecutor {
 
 	Connection con = null;
 	private static ResultSetParserCallback resultSetParserCallback;
+
 	public JdbcExecutor() {
 		String connectionURL = "jdbc:hsqldb:mem:mypersistence;user=sa";
 		try {
@@ -20,22 +21,19 @@ public class JdbcExecutor {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}
 	}
-	
+
 	public List executeQuery(String query) {
-		ResultSet resultSet = null;
 		try {
 			Statement statement = con.createStatement();
-			resultSet = statement.executeQuery(query);
+			ResultSet resultSet = statement.executeQuery(query);
 			return resultSetParserCallback.parse(resultSet);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new IllegalStateException(e);
 		}
-		return null;
 	}
-	
+
 	public boolean execute(String query) {
 		try {
 			Statement statement = con.createStatement();
@@ -43,7 +41,6 @@ public class JdbcExecutor {
 			statement.close();
 			return queryExecuted;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
@@ -51,9 +48,8 @@ public class JdbcExecutor {
 
 	public static void setResultParserCallback(
 			ResultSetParserCallback resultSetParserCallback) {
-				JdbcExecutor.resultSetParserCallback = resultSetParserCallback;
-		
+		JdbcExecutor.resultSetParserCallback = resultSetParserCallback;
+
 	}
-	
-	
+
 }

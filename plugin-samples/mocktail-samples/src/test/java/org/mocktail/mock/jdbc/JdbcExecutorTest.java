@@ -17,21 +17,15 @@ public class JdbcExecutorTest {
 	@Before
 	public void setup() {
 		jdbcExecutor = new JdbcExecutor();
-		try {
-			
-			boolean execute = jdbcExecutor.execute("CREATE TABLE USER (Nr INTEGER,Name INTEGER)");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		boolean execute = jdbcExecutor.execute("CREATE TABLE USER (Nr INTEGER,Name INTEGER)");
 	}
 	
 	@Test
 	public void shouldGetResultsForQuery() {
 		JdbcExecutor.setResultParserCallback(new ResultSetParserCallback() {
 			
-			public List parse(ResultSet resultSet) {
-				ArrayList usersList = new ArrayList();
+			public List<Long> parse(ResultSet resultSet) {
+				List<Long> usersList = new ArrayList<Long>();
 				usersList.add(1L);
 				usersList.add(2L);
 				usersList.add(2L);
@@ -39,9 +33,9 @@ public class JdbcExecutorTest {
 				return usersList;
 			}
 		});
-		List usersList = jdbcExecutor.executeQuery("select * from USER");
+		List<Long> usersList = jdbcExecutor.executeQuery("select * from USER");
 		assertNotNull(usersList);
-		assertEquals(2, usersList.size());
+		assertEquals(4, usersList.size());
 	}
 
 }
