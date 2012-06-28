@@ -38,14 +38,6 @@ public class MocktailContainer {
         return objectRepository;
     }
     
-    public void initRecordingDirectory(String directoryPath){
-        if (directoryPath.contains("\\")) {
-            this.setRecordingDirectory(directoryPath.replace("\\", "\\\\"));
-        } else {
-            this.setRecordingDirectory(directoryPath);
-        }
-    }
-
     public UniqueIdGenerator getUniqueIdGenerator() {
         return uniqueIdGenerator;
     }
@@ -54,8 +46,12 @@ public class MocktailContainer {
         return recordingDirectory;
     }
 
-    private void setRecordingDirectory(String recordingDirectory) {
-        this.recordingDirectory = recordingDirectory;
+    public void setRecordingDirectory(String directoryPath) {
+        if (directoryPath.contains("\\")) {
+            this.recordingDirectory = directoryPath.replace("\\", "\\\\");
+        } else {
+            this.recordingDirectory = directoryPath;
+        }
     }
     
     public void clean(){

@@ -53,27 +53,29 @@ public class MocktailMojo extends AjcCompileMojo {
         if (!aspectsDirectory.exists()) {
             aspectsDirectory.mkdirs();
         }
-        XStreamMocktailXmlReader configReader = new XStreamMocktailXmlReader();
-//        MocktailContainer.initializeContainer(recordingDir.getAbsolutePath());
-        MocktailContainer container = MocktailContainer.getInstance();
-        container.initRecordingDirectory(recordingDir.getAbsolutePath());
+        
+        MocktailContainer.getInstance().setRecordingDirectory(recordingDir.getAbsolutePath());
+        
         try {
-            List<Mocktail> mocktails = configReader
-                    .readXml(new FileInputStream(configuration));
-            System.out.println("\n\n " + mocktails + "\n\n");
+            XStreamMocktailXmlReader configReader = new XStreamMocktailXmlReader();
+            List<Mocktail> mocktails = configReader.readXml(new FileInputStream(configuration));
+            
             // TODO:A hack for time being as we will be either generating
             // recording/playback aspects at a time
-            if (mode.equalsIgnoreCase(MocktailMode.RECORDING_MODE
-                    .getModeDirectory())) {
-                MocktailAspectsCreator.ASPECTS_CREATOR.createAspects(mocktails,
-                        aspectsDirectory, MocktailMode.RECORDING_MODE);
+            MocktailAspectsCreator mocktailAspectsCreator = new MocktailAspectsCreator();
+            if (isRecordingMode()) {
+                mocktailAspectsCreator.createRecordingAspects(mocktails, aspectsDirectory);
             } else {
-                MocktailAspectsCreator.ASPECTS_CREATOR.createAspects(mocktails,
-                        aspectsDirectory, MocktailMode.PLAYBACK_MODE);
+                mocktailAspectsCreator.createPlaybackAspects(mocktails, aspectsDirectory);
             }
         } catch (FileNotFoundException e) {
             throw new IllegalStateException(e);
         }
+    }
+
+    private boolean isRecordingMode() {
+        return mode.equalsIgnoreCase(MocktailMode.RECORDING_MODE
+                .getModeDirectory());
     }
 
     public void setValue(Class<?> classToBeSetOn, Object o, String fieldName,

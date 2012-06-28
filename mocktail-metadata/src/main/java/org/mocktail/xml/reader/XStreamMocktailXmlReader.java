@@ -16,10 +16,7 @@ public class XStreamMocktailXmlReader implements MocktailXmlReader {
 		xstream.alias("mocktails", List.class);
 		xstream.alias("mocktail", Mocktail.class);
 		xstream.alias("methods", List.class);
-//		xstream.alias("method", String.class);
 		List<Mocktail> mocktails = (List<Mocktail>)xstream.fromXML(sampleXmlStream);
 		return mocktails;
 	}
-
-
 }
