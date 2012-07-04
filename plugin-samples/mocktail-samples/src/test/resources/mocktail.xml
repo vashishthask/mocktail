@@ -16,4 +16,11 @@
 			<string>executeQuery</string>
 		</methods>
 	</mocktail>
+	<mocktail>
+		<className>UserDao</className>
+		<classPackageName>org.mocktail.mock.jdbc.user</classPackageName>
+		<methods>
+			<string>get</string>
+		</methods>
+	</mocktail>
 </mocktails>
