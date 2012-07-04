@@ -2,13 +2,14 @@ package org.mocktail.aj.creator;
 
 import java.io.File;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mocktail.MocktailContainer;
 import org.mocktail.MocktailObjectMother;
 import org.mocktail.xml.domain.MocktailMode;
 import org.springframework.beans.DirectFieldAccessor;
 
-
+@Ignore
 public class MocktailAspectsCreatorTest {
 
 //    @Test
