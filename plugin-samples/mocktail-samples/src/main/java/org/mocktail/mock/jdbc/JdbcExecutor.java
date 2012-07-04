@@ -34,6 +34,17 @@ public class JdbcExecutor {
 		}
 	}
 
+	public ResultSet getResultSet(String query) {
+		ResultSet resultSet;
+		try {
+			Statement statement = con.createStatement();
+			resultSet = statement.executeQuery(query);
+		} catch (SQLException e) {
+			throw new IllegalStateException(e);
+		}
+		return resultSet;
+	}
+
 	public boolean execute(String query) {
 		try {
 			Statement statement = con.createStatement();
