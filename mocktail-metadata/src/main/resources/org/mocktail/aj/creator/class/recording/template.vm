@@ -19,16 +19,11 @@ public aspect RecorderAspect$className {
 		String fqcn = "$fqcn";
 		String recordingDirectoryPath = "$recordingDirectory";
 		String fileSeparator = File.separator;
+		
+		recordingDirectoryPath += fileSeparator + fqcn.replaceAll("\\.", fileSeparator);
 
 		// Verifying if root recording directory where all recordings exist is already their or not
-		assertTrue("The root recordings directory doesn't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
-		
-		//Recording directory will also have fqcn
-		recordingDirectoryPath = recordingDirectoryPath + fileSeparator
-						+ fqcn.replace(".", fileSeparator);
-		System.err.println("The recording directory is:"+recordingDirectoryPath);
 
-		//Verify if recording directory exists or not if doesn't create the directory
 		if (!(new File(recordingDirectoryPath)).exists()) {
 			(new File(recordingDirectoryPath)).mkdirs();
 		}
