@@ -17,10 +17,9 @@ public aspect RecorderAspect$className {
 	Object around() : callPointcut() {
 		
 		String fqcn = "$fqcn";
-		String recordingDirectoryPath = "$recordingDirectory";
 		String fileSeparator = File.separator;
 		
-		recordingDirectoryPath += fileSeparator + fqcn.replaceAll("\\.", fileSeparator);
+		recordingDirectoryPath = "$recordingDirectory" + fileSeparator + fqcn.replaceAll("\\.", fileSeparator);
 
 		// Verifying if root recording directory where all recordings exist is already their or not
 
