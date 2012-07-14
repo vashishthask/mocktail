@@ -17,7 +17,6 @@ public abstract class AbstractGenericJDBCDao<E> implements GenericJDBCDao<E> {
 	}
 
 	public List<E> find(String query) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

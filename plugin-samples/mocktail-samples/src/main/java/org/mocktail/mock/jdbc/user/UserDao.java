@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.mocktail.mock.jdbc.AbstractGenericJDBCDao;
 
+
 public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
 
 	@Override
@@ -21,8 +22,6 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
 			userDetail.setId(resultSet.getLong(1));
 			userDetail.setAge(resultSet.getInt(2));
 		} catch (SQLException e) {
-			System.out.println("Got sql error while reading result set");
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return userDetail;
