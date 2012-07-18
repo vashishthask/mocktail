@@ -36,6 +36,5 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
     @Override
     public void save(UserDetail e) {
         JdbcExecutor jdbcExecutor = new JdbcExecutor();
-        jdbcExecutor.execute(query)
     }
 }

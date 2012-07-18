@@ -23,14 +23,13 @@ public class UserDaoTest {
 	public void setup() {
 	    userDao = new UserDao();
 		jdbcExecutor = new JdbcExecutor();
-		jdbcExecutor.execute("CREATE TABLE USERDETAIL (id INTEGER,age INTEGER)");
 		jdbcExecutor.execute("insert into USERDETAIL values (1,10)");
-		
 	}
 	
 	@BeforeClass
 	public static void cleanRecordings(){
-	    
+	    JdbcExecutor jdbcExecutor = new JdbcExecutor();
+	    jdbcExecutor.execute("CREATE TABLE USERDETAIL (id INTEGER,age INTEGER)");
 	}
 	
 	@Test
