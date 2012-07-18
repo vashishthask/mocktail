@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.mocktail.mock.jdbc.AbstractGenericJDBCDao;
+import org.mocktail.mock.jdbc.JdbcExecutor;
 
 
 public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
@@ -27,4 +28,14 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
 		return userDetail;
 	}
 
+    @Override
+    public void delete(UserDetail e) {
+        
+    }
+
+    @Override
+    public void save(UserDetail e) {
+        JdbcExecutor jdbcExecutor = new JdbcExecutor();
+        jdbcExecutor.execute(query)
+    }
 }

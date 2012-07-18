@@ -5,7 +5,9 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
+import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mocktail.mock.jdbc.JdbcExecutor;
 
@@ -13,6 +15,9 @@ public class UserDaoTest {
 
 	private JdbcExecutor jdbcExecutor;
 	UserDao userDao;
+	
+	   
+	   
 
 	@Before
 	public void setup() {
@@ -23,8 +28,13 @@ public class UserDaoTest {
 		
 	}
 	
+	@BeforeClass
+	public static void cleanRecordings(){
+	    
+	}
+	
 	@Test
-	public void shouldGetUser() {
+	public void testGetUser() {
 		
 		//search with recording mode
         UserDetail userDetail = userDao.get(1L);
@@ -38,5 +48,26 @@ public class UserDaoTest {
         //search again
         UserDetail recordedUserDetail = userDao.get(1L);
         assertEquals(10, recordedUserDetail.getAge());
+	}
+	
+	@Test
+    public void testInsertUser() {
+        
+//        //insert the row in recording mode
+//	    
+//        
+//        
+//        
+//        //update userdetail record with new value
+//        jdbcExecutor.execute("update userdetail set age=12 where id=1");
+//        
+//        //search again
+//        UserDetail recordedUserDetail = userDao.get(1L);
+//        assertEquals(10, recordedUserDetail.getAge());
+    }
+	
+	@After
+	public void tearDown(){
+	    jdbcExecutor.execute("delete from USERDETAIL");
 	}
 }
