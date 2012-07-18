@@ -32,6 +32,7 @@ public aspect RecorderAspect$className {
 			// Create the unique id of param objects to be recorded
 			String methodName="$method";
 			String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs()) + "";
+			System.out.println(thisEnclosingJoinPointStaticPart.getSignature().getName());
 			
 			
 			Object objectToBeRecorded = null;
