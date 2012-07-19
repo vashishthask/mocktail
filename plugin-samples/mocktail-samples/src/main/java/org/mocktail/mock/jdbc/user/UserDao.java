@@ -31,8 +31,18 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
 	}
 
     @Override
-    public void delete(UserDetail e) {
-        
+    public void delete(UserDetail userDetail) {
+        JdbcExecutor jdbcExecutor = new JdbcExecutor();
+        Connection connection = jdbcExecutor.getConnection();
+        String insertStatement = "delete from userdetail where id=?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertStatement);
+            statement.setInt(1, userDetail.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -44,6 +54,23 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
             PreparedStatement statement = connection.prepareStatement(insertStatement);
             statement.setInt(1, userDetail.getId());
             statement.setInt(2, userDetail.getAge());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+    }
+
+    @Override
+    public void update(UserDetail userDetail) {
+        JdbcExecutor jdbcExecutor = new JdbcExecutor();
+        Connection connection = jdbcExecutor.getConnection();
+        String insertStatement = "update userdetail set age=? where id=?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertStatement);
+            statement.setInt(1, userDetail.getAge());
+            statement.setInt(2, userDetail.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

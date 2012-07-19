@@ -3,6 +3,8 @@ package org.mocktail.mock.jdbc;
 import java.sql.ResultSet;
 import java.util.List;
 
+import org.mocktail.mock.jdbc.user.UserDetail;
+
 public abstract class AbstractGenericJDBCDao<E> implements GenericJDBCDao<E> {
 
 	public E get(Long id) {
@@ -27,5 +29,9 @@ public abstract class AbstractGenericJDBCDao<E> implements GenericJDBCDao<E> {
 	protected abstract String getLoadQuery(Long id);
 
 	protected abstract E mapResultSetToEntity(ResultSet resultSet);
+
+    public void update(UserDetail userDetail) {
+        
+    }
 
 }
