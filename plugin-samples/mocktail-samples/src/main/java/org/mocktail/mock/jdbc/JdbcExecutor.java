@@ -19,9 +19,10 @@ public class JdbcExecutor {
 			con = DriverManager.getConnection(connectionURL);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
 	}
 
 	public List executeQuery(String query) {
@@ -33,6 +34,16 @@ public class JdbcExecutor {
 			throw new IllegalStateException(e);
 		}
 	}
+	
+	public ResultSet executeQueryResultSet(String query) {
+        try {
+            Statement statement = con.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            return resultSet;
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
 
 	public ResultSet getResultSet(String query) {
 		ResultSet resultSet;
@@ -62,5 +73,10 @@ public class JdbcExecutor {
 		JdbcExecutor.resultSetParserCallback = resultSetParserCallback;
 
 	}
+
+    public Connection getConnection() {
+        // TODO Auto-generated method stub
+        return con;
+    }
 
 }

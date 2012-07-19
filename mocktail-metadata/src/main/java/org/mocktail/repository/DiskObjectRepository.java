@@ -54,7 +54,7 @@ public class DiskObjectRepository implements ObjectRepository {
 
     public Object getObject(String objectId, String location) {
 
-        ObjectInputStream is;
+        ObjectInputStream is = null;
         try {
             is = new ObjectInputStream(new FileInputStream(new File(location,
                     objectId)));
@@ -68,6 +68,14 @@ public class DiskObjectRepository implements ObjectRepository {
         } catch (ClassNotFoundException e) {
             // TODO Auto-generated catch block
             // e.printStackTrace();
+        } finally{
+            if(is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return null;
     }

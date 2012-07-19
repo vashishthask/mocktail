@@ -10,17 +10,11 @@
 		<methods></methods>
 	</mocktail>
 	<mocktail>
-		<className>JdbcExecutor</className>
-		<classPackageName>org.mocktail.mock.jdbc</classPackageName>
-		<methods>
-			<string>executeQuery</string>
-		</methods>
-	</mocktail>
-	<mocktail>
 		<className>UserDao</className>
 		<classPackageName>org.mocktail.mock.jdbc.user</classPackageName>
 		<methods>
 			<string>get</string>
+            <string>save</string>
 		</methods>
 	</mocktail>
 </mocktails>

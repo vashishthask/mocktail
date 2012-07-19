@@ -1,5 +1,7 @@
 package org.mocktail.mock.jdbc.user;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,7 +22,7 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
 		UserDetail userDetail = new UserDetail();
 		try {
 			resultSet.next();
-			userDetail.setId(resultSet.getLong(1));
+			userDetail.setId(resultSet.getInt(1));
 			userDetail.setAge(resultSet.getInt(2));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -34,7 +36,19 @@ public class UserDao extends AbstractGenericJDBCDao<UserDetail> {
     }
 
     @Override
-    public void save(UserDetail e) {
+    public void save(UserDetail userDetail) {
         JdbcExecutor jdbcExecutor = new JdbcExecutor();
+        Connection connection = jdbcExecutor.getConnection();
+        String insertStatement = "insert into userdetail values(?,?)";
+        try {
+            PreparedStatement statement = connection.prepareStatement(insertStatement);
+            statement.setInt(1, userDetail.getId());
+            statement.setInt(2, userDetail.getAge());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 }
