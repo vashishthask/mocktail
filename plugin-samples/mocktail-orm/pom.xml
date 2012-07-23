@@ -10,4 +10,24 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Mocktail ORM</name>
   <description>This is a sample project to showcase to show how to use mocktail with ORM</description>
+  
+  <dependencies>
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+		</dependency>
+	</dependencies>
+	
 </project>
