@@ -16,5 +16,6 @@
   </properties>
   <modules>
     <module>mocktail-samples</module>
+    <module>mocktail-orm</module>
   </modules>
 </project>
