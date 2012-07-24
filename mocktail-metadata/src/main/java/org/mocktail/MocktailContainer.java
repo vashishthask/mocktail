@@ -13,6 +13,7 @@ public class MocktailContainer {
     private ObjectRepository objectRepository;
     private UniqueIdGenerator uniqueIdGenerator;
     private String recordingDirectory;
+    private MethodMocktail methodMocktail;
     
     private static MocktailContainer mocktailContainer = new MocktailContainer();
 
@@ -57,5 +58,17 @@ public class MocktailContainer {
     public void clean(){
         this.recordingDirectory = null;
         this.init();
+    }
+
+    public void setMethodMocktail(MethodMocktail methodMocktail) {
+        this.methodMocktail = methodMocktail;
+    }
+    
+    public void resetMethodMocktail() {
+        methodMocktail = null;
+    }
+    
+    public MethodMocktail getMethodMocktail() {
+        return methodMocktail;
     }
 }

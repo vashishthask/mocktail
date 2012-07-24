@@ -1,7 +1,7 @@
-<testsuite tests='5' results='5' failures='0' disabled='0' errors='0' time='0.402' name='behavior.JdbcMocktail'>
+<testsuite tests='5' results='5' failures='0' disabled='0' errors='0' time='0.414' name='behavior.JdbcMocktail'>
   <testcase classname='behavior.JdbcMocktail' name='Verify recording for search query' time='0.011' />
   <testcase classname='behavior.JdbcMocktail' name='Insert the record in database' time='0.002' />
-  <testcase classname='behavior.JdbcMocktail' name='Update the record in database' time='0.001' />
+  <testcase classname='behavior.JdbcMocktail' name='Update the record in database' time='0.002' />
   <testcase classname='behavior.JdbcMocktail' name='delete the record in database' time='0.002' />
-  <testcase classname='behavior.JdbcMocktail' name='database schema changes which should break the tests' time='0.003' />
+  <testcase classname='behavior.JdbcMocktail' name='database schema changes which should break the tests' time='0.002' />
 </testsuite>
