@@ -34,30 +34,17 @@ public aspect RecorderAspect$className {
 			Object objectToBeRecorded = null;
 			
 			if(methodMocktail != null){
-			    methodMocktail.setRecordingBasePath(recordingBasePath);
-			    //String methodMocktailPath = methodMocktail.getRecordingDirectoryPath();
 			    String methodMocktailPath = recordingBasePath + fileSeparator + methodMocktail.getFqcn().replaceAll("\\.", fileSeparator) + fileSeparator+methodMocktail.getMethodName();
-			    System.out.println(methodMocktailPath);
-			    
-			    //File methodMocktailFile = new File(methodMocktailPath);
-			    //if (!methodMocktailFile.exists()) {
-				  //  methodMocktailFile.mkdirs();
-			    //}
-			    
-			    System.out.println("test1");
-			    
+
 			    if(objectRepository.objectAlreadyExist(recordingFileName,
 			    		methodMocktailPath)){
 			        System.out.println("MethodMocktail - object already exists so not saving it:"+recordingFileName+":"+methodMocktailPath);
 			        objectToBeRecorded = objectRepository.getObject(recordingFileName, methodMocktailPath);
 			    } else {
 				    // Ask Recorder to save the recording file
-				    System.out.println("test2");
 				    System.out.println("MethodMocktail - Recording not already in place so doing the recording:"+recordingFileName+":"+methodMocktailPath);
 				    
-				    System.out.println("test3");
 				    File methodMocktailFile = new File(methodMocktailPath);
-				    System.out.println("test4");
 			        if (!methodMocktailFile.exists()) {
 				        methodMocktailFile.mkdirs();
 			        }

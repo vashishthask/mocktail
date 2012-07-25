@@ -8,15 +8,16 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.hsqldb.jdbcDriver;
-import org.mocktail.mock.jdbc.GenericJDBCDao;
+import org.mocktail.mock.jdbc.GenericDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 
-public class UserDao implements GenericJDBCDao<UserDetail> {
+public class UserDao implements GenericDao<UserDetail> {
     
     private static final String GET_OBJECT_QUERY = "select id, age from userdetail where id = ?";
+    private static final String GET_ALL_OBJECTS_QUERY = "select id, age from userdetail";
     
     private JdbcTemplate jdbcTemplate;
     
@@ -27,16 +28,8 @@ public class UserDao implements GenericJDBCDao<UserDetail> {
     }
     
     public UserDetail get(Long id) {
-       return jdbcTemplate.queryForObject(GET_OBJECT_QUERY, new Object[] {id}, new RowMapper<UserDetail>(){
-
-        public UserDetail mapRow(ResultSet rs, int rowNum) throws SQLException {
-            UserDetail userDetail = new UserDetail();
-            userDetail.setId(rs.getInt(1));
-            userDetail.setAge(rs.getInt(2));
-            return userDetail;
-        }
-           
-       });
+        UserDetailRowMapper rowMapper = new UserDetailRowMapper();
+        return jdbcTemplate.queryForObject(GET_OBJECT_QUERY, new Object[] {id}, rowMapper);
     }
     
     public int save(UserDetail userDetail) {
@@ -52,11 +45,27 @@ public class UserDao implements GenericJDBCDao<UserDetail> {
         return jdbcTemplate.update("update userdetail set age=? where id=?", new Object[]{new Integer(userDetail.getAge()), new Integer(userDetail.getId())});
     }
 
-    public List<UserDetail> find(String query) {
-        return null;
+    public List<UserDetail> getAll() {
+        UserDetailRowMapper rowMapper = new UserDetailRowMapper();
+        return jdbcTemplate.query(GET_ALL_OBJECTS_QUERY, rowMapper);
     }
 
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;   
+    }
+    
+    private class UserDetailRowMapper implements RowMapper<UserDetail>{
+
+        public UserDetail mapRow(ResultSet rs, int rowNum) throws SQLException {
+            UserDetail userDetail = new UserDetail();
+            userDetail.setId(rs.getInt(1));
+            userDetail.setAge(rs.getInt(2));
+            return userDetail;
+        }
+        
+    }
+
+    public List<UserDetail> find(String query) {
+        return null;
     }
 }
