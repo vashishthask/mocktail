@@ -8,3 +8,4 @@
 plugin-samples/samplejarapp/target
 plugin-samples/sampleapp/target
 plugin-samples/mocktail-jdbc/target
+sandbox/AspectPoc/target
