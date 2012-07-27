@@ -1,5 +1,8 @@
 package org.mocktail;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mocktail.repository.DiskObjectRepository;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.HashCodeIdGenerator;
@@ -13,6 +16,9 @@ public class MocktailContainer {
     private ObjectRepository objectRepository;
     private UniqueIdGenerator uniqueIdGenerator;
     private String recordingDirectory;
+    private MethodMocktail methodMocktail;
+    private Map<String, Integer> methodCallsMap = new HashMap<String, Integer>();
+    
     
     private static MocktailContainer mocktailContainer = new MocktailContainer();
 
@@ -57,5 +63,17 @@ public class MocktailContainer {
     public void clean(){
         this.recordingDirectory = null;
         this.init();
+    }
+
+    public void setMethodMocktail(MethodMocktail methodMocktail) {
+        this.methodMocktail = methodMocktail;
+    }
+    
+    public void resetMethodMocktail() {
+        methodMocktail = null;
+    }
+    
+    public MethodMocktail getMethodMocktail() {
+        return methodMocktail;
     }
 }
