@@ -15,11 +15,6 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-<<<<<<< HEAD
-    <module>mocktail-samples</module>
-    <module>mocktail-orm</module>
-=======
     <module>mocktail-jdbc</module>
->>>>>>> 50612cbcef6fc216df28590a227ac48af9a77c5f
   </modules>
 </project>
