@@ -1,21 +1,37 @@
 package org.mocktail;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
 
 public class UserDetailService {
 
-	private SessionFactory sessionFactory;
+	private EntityManagerFactory emf;
 
 	public UserDetailService() {
-		sessionFactory = new AnnotationConfiguration().configure(
-				"SessionFactoryConfig.cfg.xml").buildSessionFactory();
+		emf = Persistence.createEntityManagerFactory("mocktail-orm");
 	}
 	
 	public UserDetail getUserDetail() {
-		Session session = sessionFactory.getCurrentSession();
-		UserDetail userDetail = (UserDetail) session.get(UserDetail.class, 1L);
+		EntityManager newEm = emf.createEntityManager();
+		EntityTransaction newTx = newEm.getTransaction();
+		newTx.begin();
+
+		UserDetail userDetail = newEm.find(UserDetail.class, 1L);
+		newTx.commit();
 		return userDetail;
+	}
+
+	public void saveUserDetail(UserDetail userDetail) {
+		EntityManager newEm = emf.createEntityManager();
+		EntityTransaction newTx = newEm.getTransaction();
+		newTx.begin();
+		
+		newEm.persist(userDetail);
+		newTx.commit();
+		
 	}
 }
