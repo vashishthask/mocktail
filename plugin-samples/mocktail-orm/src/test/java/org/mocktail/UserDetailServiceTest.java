@@ -5,16 +5,16 @@ import org.junit.Test;
 
 public class UserDetailServiceTest {
 
-	private UserDetailService userDetailService;
+    private UserDetailService userDetailService;
 
-	@Before
-	public void setup() {
-		userDetailService = new UserDetailService();
-	}
+    @Before
+    public void setup() {
+        userDetailService = new UserDetailService();
+    }
 
-	@Test
-	public void shouldSaveUserDetail() {
-		userDetailService.saveUserDetail(new UserDetail("user"));
-	}
+    @Test
+    public void shouldSaveUserDetail() {
+        userDetailService.saveUserDetail(new UserDetail("user"));
+    }
 
 }

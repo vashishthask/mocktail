@@ -8,31 +8,32 @@ import javax.persistence.Id;
 @Entity
 public class UserDetail {
 
-	@Id @GeneratedValue @Column(name = "MESSAGE_ID")
-	private Long id;
+    @Id
+    @GeneratedValue
+    @Column(name = "MESSAGE_ID")
+    private Long id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	public UserDetail(String name) {
-		this.name = name;
-	}
+    public UserDetail(String name) {
+        this.name = name;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getText() {
-		return name;
-	}
+    public String getText() {
+        return name;
+    }
 
-	public void setText(String name) {
-		this.name = name;
-	}
+    public void setText(String name) {
+        this.name = name;
+    }
 
-	
 }
