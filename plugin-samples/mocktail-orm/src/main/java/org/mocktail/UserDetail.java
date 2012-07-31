@@ -14,8 +14,7 @@ public class UserDetail {
 	@Column
 	private String name;
 
-	public UserDetail(long id, String name) {
-		this.id = id;
+	public UserDetail(String name) {
 		this.name = name;
 	}
 
