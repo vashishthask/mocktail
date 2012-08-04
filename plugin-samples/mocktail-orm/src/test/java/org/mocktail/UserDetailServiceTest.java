@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -37,6 +38,17 @@ public class UserDetailServiceTest  extends AbstractDbUnitTest{
 		assertSame(1L, userDetail.getId());
 		assertEquals("Got " + userDetail.getName(), "user1", userDetail.getName());
 	}
+	
+	@Test
+	public void shouldGetAllUsers() throws Exception {
+		List<UserDetail> users = userDetailService.getAllUsers();
+		
+		assertNotNull(users);
+		assertEquals(3, users.size());
+		assertEquals("user1", users.get(0).getName());
+	}
+	
+	
 	@Override
 	protected Connection getSqlConnection() throws SQLException {
 		Session session = (Session)emf.createEntityManager().getDelegate();

@@ -1,5 +1,7 @@
 package org.mocktail;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -31,6 +33,16 @@ public class UserDetailService{
 		newEm.persist(userDetail);
 		newTx.commit();
 		
+	}
+
+	public List<UserDetail> getAllUsers() {
+		EntityManager newEm = emf.createEntityManager();
+		EntityTransaction newTx = newEm.getTransaction();
+		newTx.begin();
+		
+		List users = newEm.createQuery("from UserDetail").getResultList();
+		newTx.commit();
+		return users;
 	}
 
 	
