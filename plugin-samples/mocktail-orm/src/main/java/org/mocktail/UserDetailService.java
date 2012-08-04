@@ -5,9 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-import org.hibernate.Session;
-
-public class UserDetailService {
+public class UserDetailService{
 
 	private EntityManagerFactory emf;
 
@@ -34,4 +32,6 @@ public class UserDetailService {
 		newTx.commit();
 		
 	}
+
+	
 }

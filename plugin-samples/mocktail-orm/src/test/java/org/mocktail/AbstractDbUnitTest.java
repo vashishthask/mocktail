@@ -11,7 +11,6 @@ import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
-import org.springframework.jdbc.CannotGetJdbcConnectionException;
 
 public abstract class AbstractDbUnitTest {
 
@@ -31,7 +30,7 @@ public abstract class AbstractDbUnitTest {
 	}
 
 	private IDatabaseConnection getConnection()
-			throws CannotGetJdbcConnectionException, SQLException {
+			throws SQLException {
 		Connection con = getSqlConnection();
 		IDatabaseConnection dbUnitCon = new DatabaseConnection(con);
 		return dbUnitCon;
