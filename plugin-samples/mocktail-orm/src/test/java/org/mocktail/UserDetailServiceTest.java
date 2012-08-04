@@ -25,10 +25,10 @@ public class UserDetailServiceTest  extends AbstractDbUnitTest{
 		super.init();
 	}
 
-	@Test
-	public void shouldSaveUserDetail() {
-		userDetailService.saveUserDetail(new UserDetail("user"));
-	}
+    @Test
+    public void shouldSaveUserDetail() {
+        userDetailService.saveUserDetail(new UserDetail("user"));
+    }
 
 	@Test
 	public void shouldGetUserDetail() throws Exception {
