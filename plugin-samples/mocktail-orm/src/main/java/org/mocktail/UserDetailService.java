@@ -13,12 +13,12 @@ public class UserDetailService{
 		emf = Persistence.createEntityManagerFactory("mocktail-orm");
 	}
 	
-	public UserDetail getUserDetail() {
+	public UserDetail getUserDetail(Long userId) {
 		EntityManager newEm = emf.createEntityManager();
 		EntityTransaction newTx = newEm.getTransaction();
 		newTx.begin();
 
-		UserDetail userDetail = newEm.find(UserDetail.class, 1L);
+		UserDetail userDetail = newEm.find(UserDetail.class, userId);
 		newTx.commit();
 		return userDetail;
 	}

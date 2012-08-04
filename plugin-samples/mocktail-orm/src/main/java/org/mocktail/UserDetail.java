@@ -8,12 +8,16 @@ import javax.persistence.Id;
 @Entity
 public class UserDetail {
 
+	
 	@Id @GeneratedValue @Column(name = "MESSAGE_ID")
 	private Long id;
 
 	@Column
 	private String name;
 
+	public UserDetail() {
+	}
+	
 	public UserDetail(String name) {
 		this.name = name;
 	}
@@ -26,13 +30,14 @@ public class UserDetail {
 		this.id = id;
 	}
 
-	public String getText() {
+	public String getName() {
 		return name;
 	}
 
-	public void setText(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	
 }
