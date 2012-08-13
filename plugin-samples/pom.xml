@@ -16,5 +16,6 @@
   </properties>
   <modules>
     <module>mocktail-jdbc</module>
+    <module>mocktail-orm</module>
   </modules>
 </project>
