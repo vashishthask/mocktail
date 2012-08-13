@@ -2,6 +2,7 @@ package org.mocktail;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.Persistence;
 import org.hibernate.Session;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.util.ReflectionUtils;
 
 public class UserDetailServiceTest  extends AbstractDbUnitTest{
 
@@ -52,8 +54,19 @@ public class UserDetailServiceTest  extends AbstractDbUnitTest{
 	@Override
 	protected Connection getSqlConnection() throws SQLException {
 		Session session = (Session)emf.createEntityManager().getDelegate();
-		Connection conn = session.connection();
-		return conn;
+		
+//		Connection conn = session.connection();
+//		return conn;
+		
+		try {
+                // reflective lookup to bridge between Hibernate 3.x and 4.x
+                Method connectionMethod = session.getClass().getMethod("connection");
+            return (Connection) ReflectionUtils.invokeMethod(connectionMethod, session);
+        }
+        catch (NoSuchMethodException ex) {
+            throw new IllegalStateException("Cannot find connection() method on Hibernate session", ex);
+        }
+
 	}
 
 	@Override
