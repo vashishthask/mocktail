@@ -18,7 +18,8 @@ import org.mocktail.xml.reader.XStreamMocktailXmlReader;
  * Goal which touches a timestamp file.
  * 
  * @goal mocktail
- * 
+ * @execute phase="validate"
+ * @execute goal="mocktail"
  * @phase validate
  */
 public class MocktailMojo extends AjcCompileMojo {
