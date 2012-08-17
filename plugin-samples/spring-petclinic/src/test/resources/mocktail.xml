@@ -1,0 +1,9 @@
+<mocktails>
+	<mocktail>
+		<className>Clinic</className>
+		<classPackageName>org.springframework.samples.petclinic</classPackageName>
+		<methods>
+			<string>getVets</string>
+		</methods>
+	</mocktail>
+</mocktails>

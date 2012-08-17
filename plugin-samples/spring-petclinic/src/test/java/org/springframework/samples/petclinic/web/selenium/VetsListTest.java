@@ -25,7 +25,7 @@ public class VetsListTest {
 	}
 
 	@Test
-	public void testUntitled() throws Exception {
+	public void verifyHenryVet() throws Exception {
 		driver.get(baseUrl + "/petclinic/vets");
 		assertEquals(
 				"Henry Stevens",
