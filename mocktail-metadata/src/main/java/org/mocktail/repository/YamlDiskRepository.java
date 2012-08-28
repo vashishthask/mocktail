@@ -6,35 +6,38 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
-public class DiskObjectRepository implements ObjectRepository {
+import org.yaml.snakeyaml.Yaml;
 
+public class YamlDiskRepository implements ObjectRepository {
+
+    @Override
     public void saveObject(Object objectToBeSerialized,
             OutputStream outputStream) throws IOException {
+        Yaml yaml = new Yaml();
+        String yamlStr = yaml.dump(objectToBeSerialized);
         ObjectOutputStream os = new ObjectOutputStream(outputStream);
-        os.writeObject(objectToBeSerialized);
+        os.writeObject(yamlStr);
     }
 
+    @Override
     public Object getObject(InputStream inputStream) throws IOException,
             ClassNotFoundException {
-        ObjectInputStream is = new ObjectInputStream(inputStream);
-        return is.readObject();
+        Yaml yaml = new Yaml();
+        return yaml.load(inputStream);
     }
 
-    public boolean objectAlreadyExist(String objectId, String location) {
-        File objectFile = new File(location, objectId);
-        return objectFile.exists();
-    }
-
+    @Override
     public void saveObject(Object object, String objectId, String location) {
         ObjectOutputStream objectOutputStream = null;
         try {
+            Yaml yaml = new Yaml();
+            String yamlStr = yaml.dump(object);
             objectOutputStream = new ObjectOutputStream(new FileOutputStream(
                     new File(location, objectId)));
-            objectOutputStream.writeObject(object);
+            objectOutputStream.writeObject(yamlStr);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -47,31 +50,24 @@ public class DiskObjectRepository implements ObjectRepository {
                     e.printStackTrace();
                 }
         }
+
     }
 
+    @Override
     public Object getObject(String objectId, String location) {
-
-        ObjectInputStream is = null;
         try {
-            is = new ObjectInputStream(new FileInputStream(new File(location,
-                    objectId)));
-            return is.readObject();
+            FileInputStream yamlInputStream = new FileInputStream(new File(location,
+                    objectId));
+            return new Yaml().load(yamlInputStream);
         } catch (FileNotFoundException e) {
              e.printStackTrace();
-        } catch (IOException e) {
-             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-             e.printStackTrace();
-        } finally{
-            if(is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        } 
         return null;
     }
 
+    @Override
+    public boolean objectAlreadyExist(String objectId, String location) {
+        File objectFile = new File(location, objectId);
+        return objectFile.exists();
+    }
 }
