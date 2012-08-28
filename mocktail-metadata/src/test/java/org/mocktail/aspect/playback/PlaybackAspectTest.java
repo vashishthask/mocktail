@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import junit.framework.AssertionFailedError;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mocktail.MocktailContainer;
 import org.springframework.beans.DirectFieldAccessor;
@@ -24,6 +25,7 @@ public class PlaybackAspectTest {
     }
 
     @Test
+    @Ignore
     public void testPlaybackForRecordings() throws Exception {
         playbackAspect = new PlaybackAspect();
         playbackAspect.fqcn = "org.mocktail.aspect.recorder";

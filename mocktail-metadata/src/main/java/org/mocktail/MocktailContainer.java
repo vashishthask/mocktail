@@ -1,23 +1,22 @@
 package org.mocktail;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.mocktail.repository.DiskObjectRepository;
 import org.mocktail.repository.ObjectRepository;
 import org.mocktail.util.HashCodeIdGenerator;
 import org.mocktail.util.UniqueIdGenerator;
 import org.mocktail.xml.reader.MocktailXmlReader;
 import org.mocktail.xml.reader.XStreamMocktailXmlReader;
+import org.w3c.dom.Document;
+
+import com.svashishtha.dom.DomEditor;
+import com.svashishtha.dom.DomParser;
 
 public class MocktailContainer {
 
     private XStreamMocktailXmlReader mocktailXmlReader;
-    private ObjectRepository objectRepository;
     private UniqueIdGenerator uniqueIdGenerator;
     private String recordingDirectory;
     private MethodMocktail methodMocktail;
-    private Map<String, Integer> methodCallsMap = new HashMap<String, Integer>();
+    private ObjectRepository objectRepository;
     
     
     private static MocktailContainer mocktailContainer = new MocktailContainer();
@@ -28,8 +27,8 @@ public class MocktailContainer {
 
     private void init() {
         mocktailXmlReader = new XStreamMocktailXmlReader();
-        objectRepository = new DiskObjectRepository();
         uniqueIdGenerator = new HashCodeIdGenerator();
+        objectRepository = ObjectRepositoryFactory.create("yaml");
     }
     
     public static MocktailContainer getInstance(){

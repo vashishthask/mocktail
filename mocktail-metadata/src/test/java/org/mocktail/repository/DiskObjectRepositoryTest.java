@@ -18,14 +18,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.internal.verification.Times;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.mocktail.MocktailContainer;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ObjectRepositoryTest {
+public class DiskObjectRepositoryTest {
 
     @Mock
     OutputStream outputStream;
-    ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+    ObjectRepository objectRepository = new DiskObjectRepository();
 
     @SuppressWarnings("unchecked")
     @Test

@@ -1,9 +1,5 @@
 package org.mocktail.repository;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -11,67 +7,28 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
 public class DiskObjectRepository implements ObjectRepository {
+    private ObjectFileOperations fileOperations = new ObjectFileOperations();
 
     public void saveObject(Object objectToBeSerialized,
             OutputStream outputStream) throws IOException {
-        ObjectOutputStream os = new ObjectOutputStream(outputStream);
-        os.writeObject(objectToBeSerialized);
+        new ObjectOutputStream(outputStream).writeObject(objectToBeSerialized);
     }
 
     public Object getObject(InputStream inputStream) throws IOException,
             ClassNotFoundException {
-        ObjectInputStream is = new ObjectInputStream(inputStream);
-        return is.readObject();
+        return new ObjectInputStream(inputStream).readObject();
     }
 
     public boolean objectAlreadyExist(String objectId, String location) {
-        File objectFile = new File(location, objectId);
-        return objectFile.exists();
+        return fileOperations.fileAlreadyExists(objectId, location);
     }
 
     public void saveObject(Object object, String objectId, String location) {
-        ObjectOutputStream objectOutputStream = null;
-        try {
-            objectOutputStream = new ObjectOutputStream(new FileOutputStream(
-                    new File(location, objectId)));
-            objectOutputStream.writeObject(object);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != objectOutputStream)
-                try {
-                    objectOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-        }
+        fileOperations.saveObjectInFile(object, objectId, location);
     }
 
     public Object getObject(String objectId, String location) {
-
-        ObjectInputStream is = null;
-        try {
-            is = new ObjectInputStream(new FileInputStream(new File(location,
-                    objectId)));
-            return is.readObject();
-        } catch (FileNotFoundException e) {
-             e.printStackTrace();
-        } catch (IOException e) {
-             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-             e.printStackTrace();
-        } finally{
-            if(is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
+        return fileOperations.getObjectFromFile(objectId, location);
     }
 
 }
