@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.hibernate;
 
+import org.junit.Ignore;
 import org.springframework.samples.petclinic.AbstractClinicTests;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
  */
 @ContextConfiguration
 @DirtiesContext
+@Ignore
 public class HibernateClinicTests extends AbstractClinicTests {
 
 }

@@ -1,0 +1,11 @@
+Failed tests:   getVets(org.springframework.samples.petclinic.jdbc.SimpleJdbcClinicTests): expected:<1> but was:<0>
+  testUsageLogAspectIsInvoked(org.springframework.samples.petclinic.jpa.EntityManagerClinicTests)
+    testGetVets(org.springframework.samples.petclinic.jpa.EntityManagerClinicTests): expected:<1> but was:<0>
+      testUsageLogAspectIsInvoked(org.springframework.samples.petclinic.jpa.HibernateEntityManagerClinicTests)
+        testGetVets(org.springframework.samples.petclinic.jpa.HibernateEntityManagerClinicTests): expected:<1> but was:<0>
+          testUsageLogAspectIsInvoked(org.springframework.samples.petclinic.jpa.OpenJpaEntityManagerClinicTests)
+            testGetVets(org.springframework.samples.petclinic.jpa.OpenJpaEntityManagerClinicTests): expected:<1> but was:<0>
+[ERROR] /Users/shrikant/code/github/mocktail/plugin-samples/spring-petclinic/src/test/java/org/springframework/samples/petclinic/jpa/HibernateEntityManagerClinicTests.java:18:0::0 The method getConfigPaths() of type HibernateEntityManagerClinicTests must override or implement a supertype method
+[ERROR] error at protected String[] getConfigPaths() {
+    [ERROR] ^^^^^^^^^^^^^^
+    [ERROR] /Users/shrikant/code/github/mocktail/plugin-samples/spring-petclinic/src/test/java/org/springframework/samples/petclinic/jpa/OpenJpaEntityManagerClinicTests.java:19:0::0 The method getConfigPaths() of type OpenJpaEntityManagerClinicTests must override or implement a supertype method

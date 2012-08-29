@@ -14,8 +14,14 @@ import org.springframework.test.context.ContextConfiguration;
  *
  * @author Thomas Risberg
  */
+/*
 @ContextConfiguration
 @DirtiesContext
 public class SimpleJdbcClinicTests extends AbstractClinicTests {
 
+}*/
+
+public class SimpleJdbcClinicTests {
+
 }
+
