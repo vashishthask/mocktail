@@ -1,11 +1,95 @@
-Failed tests:   getVets(org.springframework.samples.petclinic.jdbc.SimpleJdbcClinicTests): expected:<1> but was:<0>
-  testUsageLogAspectIsInvoked(org.springframework.samples.petclinic.jpa.EntityManagerClinicTests)
-    testGetVets(org.springframework.samples.petclinic.jpa.EntityManagerClinicTests): expected:<1> but was:<0>
-      testUsageLogAspectIsInvoked(org.springframework.samples.petclinic.jpa.HibernateEntityManagerClinicTests)
-        testGetVets(org.springframework.samples.petclinic.jpa.HibernateEntityManagerClinicTests): expected:<1> but was:<0>
-          testUsageLogAspectIsInvoked(org.springframework.samples.petclinic.jpa.OpenJpaEntityManagerClinicTests)
-            testGetVets(org.springframework.samples.petclinic.jpa.OpenJpaEntityManagerClinicTests): expected:<1> but was:<0>
-[ERROR] /Users/shrikant/code/github/mocktail/plugin-samples/spring-petclinic/src/test/java/org/springframework/samples/petclinic/jpa/HibernateEntityManagerClinicTests.java:18:0::0 The method getConfigPaths() of type HibernateEntityManagerClinicTests must override or implement a supertype method
-[ERROR] error at protected String[] getConfigPaths() {
-    [ERROR] ^^^^^^^^^^^^^^
-    [ERROR] /Users/shrikant/code/github/mocktail/plugin-samples/spring-petclinic/src/test/java/org/springframework/samples/petclinic/jpa/OpenJpaEntityManagerClinicTests.java:19:0::0 The method getConfigPaths() of type OpenJpaEntityManagerClinicTests must override or implement a supertype method
+<build>
+        <plugins>
+          <plugin>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>maven-jetty-plugin</artifactId>
+            <configuration>
+              <scanIntervalSeconds>5</scanIntervalSeconds>
+              <stopPort>9966</stopPort>
+              <stopKey>foo</stopKey>
+              <contextPath>/petclinic</contextPath> 
+              <connectors>
+                <connector
+                  implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                  <port>8080</port>
+                  <maxIdleTime>60000</maxIdleTime>
+                </connector>
+              </connectors>
+            </configuration>
+            <executions>
+              <execution>
+                <id>start-jetty</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+                <configuration>
+                  <daemon>true</daemon>
+                </configuration>
+              </execution>
+              <execution>
+                <id>stop-jetty</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>stop</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>selenium-maven-plugin</artifactId>
+            <version>2.3</version>
+            <executions>
+              <execution>
+                <id>start</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                  <goal>start-server</goal>
+                </goals>
+                <configuration>
+                  <background>true</background>
+                  <logOutput>true</logOutput>
+                  <multiWindow>true</multiWindow>
+                </configuration>
+              </execution>
+              <execution>
+                <id>stop</id>
+                <phase>post-integration-test</phase>
+                <goals>
+                  <goal>stop-server</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <excludes>
+                <exclude>**/selenium/*Test.java
+                </exclude>
+              </excludes>
+            </configuration>
+            <executions>
+              <execution>
+                <id>integration-tests</id>
+                <phase>integration-test</phase>
+                <goals>
+                  <goal>test</goal>
+                </goals>
+                <configuration>
+                  <skip>false</skip>
+                  <excludes>
+                    <exclude>none</exclude>
+                  </excludes>
+                  <includes>
+                    <include>**/selenium/*Test.java
+                    </include>
+                  </includes>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>

@@ -12,16 +12,15 @@ package org.springframework.samples.petclinic.jpa;
  *
  * @author Juergen Hoeller
  */
-//public class HibernateEntityManagerClinicTests extends EntityManagerClinicTests {
-    public class HibernateEntityManagerClinicTests {
+public class HibernateEntityManagerClinicTests extends EntityManagerClinicTests {
 
-	/*@Override
+	@Override
 	protected String[] getConfigPaths() {
 		return new String[] {
 			"applicationContext-jpaCommon.xml",
 			"applicationContext-hibernateAdapter.xml",
 			"applicationContext-entityManager.xml"
 		};
-	}*/
+	}
 
 }

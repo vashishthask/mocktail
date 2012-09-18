@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic.web.selenium;
+package org.springframework.samples.petclinic;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import static org.junit.Assert.*;
 
-public class VetsListTest {
+public class VetsListTests {
 
 	private WebDriver driver;
 	private String baseUrl;
@@ -19,13 +19,21 @@ public class VetsListTest {
 
 	@Before
 	public void setUp() throws Exception {
+                System.out.println("Before running before");
 		driver = new FirefoxDriver();
 		baseUrl = "http://localhost:8080";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                System.out.println("after running before");
 	}
 
 	@Test
-	public void verifyHenryVet() throws Exception {
+	public void testVerifyHenryVet() throws Exception {
+                System.out.println("Before running before");
+		driver = new FirefoxDriver();
+		baseUrl = "http://localhost:8080";
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                System.out.println("after running before");
+                System.out.println("Before running test");
 		driver.get(baseUrl + "/petclinic/vets");
 		assertEquals(
 				"Henry Stevens",
@@ -37,6 +45,8 @@ public class VetsListTest {
 				driver.findElement(
 						By.xpath("//div[@id='main']/table/tbody/tr[6]/td[2]"))
 						.getText());
+               
+                System.out.println("after running test");
 	}
 
 	@After
