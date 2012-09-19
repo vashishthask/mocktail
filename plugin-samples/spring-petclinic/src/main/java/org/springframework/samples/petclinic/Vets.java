@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Arjen Poutsma
  */
 @XmlRootElement
-public class Vets {
+public class Vets implements java.io.Serializable{
 
 	private List<Vet> vets;
 

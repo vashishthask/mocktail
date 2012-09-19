@@ -1,7 +1,7 @@
 <mocktails>
 	<mocktail>
 		<className>Clinic</className>
-		<classPackageName>org.springframework.samples.petclinic</classPackageName>
+		<classPackageName>org.springframework.samples.petclinic.jdbc</classPackageName>
 		<methods>
 			<string>getVets</string>
 		</methods>

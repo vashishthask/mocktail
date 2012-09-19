@@ -57,6 +57,8 @@
 
 	<!-- PetClinic's central data access object using Spring's SimpleJdbcTemplate -->
 	<bean id="clinic" class="org.springframework.samples.petclinic.jdbc.SimpleJdbcClinic"/>
+  
+  <bean class="org.springframework.samples.petclinic.jdbc.RecorderAspectClinic" factory-method="aspectOf"/>
 
 	<!-- Call monitoring aspect that monitors call count and call invocation time -->
 	<bean id="callMonitor" class="org.springframework.samples.petclinic.aspects.CallMonitoringAspect"/>

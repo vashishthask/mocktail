@@ -5,6 +5,6 @@ package org.springframework.samples.petclinic;
  * 
  * @author Juergen Hoeller
  */
-public class Specialty extends NamedEntity {
+public class Specialty extends NamedEntity implements java.io.Serializable{
 
 }

@@ -18,7 +18,7 @@ import org.springframework.beans.support.PropertyComparator;
  * @author Sam Brannen
  * @author Arjen Poutsma
  */
-public class Vet extends Person {
+public class Vet extends Person implements java.io.Serializable{
 
 	private Set<Specialty> specialties;
 
