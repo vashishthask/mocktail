@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic;
+package org.springframework.samples.petclinic.web.selenium;
 
 import java.util.concurrent.TimeUnit;
 

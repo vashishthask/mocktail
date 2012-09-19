@@ -1,4 +1,4 @@
-package org.springframework.samples.petclinic;
+package org.springframework.samples.petclinic.web.selenium;
 
 import java.util.concurrent.TimeUnit;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import static org.junit.Assert.*;
 
-public class VetsListTests {
+public class VetsListTest {
 
 	private WebDriver driver;
 	private String baseUrl;
@@ -19,7 +19,6 @@ public class VetsListTests {
 
 	@Before
 	public void setUp() throws Exception {
-                System.out.println("Before running before");
 		driver = new FirefoxDriver();
 		baseUrl = "http://localhost:8080";
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -28,25 +27,18 @@ public class VetsListTests {
 
 	@Test
 	public void testVerifyHenryVet() throws Exception {
-                System.out.println("Before running before");
-		driver = new FirefoxDriver();
-		baseUrl = "http://localhost:8080";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-                System.out.println("after running before");
-                System.out.println("Before running test");
 		driver.get(baseUrl + "/petclinic/vets");
-		assertEquals(
+		String name = driver.findElement(
+        		By.xpath("//div[@id='main']/table/tbody/tr[6]/td"))
+        		.getText();
+        assertEquals(
 				"Henry Stevens",
-				driver.findElement(
-						By.xpath("//div[@id='main']/table/tbody/tr[6]/td"))
-						.getText());
+				name);
 		assertEquals(
 				"radiology",
 				driver.findElement(
 						By.xpath("//div[@id='main']/table/tbody/tr[6]/td[2]"))
 						.getText());
-               
-                System.out.println("after running test");
 	}
 
 	@After
