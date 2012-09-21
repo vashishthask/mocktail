@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -28,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Arjen Poutsma
  */
 @XmlRootElement
-public class Vets implements java.io.Serializable{
+public class Vets {
 
 	private List<Vet> vets;
 

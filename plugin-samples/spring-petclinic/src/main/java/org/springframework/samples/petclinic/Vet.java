@@ -51,18 +51,4 @@ public class Vet extends Person {
     public void addSpecialty(Specialty specialty) {
         getSpecialtiesInternal().add(specialty);
     }
-
-    @Override
-    public String toString(){
-        // TODO Auto-generated method stub
-        return ToStringBuilder.reflectionToString(this);
-    }
-    
-    public void setSpecialties(Set<Specialty> specialities){
-        this.specialties = specialities;
-    }
-    
-    public Set<Specialty> getSpecialities(){
-        return specialties;
-    }
 }

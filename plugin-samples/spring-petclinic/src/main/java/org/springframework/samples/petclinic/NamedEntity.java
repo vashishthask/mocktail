@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic;
 
-import java.io.Serializable;
 
 /**
  * Simple JavaBean domain object adds a name property to <code>BaseEntity</code>.
@@ -9,7 +8,7 @@ import java.io.Serializable;
  * @author Ken Krebs
  * @author Juergen Hoeller
  */
-public class NamedEntity extends BaseEntity implements Serializable {
+public class NamedEntity extends BaseEntity {
 
 	private String name;
 	
