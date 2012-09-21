@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic;
 
+import java.io.Serializable;
+
 /**
  * Simple JavaBean domain object with an id property.
  * Used as a base class for objects needing this property.
@@ -7,7 +9,7 @@ package org.springframework.samples.petclinic;
  * @author Ken Krebs
  * @author Juergen Hoeller
  */
-public class BaseEntity {
+public class BaseEntity implements Serializable{
 
 	private Integer id;
 	

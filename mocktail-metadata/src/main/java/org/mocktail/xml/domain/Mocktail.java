@@ -3,11 +3,22 @@ package org.mocktail.xml.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class Mocktail {
 
     private String className;
     private String classPackageName = "";
     private List<String> methods;
+    private String targetImpl;
+
+    public String getTargetImpl() {
+        return targetImpl;
+    }
+
+    public void setTargetImpl(String targetImpl) {
+        this.targetImpl = targetImpl;
+    }
 
     public Mocktail() {
         methods = new ArrayList<String>();
@@ -16,6 +27,8 @@ public class Mocktail {
     public String getClassName() {
         return className;
     }
+    
+    
 
     public List<String> getMethods() {
         return methods;
@@ -51,8 +64,6 @@ public class Mocktail {
 
     @Override
     public String toString() {
-        return "Mocktail [className=" + className + ", classPackageName="
-                + classPackageName + ", methods=" + methods + "]";
+        return ToStringBuilder.reflectionToString(this);
     }
-
 }

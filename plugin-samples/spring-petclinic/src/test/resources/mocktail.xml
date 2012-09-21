@@ -1,9 +1,10 @@
 <mocktails>
-	<mocktail>
-		<className>Clinic</className>
-		<classPackageName>org.springframework.samples.petclinic.jdbc</classPackageName>
-		<methods>
-			<string>getVets</string>
-		</methods>
-	</mocktail>
+  <mocktail>
+    <className>Clinic</className>
+    <classPackageName>org.springframework.samples.petclinic</classPackageName>
+    <targetImpl>org.springframework.samples.petclinic.jdbc.SimpleJdbcClinic</targetImpl>
+    <methods>
+      <string>getVets</string>
+    </methods>
+  </mocktail>
 </mocktails>
