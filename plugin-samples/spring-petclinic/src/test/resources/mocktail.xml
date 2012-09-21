@@ -2,7 +2,15 @@
   <mocktail>
     <className>Clinic</className>
     <classPackageName>org.springframework.samples.petclinic</classPackageName>
-    <targetImpl>org.springframework.samples.petclinic.jdbc.SimpleJdbcClinic</targetImpl>
+    
+    <!-- for jdbc -->
+    <!--targetImpl>org.springframework.samples.petclinic.jdbc.SimpleJdbcClinic</targetImpl-->
+    
+    <!-- for hibernate -->
+    <targetImpl>org.springframework.samples.petclinic.hibernate.HibernateClinic</targetImpl>
+    
+    <!-- jpa -->
+    <!--targetImpl>org.springframework.samples.petclinic.jpa.EntityManagerClinic</targetImpl-->
     <methods>
       <string>getVets</string>
     </methods>
