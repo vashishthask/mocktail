@@ -9,8 +9,10 @@ package org.mocktail.xml.domain;
  */
 public enum MocktailMode {
 
-    PLAYBACK_MODE("playback", "Playback"), RECORDING_MODE("recording",
-            "Recorder");
+    PLAYBACK("playback", "Playback"), RECORDING("recording",
+            "Recorder"), RECORDING_NEW("recording_new",
+                    "Recorder");
+    
 
     private final String mode;
     private final String filePrefix;

@@ -31,4 +31,15 @@ public class DiskObjectRepository implements ObjectRepository {
         return fileOperations.getObjectFromFile(objectId, location);
     }
 
+	@Override
+	public boolean clearObjectIfAvailable(String objectId, String location) {
+		boolean objectAlreadyExist = objectAlreadyExist(objectId, location);
+		if(objectAlreadyExist){
+			return fileOperations.deleteObject(objectId, location);
+		}
+		return true;
+	}
+    
+    
+
 }

@@ -11,5 +11,7 @@ plugin-samples/mocktail-samples/target
 plugin-samples/mocktail-orm/target/
 plugin-samples/mocktail-jdbc/target
 plugin-samples/spring-petclinic/target
+plugin-samples/SimpleCxfClient/target
+plugin-samples/SimpleCxfServer/target
 sandbox/AspectPoc/target
 

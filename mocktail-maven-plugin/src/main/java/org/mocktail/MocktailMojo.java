@@ -75,7 +75,7 @@ public class MocktailMojo extends AjcCompileMojo {
     }
 
     private boolean isRecordingMode() {
-        return mode.equalsIgnoreCase(MocktailMode.RECORDING_MODE
+        return mode.equalsIgnoreCase(MocktailMode.RECORDING
                 .getModeDirectory());
     }
 

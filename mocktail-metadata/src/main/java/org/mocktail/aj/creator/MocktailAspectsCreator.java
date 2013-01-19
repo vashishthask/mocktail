@@ -11,13 +11,13 @@ public class MocktailAspectsCreator {
     
     public void createRecordingAspects(List<Mocktail> mocktails,
             File aspectsDirectory) {
-        createAspects(mocktails, aspectsDirectory, MocktailMode.RECORDING_MODE);
+        createAspects(mocktails, aspectsDirectory, MocktailMode.RECORDING);
         
     }
 
     public void createPlaybackAspects(List<Mocktail> mocktails,
             File aspectsDirectory) {
-        createAspects(mocktails, aspectsDirectory, MocktailMode.PLAYBACK_MODE);
+        createAspects(mocktails, aspectsDirectory, MocktailMode.PLAYBACK);
         
     }
     

@@ -28,7 +28,7 @@ public class MocktailContainer {
     private void init() {
         mocktailXmlReader = new XStreamMocktailXmlReader();
         uniqueIdGenerator = new HashCodeIdGenerator();
-        objectRepository = ObjectRepositoryFactory.create();
+        objectRepository = ObjectRepositoryFactory.create("yaml");
     }
     
     public static MocktailContainer getInstance(){
