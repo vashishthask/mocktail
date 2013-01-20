@@ -17,5 +17,11 @@
   <modules>
     <module>mocktail-jdbc</module>
     <module>mocktail-orm</module>
+    <module>Axis2SimpleClient</module>
+    <module>Axis2SimpleService</module>
+    <module>SimpleCxfClient</module>
+    <module>SimpleCxfService</module>
+    <module>spring-ws</module>
+    <module>spring-petclinic</module>
   </modules>
 </project>
