@@ -17,6 +17,7 @@
 package org.apache.ws.commons.tcpmon;
 
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import org.mocktail.xml.domain.MocktailMode;
 
@@ -57,6 +58,8 @@ public class TCPMon {
 	 */
 	static final int DEFAULT_PORT = 8888;
 
+	private Listener l;
+
 	/**
 	 * Constructor
 	 * 
@@ -68,7 +71,6 @@ public class TCPMon {
 	public TCPMon(int listenPort, String targetHost, int targetPort, String className, String methodName, MocktailMode mocktailMode) {
 //		new AdminPane(getMessage("admin00", "Admin"));
 		if (listenPort != 0) {
-			Listener l = null;
 			if (targetHost == null) {
 				l = new Listener(listenPort, targetHost, targetPort, className, methodName,mocktailMode,  true);
 			} else {
@@ -110,6 +112,10 @@ public class TCPMon {
 	private static void initializeMessages() {
 		messages = ResourceBundle
 				.getBundle("org.apache.ws.commons.tcpmon.tcpmon");
+	}
+
+	public void halt() {
+		l.halt();
 	}
 
 }

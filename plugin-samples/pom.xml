@@ -19,8 +19,8 @@
     <module>mocktail-orm</module>
     <module>Axis2SimpleClient</module>
     <module>Axis2SimpleService</module>
-    <module>SimpleCxfClient</module>
-    <module>SimpleCxfService</module>
+    <module>CxfSimpleClient</module>
+    <module>CxfSimpleService</module>
     <module>spring-ws</module>
     <module>spring-petclinic</module>
   </modules>

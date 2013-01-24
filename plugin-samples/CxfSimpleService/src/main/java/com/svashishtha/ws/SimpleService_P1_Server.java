@@ -15,7 +15,7 @@ public class SimpleService_P1_Server{
     protected SimpleService_P1_Server() throws java.lang.Exception {
         System.out.println("Starting Server");
         Object implementor = new SimpleServiceImpl();
-        String address = "http://localhost:8081/ws/p1";
+        String address = "http://localhost:8080/ws/p1";
         Endpoint.publish(address, implementor);
     }
     

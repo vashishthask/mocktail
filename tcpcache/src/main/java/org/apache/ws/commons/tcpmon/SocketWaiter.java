@@ -52,6 +52,8 @@ private MocktailMode mocktailMode;
 
 private String methodName;
 
+private Connection connection;
+
    /**
     * Constructor SocketWaiter
     *
@@ -84,12 +86,13 @@ private String methodName;
                if (pleaseStop) {
                    break;
                }
-               new Connection(inSocket,  targetHost, targetPort, port, className, methodName, mocktailMode);
+               connection = new Connection(inSocket,  targetHost, targetPort, port, className, methodName, mocktailMode);
                inSocket = null;
            }
        } catch (Exception exp) {
     	   exp.printStackTrace();
        }
+       System.out.println("RUN DONE");
    }
 
    /**
@@ -97,6 +100,8 @@ private String methodName;
     */
    public void halt() {
        try {
+    	   System.err.println("SocketWaiter.halt() called");
+    	   connection.halt();
            pleaseStop = true;
            new Socket("127.0.0.1", port);
            if (sSocket != null) {

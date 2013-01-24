@@ -70,8 +70,9 @@ public final class SimpleService_P1_Client {
 			System.out.println("concat.result=" + _concat__return);
 
 		}
+		tcpMon.halt();
 
-		System.exit(0);
+//		System.exit(0);
 	}
 
 }

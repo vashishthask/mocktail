@@ -107,4 +107,17 @@ class Listener {
 	public void start() {
 		sw = new SocketWaiter(this, listenPort, targetHost, targetPort, className, methodName, mocktailMode);
 	}
+	
+	/**
+     * Method stop
+     */
+    public void halt() {
+    	System.err.println("Listener.halt() called");
+        try {
+            sw.halt();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
