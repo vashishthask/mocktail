@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>mocktail-parent</artifactId>
-    <groupId>org.mocktail</groupId>
+    <groupId>com.svashishtha.mocktail</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -45,6 +45,11 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
       <version>3.2.0.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>com.svashishtha.mocktail</groupId>
+      <artifactId>mocktail-common</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>

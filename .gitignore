@@ -1,6 +1,7 @@
 .project
 .classpath
 *.class
+*.iml
 .settings
 */target/*
 /sampleapp/target

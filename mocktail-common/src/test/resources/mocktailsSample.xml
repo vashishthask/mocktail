@@ -1,0 +1,13 @@
+<mocktails>
+	<mocktail>
+		<className>className</className>
+		<classPackageName>classPackage</classPackageName>
+		<methods>
+			<string>method1</string>
+			<string>method2</string>
+		</methods>
+	</mocktail>
+	<mocktail>
+		<className>fqcn2</className>
+	</mocktail>
+</mocktails>

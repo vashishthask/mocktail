@@ -1,0 +1,24 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <parent>
+    <artifactId>mocktail-parent</artifactId>
+    <groupId>com.svashishtha.mocktail</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>mocktail-samples</artifactId>
+  <packaging>pom</packaging>
+  <name>mocktail samples</name>
+  <url>https://sites.google.com/site/mocktailpro/</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <modules>
+    <module>axis2-simpleclient</module>
+    <module>axis2-simpleservice</module>
+    <module>cxf-simpleclient</module>
+    <module>cxf-simpleservice</module>
+    <module>spring-ws</module>
+  </modules>
+</project>

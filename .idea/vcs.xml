@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/mocktail-common" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-common/target/classes/META-INF/maven/com.svashishtha.mocktail/mocktail-common" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-maven-plugin" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-maven-plugin/target/classes/META-INF/maven/com.svashishtha.mocktail/mocktail-maven-plugin" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-metadata" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-samples" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-samples/cxf-simpleclient" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-samples/maven-plugin/mocktail-orm" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/mocktail-samples/spring-ws/annotated-payload-endpoint" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/sandbox/AspectPoc" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/tcpcache" vcs="svn" />
+    <mapping directory="$PROJECT_DIR$/tcpcache/target/classes/META-INF/maven/com.svashishtha.mocktail/tcpcache" vcs="svn" />
+  </component>
+</project>
+

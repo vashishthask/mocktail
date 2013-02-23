@@ -1,0 +1,41 @@
+package com.svashishtha.mocktail.metadata.aspect.playback;
+import static junit.framework.Assert.assertTrue;
+
+import java.io.File;
+
+import com.svashishtha.mocktail.metadata.MocktailContainer;
+import com.svashishtha.mocktail.repository.ObjectRepository;
+import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
+
+
+/**
+ * I'll represent the playback aspect use me to test the playback aspect whether it is working fine or not and then 
+ * update the class and method template files accordingly
+ */
+public aspect PlaybackAspect$className {
+	ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
+	UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance().getUniqueIdGenerator();
+	String fqcn = "$fqcn";
+	
+	#foreach($method in $methods)
+		pointcut callPointcut$method() : call(* $fqcn.$method(..));
+		
+		Object around() : callPointcut$method() {
+			String fileSeparator = "/";
+			String recordingDirectoryPath = "$recordingDirectory";
+			recordingDirectoryPath = recordingDirectoryPath + fileSeparator
+					+ fqcn.replaceAll("\\.", fileSeparator);
+		    File recordingFolder = new File(recordingDirectoryPath);
+			assertTrue("The recordings directory don't exists " + recordingDirectoryPath, (new File(recordingDirectoryPath)).exists());
+			
+			String methodName="$method";
+			// Create the unique id of param objects to be recorded
+			String recordingFileName = uniqueIdGenerator.getUniqueId(methodName, thisJoinPoint.getArgs())
+					+ "";
+	
+			assertTrue("Recording not in place " + recordingFileName, objectRepository.objectAlreadyExist(recordingFileName, recordingDirectoryPath));
+			return objectRepository.getObject(recordingFileName, recordingDirectoryPath);
+		}
+	#end
+
+}
