@@ -73,7 +73,7 @@ public final class SimpleService_P1_Client {
 
         }
 
-        System.exit(0);
+        tcpMon.halt();
     }
 
 }
