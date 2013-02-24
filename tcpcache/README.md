@@ -12,9 +12,9 @@ your tcp source and target. This is useful in order to print SOAP responses.
 
 	## by default caching is ON. In this case the library works as stripped down version of tcpmon
 	## which could be used in test cases or java classes as proxy to print the tcp responses.
-	## In order to save tcp responses as cache, change cachingOn to true
-	cachingOn=false
+	## In order to switch caching OFF, change cachingOn to false
+	cachingOn=true
 
 	## directory where cached recording will be stored. default is taken as sec/test/resources
-	#recordingDir=src/test/resources
+	recordingDir=src/test/resources
 	
