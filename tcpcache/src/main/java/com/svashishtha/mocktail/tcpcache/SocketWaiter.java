@@ -107,7 +107,7 @@ class SocketWaiter extends Thread {
             log.info("SocketWaiter.halt() called");
             connection.halt();
             pleaseStop = true;
-            new Socket(TCPMon.DEFAULT_HOST, port);
+            new Socket(TcpCache.DEFAULT_HOST, port);
             if (sSocket != null) {
                 sSocket.close();
             }

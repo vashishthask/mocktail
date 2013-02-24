@@ -25,7 +25,7 @@ import com.svashishtha.mocktail.MocktailMode;
  * HTTP.
  */
 
-public class TCPMon {
+public class TcpCache {
 
 	/**
 	 * Field DEFAULT_HOST
@@ -42,7 +42,7 @@ public class TCPMon {
 	 * @param targetPort
 	 * @param methodName 
 	 */
-	public TCPMon(int listenPort, String targetHost, int targetPort, Class<?> class1, String methodName, MocktailMode mocktailMode) {
+	public TcpCache(int listenPort, String targetHost, int targetPort, Class<?> class1, String methodName, MocktailMode mocktailMode) {
 		if (listenPort != 0) {
 			if (targetHost == null) {
 				l = new Listener(listenPort, targetHost, targetPort, class1, methodName,mocktailMode,  true);
