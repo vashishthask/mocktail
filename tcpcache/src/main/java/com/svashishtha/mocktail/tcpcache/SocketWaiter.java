@@ -19,96 +19,100 @@ package com.svashishtha.mocktail.tcpcache;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.slf4j.LoggerFactory;
+
 import com.svashishtha.mocktail.MocktailMode;
 
 /**
- * wait for incoming connections, spawn a connection thread when
- * stuff comes in.
+ * wait for incoming connections, spawn a connection thread when stuff comes in.
  */
 class SocketWaiter extends Thread {
+    private static final org.slf4j.Logger log = LoggerFactory
+            .getLogger(SocketWaiter.class);
 
-   /**
-    * Field sSocket
-    */
-   ServerSocket sSocket = null;
+    /**
+     * Field sSocket
+     */
+    ServerSocket sSocket = null;
 
-   /**
-    * Field port
-    */
-   int port;
+    /**
+     * Field port
+     */
+    int port;
 
-   /**
-    * Field pleaseStop
-    */
-   boolean pleaseStop = false;
+    /**
+     * Field pleaseStop
+     */
+    boolean pleaseStop = false;
 
-private int targetPort;
+    private int targetPort;
 
-private String targetHost;
+    private String targetHost;
 
-private String className;
+    private String className;
 
-private MocktailMode mocktailMode;
+    private MocktailMode mocktailMode;
 
-private String methodName;
+    private String methodName;
 
-private Connection connection;
+    private Connection connection;
 
-   /**
-    * Constructor SocketWaiter
-    *
-    * @param l
-    * @param p
- * @param targetPort 
- * @param targetHost 
- * @param mocktailMode 
- * @param className 
- * @param methodName 
-    */
-   public SocketWaiter(Listener l, int p, String targetHost, int targetPort, String className, String methodName, MocktailMode mocktailMode) {
-       port = p;
-       this.targetHost = targetHost;
-       this.targetPort = targetPort;
-	this.className = className;
-	this.methodName = methodName;
-	this.mocktailMode = mocktailMode;
-       start();
-   }
+    /**
+     * Constructor SocketWaiter
+     * 
+     * @param l
+     * @param p
+     * @param targetPort
+     * @param targetHost
+     * @param mocktailMode
+     * @param className
+     * @param methodName
+     */
+    public SocketWaiter(Listener l, int p, String targetHost, int targetPort,
+            String className, String methodName, MocktailMode mocktailMode) {
+        port = p;
+        this.targetHost = targetHost;
+        this.targetPort = targetPort;
+        this.className = className;
+        this.methodName = methodName;
+        this.mocktailMode = mocktailMode;
+        start();
+    }
 
-   /**
-    * Method run
-    */
-   public void run() {
-       try {
-           sSocket = new ServerSocket(port);
-           for (; ;) {
-               Socket inSocket = sSocket.accept();
-               if (pleaseStop) {
-                   break;
-               }
-               connection = new Connection(inSocket,  targetHost, targetPort, port, className, methodName, mocktailMode);
-               inSocket = null;
-           }
-       } catch (Exception exp) {
-    	   exp.printStackTrace();
-       }
-       System.out.println("RUN DONE");
-   }
+    /**
+     * Method run
+     */
+    public void run() {
+        try {
+            sSocket = new ServerSocket(port);
+            for (;;) {
+                Socket inSocket = sSocket.accept();
+                if (pleaseStop) {
+                    break;
+                }
+                connection = new Connection(inSocket, targetHost, targetPort,
+                        port, className, methodName, mocktailMode);
+                inSocket = null;
+            }
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
+    }
 
-   /**
-    * force a halt by connecting to self and then closing the server socket
-    */
-   public void halt() {
-       try {
-    	   System.err.println("SocketWaiter.halt() called");
-    	   connection.halt();
-           pleaseStop = true;
-           new Socket("127.0.0.1", port);
-           if (sSocket != null) {
-               sSocket.close();
-           }
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-   }
+    /**
+     * force a halt by connecting to self and then closing the server socket
+     */
+    public void halt() {
+        try {
+            log.info("SocketWaiter.halt() called");
+            connection.halt();
+            pleaseStop = true;
+            new Socket(TCPMon.DEFAULT_HOST, port);
+            if (sSocket != null) {
+                sSocket.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

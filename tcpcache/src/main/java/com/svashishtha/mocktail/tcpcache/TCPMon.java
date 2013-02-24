@@ -17,7 +17,6 @@
 package com.svashishtha.mocktail.tcpcache;
 
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import com.svashishtha.mocktail.MocktailMode;
 
@@ -29,34 +28,9 @@ import com.svashishtha.mocktail.MocktailMode;
 public class TCPMon {
 
 	/**
-	 * Field STATE_COLUMN
-	 */
-	static final int STATE_COLUMN = 0;
-
-	/**
-	 * Field OUTHOST_COLUMN
-	 */
-	static final int OUTHOST_COLUMN = 3;
-
-	/**
-	 * Field REQ_COLUMN
-	 */
-	static final int REQ_COLUMN = 4;
-
-	/**
-	 * Field ELAPSED_COLUMN
-	 */
-	static final int ELAPSED_COLUMN = 5;
-
-	/**
 	 * Field DEFAULT_HOST
 	 */
 	static final String DEFAULT_HOST = "127.0.0.1";
-
-	/**
-	 * Field DEFAULT_PORT
-	 */
-	static final int DEFAULT_PORT = 8888;
 
 	private Listener l;
 
@@ -68,13 +42,12 @@ public class TCPMon {
 	 * @param targetPort
 	 * @param methodName 
 	 */
-	public TCPMon(int listenPort, String targetHost, int targetPort, String className, String methodName, MocktailMode mocktailMode) {
-//		new AdminPane(getMessage("admin00", "Admin"));
+	public TCPMon(int listenPort, String targetHost, int targetPort, Class<?> class1, String methodName, MocktailMode mocktailMode) {
 		if (listenPort != 0) {
 			if (targetHost == null) {
-				l = new Listener(listenPort, targetHost, targetPort, className, methodName,mocktailMode,  true);
+				l = new Listener(listenPort, targetHost, targetPort, class1, methodName,mocktailMode,  true);
 			} else {
-				l = new Listener(listenPort, targetHost, targetPort, className, methodName,mocktailMode, false);
+				l = new Listener(listenPort, targetHost, targetPort, class1, methodName,mocktailMode, false);
 			}
 		}
 	}

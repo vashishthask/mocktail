@@ -16,9 +16,6 @@
 
 package com.svashishtha.mocktail.tcpcache;
 
-import java.net.ServerSocket;
-import java.net.Socket;
-
 import com.svashishtha.mocktail.MocktailMode;
 
 /**
@@ -26,25 +23,7 @@ import com.svashishtha.mocktail.MocktailMode;
  */
 class Listener {
 
-	/**
-	 * Field inputSocket
-	 */
-	public Socket inputSocket = null;
-
-	/**
-	 * Field outputSocket
-	 */
-	public Socket outputSocket = null;
-
-	/**
-	 * Field sSocket
-	 */
-	public ServerSocket sSocket = null;
-
-	/**
-	 * Field sw
-	 */
-	public SocketWaiter sw = null;
+	private SocketWaiter sw = null;
 
 	/**
 	 * Field HTTPProxyHost
@@ -55,16 +34,6 @@ class Listener {
 	 * Field HTTPProxyPort
 	 */
 	public int HTTPProxyPort = 80;
-
-	/**
-	 * Field delayBytes
-	 */
-	public int delayBytes = 0;
-
-	/**
-	 * Field delayTime
-	 */
-	public int delayTime = 0;
 
 	private int listenPort;
 
@@ -87,18 +56,18 @@ class Listener {
 	 * @param host
 	 * @param targetPort
 	 * @param mocktailMode 
-	 * @param className 
+	 * @param class1 
 	 * @param methodName 
 	 * @param isProxy
 	 * @param slowLink
 	 *            optional reference to a slow connection
 	 */
 	public Listener(int listenPort, String targetHost, int targetPort,
-			String className, String methodName, MocktailMode mocktailMode, boolean isProxy) {
+			Class<?> class1, String methodName, MocktailMode mocktailMode, boolean isProxy) {
 		this.listenPort = listenPort;
 		this.targetHost = targetHost;
 		this.targetPort = targetPort;
-		this.className = className;
+		this.className = class1.getName();
 		this.methodName = methodName;
 		this.mocktailMode = mocktailMode;
 		start();
