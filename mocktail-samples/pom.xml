@@ -10,7 +10,7 @@
   <artifactId>mocktail-samples</artifactId>
   <packaging>pom</packaging>
   <name>mocktail samples</name>
-  <url>https://sites.google.com/site/mocktailpro/</url>
+  <url>https://github.com/vashishthask/mocktail/</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -19,6 +19,5 @@
     <module>axis2-simpleservice</module>
     <module>cxf-simpleclient</module>
     <module>cxf-simpleservice</module>
-    <module>spring-ws</module>
   </modules>
 </project>
