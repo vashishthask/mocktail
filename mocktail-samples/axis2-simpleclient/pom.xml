@@ -7,8 +7,11 @@
 
   <name>axis2-simpleclient</name>
   <url>http://maven.apache.org</url>
-  <groupId>com.svashishtha.mocktail</groupId>
-  <version>0.0.1-SNAPSHOT</version>
+  <parent>
+    <artifactId>mocktail-samples</artifactId>
+    <groupId>com.svashishtha.mocktail</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>

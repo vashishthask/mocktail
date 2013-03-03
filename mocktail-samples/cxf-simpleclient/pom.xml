@@ -4,8 +4,11 @@
 
   <artifactId>cxf-simpleclient</artifactId>
   <packaging>jar</packaging>
-  <groupId>com.svashishtha.mocktail</groupId>
-  <version>0.0.1-SNAPSHOT</version>
+  <parent>
+    <artifactId>mocktail-samples</artifactId>
+    <groupId>com.svashishtha.mocktail</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
   <name>cxf-simpleclient</name>
   <url>http://maven.apache.org</url>
   <dependencies>
