@@ -7,11 +7,8 @@
 
   <name>axis2-simpleservice</name>
   <url>http://maven.apache.org</url>
-  <parent>
-    <artifactId>apache-cxf-example</artifactId>
-    <groupId>SimpleService</groupId>
-    <version>0.0.1-SNAPSHOT</version>
-  </parent>
+  <groupId>com.svashishtha.mocktail</groupId>
+  <version>0.0.1-SNAPSHOT</version>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
