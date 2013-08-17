@@ -1,9 +1,9 @@
 package com.svashishtha.mocktail.metadata.aspect.playback;
 
-import static junit.framework.Assert.assertTrue;
 
 import java.io.File;
 
+import static org.junit.Assert.assertTrue;
 
 import com.svashishtha.mocktail.metadata.MocktailContainer;
 import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;

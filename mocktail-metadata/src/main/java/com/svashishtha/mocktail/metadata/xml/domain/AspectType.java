@@ -12,5 +12,4 @@ public enum AspectType {
     public String getAspectTypeDirectory() {
         return aspectType;
     }
-
 }

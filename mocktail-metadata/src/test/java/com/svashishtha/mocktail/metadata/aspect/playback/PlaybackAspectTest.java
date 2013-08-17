@@ -38,7 +38,7 @@ public class PlaybackAspectTest {
 
     }
 
-    @Test(expected = AssertionFailedError.class)
+    @Test(expected = java.lang.AssertionError.class)
     public void testPlaybackForInvalidRecordingDir() throws Exception {
         dfa.setPropertyValue("recordingDirectory",
                 "src/test/resources/non_existent_recording_dir");
@@ -49,7 +49,7 @@ public class PlaybackAspectTest {
         assertNull(recordedObject);
     }
 
-    @Test(expected = AssertionFailedError.class)
+    @Test(expected = java.lang.AssertionError.class)
     public void testPlaybackForInvalideFQCN() throws Exception {
         dfa.setPropertyValue("recordingDirectory",
                 "src/test/resources/recording");
@@ -60,7 +60,7 @@ public class PlaybackAspectTest {
         assertNull(recordedObject);
     }
 
-    @Test(expected = AssertionFailedError.class)
+    @Test(expected = java.lang.AssertionError.class)
     public void testPlaybackForRecordingNotAvailable() throws Exception {
         playbackAspect = new PlaybackAspect();
         playbackAspect.fqcn = "com.svashishtha.mocktail.metadata.aspect.recorder";

@@ -1,9 +1,5 @@
 package com.svashishtha.mocktail.metadata;
 
-import org.w3c.dom.Document;
-
-import com.svashishtha.dom.DomEditor;
-import com.svashishtha.dom.DomParser;
 import com.svashishtha.mocktail.metadata.util.HashCodeIdGenerator;
 import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
 import com.svashishtha.mocktail.metadata.xml.reader.MocktailXmlReader;

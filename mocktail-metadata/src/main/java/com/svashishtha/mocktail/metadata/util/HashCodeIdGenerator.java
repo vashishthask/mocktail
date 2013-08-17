@@ -23,7 +23,6 @@ public class HashCodeIdGenerator implements UniqueIdGenerator {
             builder.append(oXml);
         }
         int hashCode = builder.toString().hashCode();
-        System.out.println("The hashcode for method:"+methodName + ":is:"+hashCode);
         return hashCode;
     }
 }
