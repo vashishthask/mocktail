@@ -1,10 +1,7 @@
 package com.svashishtha.mocktail;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Test;
-
-import com.svashishtha.mocktail.MocktailConfig;
 
 public class MocktailConfigTest {
 
@@ -13,5 +10,4 @@ public class MocktailConfigTest {
 		String recordingDir = MocktailConfig.INSTANCE.getProperty("recordingDir");
 		Assert.assertEquals("src/test/resources", recordingDir);
 	}
-
 }
