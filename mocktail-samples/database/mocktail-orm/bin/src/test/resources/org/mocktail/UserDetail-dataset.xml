@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <UserDetail MESSAGE_ID='1' name="user1"/>
+    <UserDetail MESSAGE_ID='2' name="user2"/>
+    <UserDetail MESSAGE_ID='3' name="user3"/>
+</dataset>

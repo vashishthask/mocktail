@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.svashishtha.mocktail.mock.jdbc.user.UserDaoTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 1.815 sec

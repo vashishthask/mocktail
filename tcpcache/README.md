@@ -6,7 +6,7 @@ From the original tcpmon source, GUI part is stripped and caching has been imple
 
 If you don't want caching ON, you can switch that off using configuration. In that case, 
 it works as tcpmon without GUI which is useful if you want to put a proxy in between 
-your tcp source and target. This is useful in order to print SOAP responses.
+your tcp source and target. This is useful to print SOAP responses.
 
 ## Sample mocktailconfig.properties
 
@@ -58,4 +58,3 @@ your tcp source and target. This is useful in order to print SOAP responses.
 	ConcatResponse response = service.concat(request);
 	System.out.println(response.getConcatResponse());
 	tcpCache.halt();
-	

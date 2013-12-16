@@ -15,9 +15,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <modules>
-    <module>axis2-simpleclient</module>
-    <module>axis2-simpleservice</module>
-    <module>cxf-simpleclient</module>
-    <module>cxf-simpleservice</module>
+    <module>database</module>
+    <module>webservice</module>
   </modules>
 </project>
