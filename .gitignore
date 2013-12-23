@@ -5,6 +5,7 @@
 *.iml
 .settings
 */target/*
+velocity.log
 mocktail-samples/mocktail-samples/target
 mocktail-samples/database/mocktail-orm/target/
 mocktail-samples/database/mocktail-jdbc/target
