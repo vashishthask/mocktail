@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.svashishtha.mocktail.tcpcache;
+package com.svashishtha.mocktail.tcpcachenew;
 
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -26,9 +26,9 @@ import com.svashishtha.mocktail.MocktailMode;
 /**
  * wait for incoming connections, spawn a connection thread when stuff comes in.
  */
-class SocketWaiter extends Thread {
+public class TcpCache extends Thread {
     private static final org.slf4j.Logger log = LoggerFactory
-            .getLogger(SocketWaiter.class);
+            .getLogger(TcpCache.class);
 
     /**
      * Field sSocket
@@ -49,31 +49,28 @@ class SocketWaiter extends Thread {
 
     private String targetHost;
 
-    private String className;
+    private Class<?> clientClass;
 
     private MocktailMode mocktailMode;
 
     private String methodName;
 
-    private Connection connection;
-
     /**
      * Constructor SocketWaiter
      * 
-     * @param l
-     * @param p
-     * @param targetPort
+     * @param listenPort
      * @param targetHost
-     * @param mocktailMode
-     * @param className
+     * @param targetPort
+     * @param clientClass
      * @param methodName
+     * @param mocktailMode
      */
-    public SocketWaiter(Listener l, int p, String targetHost, int targetPort,
-            String className, String methodName, MocktailMode mocktailMode) {
-        port = p;
+    public TcpCache(int listenPort, String targetHost, int targetPort,
+            Class<?> clientClass, String methodName, MocktailMode mocktailMode) {
+        port = listenPort;
         this.targetHost = targetHost;
         this.targetPort = targetPort;
-        this.className = className;
+        this.clientClass = clientClass;
         this.methodName = methodName;
         this.mocktailMode = mocktailMode;
         start();
@@ -85,34 +82,16 @@ class SocketWaiter extends Thread {
     public void run() {
         try {
             sSocket = new ServerSocket(port);
-            for (;;) {
-                Socket inSocket = sSocket.accept();
-                if (pleaseStop) {
-                    break;
-                }
-                connection = new Connection(inSocket, targetHost, targetPort,
-                        port, className, methodName, mocktailMode);
-                inSocket = null;
-            }
+            Socket inSocket = sSocket.accept();
+
+            Connection connection = new Connection(inSocket, targetHost,
+                    targetPort, port, clientClass.getName(), methodName,
+                    mocktailMode);
+            connection.start();
+            inSocket.close();
         } catch (Exception exp) {
             exp.printStackTrace();
         }
     }
 
-    /**
-     * force a halt by connecting to self and then closing the server socket
-     */
-    public void halt() {
-        try {
-            log.info("SocketWaiter.halt() called");
-            connection.halt();
-            pleaseStop = true;
-            new Socket(TcpCache.DEFAULT_HOST, port);
-            if (sSocket != null) {
-                sSocket.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

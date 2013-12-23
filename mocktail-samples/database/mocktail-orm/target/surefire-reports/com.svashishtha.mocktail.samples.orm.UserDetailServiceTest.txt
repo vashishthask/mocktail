@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.svashishtha.mocktail.samples.orm.UserDetailServiceTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.02 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.741 sec

@@ -21,6 +21,6 @@ public class SimpleClient {
 		request.setS2("123");
 		ConcatResponse response = service.concat(request);
 		System.out.println(response.getConcatResponse());
-		tcpCache.halt();
+//		tcpCache.halt();
 	}
 }

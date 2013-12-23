@@ -1,4 +1,4 @@
-<testsuite tests='5' results='5' failures='0' disabled='0' errors='0' time='0.562' name='behavior.JdbcMocktail'>
+<testsuite tests='5' results='5' failures='0' disabled='0' errors='0' time='0.557' name='behavior.JdbcMocktail'>
   <testcase classname='behavior.JdbcMocktail' name='Verify recording for search query' time='0.012' />
   <testcase classname='behavior.JdbcMocktail' name='Insert the record in database' time='0.002' />
   <testcase classname='behavior.JdbcMocktail' name='Update the record in database' time='0.002' />

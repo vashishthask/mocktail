@@ -16,79 +16,67 @@
 
 package com.svashishtha.mocktail.tcpcache;
 
-import java.util.ResourceBundle;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import org.slf4j.LoggerFactory;
 
 import com.svashishtha.mocktail.MocktailMode;
 
 /**
- * Proxy that sniffs and shows HTTP messages and responses, both SOAP and plain
- * HTTP.
+ * wait for incoming connections, spawn a connection thread when stuff comes in.
  */
+public class TcpCache extends Thread {
+    private static final org.slf4j.Logger log = LoggerFactory
+            .getLogger(TcpCache.class);
 
-public class TcpCache {
+    /**
+     * Field sSocket
+     */
+    ServerSocket sSocket = null;
 
-	/**
-	 * Field DEFAULT_HOST
-	 */
-	static final String DEFAULT_HOST = "127.0.0.1";
+    private Connection connection;
 
-	private Listener l;
+    private Configuration config;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param listenPort
-	 * @param targetHost
-	 * @param targetPort
-	 * @param methodName 
-	 */
-	public TcpCache(int listenPort, String targetHost, int targetPort, Class<?> class1, String methodName, MocktailMode mocktailMode) {
-		if (listenPort != 0) {
-			if (targetHost == null) {
-				l = new Listener(listenPort, targetHost, targetPort, class1, methodName,mocktailMode,  true);
-			} else {
-				l = new Listener(listenPort, targetHost, targetPort, class1, methodName,mocktailMode, false);
-			}
-		}
-	}
+    /**
+     * Constructor SocketWaiter
+     * 
+     * @param l
+     * @param p
+     * @param targetPort
+     * @param targetHost
+     * @param mocktailMode
+     * @param className
+     * @param methodName
+     */
+    public TcpCache(int localPort, String targetHost, int targetPort, Class<?> testClass,
+            String testMethodName, MocktailMode mocktailMode) {
+        config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName, mocktailMode);
+    }
 
-	private static ResourceBundle messages = null;
-
-	/**
-	 * Get the message with the given key. There are no arguments for this
-	 * message.
-	 * 
-	 * @param key
-	 * @param defaultMsg
-	 * @return string
-	 */
-	public static String getMessage(String key, String defaultMsg) {
-		try {
-			if (messages == null) {
-				initializeMessages();
-			}
-			return messages.getString(key);
-		} catch (Throwable t) {
-
-			// If there is any problem whatsoever getting the internationalized
-			// message, return the default.
-			return defaultMsg;
-		}
-	}
-
-	/**
-	 * Load the resource bundle messages from the properties file. This is ONLY
-	 * done when it is needed. If no messages are printed (for example, only
-	 * Wsdl2java is being run in non- verbose mode) then there is no need to
-	 * read the properties file.
-	 */
-	private static void initializeMessages() {
-		messages = ResourceBundle
-				.getBundle("org.apache.ws.commons.tcpmon.tcpmon");
-	}
-
-	public void halt() {
-		l.halt();
-	}
+    /**
+     * Method run
+     */
+    public void run() {
+        try {
+            sSocket = new ServerSocket(config.getLocalPort());
+            Socket inSocket = sSocket.accept();
+            connection = new Connection(inSocket, config);
+            connection.join();
+            inSocket.close();
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        } finally {
+            if (sSocket != null && !sSocket.isClosed()) {
+                try {
+                    sSocket.close();
+                } catch (IOException e) {
+                    // ignored
+                }
+            }
+        }
+    }
 
 }

@@ -1,7 +1,7 @@
-<easyb time='Mon Dec 16 13:47:26 GMT+05:30 2013' totalbehaviors='5' totalfailedbehaviors='0' totalpendingbehaviors='0' executionTime='562'>
-  <stories scenarios='5' failedscenarios='0' pendingscenarios='0' executionTime='562'>
-    <story name='jdbc mocktail' scenarios='5' failedscenarios='0' pendingscenarios='0' executionTime='562'>
-      <before name='create schema and remove recordings' result='success' executionTime='13'>
+<easyb time='Mon Dec 23 17:05:02 GMT+05:30 2013' totalbehaviors='5' totalfailedbehaviors='0' totalpendingbehaviors='0' executionTime='557'>
+  <stories scenarios='5' failedscenarios='0' pendingscenarios='0' executionTime='557'>
+    <story name='jdbc mocktail' scenarios='5' failedscenarios='0' pendingscenarios='0' executionTime='557'>
+      <before name='create schema and remove recordings' result='success' executionTime='14'>
         <given name='selenium is up and running' result='success' />
       </before>
       <scenario name='Verify recording for search query' result='success' executionTime='12'>
@@ -26,7 +26,7 @@
         <when name='change the schema' result='success' />
         <then name='test should break' result='success' />
       </scenario>
-      <after name='drop schema and remove recording' result='success' executionTime='1'>
+      <after name='drop schema and remove recording' result='success' executionTime='2'>
         <then name='drop schema and remove recording' result='success' />
       </after>
     </story>

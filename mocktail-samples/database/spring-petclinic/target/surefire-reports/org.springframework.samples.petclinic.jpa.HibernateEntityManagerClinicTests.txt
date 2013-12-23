@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.springframework.samples.petclinic.jpa.HibernateEntityManagerClinicTests
 -------------------------------------------------------------------------------
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.435 sec
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.399 sec

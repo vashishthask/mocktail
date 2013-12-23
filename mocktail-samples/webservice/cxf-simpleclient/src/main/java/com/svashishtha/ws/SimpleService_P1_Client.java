@@ -29,6 +29,10 @@ public final class SimpleService_P1_Client {
     private SimpleService_P1_Client() {
     }
 
+    /**
+     * @param args
+     * @throws java.lang.Exception
+     */
     public static void main(String args[]) throws java.lang.Exception {
         URL wsdlURL = SimpleService_Service.WSDL_LOCATION;
         if (args.length > 0 && args[0] != null && !"".equals(args[0])) {
@@ -51,6 +55,7 @@ public final class SimpleService_P1_Client {
         // for tcpmon to work -- start
         TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080,
                 SimpleService_Service.class, "main", MocktailMode.RECORDING_NEW);
+        tcpCache.start();
         BindingProvider bp = (BindingProvider) port;
         Map<String, Object> context = bp.getRequestContext();
         context.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
@@ -65,7 +70,6 @@ public final class SimpleService_P1_Client {
             java.lang.String _concat__return = port.concat(_concat_parameters);
             System.out.println("concat.result=" + _concat__return);
         }
-        tcpCache.halt();
     }
 
 }
