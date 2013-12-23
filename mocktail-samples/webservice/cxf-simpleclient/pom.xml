@@ -5,7 +5,7 @@
   <artifactId>cxf-simpleclient</artifactId>
   <packaging>jar</packaging>
   <parent>
-    <artifactId>mocktail-samples</artifactId>
+    <artifactId>webservice-samples</artifactId>
     <groupId>com.svashishtha.mocktail</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>

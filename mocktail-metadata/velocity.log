@@ -1,0 +1,2 @@
+2013-12-23 22:09:03,549 - Velocimacro : allowInlineLocal = false : VMs defined inline will be global in scope if allowed.
+2013-12-23 22:09:03,550 - Velocimacro : autoload off : VM system will not automatically reload global library macros
