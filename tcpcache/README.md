@@ -2,8 +2,13 @@
 
 tcpcache is a fork on http://ws.apache.org/commons/tcpmon/ and can be used to cache/save tcp response.
 
-From the original tcpmon source, GUI part is stripped and caching has been implemented. 
+From the original tcpmon source, GUI part is stripped. "tcpcache" is useful in following scenarios: 
 
+## Caching
+SOAP or TCP response can be cached. In that case configuration (mocktailconfig.properties) need to have
+"chachingOn" property as "true".
+
+## Printing SOAP response
 If you don't want caching ON, you can switch that off using configuration. In that case, 
 it works as tcpmon without GUI which is useful if you want to put a proxy in between 
 your tcp source and target. This is useful to print SOAP responses.
@@ -24,14 +29,14 @@ your tcp source and target. This is useful to print SOAP responses.
 		SERVICE_NAME);
 	SimpleService port = ss.getP1();
 
-	// for tcpmon to work -- start
+	// for tcpcache to work -- start
 	TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080,
 		SimpleService_Service.class, "main", MocktailMode.RECORDING_NEW);
 	BindingProvider bp = (BindingProvider) port;
 	Map<String, Object> context = bp.getRequestContext();
 	context.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
 		"http://localhost:1234/ws/p1");
-	// for tcpmon to work -- end
+	// for tcpcache to work -- end
 
 	{
 	    System.out.println("Invoking concat...");
@@ -41,20 +46,18 @@ your tcp source and target. This is useful to print SOAP responses.
 	    java.lang.String _concat__return = port.concat(_concat_parameters);
 	    System.out.println("concat.result=" + _concat__return);
 	}
-	tcpCache.halt();
 	
 ## Sample usage of tcpcache in Axis2 based web service client
 	
 	//SimpleServiceStub service = new SimpleServiceStub("http://localhost:8080/axis2/services/SimpleService");
 		
-	//for tcpmon to work - start
+	//for tcpcache to work - start
 	TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080, SimpleClient.class , "main", MocktailMode.RECORDING_NEW);
 	SimpleServiceStub service = new SimpleServiceStub("http://localhost:1234/axis2/services/SimpleService");
-	//for tcpmon to work - end
+	//for tcpcache to work - end
 		
 	ConcatRequest request = new ConcatRequest();
 	request.setS1("abc");
 	request.setS2("123");
 	ConcatResponse response = service.concat(request);
 	System.out.println(response.getConcatResponse());
-	tcpCache.halt();
