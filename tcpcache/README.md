@@ -10,8 +10,7 @@ SOAP or TCP response can be cached. In that case configuration (mocktailconfig.p
 
 * **Printing SOAP response:**
 If you don't want caching ON, you can switch that off using configuration. In that case, 
-it works as tcpmon without GUI which is useful if you want to put a proxy in between 
-your tcp source and target. This is useful to print SOAP responses.
+it works as tcpmon without GUI which is useful to print SOAP responses.
 
 ### Sample mocktailconfig.properties
 
