@@ -4,16 +4,16 @@ tcpcache is a fork on http://ws.apache.org/commons/tcpmon/ and can be used to ca
 
 From the original tcpmon source, GUI part is stripped. "tcpcache" is useful in following scenarios: 
 
-## Caching
+* **Caching:**
 SOAP or TCP response can be cached. In that case configuration (mocktailconfig.properties) need to have
 "chachingOn" property as "true".
 
-## Printing SOAP response
+* **Printing SOAP response:**
 If you don't want caching ON, you can switch that off using configuration. In that case, 
 it works as tcpmon without GUI which is useful if you want to put a proxy in between 
 your tcp source and target. This is useful to print SOAP responses.
 
-## Sample mocktailconfig.properties
+### Sample mocktailconfig.properties
 
 	## by default caching is ON. In this case the library works as stripped down version of tcpmon
 	## which could be used in test cases or java classes as proxy to print the tcp responses.
@@ -23,7 +23,7 @@ your tcp source and target. This is useful to print SOAP responses.
 	## directory where cached recording will be stored. default is taken as sec/test/resources
 	recordingDir=src/test/resources
 	
-## Sample usage of tcpcache in CXF based web service client.
+### Sample usage of tcpcache in CXF based web service client.
 
 	SimpleService_Service ss = new SimpleService_Service(wsdlURL,
 		SERVICE_NAME);
@@ -47,7 +47,7 @@ your tcp source and target. This is useful to print SOAP responses.
 	    System.out.println("concat.result=" + _concat__return);
 	}
 	
-## Sample usage of tcpcache in Axis2 based web service client
+### Sample usage of tcpcache in Axis2 based web service client
 	
 	//SimpleServiceStub service = new SimpleServiceStub("http://localhost:8080/axis2/services/SimpleService");
 		
