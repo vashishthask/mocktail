@@ -1,5 +1,7 @@
 package com.svashishtha.ws;
 
+import static org.junit.Assert.assertEquals;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
@@ -7,6 +9,7 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -30,7 +33,7 @@ public class SimpleServiceClientTest {
 		SimpleService_Service ss = new SimpleService_Service(wsdlURL, serviceName);
 		port = ss.getP1();
 
-		TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080, SimpleService_Service.class, "main");
+		TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080, SimpleService_Service.class, "main3");
 		tcpCache.start();
 
 		BindingProvider bp = (BindingProvider) port;
@@ -45,8 +48,8 @@ public class SimpleServiceClientTest {
         ConcatRequest _concat_parameters = new ConcatRequest();
         _concat_parameters.setS1("test");
         _concat_parameters.setS2(" success");
-        java.lang.String _concat__return = port.concat(_concat_parameters);
-        System.out.println("concat.result=" + _concat__return);
+        String _concat__return = port.concat(_concat_parameters);
+        assertEquals("test success", _concat__return);
 	}
 
 }

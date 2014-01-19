@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.svashishtha.mocktail.MocktailMode;
@@ -28,7 +29,7 @@ import com.svashishtha.mocktail.MocktailMode;
  * wait for incoming connections, spawn a connection thread when stuff comes in.
  */
 public class TcpCache extends Thread {
-    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TcpCache.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TcpCache.class);
 
     private ServerSocket sSocket = null;
     private Connection connection;
