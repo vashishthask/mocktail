@@ -28,39 +28,28 @@ import com.svashishtha.mocktail.MocktailMode;
  * wait for incoming connections, spawn a connection thread when stuff comes in.
  */
 public class TcpCache extends Thread {
-    private static final org.slf4j.Logger log = LoggerFactory
-            .getLogger(TcpCache.class);
+    private static final org.slf4j.Logger LOG = LoggerFactory.getLogger(TcpCache.class);
 
-    /**
-     * Field sSocket
-     */
-    ServerSocket sSocket = null;
-
+    private ServerSocket sSocket = null;
     private Connection connection;
-
     private Configuration config;
 
-    /**
-     * Constructor SocketWaiter
-     * 
-     * @param l
-     * @param p
-     * @param targetPort
-     * @param targetHost
-     * @param mocktailMode
-     * @param className
-     * @param methodName
-     */
-    public TcpCache(int localPort, String targetHost, int targetPort, Class<?> testClass,
-            String testMethodName, MocktailMode mocktailMode) {
+    public TcpCache(int localPort, String targetHost, int targetPort, Class<?> testClass, String testMethodName) {
+        config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName, MocktailMode.PLAYBACK);
+    }
+
+    public TcpCache(int localPort,
+            String targetHost,
+            int targetPort,
+            Class<?> testClass,
+            String testMethodName,
+            MocktailMode mocktailMode) {
         config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName, mocktailMode);
     }
 
-    /**
-     * Method run
-     */
     public void run() {
         try {
+            LOG.info(String.format("Starting TcpCache - listening %s port.", config.getLocalPort()));
             sSocket = new ServerSocket(config.getLocalPort());
             Socket inSocket = sSocket.accept();
             connection = new Connection(inSocket, config);
