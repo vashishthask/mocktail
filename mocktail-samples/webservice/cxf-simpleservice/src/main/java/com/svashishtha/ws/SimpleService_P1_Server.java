@@ -1,6 +1,8 @@
 
 package com.svashishtha.ws;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.xml.ws.Endpoint;
 
 /**
@@ -23,7 +25,7 @@ public class SimpleService_P1_Server{
         new SimpleService_P1_Server();
         System.out.println("Server ready..."); 
         
-        Thread.sleep(5 * 60 * 1000); 
+        Thread.sleep(TimeUnit.MINUTES.toMillis(5)); 
         System.out.println("Server exiting");
         System.exit(0);
     }

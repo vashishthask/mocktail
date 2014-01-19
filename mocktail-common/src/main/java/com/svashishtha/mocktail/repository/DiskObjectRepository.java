@@ -9,13 +9,11 @@ import java.io.OutputStream;
 public class DiskObjectRepository implements ObjectRepository {
     private ObjectFileOperations fileOperations = new ObjectFileOperations();
 
-    public void saveObject(Object objectToBeSerialized,
-            OutputStream outputStream) throws IOException {
+    public void saveObject(Object objectToBeSerialized, OutputStream outputStream) throws IOException {
         new ObjectOutputStream(outputStream).writeObject(objectToBeSerialized);
     }
 
-    public Object getObject(InputStream inputStream) throws IOException,
-            ClassNotFoundException {
+    public Object getObject(InputStream inputStream) throws IOException, ClassNotFoundException {
         return new ObjectInputStream(inputStream).readObject();
     }
 
@@ -31,12 +29,12 @@ public class DiskObjectRepository implements ObjectRepository {
         return fileOperations.getObjectFromFile(objectId, location);
     }
 
-	@Override
-	public boolean clearObjectIfAvailable(String objectId, String location) {
-		boolean objectAlreadyExist = objectAlreadyExist(objectId, location);
-		if(objectAlreadyExist){
-			return fileOperations.deleteObject(objectId, location);
-		}
-		return true;
-	}
+    @Override
+    public boolean clearObjectIfAvailable(String objectId, String location) {
+        boolean objectAlreadyExist = objectAlreadyExist(objectId, location);
+        if (objectAlreadyExist) {
+            return fileOperations.deleteObject(objectId, location);
+        }
+        return true;
+    }
 }

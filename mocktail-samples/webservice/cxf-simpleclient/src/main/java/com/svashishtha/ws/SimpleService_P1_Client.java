@@ -23,8 +23,7 @@ import com.svashishtha.mocktail.tcpcache.TcpCache;
  */
 public final class SimpleService_P1_Client {
 
-    private static final QName SERVICE_NAME = new QName(
-            "http://svashishtha.com/ws", "SimpleService");
+    private static final QName SERVICE_NAME = new QName("http://svashishtha.com/ws", "SimpleService");
 
     private SimpleService_P1_Client() {
     }
@@ -48,18 +47,20 @@ public final class SimpleService_P1_Client {
             }
         }
 
-        SimpleService_Service ss = new SimpleService_Service(wsdlURL,
-                SERVICE_NAME);
+        SimpleService_Service ss = new SimpleService_Service(wsdlURL, SERVICE_NAME);
         SimpleService port = ss.getP1();
 
         // for tcpmon to work -- start
-        TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080,
-                SimpleService_Service.class, "main", MocktailMode.RECORDING_NEW);
+        TcpCache tcpCache = new TcpCache(1234,
+                                         "127.0.0.1",
+                                         8080,
+                                         SimpleService_Service.class,
+                                         "main",
+                                         MocktailMode.RECORDING);
         tcpCache.start();
         BindingProvider bp = (BindingProvider) port;
         Map<String, Object> context = bp.getRequestContext();
-        context.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
-                "http://localhost:1234/ws/p1");
+        context.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://localhost:1234/ws/p1");
         // for tcpmon to work -- end
 
         {

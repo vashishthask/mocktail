@@ -4,7 +4,8 @@
 *.class
 *.iml
 .settings
-*/target/*
+target/
+test-output/
 velocity.log
 mocktail-samples/mocktail-samples/target
 mocktail-samples/database/mocktail-orm/target/
