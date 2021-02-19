@@ -217,7 +217,7 @@
       <groupId>junit</groupId>
       <!--artifactId>com.springsource.org.junit</artifactId -->
       <artifactId>junit</artifactId>
-      <version>4.10</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
