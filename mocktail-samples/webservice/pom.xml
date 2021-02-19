@@ -18,6 +18,6 @@
     <module>axis2-simpleclient</module>
     <module>axis2-simpleservice</module>
     <module>cxf-simpleservice</module>
-    <module>cxf-simpleclient</module>
+    <!--module>cxf-simpleclient</module-->
   </modules>
 </project>
