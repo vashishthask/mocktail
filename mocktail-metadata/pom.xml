@@ -24,7 +24,7 @@
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
       <artifactId>xstream</artifactId>
-      <version>1.4.15</version>
+      <version>1.4.19</version>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
@@ -34,8 +34,13 @@
     <dependency>
       <groupId>org.yaml</groupId>
       <artifactId>snakeyaml</artifactId>
-      <version>1.10</version>
+      <version>1.26</version>
     </dependency>
+    <!-- dependency>
+      <groupId>org.apache.velocity</groupId>
+      <artifactId>velocity-engine-core</artifactId>
+      <version>2.3</version>
+    </dependency-->
     <dependency>
       <groupId>org.apache.velocity</groupId>
       <artifactId>velocity</artifactId>
@@ -49,7 +54,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
-      <version>3.2.0.RELEASE</version>
+      <version>5.3.22</version>
     </dependency>
     <dependency>
       <groupId>com.svashishtha.mocktail</groupId>

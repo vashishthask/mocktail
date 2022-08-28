@@ -2,17 +2,19 @@ package com.svashishtha.mocktail.samples.orm;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 
 public class UserDetailService{
 
 	private EntityManagerFactory emf;
 
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
+
 	public UserDetailService() {
-		emf = Persistence.createEntityManagerFactory("mocktail-orm");
 	}
 	
 	public UserDetail getUserDetail(Long userId) {
@@ -37,12 +39,8 @@ public class UserDetailService{
 
 	public List<UserDetail> getAllUsers() {
 		EntityManager newEm = emf.createEntityManager();
-		EntityTransaction newTx = newEm.getTransaction();
-		newTx.begin();
 		
-		List users = newEm.createQuery("from UserDetail").getResultList();
-		newTx.commit();
-		return users;
+		return newEm.createQuery("from UserDetail").getResultList();
 	}
 
 	

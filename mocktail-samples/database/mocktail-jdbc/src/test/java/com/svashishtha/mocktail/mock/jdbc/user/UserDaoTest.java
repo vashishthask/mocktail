@@ -3,7 +3,7 @@ package com.svashishtha.mocktail.mock.jdbc.user;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.sql.Driver;
 import java.util.List;

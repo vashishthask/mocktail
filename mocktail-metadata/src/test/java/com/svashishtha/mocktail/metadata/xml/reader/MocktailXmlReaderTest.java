@@ -1,9 +1,9 @@
 package com.svashishtha.mocktail.metadata.xml.reader;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
 
 import java.io.InputStream;
 import java.util.List;
@@ -12,8 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.svashishtha.mocktail.metadata.xml.domain.Mocktail;
-import com.svashishtha.mocktail.metadata.xml.reader.MocktailXmlReader;
-import com.svashishtha.mocktail.metadata.xml.reader.XStreamMocktailXmlReader;
 
 public class MocktailXmlReaderTest {
 

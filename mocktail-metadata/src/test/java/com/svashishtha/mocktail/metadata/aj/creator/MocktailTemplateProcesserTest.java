@@ -2,7 +2,7 @@ package com.svashishtha.mocktail.metadata.aj.creator;
 
 import static junit.framework.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
 import java.util.ArrayList;

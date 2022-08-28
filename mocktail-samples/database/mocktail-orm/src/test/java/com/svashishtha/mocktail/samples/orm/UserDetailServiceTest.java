@@ -1,36 +1,58 @@
 package com.svashishtha.mocktail.samples.orm;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 
-import java.lang.reflect.Method;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import org.hibernate.Session;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.util.ReflectionUtils;
 
-import com.svashishtha.mocktail.samples.orm.UserDetail;
-import com.svashishtha.mocktail.samples.orm.UserDetailService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
-public class UserDetailServiceTest  extends AbstractDbUnitTest{
+public class UserDetailServiceTest{
 
 	private UserDetailService userDetailService;
 	private EntityManagerFactory emf;
+    EntityManager entityManager;
+
 
 	@Before
 	public void setup() throws Exception {
 		emf = Persistence.createEntityManagerFactory("mocktail-orm");
-		userDetailService = new UserDetailService();
-		super.init();
-	}
+        EntityManager entityManager = emf.createEntityManager();
+        entityManager.getTransaction().begin();
+        persistUser("John", 1L, entityManager);
+        persistUser("Mike", 2L, entityManager);
+        persistUser("Anurag", 3L, entityManager);
+        entityManager.getTransaction().commit();
 
-    /*@Test
+		userDetailService = new UserDetailService();
+		userDetailService.setEmf(emf);
+	}
+	
+
+    private void persistUser(String name, long id, EntityManager em ) {
+    	UserDetail johnDetails = new UserDetail();
+        johnDetails.setName(name);
+        johnDetails.setId(id);
+        em.persist(johnDetails);
+	}
+    
+    @After
+    public void free() {
+    	EntityManager entityManager = emf.createEntityManager();
+    	entityManager.getTransaction().begin();
+		entityManager.createQuery("DELETE FROM UserDetail").executeUpdate();
+		entityManager.getTransaction().commit();
+    	emf.close();
+    }
+
+	/*@Test
     public void shouldSaveUserDetail() {
         userDetailService.saveUserDetail(new UserDetail("user"));
     }*/
@@ -41,7 +63,7 @@ public class UserDetailServiceTest  extends AbstractDbUnitTest{
 		
 		assertNotNull(userDetail);
 		assertSame(1L, userDetail.getId());
-		assertEquals("Got " + userDetail.getName(), "user1", userDetail.getName());
+		assertEquals("Got " + userDetail.getName(), "John", userDetail.getName());
 	}
 	
 	@Test
@@ -50,30 +72,6 @@ public class UserDetailServiceTest  extends AbstractDbUnitTest{
 		
 		assertNotNull(users);
 		assertEquals(3, users.size());
-		assertEquals("user1", users.get(0).getName());
-	}
-	
-	
-	@Override
-	protected Connection getSqlConnection() throws SQLException {
-		Session session = (Session)emf.createEntityManager().getDelegate();
-		
-//		Connection conn = session.connection();
-//		return conn;
-		
-		try {
-                // reflective lookup to bridge between Hibernate 3.x and 4.x
-                Method connectionMethod = session.getClass().getMethod("connection");
-            return (Connection) ReflectionUtils.invokeMethod(connectionMethod, session);
-        }
-        catch (NoSuchMethodException ex) {
-            throw new IllegalStateException("Cannot find connection() method on Hibernate session", ex);
-        }
-
-	}
-
-	@Override
-	protected String getDataSetFile() {
-		return "src/test/resources/org/mocktail/UserDetail-dataset.xml";
+		assertEquals("John", users.get(0).getName());
 	}
 }
