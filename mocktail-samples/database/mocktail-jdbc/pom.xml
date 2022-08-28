@@ -19,7 +19,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>aspectj-maven-plugin</artifactId>
-        <version>1.8</version>
+        <version>1.14.0</version>
         <executions>
           <execution>
             <goals>
@@ -59,12 +59,12 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.2</version>
-        <configuration>
+        <!--configuration>
           <source>1.5</source>
           <target>1.5</target>
-        </configuration>
+        </configuration-->
       </plugin>
-      <plugin>
+      <!--plugin>
         <groupId>org.easyb</groupId>
         <artifactId>maven-easyb-plugin</artifactId>
         <version>1.4</version>
@@ -75,7 +75,7 @@
             </goals>
           </execution>
         </executions>
-      </plugin>
+      </plugin-->
       <!--plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-surefire-plugin</artifactId> 
         <version>2.12.2</version> <configuration> <systemPropertyVariables> <serializer>yaml</serializer> 
         </systemPropertyVariables> </configuration> </plugin -->

@@ -14,9 +14,9 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  <modules>
+  <!--modules>
     <module>mocktail-jdbc</module>
     <module>mocktail-orm</module>
     <module>spring-petclinic</module>
-  </modules>
+  </modules-->
 </project>
