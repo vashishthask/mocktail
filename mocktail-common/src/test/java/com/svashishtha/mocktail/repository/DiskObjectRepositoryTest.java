@@ -26,21 +26,6 @@ public class DiskObjectRepositoryTest {
 	ObjectRepository objectRepository = new DiskObjectRepository();
 
 	@Test
-	public void shouldRecordObj() throws Exception {
-		objectRepository.saveObject(Arrays.asList("sandy", "ganesh", "12", "23"), outputStream);
-		verify(outputStream, new Times(4)).write((byte[]) any(), anyInt(), anyInt());
-	}
-
-	@Test
-	public void shouldReadObj() throws Exception {
-		List recordedList = (List) objectRepository.getObject(this.getClass().getClassLoader()
-				.getResourceAsStream("com/svashishtha/mocktail/util/recorded_list.ser"));
-
-		assertThat(recordedList.size(), is(4));
-
-	}
-
-	@Test
 	public void testObjectAlreadyExists() throws Exception {
 		String locationDirectory = getAbsolutePath("src", "test", "resources", "com", "svashishtha", "mocktail",
 				"util");

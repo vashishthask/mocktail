@@ -18,7 +18,7 @@
     <module>axis2-simpleclient</module>
     <module>axis2-simpleservice</module>
     <module>cxf-simpleservice</module>
-    <module>springboot-rest-api-demo</module>
+    <module>springboot-rest-api</module>
     <!--module>cxf-simpleclient</module-->
   </modules>
 </project>
