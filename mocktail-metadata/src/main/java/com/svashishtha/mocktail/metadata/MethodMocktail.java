@@ -61,7 +61,7 @@ public class MethodMocktail implements Serializable{
         if(StringUtils.isNotEmpty(recordingBasePath)){
             recordingDirectoryPath = recordingBasePath + File.separator;
         }
-        recordingDirectoryPath += fqcn.replaceAll("\\.", File.separator) + File.separator+methodName;
+        recordingDirectoryPath += fqcn.replace(".", File.separator) + File.separator+methodName;
 
         ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
         return objectRepository.objectAlreadyExist(methodName,
