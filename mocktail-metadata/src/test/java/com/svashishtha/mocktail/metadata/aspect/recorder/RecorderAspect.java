@@ -1,6 +1,6 @@
 package com.svashishtha.mocktail.metadata.aspect.recorder;
 
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 

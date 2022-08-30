@@ -25,7 +25,7 @@ public class RecorderAspectTest {
         dfa = new DirectFieldAccessor(MocktailContainer.getInstance());
     }
 
-    @Test(expected = AssertionFailedError.class)
+    @Test(expected = AssertionError.class)
     public void shouldNotifyRootRecordingDirectoryNotAvailable()
             throws Exception {
         dfa.setPropertyValue("recordingDirectory",

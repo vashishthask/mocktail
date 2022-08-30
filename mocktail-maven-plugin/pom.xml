@@ -77,10 +77,6 @@
           </lifecycleMappingMetadata>
         </configuration>
       </plugin>
-      </plugins>
-    </pluginManagement>
-    <plugins>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-plugin-plugin</artifactId>
@@ -97,6 +93,7 @@
           </execution>
         </executions>
       </plugin>
-    </plugins>
+      </plugins>
+    </pluginManagement>
   </build>
 </project>
