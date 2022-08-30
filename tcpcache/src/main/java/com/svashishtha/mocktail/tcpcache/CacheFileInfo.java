@@ -21,7 +21,7 @@ public class CacheFileInfo {
         String packageName = className.substring(0, className.lastIndexOf("."));
 
         String location = System.getProperty("user.dir") + File.separator + config.getCacheLoation() + File.separator
-                + packageName.replaceAll("\\.", File.separator);
+                + packageName.replace(".", File.separator);
         return location;
     }
 

@@ -85,7 +85,7 @@ public class RecorderAspect$className {
             String recordingFileName, boolean voidReturnType, String methodName) throws Throwable {
         Object objectToBeRecorded;
         String recordingDirectoryPath = recordingBasePath + fileSeparator
-                + fqcn.replaceAll("\\.", fileSeparator);
+                + fqcn.replace(".", fileSeparator);
 
         if (!(new File(recordingDirectoryPath)).exists()) {
             (new File(recordingDirectoryPath)).mkdirs();
@@ -121,7 +121,7 @@ public class RecorderAspect$className {
         Object objectToBeRecorded;
         methodMocktail.setRecordingBasePath(recordingBasePath);
         String methodMocktailPath = recordingBasePath + fileSeparator
-                + methodMocktail.getFqcn().replaceAll("\\.", fileSeparator)
+                + methodMocktail.getFqcn().replace(".", fileSeparator)
                 + fileSeparator + methodMocktail.getMethodName();
         // check if it's recording mode or playback mode
 

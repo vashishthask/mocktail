@@ -1,15 +1,5 @@
 <mocktails>
 	<mocktail>
-		<className>Greeter</className>
-		<classPackageName></classPackageName>
-		<methods></methods>
-	</mocktail>
-	<mocktail>
-		<className>ClassMock</className>
-		<classPackageName>com.svashishtha.mocktail.mock</classPackageName>
-		<methods></methods>
-	</mocktail>
-	<mocktail>
 		<className>UserDao</className>
 		<classPackageName>com.svashishtha.mocktail.mock.jdbc.user</classPackageName>
 		<methods>
