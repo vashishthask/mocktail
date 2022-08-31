@@ -2,6 +2,8 @@ package com.svashishtha.mocktail.mock.jdbc.user;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 public class UserDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -22,5 +24,11 @@ public class UserDetail implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
+    }
+    
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return ToStringBuilder.reflectionToString(this);
     }
 }

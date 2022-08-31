@@ -18,9 +18,11 @@ public class HashCodeIdGenerator implements UniqueIdGenerator {
         XStream xstream = new XStream();
         StringBuilder builder = new StringBuilder();
         builder.append(methodName);
+        System.err.println("HashCodeIdGenerator:getUniqueId:methodName:"+methodName);
         for (Object object : list) {
             String oXml = xstream.toXML(object);
             builder.append(oXml);
+            System.err.println("HashCodeIdGenerator:getUniqueId:oXml"+object);
         }
         int hashCode = builder.toString().hashCode();
         return hashCode;

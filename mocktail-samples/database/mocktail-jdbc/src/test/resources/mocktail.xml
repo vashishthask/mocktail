@@ -7,7 +7,7 @@
             <string>save</string>
             <string>delete</string>
             <string>update</string>
-            <string>getAll</string>
+            <!-- string>getAll</string-->
 		</methods>
 	</mocktail>
 </mocktails>

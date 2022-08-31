@@ -19,7 +19,7 @@ public class ObjectFileOperations {
             .getLogger(ObjectFileOperations.class);
 
     public boolean fileAlreadyExists(String objectId, String location) {
-        System.err.println("The file location is:"+location +"<"+objectId);
+        System.err.println("ObjectFileOperations.fileAlreadyExists: The file location is:"+location +" objectId is:"+objectId);
         File objectFile = new File(location, objectId);
         return objectFile.exists();
     }

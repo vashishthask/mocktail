@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.svashishtha.mocktail.repository.ObjectRepository;
 
@@ -124,5 +125,10 @@ public class MethodMocktail implements Serializable{
             return methodCallsMap.get(key).intValue();
         }
         return 0;
+    }
+    
+    @Override
+    public String toString() {
+    	return ToStringBuilder.reflectionToString(this);
     }
 }
