@@ -68,15 +68,12 @@ public class UserDaoTest {
     // FIXME testcase should be repeatable, i.e. should work without clean
     @Ignore
     public void testInsertUser() {
-    	MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
         System.err.println("Inside testInsertUser");
         insertAnotherRow();// with 2, 20 cached
         assertEquals(2, getNumRows());
         
         insertAnotherRowWithSameParamsAgain();// with 2, 20 shouldn't insert again
         assertEquals(2, getNumRows());
-        methodMocktail.close();
     }
 
     private void insertAnotherRowWithSameParamsAgain() {
@@ -166,11 +163,8 @@ public class UserDaoTest {
     }
 
     @Test
-    @Ignore
     public void testMethodBasedRecording() {
         System.out.println("Inside testMethodBasedRecording");
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
 
         // get all records, insert another one, get all records again. should be
         // n+1
@@ -182,7 +176,6 @@ public class UserDaoTest {
 
         userDetails = userDao.getAll();
         assertThat(2, is(userDetails.size()));
-        methodMocktail.close();
     }
 
     private int getNumRows() {
