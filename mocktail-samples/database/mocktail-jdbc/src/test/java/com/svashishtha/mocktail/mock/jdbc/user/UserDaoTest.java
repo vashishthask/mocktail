@@ -1,9 +1,9 @@
 package com.svashishtha.mocktail.mock.jdbc.user;
 
-import static org.junit.Assert.assertEquals;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNotNull;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.sql.Driver;
 import java.util.List;
@@ -66,20 +66,27 @@ public class UserDaoTest {
 
     @Test
     // FIXME testcase should be repeatable, i.e. should work without clean
-    @Ignore
     public void testInsertUser() {
-        System.err.println("Inside testInsertUser");
+    	MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
+        boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
+        System.err.println("methodMocktail.isRecordingAvailable():"+recordingAvailable + " object details:"+methodMocktail);
+
         insertAnotherRow();// with 2, 20 cached
-        assertEquals(2, getNumRows());
+		int expectedRows = recordingAvailable? 1 : 2;
+        //int expectedRows = 2;
+
+        assertEquals(expectedRows, getNumRows());
         
         insertAnotherRowWithSameParamsAgain();// with 2, 20 shouldn't insert again
-        assertEquals(2, getNumRows());
+        expectedRows = recordingAvailable? 1 : 2;
+        //expectedRows = 2;
+        assertEquals(expectedRows, getNumRows());
+        methodMocktail.close();
     }
 
     private void insertAnotherRowWithSameParamsAgain() {
-    	System.err.println("^^^^insertAnotherRowWithSameParamsAgain");
         insertAnotherRow();
-        
     }
 
     private void insertAnotherRow() {
@@ -128,24 +135,26 @@ public class UserDaoTest {
     }
 
     @Test
-    // FIXME
     public void testDeleteUser() {
     	MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
+        boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
         System.out.println("Inside testDeleteUser");
 
         assertEquals(1, getNumRows());
-        createAnotherRecordExternally(2, 20);
-        assertEquals(2, getNumRows());
+        createAnotherRecordExternally(2, 20); //no recording 
+        assertEquals(2, getNumRows()); //same response both in recording and playback
 
-        deleteRecordWithUserDao(2);//response cached
-        assertEquals(1, getNumRows());
+        deleteRecordWithUserDao(2);//response cached 
+        int expectedRows = recordingAvailable ? 2 : 1;
+        assertEquals(expectedRows, getNumRows()); //this should be 2 in playback, 1 in recording
 
-        createAnotherRecordExternally(2, 20);
+        createAnotherRecordExternally(2, 20); //now the rows are 3 in playback, 2 in recording
         deleteRecordWithUserDao(2); // should not delete this time as response
                                     // of delete is cached in previous call
 
-        assertEquals(1, getNumRows());
+        expectedRows = recordingAvailable ? 3 : 2;
+        assertEquals(expectedRows, getNumRows());
         methodMocktail.close();
     }
 
@@ -164,6 +173,9 @@ public class UserDaoTest {
 
     @Test
     public void testMethodBasedRecording() {
+    	MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
+        boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
         System.out.println("Inside testMethodBasedRecording");
 
         // get all records, insert another one, get all records again. should be
@@ -175,12 +187,14 @@ public class UserDaoTest {
         insertAnotherRow();
 
         userDetails = userDao.getAll();
-        assertThat(2, is(userDetails.size()));
+        int expectedRows = recordingAvailable ? 1 : 2;
+        assertThat(expectedRows, is(userDetails.size()));
+        methodMocktail.close();
     }
+    
 
     private int getNumRows() {
         return jdbcTemplate.queryForInt("select count(*) from userdetail");
-        
     }
 
     @After

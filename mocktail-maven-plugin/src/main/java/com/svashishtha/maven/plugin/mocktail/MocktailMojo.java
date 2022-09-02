@@ -57,7 +57,9 @@ public class MocktailMojo extends AjcCompileMojo {
             aspectsDirectory.mkdirs();
         }
         
-        MocktailContainer.getInstance().setRecordingDirectory(recordingDir.getAbsolutePath());
+        MocktailContainer mocktailContainer = MocktailContainer.getInstance();
+		mocktailContainer.setRecordingDirectory(recordingDir.getAbsolutePath());
+		System.err.println("MocktailMojo: The Mocktail mode is:"+mocktailContainer.getMocktailMode());
         
         try {
             XStreamMocktailXmlReader configReader = new XStreamMocktailXmlReader();
@@ -76,7 +78,9 @@ public class MocktailMojo extends AjcCompileMojo {
         }
     }
 
-    private boolean isRecordingMode() {
+    
+
+	private boolean isRecordingMode() {
         return mode.equalsIgnoreCase(MocktailMode.RECORDING
                 .getModeDirectory());
     }

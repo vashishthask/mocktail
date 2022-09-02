@@ -34,6 +34,9 @@ public class UserDao implements GenericDao<UserDetail> {
     }
     
     public int save(UserDetail userDetail) {
+    	System.err.println("Insert with user detail***:"+userDetail);
+    	Exception ex = new Exception(userDetail.toString());
+    	ex.printStackTrace();
         return jdbcTemplate.update("insert into userdetail values(?,?)", new Object[]{new Integer(userDetail.getId()), new Integer(userDetail.getAge())});
     }
 

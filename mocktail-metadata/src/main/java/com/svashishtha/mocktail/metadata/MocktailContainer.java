@@ -1,5 +1,6 @@
 package com.svashishtha.mocktail.metadata;
 
+import com.svashishtha.mocktail.MocktailMode;
 import com.svashishtha.mocktail.metadata.util.HashCodeIdGenerator;
 import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
 import com.svashishtha.mocktail.metadata.xml.reader.MocktailXmlReader;
@@ -13,6 +14,7 @@ public class MocktailContainer {
     private String recordingDirectory;
     private MethodMocktail methodMocktail;
     private ObjectRepository objectRepository;
+	private MocktailMode mocktailMode;
     
     
     private static MocktailContainer mocktailContainer = new MocktailContainer();
@@ -71,4 +73,24 @@ public class MocktailContainer {
     public MethodMocktail getMethodMocktail() {
         return methodMocktail;
     }
+
+	public void setMocktailMode(String mode) {
+		this.mocktailMode = getMode(mode);
+		
+	}
+	
+	private MocktailMode getMode(String mode) {
+		if(mode.equalsIgnoreCase(MocktailMode.PLAYBACK.getModeDirectory()))
+		return MocktailMode.PLAYBACK;
+		else if (mode.equalsIgnoreCase(MocktailMode.RECORDING.getModeDirectory())) {
+			return MocktailMode.RECORDING;
+		} else if (mode.equalsIgnoreCase(MocktailMode.RECORDING_NEW.getModeDirectory())) {
+			return MocktailMode.RECORDING_NEW;
+		} 
+		return MocktailMode.RECORDING;
+	}
+
+	public MocktailMode getMocktailMode() {
+		return mocktailMode;
+	}
 }

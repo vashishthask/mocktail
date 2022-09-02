@@ -12,6 +12,7 @@ import com.svashishtha.mocktail.metadata.MocktailContainer;
 import com.svashishtha.mocktail.repository.ObjectRepository;
 import com.svashishtha.mocktail.metadata.aj.creator.MocktailMethodExecutor;
 import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
+import com.svashishtha.mocktail.metadata.aj.creator.MocktailMethodExecutor;
 
 @Aspect
 public class RecorderAspect$className {
@@ -23,9 +24,12 @@ public class RecorderAspect$className {
     private String fileSeparator;
     private String recordingBasePath;
     private String methodName;
+    private String mocktailMode;
+    private MocktailMethodExecutor methodExecutor;
 
     public RecorderAspect$className(){
         mocktailContainer = MocktailContainer.getInstance();
+        methodExecutor = new MocktailMethodExecutor();
 
         objectRepository = mocktailContainer
                 .getObjectRepository();
@@ -35,6 +39,8 @@ public class RecorderAspect$className {
 
         fileSeparator = File.separator;
         recordingBasePath = "$recordingDirectory";
+        mocktailMode = "$mocktailMode";
+        mocktailContainer.setMocktailMode(mocktailMode);
     }
     
     #foreach($method in $methods)
@@ -49,126 +55,10 @@ public class RecorderAspect$className {
     public Object advice$method(ProceedingJoinPoint pjp) throws Throwable {
         String recordingFileName = uniqueIdGenerator.getUniqueId("$method", pjp.getArgs()) + "";
         String methodName = "$method";
-        return executeAspect(pjp, recordingFileName, methodName);
+        return methodExecutor.executeAspect(pjp, recordingFileName, recordingBasePath, methodName);
     }
     #end
     
-    private Object executeAspect(ProceedingJoinPoint pjp,
-            String recordingFileName, String methodName) throws Throwable {
-        boolean voidReturnType = isVoidReturnType(pjp);
-        System.out.println("EXECUTING ASPECT NOW");
-        System.out.println("++++++++++++++++++++");
-
-        Object objectToBeRecorded = pjp.proceed();
-        MethodMocktail methodMocktail = mocktailContainer.getMethodMocktail();
-        
-        if (methodMocktail != null) {
-        System.err.println("\nexecuteAspect: The method name is:"+methodName+ " methodMocktail is:"+methodMocktail
-            + " recordingFileName is:"+recordingFileName); 
-            MocktailMethodExecutor mocktailExecutor = new MocktailMethodExecutor();
-            objectToBeRecorded = mocktailExecutor.mocktailForEachTestMethod(pjp,
-                    recordingFileName, voidReturnType, methodMocktail,
-                    methodName, recordingBasePath);
-                    
-        } /*else {
-            objectToBeRecorded = mocktailWithSharedData(pjp, recordingFileName,
-                    voidReturnType, methodName);
-        }*/
-        
-        System.out
-                    .println("executeAspect - objectToBeRecorded:"+objectToBeRecorded);
-
-        return objectToBeRecorded;
-    }
-
-    private boolean isVoidReturnType(ProceedingJoinPoint pjp) {
-        Method method = ((MethodSignature) pjp.getSignature()).getMethod();
-        boolean voidReturnType = false;
-        if (method.getReturnType().equals(Void.TYPE)) {
-            voidReturnType = true;
-        }
-        return voidReturnType;
-    }
-    
-    private Object mocktailForEachTestMethod1(ProceedingJoinPoint pjp,
-            String recordingFileName, boolean voidReturnType,
-            MethodMocktail methodMocktail, String methodName) throws Throwable {
-        Object objectToBeRecorded = null;
-        methodMocktail.setRecordingBasePath(recordingBasePath);
-        String methodMocktailPath = recordingBasePath + fileSeparator
-                + methodMocktail.getFqcn().replace(".", fileSeparator)
-                + fileSeparator + methodMocktail.getMethodName();
-        // check if it's recording mode or playback mode
-
-        boolean recordingMode = !(methodMocktail.isPlaybackMode());
-        recordingFileName = methodName + "_" + recordingFileName;
-        System.err.println("\nModified recordingFileName is:"+recordingFileName);
-        /*if (methodMocktail.getMethodCalls(originalRecordingFileName) > 0) {
-            recordingFileName = recordingFileName
-                    + "_"
-                    + methodMocktail
-                            .getMethodCalls(originalRecordingFileName);
-        } else {
-            recordingFileName = recordingFileName + "_0";
-        }*/
-        
-        //System.err.println("mocktailForEachTestMethod:recordingFileName:"+recordingFileName +" methodMocktailPath:"+methodMocktailPath);
-
-        boolean objectExistsInRepository = objectRepository
-                .objectAlreadyExist(recordingFileName, methodMocktailPath);
-        System.out.println("\nthe recording file name is:"
-                + recordingFileName + " and methodMocktailPath is:"
-                + methodMocktailPath + "> object exists?"
-                + objectExistsInRepository + ":recordingMode?"
-                + recordingMode);
-
-        /*if (recordingMode && objectExistsInRepository) {
-            // save it again
-            // get the name of the recordingFile
-            System.out
-                    .println("MethodMocktail - Recording not already in place so doing the recording:"
-                            + recordingFileName + ":" + methodMocktailPath);
-
-            objectToBeRecorded = pjp.proceed();
-            if (!voidReturnType) {
-                objectRepository.saveObject(objectToBeRecorded,
-                        recordingFileName, methodMocktailPath);
-            }
-        } else*/ if (objectExistsInRepository) {
-            
-            objectToBeRecorded = objectRepository.getObject(
-                    recordingFileName, methodMocktailPath);
-            System.out
-                    .println("MethodMocktail - object already exists so not saving it:"
-                            + recordingFileName + ":" + methodMocktailPath+" objectToBeRecorded:"+objectToBeRecorded);
-        } else if (recordingMode){
-            // Ask Recorder to save the recording file
-
-            File methodMocktailFile = new File(methodMocktailPath);
-            if (!methodMocktailFile.exists()) {
-                methodMocktailFile.mkdirs();
-            }
-            objectToBeRecorded = pjp.proceed();
-            if (!voidReturnType) {
-                System.out
-                        .println("MethodMocktail - Recording not already in place so doing the recording:"
-                                + recordingFileName
-                                + ":"
-                                + methodMocktailPath);
-                objectRepository.saveObject(objectToBeRecorded,
-                        recordingFileName, methodMocktailPath);
-                methodMocktail
-                .registerWithMethodCallsMap(recordingFileName);
-            }
-            
-        }
-        
-        System.out
-                    .println(" objectToBeRecorded:"+objectToBeRecorded);
-
-        
-        return objectToBeRecorded;
-    }
 
     private Object mocktailWithSharedData(ProceedingJoinPoint pjp,
             String recordingFileName, boolean voidReturnType, String methodName) throws Throwable {

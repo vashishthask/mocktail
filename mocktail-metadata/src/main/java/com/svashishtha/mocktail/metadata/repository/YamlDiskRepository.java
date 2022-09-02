@@ -13,6 +13,8 @@ public class YamlDiskRepository implements ObjectRepository {
     public void saveObject(Object object, String objectId, String location) {
         Yaml yaml = new Yaml();
         String yamlStr = yaml.dump(object);
+        Exception e = new Exception(objectId);
+        e.printStackTrace();
         fileOperations.writeStringToFile(yamlStr, objectId, location);
     }
 

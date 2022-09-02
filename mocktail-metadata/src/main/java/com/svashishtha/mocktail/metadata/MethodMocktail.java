@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import com.svashishtha.mocktail.MocktailConfig;
+import com.svashishtha.mocktail.repository.ObjectFileOperations;
 import com.svashishtha.mocktail.repository.ObjectRepository;
 
 public class MethodMocktail implements Serializable{
@@ -48,15 +50,31 @@ public class MethodMocktail implements Serializable{
 
     public void close() {
         container.resetMethodMocktail();
-        if(!serializedObjectExistsOnDisk()){
-            saveSerializedIndicatorOnDisk();
-        }
+//        if(!serializedObjectExistsOnDisk()){
+//            saveSerializedIndicatorOnDisk();
+//        }
         System.out.println("Calling MethodMocktail.close() method");
     }
     
-    public boolean isPlaybackMode(){
+    public boolean isObjectExistOnDisk(){
         return serializedObjectExistsOnDisk();
     }
+    
+    
+    
+    
+    private boolean checkRecordingsOnDisk() {
+    	String  recordingPath = System.getProperty("user.dir") + File.separator 
+    			+ MocktailConfig.INSTANCE.getProperty("recordingDir") + File.separator
+    			+ fqcn.replace(".", File.separator) + File.separator+methodName;
+    	ObjectFileOperations fileOperations = new ObjectFileOperations();
+    	boolean recAvailable = fileOperations.isRecordingAvailable(recordingPath);
+    	System.err.println("The recording path is:"+recordingPath+" recordingBasePath:"
+    	+recordingBasePath+ " recAvailable:"+recAvailable + " object details:"+this);
+
+		return recAvailable;
+    }
+    
     
     private boolean serializedObjectExistsOnDisk() {
         if(StringUtils.isNotEmpty(recordingBasePath)){
@@ -69,7 +87,7 @@ public class MethodMocktail implements Serializable{
                 recordingDirectoryPath);
     }
 
-    private void saveSerializedIndicatorOnDisk() {
+    /*private void saveSerializedIndicatorOnDisk() {
         System.out.println("The recording directory path is:"+recordingDirectoryPath);
         if (!(new File(recordingDirectoryPath)).exists()) {
             boolean directoryCreated = (new File(recordingDirectoryPath)).mkdirs();
@@ -80,7 +98,7 @@ public class MethodMocktail implements Serializable{
         ObjectRepository objectRepository = MocktailContainer.getInstance().getObjectRepository();
         objectRepository.saveObject(methodName, recordingFileName,
                 recordingDirectoryPath);
-    }
+    }*/
 
     private StackTraceElement getStackTraceElement(String fqcn,
             StackTraceElement[] stackTrace) {
@@ -131,4 +149,8 @@ public class MethodMocktail implements Serializable{
     public String toString() {
     	return ToStringBuilder.reflectionToString(this);
     }
+
+	public boolean areRecordingsAvailable() {
+		return checkRecordingsOnDisk();
+	}
 }

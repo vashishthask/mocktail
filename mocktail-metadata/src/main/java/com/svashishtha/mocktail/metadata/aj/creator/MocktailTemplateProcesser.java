@@ -27,7 +27,7 @@ public class MocktailTemplateProcesser {
 
     String processTemplate(Mocktail mocktail, AspectType aspectType, MocktailMode mocktailMode) {
         VelocityContext context = new VelocityContext();
-        Map<String, Object> dynamicValues = getTemplateParameterValues(mocktail, aspectType);
+        Map<String, Object> dynamicValues = getTemplateParameterValues(mocktail, aspectType, mocktailMode);
         
         for (Map.Entry<String, Object> contextEntry : dynamicValues.entrySet()) {
             context.put(contextEntry.getKey(), contextEntry.getValue());
@@ -50,11 +50,12 @@ public class MocktailTemplateProcesser {
         return writer.toString();
     }
     
-    Map<String, Object> getTemplateParameterValues(Mocktail mocktail, AspectType aspectType) {
+    Map<String, Object> getTemplateParameterValues(Mocktail mocktail, AspectType aspectType, MocktailMode mocktailMode) {
         Map<String, Object> contextMap = new HashMap<String, Object>();
         contextMap.put("fqcn", mocktail.getClassFQCN());
         contextMap.put("className", mocktail.getClassName());
         contextMap.put("packageName", mocktail.getClassPackageName());
+        contextMap.put("mocktailMode", mocktailMode.getModeDirectory());
         String targetImpl = mocktail.getTargetImpl();
         if(StringUtils.isNotEmpty(targetImpl)){
             contextMap.put("targetImpl", targetImpl);
