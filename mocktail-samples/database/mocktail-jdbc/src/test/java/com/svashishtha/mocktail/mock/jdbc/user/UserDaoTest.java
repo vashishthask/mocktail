@@ -61,7 +61,6 @@ public class UserDaoTest {
         // search again
         UserDetail recordedUserDetail = userDao.get(1L);
         assertEquals(10, recordedUserDetail.getAge());
-        methodMocktail.close();
     }
 
     @Test
@@ -82,7 +81,6 @@ public class UserDaoTest {
         expectedRows = recordingAvailable? 1 : 2;
         //expectedRows = 2;
         assertEquals(expectedRows, getNumRows());
-        methodMocktail.close();
     }
 
     private void insertAnotherRowWithSameParamsAgain() {
@@ -125,7 +123,6 @@ public class UserDaoTest {
 
         assertEquals(1, numRowsAffected); //numRowAffected comes from cached response and hence should be 1 instead of 2
 
-        methodMocktail.close();
 
     }
 
@@ -155,7 +152,6 @@ public class UserDaoTest {
 
         expectedRows = recordingAvailable ? 3 : 2;
         assertEquals(expectedRows, getNumRows());
-        methodMocktail.close();
     }
 
     private UserDetail deleteRecordWithUserDao(int id) {
@@ -189,7 +185,6 @@ public class UserDaoTest {
         userDetails = userDao.getAll();
         int expectedRows = recordingAvailable ? 1 : 2;
         assertThat(expectedRows, is(userDetails.size()));
-        methodMocktail.close();
     }
     
 

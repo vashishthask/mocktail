@@ -49,7 +49,7 @@ public class MethodMocktail implements Serializable{
 
 
     public void close() {
-        container.resetMethodMocktail();
+//        container.resetMethodMocktail();
 //        if(!serializedObjectExistsOnDisk()){
 //            saveSerializedIndicatorOnDisk();
 //        }
