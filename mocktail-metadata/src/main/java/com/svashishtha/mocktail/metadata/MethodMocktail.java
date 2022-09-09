@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.svashishtha.mocktail.MocktailConfig;
 import com.svashishtha.mocktail.repository.ObjectFileOperations;
 import com.svashishtha.mocktail.repository.ObjectRepository;
 
 public class MethodMocktail implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodMocktail.class);
     private static final long serialVersionUID = 1L;
 
     private static final String NOT_AVAIL = "?";
@@ -27,6 +30,8 @@ public class MethodMocktail implements Serializable {
     private String recordingDirectoryPath = "";
 
     private String recordingBasePath = "";
+    
+    private boolean recordingsAvailable;
 
     public String getFqcn() {
         return fqcn;
@@ -42,6 +47,7 @@ public class MethodMocktail implements Serializable {
         fqcn = object.getClass().getName();
         element = getStackTraceElement(this.getClass().getName(), Thread.currentThread().getStackTrace());
         methodName = element.getMethodName();
+        recordingsAvailable = checkRecordingsOnDisk();
     }
 
     public void close() {
@@ -57,7 +63,7 @@ public class MethodMocktail implements Serializable {
                 + fqcn.replace(".", File.separator) + File.separator + methodName;
         ObjectFileOperations fileOperations = new ObjectFileOperations();
         boolean recAvailable = fileOperations.isRecordingAvailable(recordingPath);
-        System.err.println("The recording path is:" + recordingPath + " recordingBasePath:" + recordingBasePath
+        LOGGER.debug("The recording path is:" + recordingPath + " recordingBasePath:" + recordingBasePath
                 + " recAvailable:" + recAvailable + " object details:" + this);
 
         return recAvailable;
@@ -123,6 +129,6 @@ public class MethodMocktail implements Serializable {
     }
 
     public boolean areRecordingsAvailable() {
-        return checkRecordingsOnDisk();
+        return recordingsAvailable;
     }
 }

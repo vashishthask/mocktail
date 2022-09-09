@@ -1,7 +1,6 @@
 package com.svashishtha.maven.plugin.mocktail;
 
 import java.io.File;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
@@ -9,6 +8,8 @@ import java.util.List;
 
 import org.apache.maven.plugin.MojoExecutionException;
 import org.codehaus.mojo.aspectj.AjcCompileMojo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.svashishtha.mocktail.MocktailMode;
 import com.svashishtha.mocktail.metadata.MocktailContainer;
@@ -25,6 +26,7 @@ import com.svashishtha.mocktail.metadata.xml.reader.XStreamMocktailXmlReader;
  * @phase validate
  */
 public class MocktailMojo extends AjcCompileMojo {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MocktailMojo.class);
     /**
      * @parameter expression="${aspectsDirectory}"
      *            default-value="${target}/generated/aspects"
@@ -52,14 +54,14 @@ public class MocktailMojo extends AjcCompileMojo {
 
     public void execute() throws MojoExecutionException {
 
-        System.out.println("Executing the mocktail mojo");
+        LOGGER.debug("Executing the mocktail mojo");
         if (!aspectsDirectory.exists()) {
             aspectsDirectory.mkdirs();
         }
         
         MocktailContainer mocktailContainer = MocktailContainer.getInstance();
 		mocktailContainer.setRecordingDirectory(recordingDir.getAbsolutePath());
-		System.err.println("MocktailMojo: The Mocktail mode is:"+mocktailContainer.getMocktailMode());
+		LOGGER.debug("MocktailMojo: The Mocktail mode is:"+mocktailContainer.getMocktailMode());
         
         try {
             XStreamMocktailXmlReader configReader = new XStreamMocktailXmlReader();

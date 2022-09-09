@@ -17,6 +17,8 @@ import org.apache.velocity.exception.MethodInvocationException;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.svashishtha.mocktail.MocktailMode;
 import com.svashishtha.mocktail.metadata.MocktailContainer;
@@ -24,6 +26,8 @@ import com.svashishtha.mocktail.metadata.xml.domain.AspectType;
 import com.svashishtha.mocktail.metadata.xml.domain.Mocktail;
 
 public class MocktailTemplateProcesser {
+    
+    private static final Logger LOGGER = LoggerFactory.getLogger(MocktailTemplateProcesser.class);
 
     String processTemplate(Mocktail mocktail, AspectType aspectType, MocktailMode mocktailMode) {
         VelocityContext context = new VelocityContext();
@@ -92,7 +96,7 @@ public class MocktailTemplateProcesser {
             aspectFileDirectory.mkdirs();
         }
         File file = new File(aspectFileDirectory, aspectFileName + ".java");
-        System.out.println("file path:"+ file.getAbsolutePath());
+        LOGGER.debug("file path:"+ file.getAbsolutePath());
         try {
             FileWriter aspectOs = new FileWriter(file);
             aspectOs.write(templatedObjectString);
@@ -114,7 +118,7 @@ public class MocktailTemplateProcesser {
     public void createAspect(Mocktail mocktail, AspectType aspectType,
             MocktailMode mocktailMode, File aspectsRootDirectory) {
         String templateString = processTemplate( mocktail,  aspectType,  mocktailMode);
-        System.out.println(templateString);
+        LOGGER.debug(templateString);
         createAspectFile(mocktail, getAspectFileName(mocktail, mocktailMode), aspectsRootDirectory, templateString);
     }
     

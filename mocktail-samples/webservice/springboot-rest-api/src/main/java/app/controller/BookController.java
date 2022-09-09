@@ -62,7 +62,6 @@ public class BookController {
     @RequestMapping(method = RequestMethod.GET)
     public Map<String, Object> getAllBooks() {
         List<Book> books = bookService.fetchBookList();
-        System.out.println("the books are:" + books);
         Map<String, Object> response = new LinkedHashMap<String, Object>();
         response.put("totalBooks", books.size());
         response.put("books", books);

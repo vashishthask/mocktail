@@ -1,7 +1,7 @@
 package com.svashishtha.mocktail.metadata.util;
 
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,32 +9,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.svashishtha.mocktail.metadata.MocktailContainer;
-import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
 
 public class UniqueIdGeneratorTest {
 
     UniqueIdGenerator uniqueIdGenerator = MocktailContainer.getInstance()
             .getUniqueIdGenerator();
 
-    @SuppressWarnings("unchecked")
     @Test
     public void shouldGenerateUniqueIdUsingHashCode() throws Exception {
         int uniqueId = uniqueIdGenerator.getUniqueId("sandy", "ganesh", 12,
                 23.0);
-        System.out.println(uniqueId);
         assertThat(uniqueId, is(1642607558));
 
         uniqueId = uniqueIdGenerator.getUniqueId("ganesh", "sandy", 12, 23.0);
-        System.out.println(uniqueId);
         assertThat(uniqueId, is(-1575575532));
 
         uniqueId = uniqueIdGenerator.getUniqueId(Arrays.asList("sandy",
                 "ganesh", 12, 23.0));
-        System.out.println(uniqueId);
         assertThat(uniqueId, is(1332060453));
 
         Object[] array = { "ganesh", 12, 23.0 };
@@ -60,7 +54,6 @@ public class UniqueIdGeneratorTest {
         dtoSample.appendStr("zipCode");
         
         int uniqueId = uniqueIdGenerator.getUniqueId("objectIdTest", dtoSample);
-        System.out.println(uniqueId);
         
         assertThat(uniqueId, is(-1693988048));
     }

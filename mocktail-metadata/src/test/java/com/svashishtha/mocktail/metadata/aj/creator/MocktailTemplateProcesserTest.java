@@ -1,8 +1,9 @@
 package com.svashishtha.mocktail.metadata.aj.creator;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -13,19 +14,18 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.DirectFieldAccessor;
 
 import com.svashishtha.mocktail.MocktailMode;
 import com.svashishtha.mocktail.metadata.MocktailContainer;
 import com.svashishtha.mocktail.metadata.MocktailObjectMother;
-import com.svashishtha.mocktail.metadata.aj.creator.MocktailAspectsCreator;
-import com.svashishtha.mocktail.metadata.aj.creator.MocktailTemplateProcesser;
 import com.svashishtha.mocktail.metadata.xml.domain.AspectType;
 import com.svashishtha.mocktail.metadata.xml.domain.Mocktail;
 
-import static org.hamcrest.Matchers.containsString;
-
 public class MocktailTemplateProcesserTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MocktailTemplateProcesserTest.class);
     
     @Before
     public void setupMocktailContainer() {
@@ -59,7 +59,7 @@ public class MocktailTemplateProcesserTest {
 
         String templatedString = templateProcessor.processTemplate(mocktail,
                 AspectType.METHODS_ASPECT_TYPE, MocktailMode.RECORDING);
-        System.out.println(templatedString);
+        LOGGER.debug(templatedString);
 
         String expectedpointcut = "@Around(\"execution(* com.svashishtha.mocktail.metadata.aj.creator.TemplateProcesserTest.method1(..))\")";
         assertTrue(templatedString.contains(expectedpointcut));
@@ -105,7 +105,7 @@ public class MocktailTemplateProcesserTest {
                 MocktailObjectMother.createClassMocktail("AspectedClass", ""),
                 aspectsRootDirectory, MocktailMode.RECORDING);
 
-        System.out.println("aspect root directory:"
+        LOGGER.debug("aspect root directory:"
                 + aspectsRootDirectory.getAbsolutePath());
 
         assertTrue("Aspect doesn't exists", (new File(aspectsRootDirectory,
@@ -153,7 +153,7 @@ public class MocktailTemplateProcesserTest {
         String templatedMethodObjectString = templateProcessor.processTemplate(
                 methodMocktail, AspectType.METHODS_ASPECT_TYPE,
                 MocktailMode.PLAYBACK);
-        System.out.println("The templatemethod string is\n"+templatedMethodObjectString);
+        LOGGER.debug("The templatemethod string is\n"+templatedMethodObjectString);
         assertThat(templatedMethodObjectString,
                 containsString("public class PlaybackAspectname"));
         assertThat(templatedMethodObjectString,
@@ -179,7 +179,7 @@ public class MocktailTemplateProcesserTest {
         String templatedClassObjectString = templateProcessor.processTemplate(
                 classMocktail, AspectType.CLASS_ASPECT_TYPE,
                 MocktailMode.RECORDING);
-        System.out.println(templatedClassObjectString);
+        LOGGER.debug(templatedClassObjectString);
         assertThat(templatedClassObjectString,
                 containsString("public aspect RecorderAspectAspectedClass"));
         assertThat(templatedClassObjectString,
@@ -189,6 +189,6 @@ public class MocktailTemplateProcesserTest {
         assertThat(
                 templatedClassObjectString,
                 containsString("pointcut callPointcut() : call(* com.sandy.AspectedClass.*(..));"));
-        System.out.println(templatedClassObjectString);
+        LOGGER.debug(templatedClassObjectString);
     }
 }

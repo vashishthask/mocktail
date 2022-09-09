@@ -8,6 +8,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.hsqldb.jdbcDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -19,6 +21,7 @@ public class UserDao implements GenericDao<UserDetail> {
     
     private static final String GET_OBJECT_QUERY = "select id, age from userdetail where id = ?";
     private static final String GET_ALL_OBJECTS_QUERY = "select id, age from userdetail";
+    private static final Logger LOGGER = LoggerFactory.getLogger(GenericDao.class);
     
     private JdbcTemplate jdbcTemplate;
     
@@ -34,9 +37,7 @@ public class UserDao implements GenericDao<UserDetail> {
     }
     
     public int save(UserDetail userDetail) {
-    	System.err.println("Insert with user detail***:"+userDetail);
-    	Exception ex = new Exception(userDetail.toString());
-    	ex.printStackTrace();
+        LOGGER.debug("Insert with user detail:"+userDetail);
         return jdbcTemplate.update("insert into userdetail values(?,?)", new Object[]{new Integer(userDetail.getId()), new Integer(userDetail.getAge())});
     }
 

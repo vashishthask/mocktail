@@ -30,9 +30,8 @@ public class HashCodeIdGenerator implements UniqueIdGenerator {
             try {
                 oXml = xstream.toXML(object);
             } catch (Throwable e) {
-                e.printStackTrace();
                 LOGGER.error("Could not find converter for the object " + object
-                        + ". This object will be ignored in creating unique name", e);
+                        + ". This object will be ignored in creating unique name. The trace is:" + e.getMessage(), e);
             }
             builder.append(oXml);
             LOGGER.debug("oXml" + oXml);

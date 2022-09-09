@@ -12,6 +12,8 @@ import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -34,6 +36,7 @@ import app.service.BookService;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class BookControllerTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookControllerTest.class);
     @LocalServerPort
     private int port;
 
@@ -74,10 +77,8 @@ public class BookControllerTest {
         bookRestService = new BookRestService(restTemplate.getRestTemplate(), HOST_PORT, port);
 
         Map<String, Object> apiResponse = null;
-        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable();
-
         apiResponse = bookRestService.postBook("/book", httpEntity, Map.class, Collections.EMPTY_MAP);
-        System.err.println("The API RESPONSE IS:" + apiResponse + " the port is:" + port);
+        LOGGER.debug("The API RESPONSE IS:" + apiResponse + " the port is:" + port);
 
         assertNotNull(apiResponse);
 
@@ -91,7 +92,7 @@ public class BookControllerTest {
 
         // Fetching the Book details directly from the DB to verify the API succeeded
         Book bookFromService = bookService.findBookById(bookId);
-        if (!areRecordingsAvailable) {
+        if (!methodMocktail.areRecordingsAvailable()) {
             assertEquals("Book 1", bookFromService.getName());
             assertEquals("QWER1234", bookFromService.getIsbn());
             assertEquals("Author 1", bookFromService.getAuthor());
@@ -160,8 +161,7 @@ public class BookControllerTest {
 
         bookRestService = new BookRestService(restTemplate.getRestTemplate(), HOST_PORT, port);
 
-        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable(); // recordings should be available
-                                                                                  // while recording
+        
 
         Map<String, Object> apiResponse = (Map<String, Object>) bookRestService.updateBook("/book/", HttpMethod.PUT,
                 bookId, httpEntity, Map.class, Collections.EMPTY_MAP); // will be saved in cache as saved though rest
@@ -178,7 +178,10 @@ public class BookControllerTest {
         // updating the book details. In playback the updation shouldn't have happened.
         Book bookFromDb = bookService.findBookById(bookId);
         assertNotNull(bookFromDb);
-        System.err.println("methodMocktail.areRecordingsAvailable():" + areRecordingsAvailable);
+        
+        // recordings should be available while recording
+        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable(); 
+        LOGGER.debug("areRecordingsAvailable():" + areRecordingsAvailable);
         String bookName = areRecordingsAvailable ? "Book1" : "Book2";
         String isbn = areRecordingsAvailable ? "ISBN1" : "ISBN2";
         String author = areRecordingsAvailable ? "Author1" : "Author2";

@@ -14,8 +14,9 @@ import org.hsqldb.jdbcDriver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
@@ -23,6 +24,7 @@ import com.svashishtha.mocktail.metadata.MethodMocktail;
 
 //FIXME test is not repeatable while running with "mvn install" after one run using "mvn clean install"
 public class UserDaoTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDaoTest.class);
 
     private JdbcTemplate jdbcTemplate;
     UserDao userDao;
@@ -69,7 +71,7 @@ public class UserDaoTest {
     	MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
-        System.err.println("methodMocktail.isRecordingAvailable():"+recordingAvailable + " object details:"+methodMocktail);
+        LOGGER.debug("isRecordingAvailable():"+recordingAvailable + " object details:"+methodMocktail);
 
         insertAnotherRow();// with 2, 20 cached
 		int expectedRows = recordingAvailable? 1 : 2;
@@ -92,7 +94,7 @@ public class UserDaoTest {
         userDetail.setAge(20);
         userDetail.setId(3);
         int numAffected = userDao.save(userDetail);
-        System.err.println("numAffected:"+numAffected);
+        LOGGER.debug("numAffected:"+numAffected);
     }
 
     @Test
@@ -100,7 +102,6 @@ public class UserDaoTest {
     public void testUpdateUser() {
     	MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
-        System.out.println("Inside testUpdateUser");
         int count = getNumRows();
 
         assertEquals(1, count);
@@ -136,7 +137,6 @@ public class UserDaoTest {
     	MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
-        System.out.println("Inside testDeleteUser");
 
         assertEquals(1, getNumRows());
         createAnotherRecordExternally(2, 20); //no recording 
@@ -172,7 +172,6 @@ public class UserDaoTest {
     	MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
-        System.out.println("Inside testMethodBasedRecording");
 
         // get all records, insert another one, get all records again. should be
         // n+1
