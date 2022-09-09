@@ -3,9 +3,13 @@ package com.svashishtha.mocktail.metadata.util;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.thoughtworks.xstream.XStream;
 
 public class HashCodeIdGenerator implements UniqueIdGenerator {
+    private static final Logger LOGGER = LoggerFactory.getLogger(HashCodeIdGenerator.class);
 
     @Override
     public int getUniqueId(Object... objects) {
@@ -18,11 +22,21 @@ public class HashCodeIdGenerator implements UniqueIdGenerator {
         XStream xstream = new XStream();
         StringBuilder builder = new StringBuilder();
         builder.append(methodName);
-        System.err.println("HashCodeIdGenerator:getUniqueId:methodName:"+methodName);
+        LOGGER.debug("the method name is" + methodName);
         for (Object object : list) {
-            String oXml = xstream.toXML(object);
+            LOGGER.debug("the object is" + object);
+
+            String oXml = "";
+            try {
+                oXml = xstream.toXML(object);
+            } catch (Throwable e) {
+                e.printStackTrace();
+                LOGGER.error("Could not find converter for the object " + object
+                        + ". This object will be ignored in creating unique name", e);
+            }
             builder.append(oXml);
-            System.err.println("HashCodeIdGenerator:getUniqueId:oXml"+object);
+            LOGGER.debug("oXml" + oXml);
+
         }
         int hashCode = builder.toString().hashCode();
         return hashCode;

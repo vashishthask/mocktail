@@ -1,6 +1,7 @@
 package com.svashishtha.mocktail.metadata;
 
 import com.svashishtha.mocktail.MocktailMode;
+import com.svashishtha.mocktail.metadata.repository.YamlDiskRepository;
 import com.svashishtha.mocktail.metadata.util.HashCodeIdGenerator;
 import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
 import com.svashishtha.mocktail.metadata.xml.reader.MocktailXmlReader;
@@ -14,9 +15,8 @@ public class MocktailContainer {
     private String recordingDirectory;
     private MethodMocktail methodMocktail;
     private ObjectRepository objectRepository;
-	private MocktailMode mocktailMode;
-    
-    
+    private MocktailMode mocktailMode;
+
     private static MocktailContainer mocktailContainer = new MocktailContainer();
 
     private MocktailContainer() {
@@ -28,8 +28,8 @@ public class MocktailContainer {
         uniqueIdGenerator = new HashCodeIdGenerator();
         objectRepository = ObjectRepositoryFactory.create("yaml");
     }
-    
-    public static MocktailContainer getInstance(){
+
+    public static MocktailContainer getInstance() {
         return mocktailContainer;
     }
 
@@ -40,7 +40,7 @@ public class MocktailContainer {
     public ObjectRepository getObjectRepository() {
         return objectRepository;
     }
-    
+
     public UniqueIdGenerator getUniqueIdGenerator() {
         return uniqueIdGenerator;
     }
@@ -56,8 +56,8 @@ public class MocktailContainer {
             this.recordingDirectory = directoryPath;
         }
     }
-    
-    public void clean(){
+
+    public void clean() {
         this.recordingDirectory = null;
         this.init();
     }
@@ -65,32 +65,32 @@ public class MocktailContainer {
     public void setMethodMocktail(MethodMocktail methodMocktail) {
         this.methodMocktail = methodMocktail;
     }
-    
+
     public void resetMethodMocktail() {
         methodMocktail = null;
     }
-    
+
     public MethodMocktail getMethodMocktail() {
         return methodMocktail;
     }
 
-	public void setMocktailMode(String mode) {
-		this.mocktailMode = getMode(mode);
-		
-	}
-	
-	private MocktailMode getMode(String mode) {
-		if(mode.equalsIgnoreCase(MocktailMode.PLAYBACK.getModeDirectory()))
-		return MocktailMode.PLAYBACK;
-		else if (mode.equalsIgnoreCase(MocktailMode.RECORDING.getModeDirectory())) {
-			return MocktailMode.RECORDING;
-		} else if (mode.equalsIgnoreCase(MocktailMode.RECORDING_NEW.getModeDirectory())) {
-			return MocktailMode.RECORDING_NEW;
-		} 
-		return MocktailMode.RECORDING;
-	}
+    public void setMocktailMode(String mode) {
+        this.mocktailMode = getMode(mode);
 
-	public MocktailMode getMocktailMode() {
-		return mocktailMode;
-	}
+    }
+
+    private MocktailMode getMode(String mode) {
+        if (mode.equalsIgnoreCase(MocktailMode.PLAYBACK.getModeDirectory()))
+            return MocktailMode.PLAYBACK;
+        else if (mode.equalsIgnoreCase(MocktailMode.RECORDING.getModeDirectory())) {
+            return MocktailMode.RECORDING;
+        } else if (mode.equalsIgnoreCase(MocktailMode.RECORDING_NEW.getModeDirectory())) {
+            return MocktailMode.RECORDING_NEW;
+        }
+        return MocktailMode.RECORDING;
+    }
+
+    public MocktailMode getMocktailMode() {
+        return mocktailMode;
+    }
 }

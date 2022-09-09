@@ -24,6 +24,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-test</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.svashishtha.mocktail</groupId>
+			<artifactId>mocktail-metadata</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+		</dependency>		<!-- Thanks for using https://jar-download.com -->
+
+
 		<!-- dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-data-mongodb</artifactId> 
 			</dependency -->
 		<dependency>
@@ -38,6 +50,12 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.1</version>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -57,6 +75,73 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.14.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>       <!-- use this goal to weave all your main classes -->
+							<goal>test-compile</goal>       <!-- use this goal to weave all your test classes -->
+						</goals>
+						<configuration>
+							<source>1.8</source>
+							<target>1.8</target>
+							<complianceLevel>1.8</complianceLevel>
+							<aspectDirectory>target/generated/aspects</aspectDirectory>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjtools</artifactId>
+						<version>1.9.7</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<artifactId>mocktail-maven-plugin</artifactId>
+				<groupId>com.svashishtha.mocktail</groupId>
+				<version>0.0.1-SNAPSHOT</version>
+				<configuration>
+					<aspectsDirectory>target/generated/aspects</aspectsDirectory>
+					<configuration>src/test/resources/mocktail.xml</configuration>
+					<recordingDir>target/generated/recordings</recordingDir>
+					<mode>recording</mode>
+				</configuration>
+				<executions>
+					<execution>
+						<id>mocktail</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>mocktail</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.velocity</groupId>
+						<artifactId>velocity-tools</artifactId>
+						<version>2.0</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.velocity</groupId>
+						<artifactId>velocity</artifactId>
+						<version>1.7</version>
+					</dependency>
+					<dependency>
+						<groupId>org.apache.commons</groupId>
+						<artifactId>commons-lang3</artifactId>
+						<version>3.12.0</version>
+					</dependency>
+
+					<!-- Thanks for using https://jar-download.com -->
+
+
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

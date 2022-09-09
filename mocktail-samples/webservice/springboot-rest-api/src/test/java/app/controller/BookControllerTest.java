@@ -25,177 +25,217 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.svashishtha.mocktail.metadata.MethodMocktail;
 
 import app.model.Book;
+import app.service.BookRestService;
 import app.service.BookService;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class BookControllerTest {
-	@LocalServerPort
-	private int port;
+    @LocalServerPort
+    private int port;
 
-	// Required to Generate JSON content from Java objects
-	public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-	private static final String HOST_PORT = "http://localhost:";
+    // Required to Generate JSON content from Java objects
+    public static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final String HOST_PORT = "http://localhost:";
 
-	// Required to delete the data added for tests.
-	// Directly invoke the APIs interacting with the DB
-	@Autowired
-	private BookService bookService;
+    // Required to delete the data added for tests.
+    // Directly invoke the APIs interacting with the DB
+    @Autowired
+    private BookService bookService;
 
-	// Test RestTemplate to invoke the APIs.
-	private TestRestTemplate restTemplate = new TestRestTemplate();
+    private BookRestService bookRestService;
 
-	@Test
-	public void testCreateBookApi() throws JsonProcessingException {
+    // Test RestTemplate to invoke the APIs.
+    private TestRestTemplate restTemplate = new TestRestTemplate();
 
-		// Building the Request body data
-		Map<String, Object> requestBody = new HashMap<String, Object>();
-		requestBody.put("name", "Book 1");
-		requestBody.put("isbn", "QWER1234");
-		requestBody.put("author", "Author 1");
-		requestBody.put("pages", 200);
-		HttpHeaders requestHeaders = new HttpHeaders();
-		requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+    @Test
+    // @Ignore
+    public void testCreateBookApi() throws JsonProcessingException {
+        MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
 
-		// Creating http entity object with request body and headers
-		HttpEntity<String> httpEntity = new HttpEntity<String>(OBJECT_MAPPER.writeValueAsString(requestBody),
-				requestHeaders);
+        // Building the Request body data
+        Map<String, Object> requestBody = new HashMap<String, Object>();
+        requestBody.put("name", "Book 1");
+        requestBody.put("isbn", "QWER1234");
+        requestBody.put("author", "Author 1");
+        requestBody.put("pages", 200);
+        requestBody.put("id", 1);
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-		// Invoking the API
-		Map<String, Object> apiResponse = restTemplate.postForObject(HOST_PORT + port + "/book", httpEntity, Map.class,
-				Collections.EMPTY_MAP);
+        // Creating http entity object with request body and headers
+        HttpEntity<String> httpEntity = new HttpEntity<String>(OBJECT_MAPPER.writeValueAsString(requestBody),
+                requestHeaders);
 
-		assertNotNull(apiResponse);
+        bookRestService = new BookRestService(restTemplate.getRestTemplate(), HOST_PORT, port);
 
-		// Asserting the response of the API.
-		String message = apiResponse.get("message").toString();
-		assertEquals("Book created successfully", message);
-		String bookId = ((Map<String, Object>) apiResponse.get("book")).get("id").toString();
+        Map<String, Object> apiResponse = null;
+        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable();
 
-		assertNotNull(bookId);
+        apiResponse = bookRestService.postBook("/book", httpEntity, Map.class, Collections.EMPTY_MAP);
+        System.err.println("The API RESPONSE IS:" + apiResponse + " the port is:" + port);
 
-		// Fetching the Book details directly from the DB to verify the API succeeded
-		Book bookFromService = bookService.findBookById(bookId);
-		assertEquals("Book 1", bookFromService.getName());
-		assertEquals("QWER1234", bookFromService.getIsbn());
-		assertEquals("Author 1", bookFromService.getAuthor());
-		assertTrue(200 == bookFromService.getPages());
+        assertNotNull(apiResponse);
 
-		// Delete the data added for testing
-		bookService.deleteBookById(bookId);
+        // Asserting the response of the API.
+        String message = apiResponse.get("message").toString();
+        assertEquals("Book created successfully", message);
+        String id = ((Map<String, Object>) apiResponse.get("book")).get("id").toString();
+        long bookId = Long.parseLong(id);
 
-	}
+        assertTrue(bookId > 0);
 
-	@Test
-	public void testGetBookDetailsApi() {
-		// Create a new book using the BookRepository API
-		Book book = new Book("Book1", "�SBN1", "Author1", 200);
-		bookService.saveBook(book);
+        // Fetching the Book details directly from the DB to verify the API succeeded
+        Book bookFromService = bookService.findBookById(bookId);
+        if (!areRecordingsAvailable) {
+            assertEquals("Book 1", bookFromService.getName());
+            assertEquals("QWER1234", bookFromService.getIsbn());
+            assertEquals("Author 1", bookFromService.getAuthor());
+            assertTrue(200 == bookFromService.getPages());
 
-		String bookId = book.getId();
+            // Delete the data added for testing
+            bookService.deleteBookById(bookId);
+        } else {
+            assertNull(bookFromService);
+        }
 
-		// Now make a call to the API to get details of the book
-		Book apiResponse = restTemplate.getForObject(HOST_PORT + port + "/book/" + bookId, Book.class);
+    }
 
-		// Verify that the data from the API and data saved in the DB are same
-		assertNotNull(apiResponse);
-		assertEquals(book.getName(), apiResponse.getName());
-		assertEquals(book.getId(), apiResponse.getId());
-		assertEquals(book.getIsbn(), apiResponse.getIsbn());
-		assertEquals(book.getAuthor(), apiResponse.getAuthor());
-		assertTrue(book.getPages() == apiResponse.getPages());
+    @Test
+    // @Ignore
+    public void testGetBookDetailsApi() {
+        MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
+        // Create a new book using the BookRepository API
+        Book book = new Book(1L, "Book1", "ISBN1", "Author1", 200);
+        bookService.saveBook(book);
 
-		// Delete the Test data created
-		bookService.deleteBookById(bookId);
-	}
+        long bookId = book.getId();
+        bookRestService = new BookRestService(restTemplate.getRestTemplate(), HOST_PORT, port);
 
-	@Test
-	public void testUpdateBookDetails() throws JsonProcessingException {
-		// Create a new book using the BookRepository API
-		Book book = new Book("Book1", "ISBN1", "Author1", 200);
-		bookService.saveBook(book);
+        // Now make a call to the API to get details of the book
+        // Book apiResponse = restTemplate.getForObject(HOST_PORT + port + "/book/" +
+        // bookId, Book.class);
+        Book apiResponse = bookRestService.getBookForId("/book/", bookId, Book.class);
 
-		String bookId = book.getId();
+        // Verify that the data from the API and data saved in the DB are same
+        assertNotNull(apiResponse);
+        assertEquals(book.getName(), apiResponse.getName());
+        assertEquals(book.getId(), apiResponse.getId());
+        assertEquals(book.getIsbn(), apiResponse.getIsbn());
+        assertEquals(book.getAuthor(), apiResponse.getAuthor());
+        assertTrue(book.getPages() == apiResponse.getPages());
 
-		// Now create Request body with the updated Book Data.
-		Map<String, Object> requestBody = new HashMap<String, Object>();
-		requestBody.put("name", "Book2");
-		requestBody.put("isbn", "ISBN2");
-		requestBody.put("author", "Author2");
-		requestBody.put("pages", 200);
-		HttpHeaders requestHeaders = new HttpHeaders();
-		requestHeaders.setContentType(MediaType.APPLICATION_JSON);
+        // Delete the Test data created
+        bookService.deleteBookById(bookId);
+    }
 
-		// Creating http entity object with request body and headers
-		HttpEntity<String> httpEntity = new HttpEntity<String>(OBJECT_MAPPER.writeValueAsString(requestBody),
-				requestHeaders);
+    @Test
+    // @Ignore
+    public void testUpdateBookDetails() throws JsonProcessingException {
+        MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
+        // Create a new book using the BookRepository API
+        Book book = new Book(1L, "Book1", "ISBN1", "Author1", 100);
+        bookService.saveBook(book); // will not save in cache as saved through service
 
-		// Invoking the API
-		Map<String, Object> apiResponse = (Map<String, Object>) restTemplate
-				.exchange(HOST_PORT + port + "/book/" + bookId, HttpMethod.PUT, httpEntity, Map.class, Collections.EMPTY_MAP)
-				.getBody();
+        long bookId = book.getId();
 
-		assertNotNull(apiResponse);
-		assertTrue(!apiResponse.isEmpty());
+        // Now create Request body with the updated Book Data.
+        Map<String, Object> requestBody = new HashMap<String, Object>();
+        requestBody.put("name", "Book2");
+        requestBody.put("isbn", "ISBN2");
+        requestBody.put("author", "Author2");
+        requestBody.put("pages", 200);
+        HttpHeaders requestHeaders = new HttpHeaders();
+        requestHeaders.setContentType(MediaType.APPLICATION_JSON);
 
-		// Asserting the response of the API.
-		String message = apiResponse.get("message").toString();
-		assertEquals("Book Updated successfully", message);
+        // Creating http entity object with request body and headers
+        HttpEntity<String> httpEntity = new HttpEntity<String>(OBJECT_MAPPER.writeValueAsString(requestBody),
+                requestHeaders);
 
-		// Fetching the Book details directly from the DB to verify the API succeeded in
-		// updating the book details
-		Book bookFromDb = bookService.findBookById(bookId);
-		assertNotNull(bookFromDb);
-		assertEquals(requestBody.get("name"), bookFromDb.getName());
-		assertEquals(requestBody.get("isbn"), bookFromDb.getIsbn());
-		assertEquals(requestBody.get("author"), bookFromDb.getAuthor());
-		assertTrue(Integer.parseInt(requestBody.get("pages").toString()) == bookFromDb.getPages());
+        bookRestService = new BookRestService(restTemplate.getRestTemplate(), HOST_PORT, port);
 
-		// Delete the data added for testing
-		bookService.deleteBookById(bookId);
+        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable(); // recordings should be available
+                                                                                  // while recording
 
-	}
+        Map<String, Object> apiResponse = (Map<String, Object>) bookRestService.updateBook("/book/", HttpMethod.PUT,
+                bookId, httpEntity, Map.class, Collections.EMPTY_MAP); // will be saved in cache as saved though rest
+                                                                       // service
 
-	@Test
-	public void testDeleteBookApi() {
-		// Create a new book using the BookRepository API
-		Book book = new Book("Book1", "ISBN1", "Author1", 200);
-		bookService.saveBook(book);
+        assertNotNull(apiResponse);
+        assertTrue(!apiResponse.isEmpty());
 
-		String bookId = book.getId();
+        // Asserting the response of the API.
+        String message = apiResponse.get("message").toString();
+        assertEquals("Book Updated successfully", message);
 
-		// Now Invoke the API to delete the book
-		restTemplate.delete(HOST_PORT + port + "/book/" + bookId, Collections.emptyMap());
+        // Fetching the Book details directly from the DB to verify the API succeeded in
+        // updating the book details. In playback the updation shouldn't have happened.
+        Book bookFromDb = bookService.findBookById(bookId);
+        assertNotNull(bookFromDb);
+        System.err.println("methodMocktail.areRecordingsAvailable():" + areRecordingsAvailable);
+        String bookName = areRecordingsAvailable ? "Book1" : "Book2";
+        String isbn = areRecordingsAvailable ? "ISBN1" : "ISBN2";
+        String author = areRecordingsAvailable ? "Author1" : "Author2";
+        int pages = areRecordingsAvailable ? 100 : 200;
+        assertEquals(bookName, bookFromDb.getName());
+        assertEquals(isbn, bookFromDb.getIsbn());
+        assertEquals(author, bookFromDb.getAuthor());
+        assertTrue(pages == bookFromDb.getPages());
 
-		// Try to fetch from the DB directly
-		Book bookFromDb = bookService.findBookById(bookId);
-		// and assert that there is no data found
-		assertNull(bookFromDb);
-	}
+        // Delete the data added for testing
+        bookService.deleteBookById(bookId);
 
-	@Test
-	public void testGetAllBooksApi() {
-		// Add some test data for the API
-		Book book1 = new Book("Book1", "ISBN1", "Author1", 200);
-		bookService.saveBook(book1);
+    }
 
-		Book book2 = new Book("Book2", "ISBN2", "Author2", 200);
-		bookService.saveBook(book2);
+    @Test
+    // @Ignore
+    public void testDeleteBookApi() {
+        MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
+        // Create a new book using the BookRepository API
+        Book book = new Book(1L, "Book1", "ISBN1", "Author1", 200);
+        bookService.saveBook(book);
 
-		// Invoke the API
-		Map<String, Object> apiResponse = restTemplate.getForObject(HOST_PORT + port + "/book", Map.class);
+        long bookId = book.getId();
 
-		// Assert the response from the API
-		int totalBooks = Integer.parseInt(apiResponse.get("totalBooks").toString());
-		assertTrue(totalBooks == 2);
+        // Now Invoke the API to delete the book
+        restTemplate.delete(HOST_PORT + port + "/book/" + bookId, Collections.emptyMap());
 
-		List<Map<String, Object>> booksList = (List<Map<String, Object>>) apiResponse.get("books");
-		assertTrue(booksList.size() == 2);
+        // Try to fetch from the DB directly
+        Book bookFromDb = bookService.findBookById(bookId);
+        // and assert that there is no data found
+        assertNull(bookFromDb);
+    }
 
-		// Delete the test data created
-		bookService.deleteBookById(book1.getId());
-		bookService.deleteBookById(book2.getId());
-	}
+    @Test
+    public void testGetAllBooksApi() {
+        MethodMocktail methodMocktail = new MethodMocktail();
+        methodMocktail.setUp(this);
+        // Add some test data for the API
+        Book book1 = new Book(1L, "Book1", "ISBN1", "Author1", 200);
+        bookService.saveBook(book1);
+
+        Book book2 = new Book(2L, "Book2", "ISBN2", "Author2", 200);
+        bookService.saveBook(book2);
+
+        // Invoke the API
+        Map<String, Object> apiResponse = restTemplate.getForObject(HOST_PORT + port + "/book", Map.class);
+
+        // Assert the response from the API
+        int totalBooks = Integer.parseInt(apiResponse.get("totalBooks").toString());
+        assertTrue(totalBooks == 2);
+
+        List<Map<String, Object>> booksList = (List<Map<String, Object>>) apiResponse.get("books");
+        assertTrue(booksList.size() == 2);
+
+        // Delete the test data created
+        bookService.deleteBookById(book1.getId());
+        bookService.deleteBookById(book2.getId());
+    }
 }

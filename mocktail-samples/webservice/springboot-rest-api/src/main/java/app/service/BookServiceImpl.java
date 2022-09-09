@@ -17,8 +17,8 @@ public class BookServiceImpl implements BookService {
 	private BookRepository bookRepository;
 
 	@Override
-	public Book saveBook(Book Book) {
-		return bookRepository.save(Book);
+	public Book saveBook(Book book) {
+		return bookRepository.save(book);
 	}
 
 	@Override
@@ -27,29 +27,29 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public Book updateBook(Book Book, String BookId) {
-		Book book = bookRepository.findById(BookId).get();
-		if (Objects.nonNull(Book.getName()) && !"".equalsIgnoreCase(Book.getName())) {
-			book.setName(Book.getName());
+	public Book updateBook(Book bookData, Long bookId) {
+		Book book = bookRepository.findById(bookId).get();
+		if (Objects.nonNull(bookData.getName()) && !"".equalsIgnoreCase(bookData.getName())) {
+			book.setName(bookData.getName());
 		}
 
-		if (Objects.nonNull(Book.getAuthor()) && !"".equalsIgnoreCase(Book.getAuthor())) {
-			book.setAuthor(Book.getAuthor());
+		if (Objects.nonNull(bookData.getAuthor()) && !"".equalsIgnoreCase(bookData.getAuthor())) {
+			book.setAuthor(bookData.getAuthor());
 		}
-		if (Objects.nonNull(Book.getIsbn()) && !"".equalsIgnoreCase(Book.getIsbn())) {
-			book.setIsbn(Book.getIsbn());
+		if (Objects.nonNull(bookData.getIsbn()) && !"".equalsIgnoreCase(bookData.getIsbn())) {
+			book.setIsbn(bookData.getIsbn());
 		}
-		book.setPages(Book.getPages());
+		book.setPages(bookData.getPages());
 		return bookRepository.save(book);
 	}
 
 	@Override
-	public void deleteBookById(String BookId) {
-		bookRepository.deleteById(BookId);
+	public void deleteBookById(Long bookId) {
+		bookRepository.deleteById(bookId);
 	}
 
 	@Override
-	public Book findBookById(String bookId) {
+	public Book findBookById(Long bookId) {
 		Optional<Book> book = bookRepository.findById(bookId);
 		if (book.isPresent())
 			return book.get();

@@ -37,6 +37,7 @@ public class MocktailTemplateProcesser {
         StringWriter writer = new StringWriter();
         try {
             VelocityEngine ve = new VelocityEngine();
+
             ve.evaluate(context, writer, "", reader);
         } catch (ParseErrorException e) {
             throw new IllegalStateException(e);

@@ -6,13 +6,13 @@ import app.model.Book;
 
 public interface BookService {
 
-	Book saveBook(Book Book);
+	Book saveBook(Book book);
 
 	List<Book> fetchBookList();
 
-	Book updateBook(Book Book, String BookId);
+	Book updateBook(Book book, Long bookId);
 
-	void deleteBookById(String BookId);
+	void deleteBookById(Long bookId);
 
-	Book findBookById(String bookId);
+	Book findBookById(Long bookId);
 }

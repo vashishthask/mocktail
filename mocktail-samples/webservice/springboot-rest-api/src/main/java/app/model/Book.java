@@ -1,17 +1,13 @@
 package app.model;
 
-import java.util.UUID;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 
 @Entity
 public class Book {
 
 	@Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	private Long id;
 	private String name;
 	private String isbn;
 	private String author;
@@ -20,23 +16,19 @@ public class Book {
 	public Book() {
 	}
 
-	public Book(String name, String isbn, String author, int pages) {
+	public Book(Long id, String name, String isbn, String author, int pages) {
 		this.name = name;
 		this.isbn = isbn;
 		this.author = author;
 		this.pages = pages;
+		this.id = id;
 	}
 
-	@PrePersist
-	private void ensureId() {
-		this.setId(UUID.randomUUID().toString());
-	}
-
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
