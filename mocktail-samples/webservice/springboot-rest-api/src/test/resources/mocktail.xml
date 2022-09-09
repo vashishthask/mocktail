@@ -1,13 +1,20 @@
 <mocktails>
-	<mocktail>
-		<className>BookRestService</className>
-		<classPackageName>app.service</classPackageName>
-		<methods>
-			<string>postBook</string>
-            <string>getBookForId</string>
-            <string>deleteBook</string>
-            <string>updateBook</string>
-            <!-- string>getAll</string-->
-		</methods>
-	</mocktail>
+  <mocktail>
+    <className>BookRestService</className>
+    <classPackageName>app.service</classPackageName>
+    <methods>
+      <string>postBook</string>
+      <string>getBookForId</string>
+      <string>deleteBook</string>
+      <string>updateBook</string>
+      <!-- string>getAll</string -->
+    </methods>
+  </mocktail>
+  <mocktail>
+    <className>PublicApiService</className>
+    <classPackageName>app.service</classPackageName>
+    <methods>
+      <string>getDogBreeds</string>
+    </methods>
+  </mocktail>
 </mocktails>
