@@ -8,7 +8,7 @@
   <url>http://maven.apache.org</url>
   <parent>
     <artifactId>database-samples</artifactId>
-    <groupId>com.svashishtha.mocktail</groupId>
+    <groupId>in.malonus.mocktail</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <properties>
@@ -44,7 +44,7 @@
       </plugin>
       <plugin>
         <artifactId>mocktail-maven-plugin</artifactId>
-        <groupId>com.svashishtha.mocktail</groupId>
+        <groupId>in.malonus.mocktail</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <configuration>
           <aspectsDirectory>target/generated/aspects</aspectsDirectory>
@@ -85,7 +85,7 @@
       <version>1.9.7</version>
     </dependency>
     <dependency>
-      <groupId>com.svashishtha.mocktail</groupId>
+      <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-metadata</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>

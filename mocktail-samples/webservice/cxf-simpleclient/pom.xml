@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>webservice-samples</artifactId>
-    <groupId>com.svashishtha.mocktail</groupId>
+    <groupId>in.malonus.mocktail</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>cxf-simpleclient</artifactId>
@@ -19,7 +19,7 @@
       <version>2.7</version>
     </dependency>
     <dependency>
-      <groupId>com.svashishtha.mocktail</groupId>
+      <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-metadata</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
@@ -40,12 +40,12 @@
       <version>5.3.20</version>
     </dependency>
     <dependency>
-      <groupId>com.svashishtha.mocktail</groupId>
+      <groupId>in.malonus.mocktail</groupId>
       <artifactId>tcpcache</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
-	   	<groupId>com.svashishtha.mocktail</groupId>
+	   	<groupId>in.malonus.mocktail</groupId>
 	   	<artifactId>cxf-simpleservice</artifactId>
 	   	<version>0.0.1-SNAPSHOT</version>
     </dependency>

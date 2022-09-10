@@ -1,4 +1,4 @@
-package com.svashishtha.mocktail.metadata.mock.jdbc;
+package in.malonus.mocktail.metadata.mock.jdbc;
 
 import lombok.Data;
 

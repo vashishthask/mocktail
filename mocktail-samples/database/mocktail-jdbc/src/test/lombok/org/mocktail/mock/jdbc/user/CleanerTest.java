@@ -1,4 +1,4 @@
-package com.svashishtha.mocktail.metadata.mock.jdbc.user;
+package in.malonus.mocktail.metadata.mock.jdbc.user;
 
 import lombok.Cleanup;
 

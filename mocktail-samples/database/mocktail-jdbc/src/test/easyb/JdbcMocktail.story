@@ -1,4 +1,4 @@
-package com.svashishtha.mocktail
+package in.malonus.mocktail
 
 import static org.hamcrest.Matchers.is;
 
@@ -6,8 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Assert;
-import com.svashishtha.mocktail.mock.jdbc.user.UserDao;
-import com.svashishtha.mocktail.mock.jdbc.user.UserDetail;
+import in.malonus.mocktail.mock.jdbc.user.UserDao;
+import in.malonus.mocktail.mock.jdbc.user.UserDetail;
 
 UserDao userDao;
 UserDetail recordedUserDetail;

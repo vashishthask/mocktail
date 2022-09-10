@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.2  Built on : Apr 17, 2012 (05:33:49 IST) --><serviceGroup>
     <service name="SimpleService">
         <messageReceivers>
-            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="com.svashishtha.mocktail.samples.axis2.client.SimpleServiceMessageReceiverInOut"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="in.malonus.mocktail.samples.axis2.client.SimpleServiceMessageReceiverInOut"/>
         </messageReceivers>
-        <parameter name="ServiceClass">com.svashishtha.mocktail.samples.axis2.client.SimpleServiceSkeleton</parameter>
+        <parameter name="ServiceClass">in.malonus.mocktail.samples.axis2.client.SimpleServiceSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
         <operation name="concat" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://svashishtha.com/ws">

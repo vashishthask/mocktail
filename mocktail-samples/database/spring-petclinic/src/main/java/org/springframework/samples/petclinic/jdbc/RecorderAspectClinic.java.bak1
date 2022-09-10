@@ -7,10 +7,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import com.svashishtha.mocktail.metadata.MethodMocktail;
-import com.svashishtha.mocktail.metadata.MocktailContainer;
-import com.svashishtha.mocktail.metadata.repository.ObjectRepository;
-import com.svashishtha.mocktail.metadata.util.UniqueIdGenerator;
+import in.malonus.mocktail.metadata.MethodMocktail;
+import in.malonus.mocktail.metadata.MocktailContainer;
+import in.malonus.mocktail.metadata.repository.ObjectRepository;
+import in.malonus.mocktail.metadata.util.UniqueIdGenerator;
 
 @Aspect
 public class RecorderAspectClinic {

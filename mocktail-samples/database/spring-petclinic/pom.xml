@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.svashishtha.mocktail.metadata</groupId>
+  <groupId>in.malonus.mocktail.metadata</groupId>
   <artifactId>spring-petclinic</artifactId>
   <name>petclinic</name>
   <packaging>war</packaging>
@@ -233,7 +233,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.svashishtha.mocktail</groupId>
+      <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-metadata</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
@@ -319,7 +319,7 @@
       <id>selenium</id>
       <dependencies>
         <dependency>
-          <groupId>com.svashishtha.mocktail</groupId>
+          <groupId>in.malonus.mocktail</groupId>
           <artifactId>mocktail-metadata</artifactId>
           <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -403,7 +403,7 @@
           </plugin>
           <plugin>
             <artifactId>mocktail-maven-plugin</artifactId>
-            <groupId>com.svashishtha.mocktail</groupId>
+            <groupId>in.malonus.mocktail</groupId>
             <version>0.0.1-SNAPSHOT</version>
             <configuration>
               <aspectsDirectory>src/main/generated</aspectsDirectory>

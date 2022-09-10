@@ -1,7 +1,7 @@
 <mocktails>
 	<mocktail>
 		<className>UserDao</className>
-		<classPackageName>com.svashishtha.mocktail.mock.jdbc.user</classPackageName>
+		<classPackageName>in.malonus.mocktail.mock.jdbc.user</classPackageName>
 		<methods>
 			<string>get</string>
             <string>save</string>

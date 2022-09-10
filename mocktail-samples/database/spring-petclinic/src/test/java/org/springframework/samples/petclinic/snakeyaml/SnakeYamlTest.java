@@ -12,7 +12,7 @@ import org.springframework.samples.petclinic.Specialty;
 import org.springframework.samples.petclinic.Vet;
 import org.yaml.snakeyaml.Yaml;
 
-import com.svashishtha.mocktail.repository.ObjectFileOperations;
+import in.malonus.mocktail.repository.ObjectFileOperations;
 
 public class SnakeYamlTest {
     

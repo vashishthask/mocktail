@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>mocktail-parent</artifactId>
-		<groupId>com.svashishtha.mocktail</groupId>
+		<groupId>in.malonus.mocktail</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -42,8 +42,6 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>1.8.7</version>
 		</dependency>
-		<!-- dependency> <groupId>org.apache.velocity</groupId> <artifactId>velocity-engine-core</artifactId> 
-			<version>2.3</version> </dependency -->
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
@@ -60,7 +58,7 @@
 			<version>5.3.22</version>
 		</dependency>
 		<dependency>
-			<groupId>com.svashishtha.mocktail</groupId>
+			<groupId>in.malonus.mocktail</groupId>
 			<artifactId>mocktail-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

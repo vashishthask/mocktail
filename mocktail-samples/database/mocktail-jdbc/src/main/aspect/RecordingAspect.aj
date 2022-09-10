@@ -1,10 +1,10 @@
-package com.svashishtha.mocktail.metadata;
+package in.malonus.mocktail.metadata;
 
 
 public aspect RecordingAspect {
 
 	pointcut callPointcut() : 
-		call(* com.svashishtha.mocktail.metadata.Greeter.*(..));
+		call(* in.malonus.mocktail.metadata.Greeter.*(..));
 	
 	
 	before() : callPointcut() {

@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>webservice-samples</artifactId>
-    <groupId>com.svashishtha.mocktail</groupId>
+    <groupId>in.malonus.mocktail</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>cxf-simpleservice</artifactId>

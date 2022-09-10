@@ -1,7 +1,7 @@
 <mocktails>
   <mocktail>
     <className>BookRestService</className>
-    <classPackageName>app.service</classPackageName>
+    <classPackageName>in.malonus.mocktail.springboot.app.service</classPackageName>
     <methods>
       <string>postBook</string>
       <string>getBookForId</string>
@@ -12,7 +12,7 @@
   </mocktail>
   <mocktail>
     <className>PublicApiService</className>
-    <classPackageName>app.service</classPackageName>
+    <classPackageName>in.malonus.mocktail.springboot.app.service</classPackageName>
     <methods>
       <string>getDogBreeds</string>
     </methods>

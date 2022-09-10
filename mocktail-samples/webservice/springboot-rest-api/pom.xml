@@ -25,7 +25,7 @@
 			<artifactId>spring-boot-test</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.svashishtha.mocktail</groupId>
+			<groupId>in.malonus.mocktail</groupId>
 			<artifactId>mocktail-metadata</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
@@ -104,7 +104,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>mocktail-maven-plugin</artifactId>
-				<groupId>com.svashishtha.mocktail</groupId>
+				<groupId>in.malonus.mocktail</groupId>
 				<version>0.0.1-SNAPSHOT</version>
 				<configuration>
 					<aspectsDirectory>target/generated/aspects</aspectsDirectory>
