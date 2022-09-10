@@ -14,8 +14,7 @@ class PublicApiTest {
 
     @Test
     void test() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         service = new PublicApiService(restTemplate.getRestTemplate());
         String dogBreeds = service.getDogBreeds();
         assertNotNull(dogBreeds);

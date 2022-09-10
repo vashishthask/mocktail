@@ -40,12 +40,15 @@ public class MethodMocktail implements Serializable {
     public String getMethodName() {
         return methodName;
     }
+    
+    public MethodMocktail(Object object) {
+        setUp(object);
+    }
 
-    public void setUp(Object object) {
+    private void setUp(Object object) {
         container.setMethodMocktail(this);
-        StackTraceElement element = null;
         fqcn = object.getClass().getName();
-        element = getStackTraceElement(this.getClass().getName(), Thread.currentThread().getStackTrace());
+        StackTraceElement element = getStackTraceElement(object.getClass().getName(), Thread.currentThread().getStackTrace());
         methodName = element.getMethodName();
         recordingsAvailable = checkRecordingsOnDisk();
     }
@@ -61,6 +64,7 @@ public class MethodMocktail implements Serializable {
         String recordingPath = System.getProperty("user.dir") + File.separator
                 + MocktailConfig.INSTANCE.getProperty("recordingDir") + File.separator
                 + fqcn.replace(".", File.separator) + File.separator + methodName;
+        LOGGER.debug("The recording path is:"+recordingPath);
         ObjectFileOperations fileOperations = new ObjectFileOperations();
         boolean recAvailable = fileOperations.isRecordingAvailable(recordingPath);
         LOGGER.debug("The recording path is:" + recordingPath + " recordingBasePath:" + recordingBasePath
@@ -83,14 +87,10 @@ public class MethodMocktail implements Serializable {
         if (fqcn == null) {
             return null;
         }
-        boolean next = false;
         for (StackTraceElement element : stackTrace) {
-            if (next) {
-                return element;
-            }
             String className = element.getClassName();
             if (fqcn.equals(className)) {
-                next = true;
+                return element;
             } else if (NOT_AVAIL.equals(className)) {
                 break;
             }

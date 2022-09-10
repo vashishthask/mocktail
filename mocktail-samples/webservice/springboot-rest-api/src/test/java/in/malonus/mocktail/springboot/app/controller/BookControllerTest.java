@@ -58,8 +58,7 @@ public class BookControllerTest {
     @Test
     // @Ignore
     public void testCreateBookApi() throws JsonProcessingException {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
 
         // Building the Request body data
         Map<String, Object> requestBody = new HashMap<String, Object>();
@@ -110,8 +109,7 @@ public class BookControllerTest {
     @Test
     // @Ignore
     public void testGetBookDetailsApi() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         // Create a new book using the BookRepository API
         Book book = new Book(1L, "Book1", "ISBN1", "Author1", 200);
         bookService.saveBook(book);
@@ -139,8 +137,7 @@ public class BookControllerTest {
     @Test
     // @Ignore
     public void testUpdateBookDetails() throws JsonProcessingException {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         // Create a new book using the BookRepository API
         Book book = new Book(1L, "Book1", "ISBN1", "Author1", 100);
         bookService.saveBook(book); // will not save in cache as saved through service
@@ -198,8 +195,7 @@ public class BookControllerTest {
     @Test
     // @Ignore
     public void testDeleteBookApi() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         // Create a new book using the BookRepository API
         Book book = new Book(1L, "Book1", "ISBN1", "Author1", 200);
         bookService.saveBook(book);
@@ -217,8 +213,7 @@ public class BookControllerTest {
 
     @Test
     public void testGetAllBooksApi() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         // Add some test data for the API
         Book book1 = new Book(1L, "Book1", "ISBN1", "Author1", 200);
         bookService.saveBook(book1);

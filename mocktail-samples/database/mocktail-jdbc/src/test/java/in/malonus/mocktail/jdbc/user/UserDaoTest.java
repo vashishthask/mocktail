@@ -50,8 +50,7 @@ public class UserDaoTest {
 
     @Test
     public void testGetUser() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
 
         // search with recording mode
         UserDetail userDetail = userDao.get(1L);
@@ -69,8 +68,7 @@ public class UserDaoTest {
     @Test
     // FIXME testcase should be repeatable, i.e. should work without clean
     public void testInsertUser() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
         LOGGER.debug("isRecordingAvailable():" + recordingAvailable + " object details:" + methodMocktail);
 
@@ -101,8 +99,7 @@ public class UserDaoTest {
     @Test
     // FIXME
     public void testUpdateUser() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         int count = getNumRows();
 
         assertEquals(1, count);
@@ -136,8 +133,7 @@ public class UserDaoTest {
 
     @Test
     public void testDeleteUser() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
 
         assertEquals(1, getNumRows());
@@ -170,8 +166,7 @@ public class UserDaoTest {
 
     @Test
     public void testMethodBasedRecording() {
-        MethodMocktail methodMocktail = new MethodMocktail();
-        methodMocktail.setUp(this);
+        MethodMocktail methodMocktail = new MethodMocktail(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
 
         // get all records, insert another one, get all records again. should be
