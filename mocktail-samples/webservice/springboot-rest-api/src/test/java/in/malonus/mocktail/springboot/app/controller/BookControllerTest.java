@@ -162,8 +162,6 @@ public class BookControllerTest {
 
         bookRestService = new BookRestService(restTemplate.getRestTemplate(), HOST_PORT, port);
 
-        
-
         Map<String, Object> apiResponse = (Map<String, Object>) bookRestService.updateBook("/book/", HttpMethod.PUT,
                 bookId, httpEntity, Map.class, Collections.EMPTY_MAP); // will be saved in cache as saved though rest
                                                                        // service
@@ -179,9 +177,9 @@ public class BookControllerTest {
         // updating the book details. In playback the updation shouldn't have happened.
         Book bookFromDb = bookService.findBookById(bookId);
         assertNotNull(bookFromDb);
-        
+
         // recordings should be available while recording
-        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable(); 
+        boolean areRecordingsAvailable = methodMocktail.areRecordingsAvailable();
         LOGGER.debug("areRecordingsAvailable():" + areRecordingsAvailable);
         String bookName = areRecordingsAvailable ? "Book1" : "Book2";
         String isbn = areRecordingsAvailable ? "ISBN1" : "ISBN2";

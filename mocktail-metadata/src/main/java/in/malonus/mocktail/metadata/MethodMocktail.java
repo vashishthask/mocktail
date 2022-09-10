@@ -30,7 +30,7 @@ public class MethodMocktail implements Serializable {
     private String recordingDirectoryPath = "";
 
     private String recordingBasePath = "";
-    
+
     private boolean recordingsAvailable;
 
     public String getFqcn() {

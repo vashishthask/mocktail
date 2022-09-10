@@ -58,15 +58,15 @@ public class MocktailMojo extends AjcCompileMojo {
         if (!aspectsDirectory.exists()) {
             aspectsDirectory.mkdirs();
         }
-        
+
         MocktailContainer mocktailContainer = MocktailContainer.getInstance();
-		mocktailContainer.setRecordingDirectory(recordingDir.getAbsolutePath());
-		LOGGER.debug("MocktailMojo: The Mocktail mode is:"+mocktailContainer.getMocktailMode());
-        
+        mocktailContainer.setRecordingDirectory(recordingDir.getAbsolutePath());
+        LOGGER.debug("MocktailMojo: The Mocktail mode is:" + mocktailContainer.getMocktailMode());
+
         try {
             XStreamMocktailXmlReader configReader = new XStreamMocktailXmlReader();
             List<Mocktail> mocktails = configReader.readXml(new FileInputStream(configuration));
-            
+
             // TODO:A hack for time being as we will be either generating
             // recording/playback aspects at a time
             MocktailAspectsCreator mocktailAspectsCreator = new MocktailAspectsCreator();
@@ -80,15 +80,11 @@ public class MocktailMojo extends AjcCompileMojo {
         }
     }
 
-    
-
-	private boolean isRecordingMode() {
-        return mode.equalsIgnoreCase(MocktailMode.RECORDING
-                .getModeDirectory());
+    private boolean isRecordingMode() {
+        return mode.equalsIgnoreCase(MocktailMode.RECORDING.getModeDirectory());
     }
 
-    public void setValue(Class<?> classToBeSetOn, Object o, String fieldName,
-            Object value) {
+    public void setValue(Class<?> classToBeSetOn, Object o, String fieldName, Object value) {
         try {
             Field field = classToBeSetOn.getDeclaredField(fieldName);
             field.setAccessible(true);

@@ -28,7 +28,7 @@ import in.malonus.mocktail.metadata.xml.domain.Mocktail;
 
 public class MocktailTemplateProcesserTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(MocktailTemplateProcesserTest.class);
-    
+
     @Before
     public void setupMocktailContainer() {
         MocktailContainer mocktailContainer = MocktailContainer.getInstance();
@@ -43,8 +43,8 @@ public class MocktailTemplateProcesserTest {
     public void shouldCreateClassAspect() throws Exception {
         Mocktail mocktail = createClassMocktail();
         MocktailTemplateProcesser templateProcessor = new MocktailTemplateProcesser();
-        String templatedString = templateProcessor.processTemplate(mocktail,
-                AspectType.CLASS_ASPECT_TYPE, MocktailMode.RECORDING);
+        String templatedString = templateProcessor.processTemplate(mocktail, AspectType.CLASS_ASPECT_TYPE,
+                MocktailMode.RECORDING);
 
         String expectedpointcut = "pointcut callPointcut() : call(* in.malonus.mocktail.metadata.aj.creator.TemplateProcesserTest.*(..));";
         assertTrue(templatedString.contains(expectedpointcut));
@@ -59,8 +59,8 @@ public class MocktailTemplateProcesserTest {
 
         MocktailTemplateProcesser templateProcessor = new MocktailTemplateProcesser();
 
-        String templatedString = templateProcessor.processTemplate(mocktail,
-                AspectType.METHODS_ASPECT_TYPE, MocktailMode.RECORDING);
+        String templatedString = templateProcessor.processTemplate(mocktail, AspectType.METHODS_ASPECT_TYPE,
+                MocktailMode.RECORDING);
         LOGGER.debug(templatedString);
 
         String expectedpointcut = "@Around(\"execution(* in.malonus.mocktail.metadata.aj.creator.TemplateProcesserTest.method1(..))\")";
@@ -68,8 +68,8 @@ public class MocktailTemplateProcesserTest {
 
         expectedpointcut = "@Around(\"execution(* in.malonus.mocktail.metadata.aj.creator.TemplateProcesserTest.method2(..))\")";
         assertTrue(templatedString.contains(expectedpointcut));
-        assertTrue(templatedString
-                .contains("fqcn = \"in.malonus.mocktail.metadata.aj.creator.TemplateProcesserTest\";"));
+        assertTrue(
+                templatedString.contains("fqcn = \"in.malonus.mocktail.metadata.aj.creator.TemplateProcesserTest\";"));
     }
 
     private Mocktail createMethodMocktail() {
@@ -99,97 +99,72 @@ public class MocktailTemplateProcesserTest {
 
         MocktailAspectsCreator aspectsCreator = new MocktailAspectsCreator();
         File aspectsRootDirectory = temporaryAspectDir.newFolder("aspect");
-        boolean aspectFileExists = new File(aspectsRootDirectory,
-                "RecorderAspectAspectedClass.aj").exists();
+        boolean aspectFileExists = new File(aspectsRootDirectory, "RecorderAspectAspectedClass.aj").exists();
         assertFalse("Aspect already exists", aspectFileExists);
 
-        aspectsCreator.createClassAspect(
-                MocktailObjectMother.createClassMocktail("AspectedClass", ""),
+        aspectsCreator.createClassAspect(MocktailObjectMother.createClassMocktail("AspectedClass", ""),
                 aspectsRootDirectory, MocktailMode.RECORDING);
 
-        LOGGER.debug("aspect root directory:"
-                + aspectsRootDirectory.getAbsolutePath());
+        LOGGER.debug("aspect root directory:" + aspectsRootDirectory.getAbsolutePath());
 
-        assertTrue("Aspect doesn't exists", (new File(aspectsRootDirectory,
-                "RecorderAspectAspectedClass.java")).exists());
+        assertTrue("Aspect doesn't exists",
+                (new File(aspectsRootDirectory, "RecorderAspectAspectedClass.java")).exists());
     }
 
     @Test
     @Ignore
     public void shouldCreateRecordingMethodAspects() throws Exception {
         setupMocktailContainer();
-        final Mocktail methodMocktail = MocktailObjectMother
-                .createMethodMocktail("name", "in.malonus.mocktail.metadata", "method1",
-                        "method2");
+        final Mocktail methodMocktail = MocktailObjectMother.createMethodMocktail("name",
+                "in.malonus.mocktail.metadata", "method1", "method2");
 
         MocktailTemplateProcesser templateProcessor = new MocktailTemplateProcesser();
-        String templatedMethodObjectString = templateProcessor.processTemplate(
-                methodMocktail, AspectType.METHODS_ASPECT_TYPE,
-                MocktailMode.RECORDING);
+        String templatedMethodObjectString = templateProcessor.processTemplate(methodMocktail,
+                AspectType.METHODS_ASPECT_TYPE, MocktailMode.RECORDING);
 
-        assertThat(templatedMethodObjectString,
-                containsString("public aspect RecorderAspectname"));
-        assertThat(templatedMethodObjectString,
-                containsString("String recordingDirectoryPath = \"root_dir\";"));
-        assertThat(templatedMethodObjectString,
-                containsString("String fqcn = \"in.malonus.mocktail.metadata.name\";"));
-        assertThat(
-                templatedMethodObjectString,
-                containsString("pointcut callPointcutmethod1() : call(* in.malonus.mocktail.metadata.name.method1(..));"));
-        assertThat(
-                templatedMethodObjectString,
-                containsString("pointcut callPointcutmethod2() : call(* in.malonus.mocktail.metadata.name.method2(..));"));
+        assertThat(templatedMethodObjectString, containsString("public aspect RecorderAspectname"));
+        assertThat(templatedMethodObjectString, containsString("String recordingDirectoryPath = \"root_dir\";"));
+        assertThat(templatedMethodObjectString, containsString("String fqcn = \"in.malonus.mocktail.metadata.name\";"));
+        assertThat(templatedMethodObjectString, containsString(
+                "pointcut callPointcutmethod1() : call(* in.malonus.mocktail.metadata.name.method1(..));"));
+        assertThat(templatedMethodObjectString, containsString(
+                "pointcut callPointcutmethod2() : call(* in.malonus.mocktail.metadata.name.method2(..));"));
 
     }
-
-
 
     @Test
     @Ignore
     public void shouldCreatePlaybackMethodAspects() throws Exception {
-        final Mocktail methodMocktail = MocktailObjectMother
-                .createMethodMocktail("name", "in.malonus.mocktail.metadata", "method1",
-                        "method2");
+        final Mocktail methodMocktail = MocktailObjectMother.createMethodMocktail("name",
+                "in.malonus.mocktail.metadata", "method1", "method2");
 
         MocktailTemplateProcesser templateProcessor = new MocktailTemplateProcesser();
-        String templatedMethodObjectString = templateProcessor.processTemplate(
-                methodMocktail, AspectType.METHODS_ASPECT_TYPE,
-                MocktailMode.PLAYBACK);
-        LOGGER.debug("The templatemethod string is\n"+templatedMethodObjectString);
-        assertThat(templatedMethodObjectString,
-                containsString("public class PlaybackAspectname"));
-        assertThat(templatedMethodObjectString,
-                containsString("recordingDirectoryPath = \"root_dir\";"));
-        assertThat(templatedMethodObjectString,
-                containsString("String fqcn = \"in.malonus.mocktail.metadata.name\";"));
-        assertThat(
-                templatedMethodObjectString,
-                containsString("pointcut callPointcutmethod1() : call(* in.malonus.mocktail.metadata.name.method1(..));"));
-        assertThat(
-                templatedMethodObjectString,
-                containsString("pointcut callPointcutmethod2() : call(* in.malonus.mocktail.metadata.name.method2(..));"));
+        String templatedMethodObjectString = templateProcessor.processTemplate(methodMocktail,
+                AspectType.METHODS_ASPECT_TYPE, MocktailMode.PLAYBACK);
+        LOGGER.debug("The templatemethod string is\n" + templatedMethodObjectString);
+        assertThat(templatedMethodObjectString, containsString("public class PlaybackAspectname"));
+        assertThat(templatedMethodObjectString, containsString("recordingDirectoryPath = \"root_dir\";"));
+        assertThat(templatedMethodObjectString, containsString("String fqcn = \"in.malonus.mocktail.metadata.name\";"));
+        assertThat(templatedMethodObjectString, containsString(
+                "pointcut callPointcutmethod1() : call(* in.malonus.mocktail.metadata.name.method1(..));"));
+        assertThat(templatedMethodObjectString, containsString(
+                "pointcut callPointcutmethod2() : call(* in.malonus.mocktail.metadata.name.method2(..));"));
     }
 
     @Test
     public void shouldCreateRecordingAspectForClass() throws Exception {
 
-        final Mocktail classMocktail = MocktailObjectMother
-                .createClassMocktail("AspectedClass", "com.sandy");
+        final Mocktail classMocktail = MocktailObjectMother.createClassMocktail("AspectedClass", "com.sandy");
 
         MocktailTemplateProcesser templateProcessor = new MocktailTemplateProcesser();
 
-        String templatedClassObjectString = templateProcessor.processTemplate(
-                classMocktail, AspectType.CLASS_ASPECT_TYPE,
-                MocktailMode.RECORDING);
+        String templatedClassObjectString = templateProcessor.processTemplate(classMocktail,
+                AspectType.CLASS_ASPECT_TYPE, MocktailMode.RECORDING);
         LOGGER.debug(templatedClassObjectString);
+        assertThat(templatedClassObjectString, containsString("public aspect RecorderAspectAspectedClass"));
+        assertThat(templatedClassObjectString, containsString("String fqcn = \"com.sandy.AspectedClass\";"));
+        assertThat(templatedClassObjectString, containsString("recordingDirectoryPath = \"root_dir\""));
         assertThat(templatedClassObjectString,
-                containsString("public aspect RecorderAspectAspectedClass"));
-        assertThat(templatedClassObjectString,
-                containsString("String fqcn = \"com.sandy.AspectedClass\";"));
-        assertThat(templatedClassObjectString,
-                containsString("recordingDirectoryPath = \"root_dir\""));
-        assertThat(
-                templatedClassObjectString,
                 containsString("pointcut callPointcut() : call(* com.sandy.AspectedClass.*(..));"));
         LOGGER.debug(templatedClassObjectString);
     }

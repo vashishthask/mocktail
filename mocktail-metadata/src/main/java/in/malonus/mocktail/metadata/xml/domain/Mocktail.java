@@ -27,8 +27,6 @@ public class Mocktail {
     public String getClassName() {
         return className;
     }
-    
-    
 
     public List<String> getMethods() {
         return methods;

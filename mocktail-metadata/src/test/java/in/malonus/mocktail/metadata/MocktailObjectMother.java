@@ -11,14 +11,12 @@ public class MocktailObjectMother {
     public static List<Mocktail> getMocktailsForAspects() {
         List<Mocktail> mocktails = new ArrayList<Mocktail>();
 
-        mocktails.add(getMocktail("TemplateProcesser",
-                "in.malonus.mocktail.metadata.aj.creator", "a", "b"));
+        mocktails.add(getMocktail("TemplateProcesser", "in.malonus.mocktail.metadata.aj.creator", "a", "b"));
         mocktails.add(getMocktail("Mocktail", "in.malonus.mocktail.metadata.xml.domain"));
         return mocktails;
     }
 
-    private static Mocktail getMocktail(String className, String packageName,
-            String... methodsName) {
+    private static Mocktail getMocktail(String className, String packageName, String... methodsName) {
         Mocktail mocktail = new Mocktail();
         mocktail.setClassName(className);
         mocktail.setClassPackageName(packageName);
@@ -26,13 +24,11 @@ public class MocktailObjectMother {
         return mocktail;
     }
 
-    public static Mocktail createClassMocktail(String className,
-            String pcakageName) {
+    public static Mocktail createClassMocktail(String className, String pcakageName) {
         return getMocktail(className, pcakageName);
     }
 
-    public static Mocktail createMethodMocktail(String className,
-            String packageName, String... methodsName) {
+    public static Mocktail createMethodMocktail(String className, String packageName, String... methodsName) {
         return getMocktail(className, packageName, methodsName);
     }
 

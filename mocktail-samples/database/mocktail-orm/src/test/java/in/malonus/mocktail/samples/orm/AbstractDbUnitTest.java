@@ -16,7 +16,6 @@ import org.springframework.jdbc.CannotGetJdbcConnectionException;
 
 public abstract class AbstractDbUnitTest {
 
-
     public void init() throws Exception {
         System.out.println("Cleaning & inserting data");
         DatabaseOperation.CLEAN_INSERT.execute(getConnection(), getDataSet());
@@ -39,10 +38,8 @@ public abstract class AbstractDbUnitTest {
         return dbUnitCon;
     }
 
-    protected int getRowCountsForQuery(String rowCountQuery)
-            throws SQLException {
-        ResultSet resultSet = getSqlConnection().createStatement()
-                .executeQuery(rowCountQuery);
+    protected int getRowCountsForQuery(String rowCountQuery) throws SQLException {
+        ResultSet resultSet = getSqlConnection().createStatement().executeQuery(rowCountQuery);
         resultSet.next();
         int recordCounts = resultSet.getInt(1);
         resultSet.close();
@@ -53,10 +50,8 @@ public abstract class AbstractDbUnitTest {
         return getRowCountsForQuery("select count(*) from " + tableName);
     }
 
-    protected String getStringValueForQuery(String queryForStringValue)
-            throws SQLException {
-        ResultSet resultSet = getSqlConnection().createStatement()
-                .executeQuery(queryForStringValue);
+    protected String getStringValueForQuery(String queryForStringValue) throws SQLException {
+        ResultSet resultSet = getSqlConnection().createStatement().executeQuery(queryForStringValue);
         resultSet.next();
         String stringValue = resultSet.getString(1);
         resultSet.close();

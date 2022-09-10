@@ -6,42 +6,41 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 
-public class UserDetailService{
+public class UserDetailService {
 
-	private EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
-	public void setEmf(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
+    public void setEmf(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
-	public UserDetailService() {
-	}
-	
-	public UserDetail getUserDetail(Long userId) {
-		EntityManager newEm = emf.createEntityManager();
-		EntityTransaction newTx = newEm.getTransaction();
-		newTx.begin();
+    public UserDetailService() {
+    }
 
-		UserDetail userDetail = newEm.find(UserDetail.class, userId);
-		newTx.commit();
-		return userDetail;
-	}
+    public UserDetail getUserDetail(Long userId) {
+        EntityManager newEm = emf.createEntityManager();
+        EntityTransaction newTx = newEm.getTransaction();
+        newTx.begin();
 
-	public void saveUserDetail(UserDetail userDetail) {
-		EntityManager newEm = emf.createEntityManager();
-		EntityTransaction newTx = newEm.getTransaction();
-		newTx.begin();
-		
-		newEm.persist(userDetail);
-		newTx.commit();
-		
-	}
+        UserDetail userDetail = newEm.find(UserDetail.class, userId);
+        newTx.commit();
+        return userDetail;
+    }
 
-	public List<UserDetail> getAllUsers() {
-		EntityManager newEm = emf.createEntityManager();
-		
-		return newEm.createQuery("from UserDetail").getResultList();
-	}
+    public void saveUserDetail(UserDetail userDetail) {
+        EntityManager newEm = emf.createEntityManager();
+        EntityTransaction newTx = newEm.getTransaction();
+        newTx.begin();
 
-	
+        newEm.persist(userDetail);
+        newTx.commit();
+
+    }
+
+    public List<UserDetail> getAllUsers() {
+        EntityManager newEm = emf.createEntityManager();
+
+        return newEm.createQuery("from UserDetail").getResultList();
+    }
+
 }

@@ -7,34 +7,34 @@ import jakarta.persistence.Id;
 @Entity
 public class UserDetail {
 
-	@Id
-	@Column(name = "MESSAGE_ID")
-	private Long id;
+    @Id
+    @Column(name = "MESSAGE_ID")
+    private Long id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	public UserDetail() {
-	}
+    public UserDetail() {
+    }
 
-	public UserDetail(String name) {
-		this.name = name;
-	}
+    public UserDetail(String name) {
+        this.name = name;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

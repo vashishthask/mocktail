@@ -6,13 +6,13 @@ import in.malonus.mocktail.springboot.app.model.Book;
 
 public interface BookService {
 
-	Book saveBook(Book book);
+    Book saveBook(Book book);
 
-	List<Book> fetchBookList();
+    List<Book> fetchBookList();
 
-	Book updateBook(Book book, Long bookId);
+    Book updateBook(Book book, Long bookId);
 
-	void deleteBookById(Long bookId);
+    void deleteBookById(Long bookId);
 
-	Book findBookById(Long bookId);
+    Book findBookById(Long bookId);
 }

@@ -39,9 +39,9 @@ public abstract class AjcProperties extends AbstractMojo {
 
     /**
      * List of ant-style patterns used to specify the aspects that should be
-     * included when compiling. When none specified all .java and .aj files in
-     * the project source directories, or directories spesified by the
-     * ajdtDefFile property are included.
+     * included when compiling. When none specified all .java and .aj files in the
+     * project source directories, or directories spesified by the ajdtDefFile
+     * property are included.
      * 
      * @parameter
      */
@@ -49,17 +49,17 @@ public abstract class AjcProperties extends AbstractMojo {
 
     /**
      * List of ant-style patterns used to specify the aspects that should be
-     * excluded when compiling. When none specified all .java and .aj files in
-     * the project source directories, or directories spesified by the
-     * ajdtDefFile property are included.
+     * excluded when compiling. When none specified all .java and .aj files in the
+     * project source directories, or directories spesified by the ajdtDefFile
+     * property are included.
      * 
      * @parameter
      */
     protected String[] excludes;
 
     /**
-     * Where to find the ajdt build definition file. <i>If set this will
-     * override the use of project sourcedirs</i>.
+     * Where to find the ajdt build definition file. <i>If set this will override
+     * the use of project sourcedirs</i>.
      * 
      * @parameter
      */
@@ -89,9 +89,8 @@ public abstract class AjcProperties extends AbstractMojo {
 
     /**
      * Set default level for messages about potential programming mistakes in
-     * crosscutting code. {level} may be ignore, warning, or error. This
-     * overrides entries in org/aspectj/weaver/XlintDefault.properties from
-     * aspectjtools.jar.
+     * crosscutting code. {level} may be ignore, warning, or error. This overrides
+     * entries in org/aspectj/weaver/XlintDefault.properties from aspectjtools.jar.
      * 
      * @parameter
      */
@@ -99,8 +98,7 @@ public abstract class AjcProperties extends AbstractMojo {
 
     /**
      * Enables the compiler to support hasmethod(method_pattern) and
-     * hasfield(field_pattern) type patterns, but only within declare
-     * statements.
+     * hasfield(field_pattern) type patterns, but only within declare statements.
      * 
      * It's experimental and undocumented because it may change, and because it
      * doesn't yet take into account ITDs.
@@ -193,18 +191,16 @@ public abstract class AjcProperties extends AbstractMojo {
     protected boolean showWeaveInfo;
 
     /**
-     * Repeat compilation process N times (typically to do performance
-     * analysis).
+     * Repeat compilation process N times (typically to do performance analysis).
      * 
      * @parameter
      */
     protected int repeat;
 
     /**
-     * (Experimental) runs weaver in reweavable mode which causes it to create
-     * woven classes that can be rewoven, subject to the restriction that on
-     * attempting a reweave all the types that advised the woven type must be
-     * accessible.
+     * (Experimental) runs weaver in reweavable mode which causes it to create woven
+     * classes that can be rewoven, subject to the restriction that on attempting a
+     * reweave all the types that advised the woven type must be accessible.
      * 
      * @parameter
      */
@@ -218,35 +214,34 @@ public abstract class AjcProperties extends AbstractMojo {
     protected boolean XnoInline;
 
     /**
-     * (Experimental) Normally it is an error to declare aspects Serializable.
-     * This option removes that restriction.
+     * (Experimental) Normally it is an error to declare aspects Serializable. This
+     * option removes that restriction.
      * 
      * @parameter
      */
     protected boolean XserializableAspects;
 
     /**
-     * Causes the compiler to calculate and add the SerialVersionUID field to
-     * any type implementing Serializable that is affected by an aspect. The
-     * field is calculated based on the class before weaving has taken place.
+     * Causes the compiler to calculate and add the SerialVersionUID field to any
+     * type implementing Serializable that is affected by an aspect. The field is
+     * calculated based on the class before weaving has taken place.
      * 
      * @parameter
      */
     protected boolean XaddSerialVersionUID;
 
     /**
-     * Override location of VM's bootclasspath for purposes of evaluating types
-     * when compiling. Path is a single argument containing a list of paths to
-     * zip files or directories, delimited by the platform-specific path
-     * delimiter.
+     * Override location of VM's bootclasspath for purposes of evaluating types when
+     * compiling. Path is a single argument containing a list of paths to zip files
+     * or directories, delimited by the platform-specific path delimiter.
      * 
      * @parameter
      */
     protected String bootclasspath;
 
     /**
-     * Emit warnings for any instances of the comma-delimited list of
-     * questionable code (eg 'unusedLocals,deprecation'): see
+     * Emit warnings for any instances of the comma-delimited list of questionable
+     * code (eg 'unusedLocals,deprecation'): see
      * http://www.eclipse.org/aspectj/doc/released/devguide/ajc-ref.html#ajc for
      * available settings
      * 
@@ -255,18 +250,18 @@ public abstract class AjcProperties extends AbstractMojo {
     protected String warn;
 
     /**
-     * The filename to store build configuration in. This file will be placed in
-     * the project build output directory, and will contain all the arguments
-     * passed to the compiler in the last run, and also all the filenames
-     * included in the build. Aspects as well as java files.
+     * The filename to store build configuration in. This file will be placed in the
+     * project build output directory, and will contain all the arguments passed to
+     * the compiler in the last run, and also all the filenames included in the
+     * build. Aspects as well as java files.
      * 
      * @parameter default-value="builddef.lst"
      */
     protected String argumentFileName = "builddef.lst";
 
     /**
-     * Forces re-compilation, regardless of whether the compiler arguments or
-     * the sources have changed.
+     * Forces re-compilation, regardless of whether the compiler arguments or the
+     * sources have changed.
      * 
      * @parameter
      */

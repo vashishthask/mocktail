@@ -26,28 +26,25 @@ public class RecorderAspectTest {
     }
 
     @Test(expected = AssertionError.class)
-    public void shouldNotifyRootRecordingDirectoryNotAvailable()
-            throws Exception {
-        dfa.setPropertyValue("recordingDirectory",
-                "src/test/resources/non_existent_recording_dir");
+    public void shouldNotifyRootRecordingDirectoryNotAvailable() throws Exception {
+        dfa.setPropertyValue("recordingDirectory", "src/test/resources/non_existent_recording_dir");
         recorderAspect = new RecorderAspect();
         recorderAspect.fqcn = "in.malonus.mocktail.metadata.aspect.recorder";
-        recorderAspect.doTheRecording("to be recorded object", "sandy",
-                "ganesh", 12, 23.0);
+        recorderAspect.doTheRecording("to be recorded object", "sandy", "ganesh", 12, 23.0);
 
     }
 
     @Test
     @Ignore
-    //FIXME
+    // FIXME
     public void shouldCreateRecordingDirectory() throws Exception {
         String rootRecordingDirectory = "src/test/resources/recording";
         String packagePath = "in.malonus.mocktail.metadata.aspect.recorder.new";
-        File recordingDir = new File(rootRecordingDirectory + File.separator
-                + packagePath.replace(".", File.separator));
-        
+        File recordingDir = new File(
+                rootRecordingDirectory + File.separator + packagePath.replace(".", File.separator));
+
         System.out.println(recordingDir.delete());
-        
+
         System.out.println(recordingDir.getPath());
 
         assertFalse("Recording directory already exists", recordingDir.exists());
@@ -55,8 +52,7 @@ public class RecorderAspectTest {
         dfa.setPropertyValue("recordingDirectory", rootRecordingDirectory);
         recorderAspect = new RecorderAspect();
         recorderAspect.fqcn = packagePath;
-        recorderAspect.doTheRecording("to be recorded object", "sandy",
-                "ganesh", 12, 23.0);
+        recorderAspect.doTheRecording("to be recorded object", "sandy", "ganesh", 12, 23.0);
 
         assertTrue("Recording directory doesn't exists", recordingDir.exists());
         (new File(recordingDir, "1359766052")).delete();
@@ -68,8 +64,7 @@ public class RecorderAspectTest {
     public void shouldExecuteIfRecordingExists() throws Exception {
         String rootRecordingDirectory = "src/test/resources/recording";
         String packagePath = "in.malonus.mocktail.metadata.aspect.recorder";
-        File recordingFile = new File(rootRecordingDirectory + File.separator
-                + packagePath.replace(".", File.separator)
+        File recordingFile = new File(rootRecordingDirectory + File.separator + packagePath.replace(".", File.separator)
                 + File.separator + "1359766052");
 
         assertTrue("Recording File doesn't exists", recordingFile.exists());
@@ -77,18 +72,16 @@ public class RecorderAspectTest {
         dfa.setPropertyValue("recordingDirectory", rootRecordingDirectory);
         recorderAspect = new RecorderAspect();
         recorderAspect.fqcn = packagePath;
-        recorderAspect.doTheRecording("to be recorded object", "sandy",
-                "ganesh", 12, 23.0);
+        recorderAspect.doTheRecording("to be recorded object", "sandy", "ganesh", 12, 23.0);
     }
 
     @Test
     @Ignore
-    //FIXME
+    // FIXME
     public void shouldDoRecordingIfRecordingNotTheir() throws Exception {
         String rootRecordingDirectory = "src/test/resources/recording";
         String packagePath = "in.malonus.mocktail.metadata.aspect.recorder.new";
-        File recordingFile = new File(rootRecordingDirectory + File.separator
-                + packagePath.replace(".", File.separator)
+        File recordingFile = new File(rootRecordingDirectory + File.separator + packagePath.replace(".", File.separator)
                 + File.separator + "1359766052");
 
         assertFalse("Recording File already exists", recordingFile.exists());
@@ -96,8 +89,7 @@ public class RecorderAspectTest {
         dfa.setPropertyValue("recordingDirectory", rootRecordingDirectory);
         recorderAspect = new RecorderAspect();
         recorderAspect.fqcn = packagePath;
-        recorderAspect.doTheRecording("to be recorded object", "sandy",
-                "ganesh", 12, 23.0);
+        recorderAspect.doTheRecording("to be recorded object", "sandy", "ganesh", 12, 23.0);
 
         assertTrue("Recording File doesn't exists", recordingFile.exists());
         recordingFile.delete();

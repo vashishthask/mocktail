@@ -25,10 +25,10 @@ public class UserDetail implements Serializable {
     public void setAge(int age) {
         this.age = age;
     }
-    
+
     @Override
     public String toString() {
-    	// TODO Auto-generated method stub
-    	return ToStringBuilder.reflectionToString(this);
+        // TODO Auto-generated method stub
+        return ToStringBuilder.reflectionToString(this);
     }
 }

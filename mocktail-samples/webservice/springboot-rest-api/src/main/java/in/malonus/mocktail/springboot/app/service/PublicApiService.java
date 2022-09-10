@@ -8,7 +8,7 @@ public class PublicApiService {
     public PublicApiService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-    
+
     public String getDogBreeds() {
         return restTemplate.getForObject("https://dog.ceo/api/breeds/list/all", String.class);
     }

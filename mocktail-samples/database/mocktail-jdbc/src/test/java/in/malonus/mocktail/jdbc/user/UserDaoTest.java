@@ -42,8 +42,7 @@ public class UserDaoTest {
     @BeforeClass
     public static void cleanRecordings() {
         Driver driver = new jdbcDriver();
-        DataSource dataSource = new SimpleDriverDataSource(driver,
-                "jdbc:hsqldb:mem:mypersistence;user=sa");
+        DataSource dataSource = new SimpleDriverDataSource(driver, "jdbc:hsqldb:mem:mypersistence;user=sa");
         JdbcTemplate template = new JdbcTemplate(dataSource);
         template.execute("CREATE TABLE USERDETAIL (id INTEGER,age INTEGER)");
 
@@ -51,7 +50,7 @@ public class UserDaoTest {
 
     @Test
     public void testGetUser() {
-    	MethodMocktail methodMocktail = new MethodMocktail();
+        MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
 
         // search with recording mode
@@ -70,20 +69,20 @@ public class UserDaoTest {
     @Test
     // FIXME testcase should be repeatable, i.e. should work without clean
     public void testInsertUser() {
-    	MethodMocktail methodMocktail = new MethodMocktail();
+        MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
-        LOGGER.debug("isRecordingAvailable():"+recordingAvailable + " object details:"+methodMocktail);
+        LOGGER.debug("isRecordingAvailable():" + recordingAvailable + " object details:" + methodMocktail);
 
         insertAnotherRow();// with 2, 20 cached
-		int expectedRows = recordingAvailable? 1 : 2;
-        //int expectedRows = 2;
+        int expectedRows = recordingAvailable ? 1 : 2;
+        // int expectedRows = 2;
 
         assertEquals(expectedRows, getNumRows());
-        
+
         insertAnotherRowWithSameParamsAgain();// with 2, 20 shouldn't insert again
-        expectedRows = recordingAvailable? 1 : 2;
-        //expectedRows = 2;
+        expectedRows = recordingAvailable ? 1 : 2;
+        // expectedRows = 2;
         assertEquals(expectedRows, getNumRows());
     }
 
@@ -96,13 +95,13 @@ public class UserDaoTest {
         userDetail.setAge(20);
         userDetail.setId(3);
         int numAffected = userDao.save(userDetail);
-        LOGGER.debug("numAffected:"+numAffected);
+        LOGGER.debug("numAffected:" + numAffected);
     }
 
     @Test
     // FIXME
     public void testUpdateUser() {
-    	MethodMocktail methodMocktail = new MethodMocktail();
+        MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         int count = getNumRows();
 
@@ -112,20 +111,21 @@ public class UserDaoTest {
         userDetail.setId(1);
 
         // update the row in recording mode
-        int affectedRows = userDao.update(userDetail);//update 1 with (1,30) - cached
+        int affectedRows = userDao.update(userDetail);// update 1 with (1,30) - cached
 
         assertEquals(1, affectedRows);
 
-        updateRecordToOriginalValue(1, 10);//externally updated
-        createAnotherRecordExternally(1, 10);//another one created 1, 10 - total 2 records with key 1
+        updateRecordToOriginalValue(1, 10);// externally updated
+        createAnotherRecordExternally(1, 10);// another one created 1, 10 - total 2 records with key 1
         assertEquals(2, getNumRows());
 
         userDetail.setAge(30);
         userDetail.setId(1);
-        int numRowsAffected = userDao.update(userDetail); //update again but this time as update query is cached it will not affect the db
+        int numRowsAffected = userDao.update(userDetail); // update again but this time as update query is cached it
+                                                          // will not affect the db
 
-        assertEquals(1, numRowsAffected); //numRowAffected comes from cached response and hence should be 1 instead of 2
-
+        assertEquals(1, numRowsAffected); // numRowAffected comes from cached response and hence should be 1 instead of
+                                          // 2
 
     }
 
@@ -136,19 +136,19 @@ public class UserDaoTest {
 
     @Test
     public void testDeleteUser() {
-    	MethodMocktail methodMocktail = new MethodMocktail();
+        MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
 
         assertEquals(1, getNumRows());
-        createAnotherRecordExternally(2, 20); //no recording 
-        assertEquals(2, getNumRows()); //same response both in recording and playback
+        createAnotherRecordExternally(2, 20); // no recording
+        assertEquals(2, getNumRows()); // same response both in recording and playback
 
-        deleteRecordWithUserDao(2);//response cached 
+        deleteRecordWithUserDao(2);// response cached
         int expectedRows = recordingAvailable ? 2 : 1;
-        assertEquals(expectedRows, getNumRows()); //this should be 2 in playback, 1 in recording
+        assertEquals(expectedRows, getNumRows()); // this should be 2 in playback, 1 in recording
 
-        createAnotherRecordExternally(2, 20); //now the rows are 3 in playback, 2 in recording
+        createAnotherRecordExternally(2, 20); // now the rows are 3 in playback, 2 in recording
         deleteRecordWithUserDao(2); // should not delete this time as response
                                     // of delete is cached in previous call
 
@@ -165,13 +165,12 @@ public class UserDaoTest {
     }
 
     private void createAnotherRecordExternally(int id, int age) {
-        jdbcTemplate.update("insert into USERDETAIL values (" + id + "," + age
-                + ")");
+        jdbcTemplate.update("insert into USERDETAIL values (" + id + "," + age + ")");
     }
 
     @Test
     public void testMethodBasedRecording() {
-    	MethodMocktail methodMocktail = new MethodMocktail();
+        MethodMocktail methodMocktail = new MethodMocktail();
         methodMocktail.setUp(this);
         boolean recordingAvailable = methodMocktail.areRecordingsAvailable();
 
@@ -187,7 +186,6 @@ public class UserDaoTest {
         int expectedRows = recordingAvailable ? 1 : 2;
         assertThat(expectedRows, is(userDetails.size()));
     }
-    
 
     private int getNumRows() {
         return jdbcTemplate.queryForInt("select count(*) from userdetail");

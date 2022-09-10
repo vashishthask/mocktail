@@ -26,13 +26,13 @@ public class YamlDiskRepository implements ObjectRepository {
     public boolean objectAlreadyExist(String objectId, String location) {
         return fileOperations.fileAlreadyExists(objectId, location);
     }
-    
+
     @Override
-	public boolean clearObjectIfAvailable(String objectId, String location) {
-		boolean objectAlreadyExist = objectAlreadyExist(objectId, location);
-		if(objectAlreadyExist){
-			return fileOperations.deleteObject(objectId, location);
-		}
-		return true;
-	}
+    public boolean clearObjectIfAvailable(String objectId, String location) {
+        boolean objectAlreadyExist = objectAlreadyExist(objectId, location);
+        if (objectAlreadyExist) {
+            return fileOperations.deleteObject(objectId, location);
+        }
+        return true;
+    }
 }
