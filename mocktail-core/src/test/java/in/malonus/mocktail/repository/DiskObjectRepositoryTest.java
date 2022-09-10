@@ -17,22 +17,21 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class DiskObjectRepositoryTest {
 
-	@Mock
+	private static final String SERIALIZED_LIST_PATH = "src/test/resources/in/malonus/mocktail";
+    @Mock
 	OutputStream outputStream;
 	ObjectRepository objectRepository = new DiskObjectRepository();
 
 	@Test
 	public void testObjectAlreadyExists() throws Exception {
-		String locationDirectory = getAbsolutePath("src", "test", "resources", "in", "malonus", "mocktail",
-				"util");
+		String locationDirectory = getAbsolutePath(SERIALIZED_LIST_PATH);
 		boolean objectAlreadyExist = objectRepository.objectAlreadyExist("recorded_list.ser", locationDirectory);
 		assertThat(objectAlreadyExist, is(true));
 	}
 
 	@Test
 	public void shouldSaveObject() throws Exception {
-		String locationDirectory = getAbsolutePath("src", "test", "resources", "in", "malonus", "mocktail",
-				"util");
+		String locationDirectory = getAbsolutePath(SERIALIZED_LIST_PATH);
 		File file = new File(locationDirectory, "saved_object");
 		assertThat(file.exists(), is(false));
 		objectRepository.saveObject(Arrays.asList("sandy", "ganesh", 12, 23.0), "saved_object", locationDirectory);
@@ -43,9 +42,9 @@ public class DiskObjectRepositoryTest {
 
 	@Test
 	public void shouldGetObject() throws Exception {
-		String locationDirectory = getAbsolutePath("src", "test", "resources", "in", "malonus", "mocktail",
-				"util");
-		List recordedList = (List) objectRepository.getObject("recorded_list.ser", locationDirectory);
+		String locationDirectory = getAbsolutePath(SERIALIZED_LIST_PATH);
+		@SuppressWarnings("rawtypes")
+        List recordedList = (List) objectRepository.getObject("recorded_list.ser", locationDirectory);
 		assertThat(recordedList.size(), is(4));
 		assertThat((String) recordedList.get(0), is("sandy"));
 		assertThat((String) recordedList.get(1), is("ganesh"));
@@ -53,12 +52,10 @@ public class DiskObjectRepositoryTest {
 		assertThat((Double) recordedList.get(3), is(23.0));
 	}
 
-	private String getAbsolutePath(String... path) throws IOException {
+	private String getAbsolutePath(String path) throws IOException {
 		File file = new File(".");
 		StringBuffer absolutePath = new StringBuffer(file.getCanonicalPath());
-		for (String pathElement : path) {
-			absolutePath.append(File.separator).append(pathElement);
-		}
+		absolutePath.append(File.separator).append(path);
 		return absolutePath.toString();
 	}
 }

@@ -16,4 +16,4 @@ mocktail-samples/webservice/axis2-simpleclient/target
 mocktail-samples/webservice/axis2-simpleservice/target
 mocktail-samples/webservice/cxf-simpleservice/target
 mocktail-samples/webservice/cxf-simpleclient/target
-mocktail-metadata/velocity.log*
+mocktail-core/velocity.log*

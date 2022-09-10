@@ -106,8 +106,7 @@
     </plugins>
   </build>
   <modules>
-    <module>mocktail-common</module>
-    <module>mocktail-metadata</module>
+    <module>mocktail-core</module>
     <module>mocktail-maven-plugin</module>
     <module>mocktail-samples</module>
     <module>tcpcache</module>

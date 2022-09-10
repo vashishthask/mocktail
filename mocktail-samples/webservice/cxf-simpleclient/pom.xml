@@ -20,7 +20,7 @@
     </dependency>
     <dependency>
       <groupId>in.malonus.mocktail</groupId>
-      <artifactId>mocktail-metadata</artifactId>
+      <artifactId>mocktail-core</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>

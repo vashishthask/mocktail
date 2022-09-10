@@ -1,18 +1,8 @@
 package in.malonus.mocktail;
 
-/**
- * I'll define the mode in which the mocktail runs Two modes that I've right now
- * are playback and recording
- * 
- * @author sandeep
- * 
- */
 public enum MocktailMode {
 
-    PLAYBACK("playback", "Playback"), RECORDING("recording",
-            "Recorder"), RECORDING_NEW("recording_new",
-                    "Recorder");
-    
+    PLAYBACK("playback", "Playback"), RECORDING("recording", "Recorder"), RECORDING_NEW("recording_new", "Recorder");
 
     private final String mode;
     private final String filePrefix;
