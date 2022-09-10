@@ -2,10 +2,10 @@ package in.malonus.mocktail.samples.axis2.client;
 
 import java.rmi.RemoteException;
 
-import in.malonus.mocktail.MocktailMode;
 import in.malonus.mocktail.samples.axis2.client.SimpleServiceStub.ConcatRequest;
 import in.malonus.mocktail.samples.axis2.client.SimpleServiceStub.ConcatResponse;
-import in.malonus.mocktail.tcpcache.TcpCache;
+import in.malonus.tcpcache.CacheMode;
+import in.malonus.tcpcache.TcpCache;
 
 public class SimpleClient {
     public static void main(String[] args) throws RemoteException {
@@ -14,7 +14,7 @@ public class SimpleClient {
 
         // for tcpmon to work - start
         TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080, SimpleClient.class, "main",
-                MocktailMode.RECORDING_NEW);
+                CacheMode.RECORDING_NEW);
         SimpleServiceStub service = new SimpleServiceStub("http://localhost:1234/axis2/services/SimpleService");
         // for tcpmon to work - end
 

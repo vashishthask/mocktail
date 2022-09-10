@@ -1,9 +1,6 @@
-package in.malonus.mocktail.metadata.repository;
+package in.malonus.mocktail.repository;
 
 import org.yaml.snakeyaml.Yaml;
-
-import in.malonus.mocktail.repository.ObjectFileOperations;
-import in.malonus.mocktail.repository.ObjectRepository;
 
 public class YamlDiskRepository implements ObjectRepository {
 

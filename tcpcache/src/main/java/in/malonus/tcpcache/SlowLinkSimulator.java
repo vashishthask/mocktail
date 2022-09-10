@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package in.malonus.mocktail.tcpcache;
+package in.malonus.tcpcache;
 
 /**
  * class to simulate slow connections by slowing down the system

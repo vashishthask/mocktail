@@ -12,7 +12,7 @@ SOAP or TCP response can be cached. In that case configuration (mocktailconfig.p
 If you don't want caching ON, you can switch that off using configuration. In that case, 
 it works as tcpmon without GUI which is useful to print SOAP responses.
 
-### Sample mocktailconfig.properties
+### Sample tcpcache.properties
 
 	## by default caching is ON. In this case the library works as stripped down version of tcpmon
 	## which could be used in test cases or java classes as proxy to print the tcp responses.
@@ -30,7 +30,7 @@ it works as tcpmon without GUI which is useful to print SOAP responses.
 
 	// for tcpcache to work -- start
 	TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080,
-		SimpleService_Service.class, "main", MocktailMode.RECORDING_NEW);
+		SimpleService_Service.class, "main", CacheMode.RECORDING_NEW);
 	BindingProvider bp = (BindingProvider) port;
 	Map<String, Object> context = bp.getRequestContext();
 	context.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,
@@ -51,7 +51,7 @@ it works as tcpmon without GUI which is useful to print SOAP responses.
 	//SimpleServiceStub service = new SimpleServiceStub("http://localhost:8080/axis2/services/SimpleService");
 		
 	//for tcpcache to work - start
-	TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080, SimpleClient.class , "main", MocktailMode.RECORDING_NEW);
+	TcpCache tcpCache = new TcpCache(1234, "127.0.0.1", 8080, SimpleClient.class , "main", CacheMode.RECORDING_NEW);
 	SimpleServiceStub service = new SimpleServiceStub("http://localhost:1234/axis2/services/SimpleService");
 	//for tcpcache to work - end
 		

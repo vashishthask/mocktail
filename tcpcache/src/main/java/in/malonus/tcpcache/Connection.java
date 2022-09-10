@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package in.malonus.mocktail.tcpcache;
+package in.malonus.tcpcache;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,8 +31,6 @@ import java.net.UnknownHostException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import in.malonus.mocktail.MocktailMode;
-import in.malonus.mocktail.repository.DiskObjectRepository;
 
 /**
  * a connection listens to a single current connection
@@ -96,7 +94,7 @@ class Connection extends Thread {
      * 
      * @param l
      * @param s
-     * @param mocktailMode
+     * @param CacheMode
      * @param objectId
      * @param methodName
      */
@@ -142,7 +140,7 @@ class Connection extends Thread {
                 bufferedData = createInputRequest(incomingStream);
             }
             
-            if (MocktailMode.PLAYBACK.equals(config.getMocktailMode()) && isObjectExistInCache()) {
+            if (CacheMode.PLAYBACK.equals(config.getCacheMode()) && isObjectExistInCache()) {
                 writeResponseFromCache(inSocketOutputStream);
             } else {
                 try {

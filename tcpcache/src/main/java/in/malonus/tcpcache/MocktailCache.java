@@ -1,10 +1,6 @@
-package in.malonus.mocktail.tcpcache;
+package in.malonus.tcpcache;
 
 import java.io.File;
-
-import in.malonus.mocktail.MocktailMode;
-import in.malonus.mocktail.repository.DiskObjectRepository;
-import in.malonus.mocktail.repository.ObjectRepository;
 
 public class MocktailCache {
     
@@ -19,10 +15,10 @@ public class MocktailCache {
     }
     
     public void saveInMocktailRepository() {
-        MocktailMode mocktailMode = config.getMocktailMode();
-        if(MocktailMode.RECORDING_NEW.equals(mocktailMode))
+        CacheMode cacheMode = config.getCacheMode();
+        if(CacheMode.RECORDING_NEW.equals(cacheMode))
             clearObjectOnDisk(config.getTestClassName());
-        if(MocktailMode.RECORDING == mocktailMode || mocktailMode == MocktailMode.RECORDING_NEW){
+        if(CacheMode.RECORDING == cacheMode || cacheMode == CacheMode.RECORDING_NEW){
             saveObjectInRepository();
         }
     }
@@ -36,7 +32,7 @@ public class MocktailCache {
         if (!(new File(location)).exists()) {
             (new File(location)).mkdirs();
         }
-        ObjectRepository objectRepository = new DiskObjectRepository();
+        DiskObjectRepository objectRepository = new DiskObjectRepository();
         objectRepository.saveObject(response, objectId, location);
     }
 
@@ -44,7 +40,7 @@ public class MocktailCache {
         String location = cacheFileInfo.getCacheFileLocation();
         String objectId = cacheFileInfo.getObjectId();
         
-        ObjectRepository objectRepository = new DiskObjectRepository();
+        DiskObjectRepository objectRepository = new DiskObjectRepository();
         objectRepository.clearObjectIfAvailable(objectId, location);
     }
 

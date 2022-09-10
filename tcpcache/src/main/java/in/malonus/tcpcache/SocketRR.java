@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package in.malonus.mocktail.tcpcache;
+package in.malonus.tcpcache;
 
 import java.io.InputStream;
 import java.io.OutputStream;

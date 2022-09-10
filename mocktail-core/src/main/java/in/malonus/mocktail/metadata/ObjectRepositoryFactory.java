@@ -1,8 +1,8 @@
 package in.malonus.mocktail.metadata;
 
-import in.malonus.mocktail.metadata.repository.YamlDiskRepository;
 import in.malonus.mocktail.repository.DiskObjectRepository;
 import in.malonus.mocktail.repository.ObjectRepository;
+import in.malonus.mocktail.repository.YamlDiskRepository;
 
 public class ObjectRepositoryFactory {
 

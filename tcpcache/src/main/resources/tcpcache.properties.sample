@@ -6,3 +6,6 @@ chachingOn=true
 ## directory where cached recording will be stored. default is taken as sec/test/resources
 recordingDir=src/test/resources
 
+##indicator which mentions if tcpcache is in "recording" mode, "playback" mode or "recording_new" mode
+cachemode=recording
+

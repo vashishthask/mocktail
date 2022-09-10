@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package in.malonus.mocktail.tcpcache;
+package in.malonus.tcpcache;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -22,8 +22,6 @@ import java.net.Socket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import in.malonus.mocktail.MocktailMode;
 
 /**
  * wait for incoming connections, spawn a connection thread when stuff comes in.
@@ -36,7 +34,7 @@ public class TcpCache extends Thread {
     private Configuration config;
 
     public TcpCache(int localPort, String targetHost, int targetPort, Class<?> testClass, String testMethodName) {
-        config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName, MocktailMode.PLAYBACK);
+        config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName);
     }
 
     public TcpCache(int localPort,
@@ -44,8 +42,8 @@ public class TcpCache extends Thread {
             int targetPort,
             Class<?> testClass,
             String testMethodName,
-            MocktailMode mocktailMode) {
-        config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName, mocktailMode);
+            CacheMode cacheMode) {
+        config = new Configuration(localPort, targetHost, targetPort, testClass, testMethodName);
     }
 
     public void run() {
