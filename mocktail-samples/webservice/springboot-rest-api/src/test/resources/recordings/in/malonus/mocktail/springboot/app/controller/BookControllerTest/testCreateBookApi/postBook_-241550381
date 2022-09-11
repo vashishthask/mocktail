@@ -1,0 +1,2 @@
+message: Book created successfully
+book: {id: 1, name: Book 1, isbn: QWER1234, author: Author 1, pages: 200}

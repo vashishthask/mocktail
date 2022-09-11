@@ -62,10 +62,5 @@
       <artifactId>spring-beans</artifactId>
       <version>5.3.22</version>
     </dependency>
-    <dependency>
-      <groupId>in.malonus.mocktail</groupId>
-      <artifactId>mocktail-common</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-    </dependency>
   </dependencies>
 </project>

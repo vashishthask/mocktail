@@ -80,11 +80,11 @@ public class MocktailContainer {
     }
 
     private MocktailMode getMode(String mode) {
-        if (mode.equalsIgnoreCase(MocktailMode.PLAYBACK.getModeDirectory()))
+        if (mode.equalsIgnoreCase(MocktailMode.PLAYBACK.toString()))
             return MocktailMode.PLAYBACK;
-        else if (mode.equalsIgnoreCase(MocktailMode.RECORDING.getModeDirectory())) {
+        else if (mode.equalsIgnoreCase(MocktailMode.RECORDING.toString())) {
             return MocktailMode.RECORDING;
-        } else if (mode.equalsIgnoreCase(MocktailMode.RECORDING_NEW.getModeDirectory())) {
+        } else if (mode.equalsIgnoreCase(MocktailMode.RECORDING_NEW.toString())) {
             return MocktailMode.RECORDING_NEW;
         }
         return MocktailMode.RECORDING;

@@ -60,7 +60,7 @@ public class MocktailTemplateProcesser {
         contextMap.put("fqcn", mocktail.getClassFQCN());
         contextMap.put("className", mocktail.getClassName());
         contextMap.put("packageName", mocktail.getClassPackageName());
-        contextMap.put("mocktailMode", mocktailMode.getModeDirectory());
+        contextMap.put("mocktailMode", mocktailMode.toString());
         String targetImpl = mocktail.getTargetImpl();
         if (StringUtils.isNotEmpty(targetImpl)) {
             contextMap.put("targetImpl", targetImpl);
@@ -76,7 +76,7 @@ public class MocktailTemplateProcesser {
     private Reader getAspectTemplate(AspectType aspectType, MocktailMode mocktailMode) {
         StringBuffer aspectTemplatePath = new StringBuffer("in/malonus/mocktail/aj/creator/");
         aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append("/");
-        aspectTemplatePath.append(mocktailMode.getModeDirectory()).append("/");
+        aspectTemplatePath.append(mocktailMode.toString()).append("/");
         aspectTemplatePath.append("template.vm");
         return new ClasspathResourceLoader().getResourceReader(aspectTemplatePath.toString(), "UTF-8");
     }
@@ -117,6 +117,6 @@ public class MocktailTemplateProcesser {
     }
 
     private String getAspectFileName(Mocktail mocktail, MocktailMode mocktailMode) {
-        return mocktailMode.getFilePrefixForMode() + "Aspect" + mocktail.getClassName();
+        return mocktailMode.getFilePrefix() + "Aspect" + mocktail.getClassName();
     }
 }

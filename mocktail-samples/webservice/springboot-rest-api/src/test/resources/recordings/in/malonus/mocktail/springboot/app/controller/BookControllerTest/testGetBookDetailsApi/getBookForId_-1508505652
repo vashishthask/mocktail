@@ -1,0 +1,2 @@
+!!in.malonus.mocktail.springboot.app.model.Book {author: Author1, id: 1, isbn: ISBN1,
+  name: Book1, pages: 200}

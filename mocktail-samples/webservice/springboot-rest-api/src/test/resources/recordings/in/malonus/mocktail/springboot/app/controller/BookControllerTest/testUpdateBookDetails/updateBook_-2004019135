@@ -1,0 +1,2 @@
+message: Book Updated successfully
+book: {id: 1, name: Book2, isbn: ISBN2, author: Author2, pages: 200}
