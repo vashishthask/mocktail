@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class MocktailTemplateProcesser {
         for (Map.Entry<String, Object> contextEntry : dynamicValues.entrySet()) {
             context.put(contextEntry.getKey(), contextEntry.getValue());
         }
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getAspectTemplate(aspectType, mocktailMode)));
+        Reader reader = getAspectTemplate(aspectType, mocktailMode);
 
         StringWriter writer = new StringWriter();
         try {
@@ -48,8 +49,6 @@ public class MocktailTemplateProcesser {
         } catch (MethodInvocationException e) {
             throw new IllegalStateException(e);
         } catch (ResourceNotFoundException e) {
-            throw new IllegalStateException(e);
-        } catch (IOException e) {
             throw new IllegalStateException(e);
         }
         return writer.toString();
@@ -74,12 +73,12 @@ public class MocktailTemplateProcesser {
         return contextMap;
     }
 
-    private InputStream getAspectTemplate(AspectType aspectType, MocktailMode mocktailMode) {
+    private Reader getAspectTemplate(AspectType aspectType, MocktailMode mocktailMode) {
         StringBuffer aspectTemplatePath = new StringBuffer("in/malonus/mocktail/aj/creator/");
         aspectTemplatePath.append(aspectType.getAspectTypeDirectory()).append("/");
         aspectTemplatePath.append(mocktailMode.getModeDirectory()).append("/");
         aspectTemplatePath.append("template.vm");
-        return new ClasspathResourceLoader().getResourceStream(aspectTemplatePath.toString());
+        return new ClasspathResourceLoader().getResourceReader(aspectTemplatePath.toString(), "UTF-8");
     }
 
     /**
