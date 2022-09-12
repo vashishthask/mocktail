@@ -62,7 +62,7 @@ public class MethodMocktail implements Serializable {
 
     private boolean checkRecordingsOnDisk() {
         String recordingPath = System.getProperty("user.dir") + File.separator
-                + MocktailConfig.INSTANCE.getProperty("recordingDir") + File.separator
+                + MocktailConfig.INSTANCE.getRecordingPath() + File.separator
                 + fqcn.replace(".", File.separator) + File.separator + methodName;
         LOGGER.debug("The recording path is:"+recordingPath);
         ObjectFileOperations fileOperations = new ObjectFileOperations();

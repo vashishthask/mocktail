@@ -48,10 +48,10 @@
         <groupId>in.malonus.mocktail</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <configuration>
-          <aspectsDirectory>target/generated/aspects</aspectsDirectory>
+          <!--aspectsDirectory>target/generated/aspects</aspectsDirectory>
           <configuration>src/test/resources/mocktail.xml</configuration>
-          <recordingDir>src/test/resources/recordings</recordingDir>
-          <mode>recording</mode>
+          <recordingDir>src/test/resources/recordings</recordingDir-->
+          <mode>recording_new</mode>
         </configuration>
         <executions>
           <execution>
@@ -93,7 +93,6 @@
     <dependency>
       <groupId>org.hsqldb</groupId>
       <artifactId>hsqldb</artifactId>
-      <version>2.2.6</version>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
