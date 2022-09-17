@@ -38,9 +38,9 @@
       <version>1.6.2</version>
     </dependency>
     <dependency>
-      <groupId>in.malonus.mocktail</groupId>
+      <groupId>io.github.vashishthask</groupId>
       <artifactId>tcpcache</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 </project>

@@ -114,6 +114,5 @@
     <module>mocktail-core</module>
     <module>mocktail-maven-plugin</module>
     <module>mocktail-samples</module>
-    <module>tcpcache</module>
   </modules>
 </project>
