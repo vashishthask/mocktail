@@ -8,6 +8,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.utils.io.FileUtils;
 import org.codehaus.mojo.aspectj.AjcCompileMojo;
 import org.slf4j.Logger;
@@ -22,37 +25,26 @@ import in.malonus.mocktail.metadata.xml.reader.XStreamMocktailXmlReader;
 /**
  * Goal which touches a timestamp file.
  * 
- * @goal mocktail
- * @execute phase="validate"
- * @execute goal="mocktail"
- * @phase validate
+ *
  */
+@Mojo(name="mocktail", defaultPhase = LifecyclePhase.VALIDATE)
 public class MocktailMojo extends AjcCompileMojo {
     private static final Logger LOGGER = LoggerFactory.getLogger(MocktailMojo.class);
 
-    /**
-     * @parameter expression="${aspectsDirectory}"
-     *            default-value="target/generated/aspects"
-     * @required
-     */
+    
+    @Parameter(property="aspectsDirectory", defaultValue = "target/generated/aspects")
     private File aspectsDirectory;
 
-    /**
-     * @parameter expression="${mocktailconfig}" default-value="src/test/resources/mocktail.xml"
-     * @required
-     */
+
+    @Parameter(property="mocktailconfig", defaultValue = "src/test/resources/mocktail.xml")
     private File configuration;
 
-    /**
-     * @parameter expression="${recordingDir}" default-value="src/test/resources/recordings"
-     * @required
-     */
+    
+    @Parameter(property="recordingDir", defaultValue = "src/test/resources/recordings")
     private File recordingDir;
 
-    /**
-     * @parameter expression="${mode}" default-value="recording"
-     * @required
-     */
+    
+    @Parameter(property="mode", defaultValue = "recording")
     private String mode;
 
     public void execute() throws MojoExecutionException {
