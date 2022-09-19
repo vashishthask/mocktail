@@ -6,9 +6,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>in.malonus.mocktail</groupId>
   <artifactId>mocktail-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
-  <name>mocktail Maven Plugin</name>
+  <name>mocktail parent</name>
+  <description>mocktail is a tool to mock potentially any java method response on the disk for testing purposes</description>
 
   <url>https://github.com/vashishthask/mocktail</url>
 
