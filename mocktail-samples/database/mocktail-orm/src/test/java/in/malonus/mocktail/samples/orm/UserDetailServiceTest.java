@@ -8,10 +8,9 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.malonus.mocktail.samples.orm.UserDetail;
-import in.malonus.mocktail.samples.orm.UserDetailService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -19,12 +18,16 @@ import jakarta.persistence.Persistence;
 public class UserDetailServiceTest {
 
     private UserDetailService userDetailService;
-    private EntityManagerFactory emf;
+    private static EntityManagerFactory emf;
     EntityManager entityManager;
 
+    @BeforeClass
+    public static void init() {
+        emf = Persistence.createEntityManagerFactory("mocktail-orm");
+    }
+    
     @Before
     public void setup() throws Exception {
-        emf = Persistence.createEntityManagerFactory("mocktail-orm");
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
         persistUser("John", 1L, entityManager);
@@ -47,9 +50,8 @@ public class UserDetailServiceTest {
     public void free() {
         EntityManager entityManager = emf.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.createQuery("DELETE FROM UserDetail").executeUpdate();
+        int numDeleted = entityManager.createQuery("DELETE FROM UserDetail").executeUpdate();
         entityManager.getTransaction().commit();
-        emf.close();
     }
 
     /*

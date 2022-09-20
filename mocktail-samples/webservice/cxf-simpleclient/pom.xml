@@ -21,7 +21,6 @@
     <dependency>
       <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-core</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -40,14 +39,14 @@
       <version>5.3.20</version>
     </dependency>
     <dependency>
-      <groupId>in.malonus.mocktail</groupId>
+      <groupId>io.github.vashishthask</groupId>
       <artifactId>tcpcache</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
-	   	<groupId>in.malonus.mocktail</groupId>
-	   	<artifactId>cxf-simpleservice</artifactId>
-	   	<version>0.0.1-SNAPSHOT</version>
+      <groupId>in.malonus.mocktail</groupId>
+      <artifactId>cxf-simpleservice</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>

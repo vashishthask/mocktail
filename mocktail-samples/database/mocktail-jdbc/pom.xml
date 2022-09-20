@@ -10,7 +10,7 @@
   <parent>
     <artifactId>database-samples</artifactId>
     <groupId>in.malonus.mocktail</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,9 +44,8 @@
         </dependencies>
       </plugin>
       <plugin>
-        <artifactId>mocktail-maven-plugin</artifactId>
         <groupId>in.malonus.mocktail</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>mocktail-maven-plugin</artifactId>
         <configuration>
           <!--aspectsDirectory>target/generated/aspects</aspectsDirectory> 
             <configuration>src/test/resources/mocktail.xml</configuration> <recordingDir>src/test/resources/recordings</recordingDir -->
@@ -87,7 +86,6 @@
     <dependency>
       <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-core</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.hsqldb</groupId>

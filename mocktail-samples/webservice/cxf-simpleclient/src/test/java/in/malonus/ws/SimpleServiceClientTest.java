@@ -9,11 +9,10 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 import javax.xml.ws.BindingProvider;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.malonus.mocktail.tcpcache.TcpCache;
+import io.github.vashishthask.tcpcache.TcpCache;
 
 public class SimpleServiceClientTest {
 

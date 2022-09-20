@@ -9,9 +9,9 @@
   <name>axis2-simpleclient</name>
   <url>http://maven.apache.org</url>
   <parent>
-    <artifactId>webservice-samples</artifactId>
+    <artifactId>mocktail-samples</artifactId>
     <groupId>in.malonus.mocktail</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
