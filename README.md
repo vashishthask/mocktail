@@ -1,6 +1,6 @@
 # Mocktail
 
-[Mocktail](https://github.com/vashishthask/mocktail/) is a tool to cache the response of potentially any Java method call on the disk. This becomes tremendously useful when you want to mock a method call, but still want it to respond with real-world response, e.g. complex database call, a restful service call. After the first call it makes, from next call onwards, method provides the response from what it saved in its first call from the disk.
+[Mocktail](https://github.com/vashishthask/mocktail/) is a tool to cache the response of potentially any Java method call on the disk. This becomes tremendously useful when you want to mock a method call, but still want it to respond with real-world response, e.g. for complex database call, for a restful service call. After the first call it makes to the method implementation, from next call onwards, method provides the response from its cache.
 
 This can be termed as [VCR](https://github.com/vcr/vcr) implementation in Java. VCR record your test suite's HTTP interactions and replay them during future test runs for fast, deterministic, accurate tests. Mocktail does the record and playback for any method. HTTP record and playback is one of the record and playback it does.
 
