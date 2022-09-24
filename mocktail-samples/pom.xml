@@ -25,7 +25,7 @@
       <dependency>
         <groupId>in.malonus.mocktail</groupId>
         <artifactId>mocktail-core</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -68,7 +68,7 @@
         <plugin>
           <artifactId>mocktail-maven-plugin</artifactId>
           <groupId>in.malonus.mocktail</groupId>
-          <version>1.0.1</version>
+          <version>1.0.2-SNAPSHOT</version>
         </plugin>
         <plugin>
         <groupId>org.apache.maven.plugins</groupId>

@@ -27,7 +27,7 @@
     <dependency>
       <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-core</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -73,8 +73,8 @@
         <executions>
           <execution>
             <goals>
-              <goal>compile</goal>       <!-- use this goal to weave all your main classes -->
-              <goal>test-compile</goal>       <!-- use this goal to weave all your test classes -->
+              <goal>compile</goal>
+              <goal>test-compile</goal>
             </goals>
             <configuration>
               <source>1.8</source>
@@ -95,7 +95,7 @@
       <plugin>
         <artifactId>mocktail-maven-plugin</artifactId>
         <groupId>in.malonus.mocktail</groupId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
         <configuration>
           <!--aspectsDirectory>target/generated/aspects</aspectsDirectory>
           <configuration>src/test/resources/mocktail.xml</configuration>
