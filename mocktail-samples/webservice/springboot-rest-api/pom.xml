@@ -93,8 +93,8 @@
         </dependencies>
       </plugin>
       <plugin>
-        <artifactId>mocktail-maven-plugin</artifactId>
         <groupId>in.malonus.mocktail</groupId>
+        <artifactId>mocktail-maven-plugin</artifactId>
         <version>1.0.2-SNAPSHOT</version>
         <configuration>
           <!--aspectsDirectory>target/generated/aspects</aspectsDirectory>

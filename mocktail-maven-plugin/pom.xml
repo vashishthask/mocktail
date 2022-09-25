@@ -21,13 +21,14 @@
     <dependency>
       <groupId>in.malonus.mocktail</groupId>
       <artifactId>mocktail-core</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.maven.plugin-tools</groupId>
       <artifactId>maven-plugin-annotations</artifactId>
       <version>3.5</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.maven</groupId>
@@ -131,13 +132,14 @@
         <artifactId>maven-plugin-plugin</artifactId>
         <version>3.6.4</version>
         <configuration>
-          <goalPrefix>mocktail</goalPrefix>
+          <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
         </configuration>
         <executions>
           <execution>
-            <id>generated-helpmojo</id>
+            <id>mojo-descriptor</id>
+            <phase>process-classes</phase>
             <goals>
-              <goal>helpmojo</goal>
+              <goal>descriptor</goal>
             </goals>
           </execution>
         </executions>
