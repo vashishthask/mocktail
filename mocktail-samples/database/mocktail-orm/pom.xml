@@ -10,6 +10,9 @@
   <artifactId>mocktail-orm</artifactId>
   <name>Mocktail ORM</name>
   <description>This is a sample project to showcase to show how to use mocktail with ORM</description>
+  <properties>
+    <org.aspectj.version>1.9.7</org.aspectj.version>
+  </properties>
 
   <dependencies>
     <dependency>
@@ -17,8 +20,10 @@
       <artifactId>commons-logging</artifactId>
       <version>1.0.4</version>
     </dependency>
-
-    <!-- Hibernate & JPA -->
+    <dependency>
+      <groupId>in.malonus.mocktail</groupId>
+      <artifactId>mocktail-core</artifactId>
+    </dependency>
     <dependency>
       <groupId>org.hibernate.orm</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -57,5 +62,57 @@
       <artifactId>spring-jdbc</artifactId>
       <version>3.1.2.RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>org.aspectj</groupId>
+      <artifactId>aspectjrt</artifactId>
+      <version>${org.aspectj.version}</version>
+      <scope>runtime</scope>
+    </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>aspectj-maven-plugin</artifactId>
+        <version>1.14.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+              <complianceLevel>1.8</complianceLevel>
+              <aspectDirectory>target/generated/aspects</aspectDirectory>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjtools</artifactId>
+            <version>${org.aspectj.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>in.malonus.mocktail</groupId>
+        <artifactId>mocktail-maven-plugin</artifactId>
+        <configuration>
+          <mode>recording</mode>
+        </configuration>
+        <executions>
+          <execution>
+            <id>mocktail</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>mocktail</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

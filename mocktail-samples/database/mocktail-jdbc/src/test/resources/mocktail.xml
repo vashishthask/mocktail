@@ -1,13 +1,14 @@
 <mocktails>
-	<mocktail>
-		<className>UserDao</className>
-		<classPackageName>in.malonus.mocktail.mock.jdbc.user</classPackageName>
-		<methods>
-			<string>get</string>
-            <string>save</string>
-            <string>delete</string>
-            <string>update</string>
-            <!-- string>getAll</string-->
-		</methods>
-	</mocktail>
+  <mocktail>
+    <className>UserDao</className>
+    <classPackageName>in.malonus.mocktail.mock.jdbc.user
+    </classPackageName>
+    <methods>
+      <string>get</string>
+      <string>save</string>
+      <string>delete</string>
+      <string>update</string>
+      <!-- string>getAll</string -->
+    </methods>
+  </mocktail>
 </mocktails>

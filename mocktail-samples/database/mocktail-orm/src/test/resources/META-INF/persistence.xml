@@ -7,7 +7,7 @@
         <class>in.malonus.mocktail.samples.orm.UserDetail</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:file:target/hsqldb/myDB;shutdown=true"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:hsqldb:mem:target/hsqldb/myDB;shutdown=true"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="password"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>

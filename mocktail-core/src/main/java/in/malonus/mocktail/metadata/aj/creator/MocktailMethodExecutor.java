@@ -61,16 +61,18 @@ public class MocktailMethodExecutor {
         LOGGER.debug("\nfileNameForRecording is:" + fileNameForRecording);
 
         boolean objectExistsInRepository = objectRepository.objectAlreadyExist(fileNameForRecording, recordingFilePath);
-        LOGGER.debug("\n object " + fileNameForRecording + " exists? " + objectExistsInRepository);
+        LOGGER.debug("\n Object " + fileNameForRecording + " exists? " + objectExistsInRepository);
 
         if (objectExistsInRepository) {
-
+            
+            LOGGER.info("Object exists on cache");
             objectToBeRecorded = objectRepository.getObject(fileNameForRecording, recordingFilePath);
             LOGGER.debug("cached response is:" + objectToBeRecorded);
         } else if (recordingMode()) {
             createDirectoryForFilePath(recordingFilePath);
             objectToBeRecorded = pjp.proceed();
             if (!voidReturnType) {
+                LOGGER.info("Object doesn't exists in cache. So recording it.");
                 saveRecordingFile(fileNameForRecording, testMethodMocktail, objectToBeRecorded, recordingFilePath);
             }
 

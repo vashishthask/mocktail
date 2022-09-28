@@ -1,0 +1,9 @@
+<mocktails>
+  <mocktail>
+    <className>UserDetailService</className>
+    <classPackageName>in.malonus.mocktail.samples.orm</classPackageName>
+    <methods>
+      <string>getUserDetail</string>
+    </methods>
+  </mocktail>
+</mocktails>

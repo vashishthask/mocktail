@@ -7,10 +7,12 @@ import static org.junit.Assert.assertSame;
 import java.util.List;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import in.malonus.mocktail.metadata.MethodMocktail;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -54,15 +56,10 @@ public class UserDetailServiceTest {
         entityManager.getTransaction().commit();
     }
 
-    /*
-     * @Test public void shouldSaveUserDetail() {
-     * userDetailService.saveUserDetail(new UserDetail("user")); }
-     */
-
     @Test
     public void shouldGetUserDetail() throws Exception {
+        MethodMocktail mocktail = new MethodMocktail(this);
         UserDetail userDetail = userDetailService.getUserDetail(1L);
-
         assertNotNull(userDetail);
         assertSame(1L, userDetail.getId());
         assertEquals("Got " + userDetail.getName(), "John", userDetail.getName());
@@ -75,5 +72,10 @@ public class UserDetailServiceTest {
         assertNotNull(users);
         assertEquals(3, users.size());
         assertEquals("John", users.get(0).getName());
+    }
+    
+    @AfterClass
+    public static void freeEmf() {
+        emf.close();
     }
 }
