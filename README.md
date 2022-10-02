@@ -262,3 +262,9 @@ The response of this call then gets saved on the disk under the src/test/resourc
 
 For any subsequent get() method call (either within the same test method or any rerun of the test), the proxy gets the response from the disk for the input "1L" instead of getting it by executing the actual get() method and in turn calling the DB.
 
+# Contributors
+
+* [ShriKant Vashishtha](http://www.linkedin.com/in/shrikantv) - Lead
+* Gaurav Kohli
+* Sandeep Rawat
+
