@@ -5,7 +5,7 @@
   <groupId>in.malonus.mocktail</groupId>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>mocktail-samples</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>mocktail samples</name>
   <url>https://github.com/vashishthask/mocktail/</url>
@@ -25,7 +25,7 @@
       <dependency>
         <groupId>in.malonus.mocktail</groupId>
         <artifactId>mocktail-core</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
+        <version>1.0.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
@@ -68,7 +68,7 @@
         <plugin>
           <artifactId>mocktail-maven-plugin</artifactId>
           <groupId>in.malonus.mocktail</groupId>
-          <version>1.0.2-SNAPSHOT</version>
+          <version>1.0.3</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>

@@ -4,7 +4,7 @@
   <parent>
     <artifactId>webservice-samples</artifactId>
     <groupId>in.malonus.mocktail</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
   </parent>
   <artifactId>cxf-simpleclient</artifactId>
   <name>cxf-simpleclient</name>
@@ -46,7 +46,7 @@
     <dependency>
       <groupId>in.malonus.mocktail</groupId>
       <artifactId>cxf-simpleservice</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.4-SNAPSHOT</version>
     </dependency>
   </dependencies>
 </project>

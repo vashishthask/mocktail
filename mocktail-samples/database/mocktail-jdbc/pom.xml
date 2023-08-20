@@ -10,7 +10,7 @@
   <parent>
     <artifactId>database-samples</artifactId>
     <groupId>in.malonus.mocktail</groupId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
   </parent>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -46,7 +46,6 @@
       <plugin>
         <groupId>in.malonus.mocktail</groupId>
         <artifactId>mocktail-maven-plugin</artifactId>
-        <version>1.0.2-SNAPSHOT</version>
         <configuration>
           <!--aspectsDirectory>target/generated/aspects</aspectsDirectory> 
             <configuration>src/test/resources/mocktail.xml</configuration> <recordingDir>src/test/resources/recordings</recordingDir -->
