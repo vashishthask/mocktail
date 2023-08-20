@@ -27,7 +27,7 @@ public class UserDetailServiceTest {
     public static void init() {
         emf = Persistence.createEntityManagerFactory("mocktail-orm");
     }
-    
+
     @Before
     public void setup() throws Exception {
         EntityManager entityManager = emf.createEntityManager();
@@ -58,11 +58,12 @@ public class UserDetailServiceTest {
 
     @Test
     public void shouldGetUserDetail() throws Exception {
-        MethodMocktail mocktail = new MethodMocktail(this);
-        UserDetail userDetail = userDetailService.getUserDetail(1L);
-        assertNotNull(userDetail);
-        assertSame(1L, userDetail.getId());
-        assertEquals("Got " + userDetail.getName(), "John", userDetail.getName());
+        try (MethodMocktail mocktail = new MethodMocktail(this);) {
+            UserDetail userDetail = userDetailService.getUserDetail(1L);
+            assertNotNull(userDetail);
+            assertSame(1L, userDetail.getId());
+            assertEquals("Got " + userDetail.getName(), "John", userDetail.getName());
+        }
     }
 
     @Test
@@ -73,7 +74,7 @@ public class UserDetailServiceTest {
         assertEquals(3, users.size());
         assertEquals("John", users.get(0).getName());
     }
-    
+
     @AfterClass
     public static void freeEmf() {
         emf.close();

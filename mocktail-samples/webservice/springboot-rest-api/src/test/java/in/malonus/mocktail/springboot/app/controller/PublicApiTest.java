@@ -14,9 +14,10 @@ class PublicApiTest {
 
     @Test
     void test() {
-        MethodMocktail methodMocktail = new MethodMocktail(this);
-        service = new PublicApiService(restTemplate.getRestTemplate());
-        String dogBreeds = service.getDogBreeds();
-        assertNotNull(dogBreeds);
+        try (MethodMocktail methodMocktail = new MethodMocktail(this);) {
+            service = new PublicApiService(restTemplate.getRestTemplate());
+            String dogBreeds = service.getDogBreeds();
+            assertNotNull(dogBreeds);
+        }
     }
 }

@@ -13,7 +13,7 @@ import in.malonus.mocktail.MocktailConfig;
 import in.malonus.mocktail.repository.ObjectFileOperations;
 import in.malonus.mocktail.repository.ObjectRepository;
 
-public class MethodMocktail implements Serializable {
+public class MethodMocktail implements Serializable, AutoCloseable {
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodMocktail.class);
     private static final long serialVersionUID = 1L;
 
@@ -53,7 +53,9 @@ public class MethodMocktail implements Serializable {
         recordingsAvailable = checkRecordingsOnDisk();
     }
 
+    @Override
     public void close() {
+        container.setMethodMocktail(null);
     }
 
     public boolean isObjectExistOnDisk() {
