@@ -18,7 +18,7 @@ Here's the required dependency
 <dependency>
   <groupId>in.malonus.mocktail</groupId>
   <artifactId>mocktail-core</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.4</version>
 </dependency>
 ```
 and required maven plugin
@@ -26,7 +26,7 @@ and required maven plugin
 <plugin>
   <artifactId>mocktail-maven-plugin</artifactId>
   <groupId>in.malonus.mocktail</groupId>
-  <version>1.0.1</version>
+  <version>1.0.4</version>
 </plugin>
 ```
 # Steps in Setting up Mocktail
@@ -47,7 +47,7 @@ Include mocktail-core lib
 <dependency>
   <groupId>in.malonus.mocktail</groupId>
   <artifactId>mocktail-core</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.4</version>
 </dependency>
 <dependency>
   <groupId>org.aspectj</groupId>
@@ -64,7 +64,7 @@ Include mocktail-maven-plugin and aspectj-maven-plugin
 <plugin>
   <artifactId>mocktail-maven-plugin</artifactId>
   <groupId>in.malonus.mocktail</groupId>
-  <version>1.0.1</version>
+  <version>1.0.4</version>
   <configuration>
     <mode>recording_new</mode>
   </configuration>
@@ -142,11 +142,12 @@ Through mocktail.xml we get to know which methods to consider for response cachi
 ```java
 @Test
 public void testSomething(){
-    MethodMocktail methodMocktail = new MethodMocktail(this);
-    // search with recording mode
-    UserDetail userDetail = userDao.get(1L);
-    assertNotNull(userDetail);
-    assertThat(10, is(userDetail.getAge()));
+    try(MethodMocktail methodMocktail = new MethodMocktail(this);){
+        // search with recording mode
+        UserDetail userDetail = userDao.get(1L);
+        assertNotNull(userDetail);
+        assertThat(10, is(userDetail.getAge()));
+    }
 }
 ```
 
@@ -246,11 +247,12 @@ Mocktail gets to know about a joinpoint if an instance of MocktailMethod exists 
 ```java
 @Test
 public void testSomething(){
-    MethodMocktail methodMocktail = new MethodMocktail(this);
-    // search with recording mode
-    UserDetail userDetail = userDao.get(1L);
-    assertNotNull(userDetail);
-    assertThat(10, is(userDetail.getAge()));
+    try(MethodMocktail methodMocktail = new MethodMocktail(this);){
+        // search with recording mode
+        UserDetail userDetail = userDao.get(1L);
+        assertNotNull(userDetail);
+        assertThat(10, is(userDetail.getAge()));
+    }
 }
 ```
 
