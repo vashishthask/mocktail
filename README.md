@@ -18,7 +18,7 @@ Here's the required dependency
 <dependency>
   <groupId>in.malonus.mocktail</groupId>
   <artifactId>mocktail-core</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 and required maven plugin
@@ -26,7 +26,7 @@ and required maven plugin
 <plugin>
   <artifactId>mocktail-maven-plugin</artifactId>
   <groupId>in.malonus.mocktail</groupId>
-  <version>1.0.4</version>
+  <version>1.0.3</version>
 </plugin>
 ```
 # Steps in Setting up Mocktail
@@ -47,7 +47,7 @@ Include mocktail-core lib
 <dependency>
   <groupId>in.malonus.mocktail</groupId>
   <artifactId>mocktail-core</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.3</version>
 </dependency>
 <dependency>
   <groupId>org.aspectj</groupId>
@@ -64,7 +64,7 @@ Include mocktail-maven-plugin and aspectj-maven-plugin
 <plugin>
   <artifactId>mocktail-maven-plugin</artifactId>
   <groupId>in.malonus.mocktail</groupId>
-  <version>1.0.4</version>
+  <version>1.0.3</version>
   <configuration>
     <mode>recording_new</mode>
   </configuration>
